@@ -443,6 +443,7 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 
 	    backups=[]
 	    restartTarget=backupLevel();
+      initObjectTrackers();
 		keybuffer=[];
 
 	    if ('run_rules_on_level_start' in state.metadata) {
@@ -577,7 +578,8 @@ function backupLevel() {
 		dat : new Int32Array(level.objects),
 		width : level.width,
 		height : level.height,
-		oldflickscreendat: oldflickscreendat.concat([])
+		oldflickscreendat: oldflickscreendat.concat([]),
+    objectTrackers: JSON.parse(JSON.stringify(objectTrackers))
 	};
 	return ret;
 }
@@ -872,6 +874,7 @@ function restoreLevel(lev) {
 		}
 	} else {	
 		level.objects = new Int32Array(lev.dat);
+		objectTrackers = JSON.parse(JSON.stringify(lev.objectTrackers));
 	}
 
 	if (level.width !== lev.width || level.height !== lev.height) {
@@ -997,7 +1000,8 @@ function DoRestart(force) {
 		consolePrint("--- restarting ---",true);
 	}
 
-	restoreLevel(restartTarget);
+  // When restarting, we now only restart the "active region".
+	restoreActiveRegion(restartTarget);
 	tryPlayRestartSound();
 
 	if ('run_rules_on_level_start' in state.metadata) {
@@ -1178,7 +1182,12 @@ function repositionEntitiesOnLayer(positionIndex,layer,dirMask)
     level.colCellContents[colIndex].ior(movingEntities);
     level.rowCellContents[rowIndex].ior(movingEntities);
     level.mapCellContents.ior(movingEntities);
+
 	//corresponding movement stuff in setmovements
+
+    objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
+    delete objectTrackers[tx][ty][layer];
+
     return true;
 }
 
@@ -1549,6 +1558,7 @@ function CellReplacement(row) {
 	this.movementsLayerMask = row[4];
 	this.randomEntityMask = row[5];
 	this.randomDirMask = row[6];
+  this.trackerTransfers = row[7];
 };
 
 
@@ -1625,7 +1635,7 @@ CellPattern.prototype.toJSON = function() {
 var _o1,_o2,_o2_5,_o3,_o4,_o5,_o6,_o7,_o8,_o9,_o10,_o11,_o12;
 var _m1,_m2,_m3;
 
-CellPattern.prototype.replace = function(rule, currentIndex) {
+CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 	var replace = this.replacement;
 
 	if (replace === null) {
@@ -1702,6 +1712,9 @@ CellPattern.prototype.replace = function(rule, currentIndex) {
 
 	var result = false;
 
+  var colIndex=(currentIndex/level.height)|0;
+  var rowIndex=(currentIndex%level.height);
+
 	//check if it's changed
 	if (!oldCellMask.equals(curCellMask) || !oldMovementMask.equals(curMovementMask) || rigidchange) { 
 		result=true;
@@ -1719,9 +1732,6 @@ CellPattern.prototype.replace = function(rule, currentIndex) {
 
 		level.setCell(currentIndex, curCellMask);
 		level.setMovements(currentIndex, curMovementMask);
-
-		var colIndex=(currentIndex/level.height)|0;
-		var rowIndex=(currentIndex%level.height);
 		level.colCellContents[colIndex].ior(curCellMask);
 		level.rowCellContents[rowIndex].ior(curCellMask);
 		level.mapCellContents.ior(curCellMask);
@@ -1731,6 +1741,46 @@ CellPattern.prototype.replace = function(rule, currentIndex) {
 		level.mapCellContents_Movements.ior(curMovementMask);
 
 	}
+
+  // Remove the tracker for any tracked objects that we're removing
+  if (objectsClear.anyBitsInCommon(state.moverMask)) {
+    var layers = getLayersOfMask(objectsClear);
+    for (var i = 0; i < layers.length; i++) {
+      var layer = layers[i];
+      delete objectTrackers[colIndex][rowIndex][layer];
+    }
+  }
+
+  // Transfer the trackers for any tracked objects that we're creating
+  if (objectsSet.anyBitsInCommon(state.moverMask)) {
+    var layers = getLayersOfMask(objectsSet);
+    for (var i = 0; i < layers.length; i++) {
+      var layer = layers[i];
+      var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
+        return trackerTransfer[0] === layer;
+      });
+
+      if (trackerTransfer == null) {
+        continue;
+      }
+
+      var transferCellRowIndex = trackerTransfer[1];
+      var transferCellIndex = trackerTransfer[2];
+      var transferLayer = trackerTransfer[3];
+
+      var transferCellRowPosition = tuple[transferCellRowIndex];
+
+      var d0 = delta[0] * level.height;
+      var d1 = delta[1];
+
+      var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
+
+      var transferFromX = (transferFromPosition / level.height) | 0;
+      var transferFromY = (transferFromPosition % level.height);
+
+      objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][layer];
+    }
+  }
 
 	return result;
 }
@@ -2110,7 +2160,7 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
             	continue;
             }
 
-            result = preCell.replace(rule, currentIndex) || result;
+            result = preCell.replace(rule, currentIndex, tuple, delta) || result;
 
             currentIndex += delta;
         }
@@ -2321,9 +2371,14 @@ function applyRuleGroup(ruleGroup) {
     return loopPropagated;
 }
 
+var previousObjectTrackers = null;
+
 function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup){
     //for each rule
     //try to match it
+
+    // We make a copy of object trackers to transfer trackers from while modifying the original ones
+    previousObjectTrackers = JSON.parse(JSON.stringify(objectTrackers));
 
     //when we're going back in, let's loop, to be sure to be sure
     var loopPropagated = startRuleGroupindex>0;
@@ -2370,6 +2425,8 @@ function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup){
 			}
         }
     }
+
+    previousObjectTrackers = null;
 }
 
 
