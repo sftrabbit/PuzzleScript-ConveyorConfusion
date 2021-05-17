@@ -1018,7 +1018,7 @@ var codeMirrorFn = function() {
                             stream.match(/[\p{Z}\s]*/u, true);
                             return 'BRACKET';
                         } else {
-                            var m = stream.match(/[^\[\|\]\p{Z}\s]*/u, true)[0].trim();
+                            var m = stream.match(/[^\[\|\]\p{Z}\s@]*/u, true)[0].trim();
 
                             if (state.tokenIndex===0&&reg_loopmarker.exec(m)) {
                             	return 'BRACKET';
@@ -1029,28 +1029,33 @@ var codeMirrorFn = function() {
                                 stream.match(/[\p{Z}\s]*/u, true);
                                 return 'DIRECTION';
                             } else {
-                                if (state.names.indexOf(m) >= 0) {
-                                    if (sol) {
-                                        logError('Identifiers cannot appear outside of square brackets in rules, only directions can.', state.lineNumber);
-                                        return 'ERROR';
-                                    } else {
-                                        stream.match(/[\p{Z}\s]*/u, true);
-                                        return 'NAME';
-                                    }
-                                } else if (m==='...') {
-                                    return 'DIRECTION';
-                                } else if (m==='rigid') {
-                                    return 'DIRECTION';
-                                } else if (m==='random') {
-                                    return 'DIRECTION';
-                                } else if (commandwords.indexOf(m)>=0) {
-									if (m==='message') {
-										state.tokenIndex=-4;
-									}                                	
-                                	return 'COMMAND';
+                                if (ch === '@') {
+                                    stream.match(/[^\[\|\]\p{Z}\s]*/u, true)[0].trim();
+                                    return 'BRACKET';
                                 } else {
-                                    logError('Name "' + m + '", referred to in a rule, does not exist.', state.lineNumber);
-                                    return 'ERROR';
+                                    if (state.names.indexOf(m) >= 0) {
+                                        if (sol) {
+                                            logError('Identifiers cannot appear outside of square brackets in rules, only directions can.', state.lineNumber);
+                                            return 'ERROR';
+                                        } else {
+                                            stream.match(/[\p{Z}\s]*/u, true);
+                                            return 'NAME';
+                                        }
+                                    } else if (m==='...') {
+                                        return 'DIRECTION';
+                                    } else if (m==='rigid') {
+                                        return 'DIRECTION';
+                                    } else if (m==='random') {
+                                        return 'DIRECTION';
+                                    } else if (commandwords.indexOf(m)>=0) {
+    									if (m==='message') {
+    										state.tokenIndex=-4;
+    									}                                	
+                                    	return 'COMMAND';
+                                    } else {
+                                        logError('Name "' + m + '", referred to in a rule, does not exist.', state.lineNumber);
+                                        return 'ERROR';
+                                    }
                                 }
                             }
                         }

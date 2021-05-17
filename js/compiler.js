@@ -688,6 +688,7 @@ function processRuleString(rule, state, curRules) {
                 }
             case 1:
                 {
+                    var name = token.split('@')[0];
                     if (token == '[') {
                         bracketbalance++;
                         if (bracketbalance > 1) {
@@ -750,7 +751,7 @@ function processRuleString(rule, state, curRules) {
                         } else {
                             rhs = true;
                         }
-                    } else if (state.names.indexOf(token) >= 0) {
+                    } else if (state.names.indexOf(name) >= 0) {
                         if (!incellrow) {
                             logWarning("Invalid token " + token.toUpperCase() + ". Object names should only be used within cells (square brackets).", lineNumber);
                         } else if (curcell.length % 2 == 0) {
@@ -1562,6 +1563,34 @@ function rulesToMask(state) {
 
     for (var i = 0; i < state.rules.length; i++) {
         var rule = state.rules[i];
+
+        // We preloop over the left-hand side patterns to determine the source cells for trackers
+        var trackerSources = {};
+        for (var j = 0; j < rule.lhs.length; j++) {
+            var cellrow_l = rule.lhs[j];
+            for (var k = 0; k < cellrow_l.length; k++) {
+                var cell_l = cellrow_l[k];
+                for (var l = 0; l < cell_l.length; l += 2) {
+                    var object_dir = cell_l[l];
+                    if (object_dir === '...' || object_dir === 'random' || object_dir === 'no') {
+                        continue;
+                    }
+
+                    var object_name_parts = cell_l[l + 1].split('@');
+
+                    if (object_name_parts.length > 1) {
+                        var tracker_name = object_name_parts[1];
+
+                        if (trackerSources[tracker_name] != null) {
+                            logError('Tracker @' + tracker_name + ' cannot appear more than once on the left side of a rule.', rule.lineNumber);
+                        }
+
+                        trackerSources[tracker_name] = [j, k, layerIndex];
+                    }
+                }
+            }
+        }
+
         for (var j = 0; j < rule.lhs.length; j++) {
             var cellrow_l = rule.lhs[j];
             var cellrow_r = rule.rhs[j];
@@ -1595,7 +1624,8 @@ function rulesToMask(state) {
                         continue;
                     }
 
-                    var object_name = cell_l[l + 1];
+                    var object_name_parts = cell_l[l + 1].split('@');
+                    var object_name = object_name_parts[0];
                     var object = state.objects[object_name];
                     var objectMask = state.objectMasks[object_name];
                     if (object) {
@@ -1687,9 +1717,12 @@ function rulesToMask(state) {
                 var randomMask_r = new BitVec(STRIDE_OBJ);
                 var postMovementsLayerMask_r = new BitVec(STRIDE_MOV);
                 var randomDirMask_r = new BitVec(STRIDE_MOV);
+
+                var trackerTransfers = [];
                 for (var l = 0; l < cell_r.length; l += 2) {
                     var object_dir = cell_r[l];
-                    var object_name = cell_r[l + 1];
+                    var object_name_parts = cell_r[l + 1].split('@');
+                    var object_name = object_name_parts[0];
 
                     if (object_dir === '...') {
                         //logError("spooky ellipsis found! (should never hit this)");
@@ -1753,6 +1786,10 @@ function rulesToMask(state) {
                         layersUsed_r[layerIndex] = object_name;
 
                         if (object_dir.length > 0) {
+                            // If object is moving on RHS of rule, add it to mover mask
+                            if (object_dir !== 'stationary') {
+                                state.moverMask.ior(objectMask);
+                            }
                             postMovementsLayerMask_r.ishiftor(0x1f, 5 * layerIndex);
                         }
 
@@ -1774,6 +1811,18 @@ function rulesToMask(state) {
                         } else {
                             movementsSet.ishiftor(dirMasks[object_dir], 5 * layerIndex);
                         };
+
+                        if (object_name_parts.length > 1) {
+                            var tracker_name = object_name_parts[1];
+                            var trackerSource = trackerSources[tracker_name];
+
+                            if (trackerSource == null) {
+                                logError('Tracker @' + tracker_name + ' referred to on right side of rule has not been defined on the left side', rule.lineNumber);
+                                continue;
+                            }
+
+                            trackerTransfers.push([layerIndex, trackerSource[0], trackerSource[1], trackerSource[2]]);
+                        }
                     }
                 }
 
@@ -1808,8 +1857,8 @@ function rulesToMask(state) {
                 postMovementsLayerMask_r.ior(objectlayers_l);
                 if (!objectsClear.iszero() || !objectsSet.iszero() || !movementsClear.iszero() || !movementsSet.iszero() || !postMovementsLayerMask_r.iszero() || !randomMask_r.iszero() || !randomDirMask_r.iszero()) {
                     // only set a replacement if something would change
-                    cellrow_l[k].replacement = new CellReplacement([objectsClear, objectsSet, movementsClear, movementsSet, postMovementsLayerMask_r, randomMask_r, randomDirMask_r]);
-                } 
+                    cellrow_l[k].replacement = new CellReplacement([objectsClear, objectsSet, movementsClear, movementsSet, postMovementsLayerMask_r, randomMask_r, randomDirMask_r, trackerTransfers]);
+                }
             }
         }
     }
@@ -2079,6 +2128,9 @@ function generateMasks(state) {
     objectMask["\nall\n"] = all_obj;
 
     state.objectMasks = objectMask;
+
+    // Mask to represent all objects that move - used for tracking objects for localised reset
+    state.moverMask = new BitVec(STRIDE_OBJ);
 }
 
 function checkObjectsAreLayered(state) {
@@ -2652,6 +2704,7 @@ function loadFile(str) {
 
     rulesToMask(state);
 
+    generateMoverObjectLayers(state);
 
     if (debugMode) {
         printRules(state);
