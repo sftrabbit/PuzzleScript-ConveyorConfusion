@@ -446,10 +446,18 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
       initObjectTrackers();
 		keybuffer=[];
 
+        if (curlevel === 0) {
+          initRegions();
+          initSmoothCamera();
+          startRealtimeRenderer();
+        }
+
 	    if ('run_rules_on_level_start' in state.metadata) {
 			runrulesonlevelstart_phase=true;
 			processInput(-1,true);
 			runrulesonlevelstart_phase=false;
+	    } else {
+			onStateUpdate(false, false);
 	    }
 	} else {
 		ignoreNotJustPressedAction=true;
@@ -785,7 +793,7 @@ function setGameState(_state, command, randomseed) {
 			break;
 		}
 	}
-	
+
 	if(command[0] !== "rebuild") {
 		clearInputHistory();
 	}
@@ -1004,10 +1012,16 @@ function DoRestart(force) {
 	restoreActiveRegion(restartTarget);
 	tryPlayRestartSound();
 
+    if (curlevel === 0) {
+        initSmoothCamera();
+    }
+
 	if ('run_rules_on_level_start' in state.metadata) {
     	processInput(-1,true);
-	}
-	
+	} else {
+        onStateUpdate(false, false);
+    }
+
 	level.commandQueue=[];
 	level.commandQueueSourceRules=[];
 	restarting=false;
@@ -1050,6 +1064,7 @@ function DoUndo(force,ignoreDuplicates) {
 		restoreLevel(torestore);
 		backups = backups.splice(0,backups.length-1);
 		if (! force) {
+      onStateUpdate(againing);
 			tryPlayUndoSound();
 		}
 	}
@@ -2838,7 +2853,9 @@ function processInput(dir,dontDoWin,dontModify) {
 		if (verbose_logging) { 
 			consolePrint(`Turn complete`);    
 		}
-		
+
+  onStateUpdate(againing, dir === 16);
+
 	    level.commandQueue=[];
 	    level.commandQueueSourceRules=[];
 
