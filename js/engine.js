@@ -443,11 +443,11 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 
 	    backups=[]
 	    restartTarget=backupLevel();
-      initObjectTrackers();
 		keybuffer=[];
 
         if (curlevel === 0) {
           initRegions();
+          initObjectTrackers();
           initSmoothCamera();
           startRealtimeRenderer();
         }
