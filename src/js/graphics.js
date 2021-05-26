@@ -266,8 +266,11 @@ var yoffset;
 window.addEventListener('resize', canvasResize, false);
 canvas = document.getElementById('gameCanvas');
 ctx = canvas.getContext('2d');
+levelCtx = null;
 x = 0;
 y = 0;
+
+var levelCanvas = null;
 
 function glyphCount(){
     var count=0;
@@ -279,10 +282,37 @@ function glyphCount(){
     return count;
 }
 
+function drawLevel() {
+    if (cellwidth===0||cellheight===0||textMode) {
+        return;
+    }
+
+    if (spriteimages===undefined) {
+        regenSpriteImages();
+    }
+
+    levelCtx.fillStyle = state.bgcolor;
+    levelCtx.fillRect(0, 0, levelCanvas.width, levelCanvas.height);
+
+    for (var i = 0; i < level.width; i++) {
+        for (var j = 0; j < level.height; j++) {
+            var posIndex = j + i * level.height;
+            var posMask = level.getCellInto(posIndex,_o12);
+            for (var k = 0; k < state.objectCount; k++) {
+                if (posMask.get(k) != 0) {
+                    var sprite = spriteimages[k];
+                    levelCtx.drawImage(sprite, i * cellwidth, j * cellheight);
+                }
+            }
+        }
+    }
+}
+
 function redraw() {
     if (cellwidth===0||cellheight===0) {
         return;
     }
+
     if (spriteimages===undefined) {
         regenSpriteImages();
     }
@@ -314,6 +344,9 @@ function redraw() {
         var maxi=screenwidth;
         var minj=0;
         var maxj=screenheight;
+
+        var levelCanvasOffsetX = 0;
+        var levelCanvasOffsetY = 0;
 
         if (levelEditorOpened) {
             var glyphcount = glyphCount();
@@ -357,21 +390,32 @@ function redraw() {
                 minj=oldflickscreendat[1];
                 maxi=oldflickscreendat[2];
                 maxj=oldflickscreendat[3];
-            }         
+            }
         }
-	    
 
+        ctx.save();
 
-        for (var i = mini; i < maxi; i++) {
-            for (var j = minj; j < maxj; j++) {
-                var posIndex = j + i * curlevel.height;
-                var posMask = curlevel.getCellInto(posIndex,_o12);                
-                for (var k = 0; k < state.objectCount; k++) {
-                    if (posMask.get(k) != 0) {                  
-                        var sprite = spriteimages[k];
-                        ctx.drawImage(sprite, xoffset + (i-mini) * cellwidth, yoffset + (j-minj) * cellheight);
-                    }
-                }
+        if (curlevel === 0) {
+            ctx.beginPath();
+            ctx.moveTo(levelViewOffsetX, levelViewOffsetY);
+            ctx.lineTo(levelViewOffsetX + levelViewWidth, levelViewOffsetY);
+            ctx.lineTo(levelViewOffsetX + levelViewWidth, levelViewOffsetY + levelViewHeight);
+            ctx.lineTo(levelViewOffsetX, levelViewOffsetY + levelViewHeight);
+            ctx.clip();
+        }
+
+        if (cameraTransition != null) {
+            var now = (new Date()).getTime();
+            var transitionProgress = easeOutQuad(Math.min((now - cameraTransition.start) / 1000, 1));
+            if (transitionProgress < 1) {
+                var deltaX = cameraTransition.to.position[0] - cameraTransition.from.position[0];
+                camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
+                var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
+                camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
+                var deltaZoom = cameraTransition.to.zoom - cameraTransition.from.zoom;
+                camera.zoom = cameraTransition.from.zoom + deltaZoom * transitionProgress;
+            } else {
+                cameraTransition = null;
             }
         }
         
@@ -420,6 +464,16 @@ function redraw() {
                 }
             }
         }
+
+        ctx.drawImage(
+            levelCanvas,
+            0, 0,
+            levelCanvas.width, levelCanvas.height,
+            (canvas.width / 2) - (camera.position[0] * cellwidth * camera.zoom), (canvas.height / 2) - (camera.position[1] * cellheight * camera.zoom),
+            levelCanvas.width * camera.zoom, levelCanvas.height * camera.zoom
+        );
+
+        ctx.restore()
 
 	    if (levelEditorOpened) {
 	    	drawEditorIcons(mini,minj);
@@ -518,6 +572,12 @@ var oldcellheight=0;
 var oldtextmode=-1;
 var oldfgcolor=-1;
 var forceRegenImages=false;
+
+var levelViewHeight = null;
+var levelViewWidth = null;
+var levelViewOffsetX = null;
+var levelViewOffsetY = null;
+
 function canvasResize() {
     canvas.width = canvas.parentNode.clientWidth;
     canvas.height = canvas.parentNode.clientHeight;
@@ -544,6 +604,10 @@ function canvasResize() {
     if (textMode) {
         screenwidth=titleWidth;
         screenheight=titleHeight;
+    } else if (curlevel === 0) {
+        // These need to be about the size of the smallest zoom region
+        screenwidth = 8;
+        screenheight = 8;
     }
     
     cellwidth = canvas.width / screenwidth;
@@ -596,5 +660,26 @@ function canvasResize() {
     oldtextmode=textMode;
     oldfgcolor=state.fgcolor;
 
-    redraw();
+    levelCanvas = document.createElement('canvas');
+    levelCanvas.width = cellwidth * level.width;
+    levelCanvas.height = cellheight * level.height;
+
+    levelViewHeight = canvas.height;
+    levelViewWidth = Math.floor(levelViewHeight * (16 / 9));
+
+    if (levelViewWidth > canvas.width) {
+        levelViewWidth = canvas.width;
+        levelViewHeight = Math.floor(levelViewWidth / (16 / 9));
+    }
+
+    levelViewOffsetX = Math.floor((canvas.width / 2) - (levelViewWidth / 2));
+    levelViewOffsetY = Math.floor((canvas.height / 2) - (levelViewHeight / 2));
+
+    levelCtx = levelCanvas.getContext('2d');
+
+    if (curlevel === 0) {
+        drawLevel();
+    } else {
+        redraw();
+    }
 }

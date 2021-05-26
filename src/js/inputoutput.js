@@ -789,17 +789,16 @@ function checkKey(e,justPressed) {
 
             } else {
                 pushInput(inputdir);
-                if (processInput(inputdir)) {
-                    redraw();
-                }
+                processInput(inputdir)
 	        }
 	       	return prevent(e);
     	}
     }
 }
 
-
 function update() {
+    var draw = false;
+
     timer+=deltatime;
     input_throttle_timer+=deltatime;
     if (quittingTitleScreen) {
@@ -811,7 +810,7 @@ function update() {
     if (againing) {
         if (timer>againinterval&&messagetext.length==0) {
             if (processInput(-1)) {
-                redraw();
+                draw = true;
                 keyRepeatTimer=0;
                 autotick=0;
             }
@@ -858,30 +857,32 @@ function update() {
             autotick=0;
             pushInput("tick");
             if (processInput(-1)) {
-                redraw();
+                draw =true;
             }
         }
+    }
+
+    if (curlevel !== 0 && draw) {
+      redraw();
     }
 }
 
 var looping=false;
 // Lights, camera…function!
-var loop = function(){
-	looping=true;
-	update();
-	if (document.visibilityState==='hidden'){
-		looping=false;
-		return;
-	};
-	setTimeout(loop,deltatime);
+
+setInterval(function() {
+    update();
+}, deltatime);
+
+function animationFrame() {
+  if (curlevel !== 0) {
+    return;
+  }
+
+  redraw();
+  window.requestAnimationFrame(animationFrame);
 }
 
-document.addEventListener('visibilitychange', function logData() {
-	if (document.visibilityState === 'visible') {
-		if (looping===false){
-			loop();
-		}
-	}
-  });
-
-loop();
+function startRealtimeRenderer() {
+  window.requestAnimationFrame(animationFrame);
+}
