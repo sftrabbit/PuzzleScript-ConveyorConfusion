@@ -5,12 +5,34 @@ function onStateUpdate(againing, action) {
 
   drawLevel();
 
-  var region = getActiveRegion();
+  var activeRegion = getActiveRegion();
+  var region = activeRegion[0];
+  var isPrimary = activeRegion[1];
 
-  if (region !== currentRegion) {
-    transitionCameraToRegion(region);
+  if (currentRegion == null) {
     currentRegion = region;
+    currentRegionPrimary = isPrimary;
   }
+
+  if (region.cameraFollowPlayer) {
+    transitionCameraToPlayer();
+
+    if (isPrimary) {
+      currentRegion = region;
+    }
+  } else {
+    if (isPrimary) {
+      if (region !== currentRegion || isPrimary !== currentRegionPrimary) {
+        transitionCameraToRegion(activeRegion);
+      }
+
+      currentRegion = region;
+    } else {
+      transitionCameraPulledByPlayer();
+    }
+  }
+
+  currentRegionPrimary = isPrimary;
 }
 
 function isOpenWorldLevel() {

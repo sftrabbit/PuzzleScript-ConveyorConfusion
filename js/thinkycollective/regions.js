@@ -58,19 +58,6 @@ function initRegions() {
 
     var regionBounds = getRegionBounds(region);
 
-    for (var j = 0; j < region.primaryRects.length; j++) {
-      var rect = region.primaryRects[j];
-
-      var positionX = offsetX + rect[0];
-      var positionY = offsetY + rect[1];
-
-      for (var x = positionX; x < positionX + rect[2]; x++) {
-        for (var y = positionY; y < positionY + rect[3]; y++) {
-          regionMap[x][y] = i;
-        }
-      }
-    }
-
     for (var j = 0; j < region.secondaryRects.length; j++) {
       var rect = region.secondaryRects[j];
 
@@ -79,7 +66,20 @@ function initRegions() {
 
       for (var x = positionX; x < positionX + rect[2]; x++) {
         for (var y = positionY; y < positionY + rect[3]; y++) {
-          regionMap[x][y] = i;
+          regionMap[x][y] = [i, false];
+        }
+      }
+    }
+
+    for (var j = 0; j < region.primaryRects.length; j++) {
+      var rect = region.primaryRects[j];
+
+      var positionX = offsetX + rect[0];
+      var positionY = offsetY + rect[1];
+
+      for (var x = positionX; x < positionX + rect[2]; x++) {
+        for (var y = positionY; y < positionY + rect[3]; y++) {
+          regionMap[x][y] = [i, true];
         }
       }
     }
@@ -94,7 +94,19 @@ function initRegions() {
 }
 
 function getRegion(position) {
-  return regions[regionMap[position.x][position.y]];
+  return regions[getRegionIndex(position.x, position.y)];
+}
+
+function isRegionPrimary(position) {
+  return regionMap[position.x][position.y][1];
+}
+
+function getRegionIndex(x, y) {
+  if (regionMap[x][y] == null) {
+    return null;
+  }
+
+  return regionMap[x][y][0];
 }
 
 function getActiveRegion () {
@@ -105,14 +117,15 @@ function getActiveRegion () {
     y: (playerPositions[0]%level.height)|0
   };
 
-  return getRegion(playerPosition);
+  return [getRegion(playerPosition), isRegionPrimary(playerPosition)];
 }
 
 function formatRegionMap() {
   var output = '';
   for (var y = 0; y < regionMap[0].length; y++) {
     for (var x = 0; x < regionMap.length; x++) {
-      output += regionMap[x][y] != null ? regionMap[x][y] : '-';
+      var regionIndex = getRegionIndex(x, y);
+      output += regionIndex != null ? String.fromCharCode(48 + regionIndex) : '-';
     }
     output += '\n';
   }

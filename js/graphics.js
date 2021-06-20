@@ -628,8 +628,8 @@ function canvasResize() {
     } else if (isOpenWorldLevel()) {
         var maxRegionSize = getMaxRegionSize();
         // These need to be about the size of the smallest zoom region
-        screenwidth = maxRegionSize.width + 4;
-        screenheight = maxRegionSize.height + 4;
+        screenwidth = maxRegionSize.width + 7;
+        screenheight = maxRegionSize.height + 7;
     }
     
     cellwidth = canvas.width / screenwidth;

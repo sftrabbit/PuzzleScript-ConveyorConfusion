@@ -8,14 +8,14 @@ function restoreActiveRegion(lev) {
   var playerX = (playerPosition / level.height) | 0;
   var playerY = playerPosition % level.height;
 
-  var activeRegion = regionMap[playerX][playerY];
+  var activeRegion = getRegionIndex(playerX, playerY);
 
   // Copy original state of level for the active region
   for (var x = 0; x < level.width; x++) {
     for (var y = 0; y < level.height; y++) {
       var positionIndex = x * level.height + y;
 
-      var inRegion = regionMap[x][y] === activeRegion;
+      var inRegion = getRegionIndex(x, y) === activeRegion;
 
       if (inRegion) {
         for (var i = 0; i < STRIDE_OBJ; i++) {
@@ -87,7 +87,7 @@ function initObjectTrackers() {
 
       var trackers = {};
 
-      var region = regionMap[x][y];
+      var region = getRegionIndex(x, y);
 
       if (cell.anyBitsInCommon(state.moverMask)) {
         for (var i = 0; i < objectNames.length; i++) {
