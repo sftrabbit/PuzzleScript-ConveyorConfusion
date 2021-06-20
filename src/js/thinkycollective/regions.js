@@ -132,7 +132,7 @@ function formatRegionMap() {
   return output;
 }
 
-function getRegionBounds(region) {
+function getRegionBounds(region, includeSecondary = false) {
   var bounds = {
     minX: Infinity,
     maxX: 0,
@@ -143,8 +143,10 @@ function getRegionBounds(region) {
   var offsetX = regionsOffset[0] + region.offset[0];
   var offsetY = regionsOffset[1] + region.offset[1];
 
-  for (var j = 0; j < region.primaryRects.length; j++) {
-    var rect = region.primaryRects[j];
+  var rects = region.primaryRects.concat(includeSecondary ? region.secondaryRects : []);
+
+  for (var j = 0; j < rects.length; j++) {
+    var rect = rects[j];
 
     var positionX = offsetX + rect[0];
     var positionY = offsetY + rect[1];
