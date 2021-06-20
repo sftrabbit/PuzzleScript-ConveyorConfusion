@@ -294,9 +294,21 @@ function drawLevel() {
     levelCtx.fillStyle = state.bgcolor;
     levelCtx.fillRect(0, 0, levelCanvas.width, levelCanvas.height);
 
-    for (var i = 0; i < level.width; i++) {
-        for (var j = 0; j < level.height; j++) {
-            var posIndex = j + i * level.height;
+    var cameraOrigin = {
+        x: Math.floor(camera.position[0] - (screenwidth / 2)),
+        y: Math.floor(camera.position[1] - (screenheight / 2))
+    };
+
+    for (var i = 0; i < screenwidth + 1; i++) {
+        for (var j = 0; j < screenheight + 1; j++) {
+            var posX = cameraOrigin.x + i;
+            var posY = cameraOrigin.y + j;
+
+            if (posX >= level.width || posY >= level.height) {
+                continue;
+            }
+
+            var posIndex = posY + posX * level.height;
             var posMask = level.getCellInto(posIndex,_o12);
             for (var k = 0; k < state.objectCount; k++) {
                 if (posMask.get(k) != 0) {
@@ -345,9 +357,6 @@ function redraw() {
         var minj=0;
         var maxj=screenheight;
 
-        var levelCanvasOffsetX = 0;
-        var levelCanvasOffsetY = 0;
-
         if (levelEditorOpened) {
             var glyphcount = glyphCount();
             editorRowCount = Math.ceil(glyphcount/(screenwidth-1));
@@ -395,26 +404,27 @@ function redraw() {
 
         ctx.save();
 
-        if (curlevel === 0) {
+        if (isOpenWorldLevel()) {
             ctx.beginPath();
-            ctx.moveTo(levelViewOffsetX, levelViewOffsetY);
-            ctx.lineTo(levelViewOffsetX + levelViewWidth, levelViewOffsetY);
-            ctx.lineTo(levelViewOffsetX + levelViewWidth, levelViewOffsetY + levelViewHeight);
-            ctx.lineTo(levelViewOffsetX, levelViewOffsetY + levelViewHeight);
+            ctx.moveTo(xoffset, yoffset);
+            ctx.lineTo(xoffset + (cellwidth * screenwidth), yoffset);
+            ctx.lineTo(xoffset + (cellwidth * screenwidth), yoffset + (cellheight * screenheight));
+            ctx.lineTo(xoffset, yoffset + (cellheight * screenheight));
             ctx.clip();
         }
 
         if (cameraTransition != null) {
             var now = (new Date()).getTime();
             var transitionProgress = easeOutQuad(Math.min((now - cameraTransition.start) / 1000, 1));
-            if (transitionProgress < 1) {
-                var deltaX = cameraTransition.to.position[0] - cameraTransition.from.position[0];
-                camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
-                var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
-                camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
-                var deltaZoom = cameraTransition.to.zoom - cameraTransition.from.zoom;
-                camera.zoom = cameraTransition.from.zoom + deltaZoom * transitionProgress;
-            } else {
+
+            var deltaX = cameraTransition.to.position[0] - cameraTransition.from.position[0];
+            camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
+            var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
+            camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
+
+            if (transitionProgress >= 1) {
+                camera.position[0] = cameraTransition.to.position[0];
+                camera.position[1] = cameraTransition.to.position[1];
                 cameraTransition = null;
             }
         }
@@ -465,12 +475,23 @@ function redraw() {
             }
         }
 
+        drawLevel();
+
+        var cameraOriginX = camera.position[0] - (screenwidth / 2);
+        var cameraOriginY = camera.position[1] - (screenheight / 2);
+
+        // var levelCanvasOffsetX = Math.floor(((Math.ceil(cameraOriginX) - cameraOriginX) % 1) * cellwidth);
+        // var levelCanvasOffsetY = Math.floor(((Math.ceil(cameraOriginY) - cameraOriginY) % 1) * cellheight);
+
+        var levelCanvasOffsetX = Math.floor(((cameraOriginX - Math.floor(cameraOriginX)) % 1) * cellwidth);
+        var levelCanvasOffsetY = Math.floor(((cameraOriginY - Math.floor(cameraOriginY)) % 1) * cellheight);
+
         ctx.drawImage(
             levelCanvas,
             0, 0,
             levelCanvas.width, levelCanvas.height,
-            (canvas.width / 2) - (camera.position[0] * cellwidth * camera.zoom), (canvas.height / 2) - (camera.position[1] * cellheight * camera.zoom),
-            levelCanvas.width * camera.zoom, levelCanvas.height * camera.zoom
+            xoffset - levelCanvasOffsetX, yoffset - levelCanvasOffsetY,
+            levelCanvas.width, levelCanvas.height
         );
 
         ctx.restore()
@@ -604,10 +625,11 @@ function canvasResize() {
     if (textMode) {
         screenwidth=titleWidth;
         screenheight=titleHeight;
-    } else if (curlevel === 0) {
+    } else if (isOpenWorldLevel()) {
+        var maxRegionSize = getMaxRegionSize();
         // These need to be about the size of the smallest zoom region
-        screenwidth = 8;
-        screenheight = 8;
+        screenwidth = maxRegionSize.width + 4;
+        screenheight = maxRegionSize.height + 4;
     }
     
     cellwidth = canvas.width / screenwidth;
@@ -661,23 +683,23 @@ function canvasResize() {
     oldfgcolor=state.fgcolor;
 
     levelCanvas = document.createElement('canvas');
-    levelCanvas.width = cellwidth * level.width;
-    levelCanvas.height = cellheight * level.height;
+    levelCanvas.width = cellwidth * (screenwidth + 1);
+    levelCanvas.height = cellheight * (screenheight + 1);
 
-    levelViewHeight = canvas.height;
-    levelViewWidth = Math.floor(levelViewHeight * (16 / 9));
+    // levelViewHeight = canvas.height;
+    // levelViewWidth = Math.floor(levelViewHeight * (16 / 9));
 
-    if (levelViewWidth > canvas.width) {
-        levelViewWidth = canvas.width;
-        levelViewHeight = Math.floor(levelViewWidth / (16 / 9));
-    }
+    // if (levelViewWidth > canvas.width) {
+    //     levelViewWidth = canvas.width;
+    //     levelViewHeight = Math.floor(levelViewWidth / (16 / 9));
+    // }
 
-    levelViewOffsetX = Math.floor((canvas.width / 2) - (levelViewWidth / 2));
-    levelViewOffsetY = Math.floor((canvas.height / 2) - (levelViewHeight / 2));
+    // levelViewOffsetX = Math.floor((canvas.width / 2) - (levelViewWidth / 2));
+    // levelViewOffsetY = Math.floor((canvas.height / 2) - (levelViewHeight / 2));
 
     levelCtx = levelCanvas.getContext('2d');
 
-    if (curlevel === 0) {
+    if (isOpenWorldLevel()) {
         drawLevel();
     } else {
         redraw();

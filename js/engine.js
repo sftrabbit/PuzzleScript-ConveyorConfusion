@@ -445,7 +445,7 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    restartTarget=backupLevel();
 		keybuffer=[];
 
-        if (curlevel === 0) {
+        if (isOpenWorldLevel()) {
           initRegions();
           initObjectTrackers();
           initSmoothCamera();
@@ -1012,7 +1012,7 @@ function DoRestart(force) {
 	restoreActiveRegion(restartTarget);
 	tryPlayRestartSound();
 
-    if (curlevel === 0) {
+    if (isOpenWorldLevel()) {
         initSmoothCamera();
     }
 

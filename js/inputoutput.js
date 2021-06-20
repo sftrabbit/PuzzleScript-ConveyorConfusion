@@ -862,7 +862,7 @@ function update() {
         }
     }
 
-    if (curlevel !== 0 && draw) {
+    if (!isOpenWorldLevel() && draw) {
       redraw();
     }
 }
@@ -875,7 +875,7 @@ setInterval(function() {
 }, deltatime);
 
 function animationFrame() {
-  if (curlevel !== 0) {
+  if (!isOpenWorldLevel()) {
     return;
   }
 

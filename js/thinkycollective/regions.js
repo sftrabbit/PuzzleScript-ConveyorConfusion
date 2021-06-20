@@ -7,8 +7,7 @@ var regions = [
     ],
     secondaryRects: [
       [0, 1, 11, 1]
-    ],
-    zoom: 1,
+    ]
   },
   {
     offset: [11, 1],
@@ -18,8 +17,7 @@ var regions = [
     secondaryRects: [
       [0, 0, 1, 1],
       [8, 6, 2, 1]
-    ],
-    zoom: 0.9
+    ]
   },
   {
     offset: [21, 1],
@@ -28,8 +26,7 @@ var regions = [
     ],
     secondaryRects: [
       [5, -1, 1, 1]
-    ],
-    zoom: 0.8
+    ]
   }
 ];
 
@@ -59,6 +56,8 @@ function initRegions() {
     var minY = Infinity;
     var maxY = 0;
 
+    var regionBounds = getRegionBounds(region);
+
     for (var j = 0; j < region.primaryRects.length; j++) {
       var rect = region.primaryRects[j];
 
@@ -69,20 +68,6 @@ function initRegions() {
         for (var y = positionY; y < positionY + rect[3]; y++) {
           regionMap[x][y] = i;
         }
-      }
-
-      if (positionX < minX) {
-        minX = positionX;
-      }
-      if (positionY < minY) {
-        minY = positionY;
-      }
-
-      if (positionX + rect[2] > maxX) {
-        maxX = positionX + rect[2];
-      }
-      if (positionY + rect[3] > maxY) {
-        maxY = positionY + rect[3];
       }
     }
 
@@ -99,11 +84,13 @@ function initRegions() {
       }
     }
 
-    var cameraAnchorX = minX + ((maxX - minX) / 2);
-    var cameraAnchorY = minY + ((maxY - minY) / 2);
+    var cameraAnchorX = regionBounds.minX + ((regionBounds.maxX - regionBounds.minX) / 2);
+    var cameraAnchorY = regionBounds.minY + ((regionBounds.maxY - regionBounds.minY) / 2);
 
     region.cameraAnchor = [cameraAnchorX, cameraAnchorY];
   }
+
+  console.log(formatRegionMap())
 }
 
 function getRegion(position) {
@@ -130,4 +117,62 @@ function formatRegionMap() {
     output += '\n';
   }
   return output;
+}
+
+function getRegionBounds(region) {
+  var bounds = {
+    minX: Infinity,
+    maxX: 0,
+    minY: Infinity,
+    maxY: 0
+  };
+
+  var offsetX = regionsOffset[0] + region.offset[0];
+  var offsetY = regionsOffset[1] + region.offset[1];
+
+  for (var j = 0; j < region.primaryRects.length; j++) {
+    var rect = region.primaryRects[j];
+
+    var positionX = offsetX + rect[0];
+    var positionY = offsetY + rect[1];
+
+    if (positionX < bounds.minX) {
+      bounds.minX = positionX;
+    }
+    if (positionY < bounds.minY) {
+      bounds.minY = positionY;
+    }
+
+    if (positionX + rect[2] > bounds.maxX) {
+      bounds.maxX = positionX + rect[2];
+    }
+    if (positionY + rect[3] > bounds.maxY) {
+      bounds.maxY = positionY + rect[3];
+    }
+  }
+
+  return bounds;
+}
+
+function getMaxRegionSize() {
+  var maxRegionSize = {
+    width: 0,
+    height: 0
+  };
+
+  for (var i = 0; i < regions.length; i++) {
+    var regionBounds = getRegionBounds(regions[i]);
+    var regionWidth = regionBounds.maxX - regionBounds.minX;
+    var regionHeight = regionBounds.maxY - regionBounds.minY;
+
+    if (regionWidth > maxRegionSize.width) {
+      maxRegionSize.width = regionWidth;
+    }
+
+    if (regionHeight > maxRegionSize.height) {
+      maxRegionSize.height = regionHeight;
+    }
+  }
+
+  return maxRegionSize;
 }

@@ -12,3 +12,7 @@ function onStateUpdate(againing, action) {
     currentRegion = region;
   }
 }
+
+function isOpenWorldLevel() {
+  return curlevel === 0;
+}
