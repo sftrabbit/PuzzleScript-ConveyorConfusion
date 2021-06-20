@@ -3,15 +3,14 @@ var cameraTransition = null;
 var currentRegion = null;
 
 function transitionCameraToRegion(region) {
+  console.log('transition', camera.position);
   cameraTransition = {
     start: (new Date()).getTime(),
     from: {
-      position: [camera.position[0], camera.position[1]],
-      zoom: camera.zoom
+      position: [camera.position[0], camera.position[1]]
     },
     to: {
-      position: [region.cameraAnchor[0], region.cameraAnchor[1]],
-      zoom: region.zoom
+      position: [region.cameraAnchor[0], region.cameraAnchor[1]]
     }
   };
 }
@@ -20,8 +19,7 @@ function initSmoothCamera() {
   var region = getActiveRegion();
 
   camera = {
-    position: [region.cameraAnchor[0], region.cameraAnchor[1]],
-    zoom: region.zoom
+    position: [region.cameraAnchor[0], region.cameraAnchor[1]]
   };
 }
 
