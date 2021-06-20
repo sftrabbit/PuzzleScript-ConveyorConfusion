@@ -1200,8 +1200,10 @@ function repositionEntitiesOnLayer(positionIndex,layer,dirMask)
 
 	//corresponding movement stuff in setmovements
 
-    objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
-    delete objectTrackers[tx][ty][layer];
+    if (!movingEntities.anyBitsInCommon(state.objectMasks["player"])) {
+      objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
+      delete objectTrackers[tx][ty][layer];
+    }
 
     return true;
 }
@@ -1794,7 +1796,6 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
       var transferFromY = (transferFromPosition % level.height);
 
       objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
-      console.log(`Transfer from ${transferFromX},${transferFromY},${transferLayer} to ${colIndex},${rowIndex},${layer}`)
     }
   }
 
