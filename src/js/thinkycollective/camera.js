@@ -3,7 +3,6 @@ var cameraTransition = null;
 var currentRegion = null;
 
 function transitionCameraToRegion(region) {
-  console.log('transition', camera.position);
   cameraTransition = {
     start: (new Date()).getTime(),
     from: {

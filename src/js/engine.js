@@ -1793,7 +1793,8 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
       var transferFromX = (transferFromPosition / level.height) | 0;
       var transferFromY = (transferFromPosition % level.height);
 
-      objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][layer];
+      objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
+      console.log(`Transfer from ${transferFromX},${transferFromY},${transferLayer} to ${colIndex},${rowIndex},${layer}`)
     }
   }
 

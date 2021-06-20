@@ -1585,7 +1585,9 @@ function rulesToMask(state) {
                             logError('Tracker @' + tracker_name + ' cannot appear more than once on the left side of a rule.', rule.lineNumber);
                         }
 
-                        trackerSources[tracker_name] = [j, k, layerIndex];
+                        var object = state.objects[object_name_parts[0]];
+
+                        trackerSources[tracker_name] = [j, k, object.layer];
                     }
                 }
             }

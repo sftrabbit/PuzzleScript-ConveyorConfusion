@@ -87,7 +87,7 @@ function initObjectTrackers() {
 
       var trackers = {};
 
-      var region = getRegion({ x: x, y: y });
+      var region = regionMap[x][y];
 
       if (cell.anyBitsInCommon(state.moverMask)) {
         for (var i = 0; i < objectNames.length; i++) {
