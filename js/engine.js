@@ -1757,47 +1757,46 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 		level.rowCellContents_Movements[rowIndex].ior(curMovementMask);
 		level.mapCellContents_Movements.ior(curMovementMask);
 
-	}
-
-  // Remove the tracker for any tracked objects that we're removing
-  if (objectsClear.anyBitsInCommon(state.moverMask)) {
-    var layers = getLayersOfMask(objectsClear);
-    for (var i = 0; i < layers.length; i++) {
-      var layer = layers[i];
-      delete objectTrackers[colIndex][rowIndex][layer];
-    }
-  }
-
-  // Transfer the trackers for any tracked objects that we're creating
-  if (objectsSet.anyBitsInCommon(state.moverMask)) {
-    var layers = getLayersOfMask(objectsSet);
-    for (var i = 0; i < layers.length; i++) {
-      var layer = layers[i];
-      var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
-        return trackerTransfer[0] === layer;
-      });
-
-      if (trackerTransfer == null) {
-        continue;
+    // Remove the tracker for any tracked objects that we're removing
+    if (destroyed.anyBitsInCommon(state.moverMask)) {
+      var layers = getLayersOfMask(destroyed);
+      for (var i = 0; i < layers.length; i++) {
+        var layer = layers[i];
+        delete objectTrackers[colIndex][rowIndex][layer];
       }
-
-      var transferCellRowIndex = trackerTransfer[1];
-      var transferCellIndex = trackerTransfer[2];
-      var transferLayer = trackerTransfer[3];
-
-      var transferCellRowPosition = tuple[transferCellRowIndex];
-
-      var d0 = delta[0] * level.height;
-      var d1 = delta[1];
-
-      var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
-
-      var transferFromX = (transferFromPosition / level.height) | 0;
-      var transferFromY = (transferFromPosition % level.height);
-
-      objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
     }
-  }
+
+    // Transfer the trackers for any tracked objects that we're creating
+    if (created.anyBitsInCommon(state.moverMask)) {
+      var layers = getLayersOfMask(created);
+      for (var i = 0; i < layers.length; i++) {
+        var layer = layers[i];
+        var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
+          return trackerTransfer[0] === layer;
+        });
+
+        if (trackerTransfer == null) {
+          continue;
+        }
+
+        var transferCellRowIndex = trackerTransfer[1];
+        var transferCellIndex = trackerTransfer[2];
+        var transferLayer = trackerTransfer[3];
+
+        var transferCellRowPosition = tuple[transferCellRowIndex];
+
+        var d0 = delta[0] * level.height;
+        var d1 = delta[1];
+
+        var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
+
+        var transferFromX = (transferFromPosition / level.height) | 0;
+        var transferFromY = (transferFromPosition % level.height);
+
+        objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
+      }
+    }
+	}
 
 	return result;
 }
