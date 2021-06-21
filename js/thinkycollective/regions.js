@@ -3,20 +3,23 @@ var regions = [
   {
     offset: [0, 0],
     primaryRects: [
-      [2, 0, 8, 7]
+      [2, -1, 8, 9]
     ],
     secondaryRects: [
-      [0, 1, 11, 1]
+      [0, -1, 2, 4],
+      [10, -1, 1, 9],
+      [1, 3, 1, 5]
     ]
   },
   {
     offset: [11, 1],
     primaryRects: [
-      [1, 0, 7, 7]
+      [1, -1, 7, 9]
     ],
     secondaryRects: [
-      [0, 0, 1, 1],
-      [8, 6, 2, 1]
+      [0, -1, 1, 9],
+      [8, -1, 1, 9],
+      [9, 5, 1, 3]
     ]
   },
   {
@@ -88,9 +91,9 @@ function initRegions() {
     var cameraAnchorY = regionBounds.minY + ((regionBounds.maxY - regionBounds.minY) / 2);
 
     region.cameraAnchor = [cameraAnchorX, cameraAnchorY];
-  }
 
-  console.log(formatRegionMap())
+    region.outlinePolygon = calculateOutlinePolygon(region);
+  }
 }
 
 function getRegion(position) {
@@ -118,6 +121,17 @@ function getActiveRegion () {
   };
 
   return [getRegion(playerPosition), isRegionPrimary(playerPosition)];
+}
+
+function getActiveRegionIndex () {
+  var playerPositions = getPlayerPositions();
+
+  const playerPosition = {
+    x: (playerPositions[0]/(level.height))|0,
+    y: (playerPositions[0]%level.height)|0
+  };
+
+  return getRegionIndex(playerPosition.x, playerPosition.y);
 }
 
 function formatRegionMap() {
@@ -190,4 +204,121 @@ function getMaxRegionSize() {
   }
 
   return maxRegionSize;
+}
+
+function calculateOutlinePolygon(region) {
+  var rects = region.primaryRects.concat(region.secondaryRects);
+    
+  // Implementation of algorithm described here: https://stackoverflow.com/a/13851341/150634
+  var points = [];
+
+  var offset = [regionsOffset[0] + region.offset[0], regionsOffset[1] + region.offset[1]];
+
+  for (var i = 0; i < rects.length; i++) {
+    // We move the rectangle points out to align with pixel surrounding area
+    var rectPoints = [
+      [offset[0] + rects[i][0], offset[1] + rects[i][1]],
+      [offset[0] + rects[i][0], offset[1] + rects[i][1] + rects[i][3]],
+      [offset[0] + rects[i][0] + rects[i][2], offset[1] + rects[i][1]],
+      [offset[0] + rects[i][0] + rects[i][2], offset[1] + rects[i][1] + rects[i][3]]
+    ];
+
+    for (var j = 0; j < rectPoints.length; j++) {
+      var existingPointIndex = points.findIndex(function(point) {
+        return point[0] === rectPoints[j][0] && point[1] === rectPoints[j][1];
+      });
+
+      if (existingPointIndex >= 0) {
+        points.splice(existingPointIndex, 1);
+      } else {
+        points.push(rectPoints[j]);
+      }
+    }
+  }
+
+  var pointsByX = JSON.parse(JSON.stringify(points)).sort(function(pointA, pointB) {
+    if (pointA[0] < pointB[0]) {
+      return -1;
+    }
+
+    if (pointA[0] === pointB[0]) {
+      if (pointA[1] < pointB[1]) {
+        return -1;
+      }
+
+      return 0;
+    }
+
+    return 1;
+  })
+
+  var pointsByY = JSON.parse(JSON.stringify(points)).sort(function(pointA, pointB) {
+    if (pointA[1] < pointB[1]) {
+      return -1;
+    }
+
+    if (pointA[1] === pointB[1]) {
+      if (pointA[0] < pointB[0]) {
+        return -1;
+      }
+
+      return 0;
+    }
+
+    return 1;
+  })
+
+  var edgesH = {};
+  var edgesV = {};
+
+  var i = 0;
+  while (i < points.length) {
+    var currentY = pointsByY[i][1];
+    while (i < points.length && pointsByY[i][1] === currentY) {
+      edgesH[formatPoint(pointsByY[i])] = formatPoint(pointsByY[i + 1]);
+      edgesH[formatPoint(pointsByY[i + 1])] = formatPoint(pointsByY[i]);
+      i += 2;
+    }
+  }
+
+  var i = 0;
+  while (i < points.length) {
+    var currentX = pointsByX[i][0];
+    while (i < points.length && pointsByX[i][0] === currentX) {
+      edgesV[formatPoint(pointsByX[i])] = formatPoint(pointsByX[i + 1]);
+      edgesV[formatPoint(pointsByX[i + 1])] = formatPoint(pointsByX[i]);
+      i += 2;
+    }
+  }
+
+  var outlinePolygon = [];
+  var horizontal = true;
+  var initialPoint = parsePoint(Object.keys(edgesH)[0]);
+  var currentPoint = initialPoint;
+
+  while (true) {
+    var edges = horizontal ? edgesH : edgesV;
+
+    outlinePolygon.push(currentPoint);
+
+    var formattedNextPoint = edges[formatPoint(currentPoint)];
+
+    horizontal = !horizontal;
+    currentPoint = parsePoint(formattedNextPoint);
+
+    if (currentPoint[0] === initialPoint[0] && currentPoint[1] === initialPoint[1]) {
+      break;
+    }
+  }
+
+  return outlinePolygon;
+}
+
+function formatPoint(point) {
+  return point[0] + ',' + point[1];
+}
+
+function parsePoint(formattedPoint) {
+  var pointParts = formattedPoint.split(',');
+  return [parseInt(pointParts[0]), parseInt(pointParts[1])]
 }

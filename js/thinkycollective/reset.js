@@ -81,6 +81,7 @@ function restoreActiveRegion(lev) {
 
     var layerMask = state.layerMasks[foreignObject.layer];
 
+    // If the restored cell already has stuff in this layer, foreign object doesn't get to exist anymore
     if (cell.anyBitsInCommon(layerMask)) {
       continue;
     }
