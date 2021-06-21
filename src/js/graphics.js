@@ -304,7 +304,7 @@ function drawLevel() {
             var posX = cameraOrigin.x + i;
             var posY = cameraOrigin.y + j;
 
-            if (posX >= level.width || posY >= level.height) {
+            if (posX < 0 || posY < 0 || posX >= level.width || posY >= level.height) {
                 continue;
             }
 
@@ -318,6 +318,23 @@ function drawLevel() {
             }
         }
     }
+
+    var activeRegionIndex = getActiveRegionIndex();
+    var outlinePolygon = regions[activeRegionIndex].outlinePolygon;
+
+    levelCtx.save();
+    levelCtx.beginPath();
+    levelCtx.moveTo((outlinePolygon[0][0]- cameraOrigin.x) * cellwidth, (outlinePolygon[0][1] - cameraOrigin.y) * cellheight);
+    for (var i = 0; i < outlinePolygon.length; i++) {
+        var nextPoint = outlinePolygon[(i + 1) % outlinePolygon.length];
+        levelCtx.lineTo((nextPoint[0] - cameraOrigin.x) * cellwidth, (nextPoint[1] - cameraOrigin.y) * cellheight);
+    }
+    levelCtx.lineWidth = Math.floor(cellwidth * 0.4);
+    levelCtx.strokeStyle = '#555';
+    levelCtx.setLineDash([Math.floor(cellwidth * 0.4), Math.floor(cellwidth * 0.2)]);
+    levelCtx.clip();
+    levelCtx.stroke();
+    levelCtx.restore();
 }
 
 function redraw() {
