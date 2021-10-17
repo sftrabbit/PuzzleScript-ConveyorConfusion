@@ -450,6 +450,8 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
           initObjectTrackers();
           initSmoothCamera();
           startRealtimeRenderer();
+        } else {
+          clearOpenWorldState();
         }
 
 	    if ('run_rules_on_level_start' in state.metadata) {
@@ -459,6 +461,10 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    } else {
 			onStateUpdate(false, false);
 	    }
+
+	    canvasResize();
+	    drawLevel();
+	    redraw();
 	} else {
 		ignoreNotJustPressedAction=true;
 		tryPlayShowMessageSound();
@@ -1008,8 +1014,12 @@ function DoRestart(force) {
 		consolePrint("--- restarting ---",true);
 	}
 
-  // When restarting, we now only restart the "active region".
-	restoreActiveRegion(restartTarget);
+	// When restarting, we now only restart the "active region".
+	if (isOpenWorldLevel()) {
+		restoreActiveRegion(restartTarget);
+	} else {
+		restoreLevel(restartTarget);
+	}
 	tryPlayRestartSound();
 
     if (isOpenWorldLevel()) {
@@ -1200,9 +1210,11 @@ function repositionEntitiesOnLayer(positionIndex,layer,dirMask)
 
 	//corresponding movement stuff in setmovements
 
-    if (!movingEntities.anyBitsInCommon(state.objectMasks["player"])) {
-      objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
-      delete objectTrackers[tx][ty][layer];
+    if (isOpenWorldLevel()) {
+      if (!movingEntities.anyBitsInCommon(state.objectMasks["player"])) {
+        objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
+        delete objectTrackers[tx][ty][layer];
+      }
     }
 
     return true;
@@ -1757,43 +1769,45 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 		level.rowCellContents_Movements[rowIndex].ior(curMovementMask);
 		level.mapCellContents_Movements.ior(curMovementMask);
 
-    // Remove the tracker for any tracked objects that we're removing
-    if (destroyed.anyBitsInCommon(state.moverMask)) {
-      var layers = getLayersOfMask(destroyed);
-      for (var i = 0; i < layers.length; i++) {
-        var layer = layers[i];
-        delete objectTrackers[colIndex][rowIndex][layer];
-      }
-    }
-
-    // Transfer the trackers for any tracked objects that we're creating
-    if (created.anyBitsInCommon(state.moverMask)) {
-      var layers = getLayersOfMask(created);
-      for (var i = 0; i < layers.length; i++) {
-        var layer = layers[i];
-        var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
-          return trackerTransfer[0] === layer;
-        });
-
-        if (trackerTransfer == null) {
-          continue;
+    if (isOpenWorldLevel()) {
+      // Remove the tracker for any tracked objects that we're removing
+      if (destroyed.anyBitsInCommon(state.moverMask)) {
+        var layers = getLayersOfMask(destroyed);
+        for (var i = 0; i < layers.length; i++) {
+          var layer = layers[i];
+          delete objectTrackers[colIndex][rowIndex][layer];
         }
+      }
 
-        var transferCellRowIndex = trackerTransfer[1];
-        var transferCellIndex = trackerTransfer[2];
-        var transferLayer = trackerTransfer[3];
+      // Transfer the trackers for any tracked objects that we're creating
+      if (created.anyBitsInCommon(state.moverMask)) {
+        var layers = getLayersOfMask(created);
+        for (var i = 0; i < layers.length; i++) {
+          var layer = layers[i];
+          var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
+            return trackerTransfer[0] === layer;
+          });
 
-        var transferCellRowPosition = tuple[transferCellRowIndex];
+          if (trackerTransfer == null) {
+            continue;
+          }
 
-        var d0 = delta[0] * level.height;
-        var d1 = delta[1];
+          var transferCellRowIndex = trackerTransfer[1];
+          var transferCellIndex = trackerTransfer[2];
+          var transferLayer = trackerTransfer[3];
 
-        var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
+          var transferCellRowPosition = tuple[transferCellRowIndex];
 
-        var transferFromX = (transferFromPosition / level.height) | 0;
-        var transferFromY = (transferFromPosition % level.height);
+          var d0 = delta[0] * level.height;
+          var d1 = delta[1];
 
-        objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
+          var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
+
+          var transferFromX = (transferFromPosition / level.height) | 0;
+          var transferFromY = (transferFromPosition % level.height);
+
+          objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
+        }
       }
     }
 	}
@@ -3058,7 +3072,6 @@ function nextLevel() {
 	if (state!==undefined && state.metadata.flickscreen!==undefined){
 		oldflickscreendat=[0,0,Math.min(state.metadata.flickscreen[0],level.width),Math.min(state.metadata.flickscreen[1],level.height)];
 	}
-	canvasResize();	
 }
 
 function goToTitleScreen(){

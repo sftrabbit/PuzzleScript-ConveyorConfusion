@@ -1,9 +1,10 @@
 function onStateUpdate(againing, action) {
-  if (curlevel !== 0) {
+  drawLevel();
+  redraw();
+
+  if (!isOpenWorldLevel()) {
     return;
   }
-
-  drawLevel();
 
   var activeRegion = getActiveRegion();
   var region = activeRegion[0];
@@ -36,5 +37,16 @@ function onStateUpdate(againing, action) {
 }
 
 function isOpenWorldLevel() {
-  return curlevel === 0;
+  return !textMode && regions[curlevel] != null;
+}
+
+function clearOpenWorldState() {
+  window.cancelAnimationFrame(currentAnimationFrameId);
+
+  regionMap = [];
+  camera = null;
+  cameraTransition = null;
+  currentRegion = null;
+  currentRegionPrimary = null;
+  objectTrackers = [];
 }
