@@ -1,44 +1,46 @@
 var regionsOffset = [1, 10];
 var regions = [
-  {
-    offset: [0, 0],
-    primaryRects: [
-      [2, -1, 8, 9]
-    ],
-    secondaryRects: [
-      [0, -1, 2, 4],
-      [10, -1, 1, 9],
-      [1, 3, 1, 5]
-    ]
-  },
-  {
-    offset: [11, 1],
-    primaryRects: [
-      [1, -1, 7, 9]
-    ],
-    secondaryRects: [
-      [0, -1, 1, 9],
-      [8, -1, 1, 9],
-      [9, 5, 1, 3]
-    ]
-  },
-  {
-    offset: [21, 1],
-    primaryRects: [
-      [0, 0, 7, 7]
-    ],
-    secondaryRects: [
-      [5, -1, 1, 1]
-    ]
-  }
+  [
+    {
+      offset: [0, 0],
+      primaryRects: [
+        [2, -1, 8, 9]
+      ],
+      secondaryRects: [
+        [0, -1, 2, 4],
+        [10, -1, 1, 9],
+        [1, 3, 1, 5]
+      ]
+    },
+    {
+      offset: [11, 1],
+      primaryRects: [
+        [1, -1, 7, 9]
+      ],
+      secondaryRects: [
+        [0, -1, 1, 9],
+        [8, -1, 1, 9],
+        [9, 5, 1, 3]
+      ]
+    },
+    {
+      offset: [21, 1],
+      primaryRects: [
+        [0, 0, 7, 7]
+      ],
+      secondaryRects: [
+        [5, -1, 1, 1]
+      ]
+    }
+  ]
 ];
 
 var regionMap = [];
 
 function initRegions() {
-  if (curlevel !== 0) {
-    return;
-  }
+  regionMap = [];
+
+  var levelRegions = regions[curlevel] || [];
 
   for (var x = 0; x < level.width; x++) {
     var regionMapColumn = [];
@@ -48,8 +50,8 @@ function initRegions() {
     regionMap.push(regionMapColumn);
   }
 
-  for (var i = 0; i < regions.length; i++) {
-    var region = regions[i];
+  for (var i = 0; i < levelRegions.length; i++) {
+    var region = levelRegions[i];
 
     var offsetX = regionsOffset[0] + region.offset[0];
     var offsetY = regionsOffset[1] + region.offset[1];
@@ -97,7 +99,7 @@ function initRegions() {
 }
 
 function getRegion(position) {
-  return regions[getRegionIndex(position.x, position.y)];
+  return (regions[curlevel] || [])[getRegionIndex(position.x, position.y)];
 }
 
 function isRegionPrimary(position) {
@@ -105,7 +107,7 @@ function isRegionPrimary(position) {
 }
 
 function getRegionIndex(x, y) {
-  if (regionMap[x][y] == null) {
+  if ((regionMap[x] || [])[y] == null) {
     return null;
   }
 
@@ -124,6 +126,10 @@ function getActiveRegion () {
 }
 
 function getActiveRegionIndex () {
+  if (!isOpenWorldLevel()) {
+    return null;
+  }
+
   var playerPositions = getPlayerPositions();
 
   const playerPosition = {
@@ -189,8 +195,8 @@ function getMaxRegionSize() {
     height: 0
   };
 
-  for (var i = 0; i < regions.length; i++) {
-    var regionBounds = getRegionBounds(regions[i]);
+  for (var i = 0; i < (regions[curlevel] || []).length; i++) {
+    var regionBounds = getRegionBounds(regions[curlevel][i]);
     var regionWidth = regionBounds.maxX - regionBounds.minX;
     var regionHeight = regionBounds.maxY - regionBounds.minY;
 

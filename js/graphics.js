@@ -294,10 +294,15 @@ function drawLevel() {
     levelCtx.fillStyle = state.bgcolor;
     levelCtx.fillRect(0, 0, levelCanvas.width, levelCanvas.height);
 
-    var cameraOrigin = {
-        x: Math.floor(camera.position[0] - (screenwidth / 2)),
-        y: Math.floor(camera.position[1] - (screenheight / 2))
-    };
+    var cameraOrigin = isOpenWorldLevel()
+        ? {
+            x: Math.floor(camera.position[0] - (screenwidth / 2)),
+            y: Math.floor(camera.position[1] - (screenheight / 2))
+        }
+        : {
+            x: 0,
+            y: 0
+        };
 
     for (var i = 0; i < screenwidth + 1; i++) {
         for (var j = 0; j < screenheight + 1; j++) {
@@ -320,21 +325,27 @@ function drawLevel() {
     }
 
     var activeRegionIndex = getActiveRegionIndex();
-    var outlinePolygon = regions[activeRegionIndex].outlinePolygon;
+    if (activeRegionIndex != null) {
+        var outlinePolygon = regions[curlevel][activeRegionIndex].outlinePolygon;
 
-    levelCtx.save();
-    levelCtx.beginPath();
-    levelCtx.moveTo((outlinePolygon[0][0]- cameraOrigin.x) * cellwidth, (outlinePolygon[0][1] - cameraOrigin.y) * cellheight);
-    for (var i = 0; i < outlinePolygon.length; i++) {
-        var nextPoint = outlinePolygon[(i + 1) % outlinePolygon.length];
-        levelCtx.lineTo((nextPoint[0] - cameraOrigin.x) * cellwidth, (nextPoint[1] - cameraOrigin.y) * cellheight);
+        levelCtx.save();
+        levelCtx.beginPath();
+        levelCtx.moveTo((outlinePolygon[0][0]- cameraOrigin.x) * cellwidth, (outlinePolygon[0][1] - cameraOrigin.y) * cellheight);
+        for (var i = 0; i < outlinePolygon.length; i++) {
+            var nextPoint = outlinePolygon[(i + 1) % outlinePolygon.length];
+            levelCtx.lineTo((nextPoint[0] - cameraOrigin.x) * cellwidth, (nextPoint[1] - cameraOrigin.y) * cellheight);
+        }
+        levelCtx.lineWidth = Math.floor(cellwidth * 0.4);
+        levelCtx.strokeStyle = '#555';
+        levelCtx.setLineDash([Math.floor(cellwidth * 0.4), Math.floor(cellwidth * 0.2)]);
+        levelCtx.clip();
+        levelCtx.stroke();
+        levelCtx.restore();
     }
-    levelCtx.lineWidth = Math.floor(cellwidth * 0.4);
-    levelCtx.strokeStyle = '#555';
-    levelCtx.setLineDash([Math.floor(cellwidth * 0.4), Math.floor(cellwidth * 0.2)]);
-    levelCtx.clip();
-    levelCtx.stroke();
-    levelCtx.restore();
+
+    // var dataUrl = levelCanvas.toDataURL('image/png')
+    // var w = window.open()
+    // w.document.write('<img src="' + dataUrl + '" />')
 }
 
 function redraw() {
@@ -421,6 +432,9 @@ function redraw() {
 
         ctx.save();
 
+        var levelCanvasOffsetX = 0;
+        var levelCanvasOffsetY = 0;
+
         if (isOpenWorldLevel()) {
             ctx.beginPath();
             ctx.moveTo(xoffset, yoffset);
@@ -428,80 +442,31 @@ function redraw() {
             ctx.lineTo(xoffset + (cellwidth * screenwidth), yoffset + (cellheight * screenheight));
             ctx.lineTo(xoffset, yoffset + (cellheight * screenheight));
             ctx.clip();
-        }
 
-        if (cameraTransition != null) {
-            var now = (new Date()).getTime();
-            var transitionProgress = easeOutQuad(Math.min((now - cameraTransition.start) / 1000, 1));
+            if (cameraTransition != null) {
+                var now = (new Date()).getTime();
+                var transitionProgress = easeOutQuad(Math.min((now - cameraTransition.start) / 1000, 1));
 
-            var deltaX = cameraTransition.to.position[0] - cameraTransition.from.position[0];
-            camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
-            var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
-            camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
+                var deltaX = cameraTransition.to.position[0] - cameraTransition.from.position[0];
+                camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
+                var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
+                camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
 
-            if (transitionProgress >= 1) {
-                camera.position[0] = cameraTransition.to.position[0];
-                camera.position[1] = cameraTransition.to.position[1];
-                cameraTransition = null;
-            }
-        }
-        
-        if (diffToVisualize!==null){
-            //find previous state (this is never called on the very first state, the one before player inputs are applied, so there is always a previous state)
-            var prevstate_lineNumberIndex=diffToVisualize.lineNumber-1;
-            for (;prevstate_lineNumberIndex>=-1;prevstate_lineNumberIndex--)
-            {
-                if (debug_visualisation_array[diffToVisualize.turnIndex].hasOwnProperty(prevstate_lineNumberIndex)){
-                    break;
+                if (transitionProgress >= 1) {
+                    camera.position[0] = cameraTransition.to.position[0];
+                    camera.position[1] = cameraTransition.to.position[1];
+                    cameraTransition = null;
                 }
             }
 
-            var prev_state = debug_visualisation_array[diffToVisualize.turnIndex][prevstate_lineNumberIndex];
-            var prevlevel = new Level(-1,prev_state.width,prev_state.height,prev_state.layerCount,prev_state.objects);
-            prevlevel.movements = prev_state.movements;
-        
-            for (var i = mini; i < maxi; i++) {
-                for (var j = minj; j < maxj; j++) {
-                    var posIndex = j + i * curlevel.height;
-                    var movementbitvec_PREV = prevlevel.getMovements(posIndex);
-                    var movementbitvec = curlevel.getMovements(posIndex);
-                    
-                    var posMask_PREV = prevlevel.getCellInto(posIndex,_o11); 
-                    var posMask = curlevel.getCellInto(posIndex,_o12); 
-                    if (!movementbitvec.equals(movementbitvec_PREV) || !posMask.equals(posMask_PREV)){
-                        ctx.drawImage(glyphHighlightDiff, xoffset + (i-mini) * cellwidth, yoffset + (j-minj) * cellheight);
+            drawLevel();
 
-                    }
-                }
-            }
-        
-            //draw movements!
-            for (var i = mini; i < maxi; i++) {
-                for (var j = minj; j < maxj; j++) {
-                    var posIndex = j + i * curlevel.height;
-                    var movementbitvec = curlevel.getMovements(posIndex);
-                    for (var layer=0;layer<curlevel.layerCount;layer++) {
-                        var layerMovement = movementbitvec.getshiftor(0x1f, 5*layer);
-                        for (var k = 0; k < 5; k++) {
-                            if ((layerMovement&Math.pow(2,k))!==0){
-                                ctx.drawImage(editorGlyphMovements[k], xoffset + (i-mini) * cellwidth, yoffset + (j-minj) * cellheight);
-                            }
-                        }
-                    }                             
-                }
-            }
+            var cameraOriginX = camera.position[0] - (screenwidth / 2);
+            var cameraOriginY = camera.position[1] - (screenheight / 2);
+
+            levelCanvasOffsetX = Math.floor(((cameraOriginX - Math.floor(cameraOriginX)) % 1) * cellwidth);
+            levelCanvasOffsetY = Math.floor(((cameraOriginY - Math.floor(cameraOriginY)) % 1) * cellheight);
         }
-
-        drawLevel();
-
-        var cameraOriginX = camera.position[0] - (screenwidth / 2);
-        var cameraOriginY = camera.position[1] - (screenheight / 2);
-
-        // var levelCanvasOffsetX = Math.floor(((Math.ceil(cameraOriginX) - cameraOriginX) % 1) * cellwidth);
-        // var levelCanvasOffsetY = Math.floor(((Math.ceil(cameraOriginY) - cameraOriginY) % 1) * cellheight);
-
-        var levelCanvasOffsetX = Math.floor(((cameraOriginX - Math.floor(cameraOriginX)) % 1) * cellwidth);
-        var levelCanvasOffsetY = Math.floor(((cameraOriginY - Math.floor(cameraOriginY)) % 1) * cellheight);
 
         ctx.drawImage(
             levelCanvas,
@@ -716,9 +681,8 @@ function canvasResize() {
 
     levelCtx = levelCanvas.getContext('2d');
 
-    if (isOpenWorldLevel()) {
-        drawLevel();
-    } else {
+    drawLevel();
+    if (!isOpenWorldLevel()) {
         redraw();
     }
 }

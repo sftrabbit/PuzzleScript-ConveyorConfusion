@@ -862,9 +862,11 @@ function update() {
         }
     }
 
-    if (!isOpenWorldLevel() && draw) {
-      redraw();
-    }
+    // console.log(isOpenWorldLevel(), draw)
+    // if (!isOpenWorldLevel() && draw) {
+    //   console.log('foo2')
+    //   redraw();
+    // }
 }
 
 var looping=false;
@@ -874,15 +876,17 @@ setInterval(function() {
     update();
 }, deltatime);
 
+var currentAnimationFrameId = null;
+
 function animationFrame() {
   if (!isOpenWorldLevel()) {
     return;
   }
 
   redraw();
-  window.requestAnimationFrame(animationFrame);
+  currentAnimationFrameId = window.requestAnimationFrame(animationFrame);
 }
 
 function startRealtimeRenderer() {
-  window.requestAnimationFrame(animationFrame);
+  currentAnimationFrameId = window.requestAnimationFrame(animationFrame);
 }

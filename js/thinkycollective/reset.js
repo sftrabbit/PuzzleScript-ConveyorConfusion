@@ -9,7 +9,7 @@ function restoreActiveRegion(lev) {
   var playerY = playerPosition % level.height;
 
   var activeRegionIndex = getRegionIndex(playerX, playerY);
-  var regionBounds = getRegionBounds(regions[activeRegionIndex], true);
+  var regionBounds = getRegionBounds(regions[curlevel][activeRegionIndex], true);
 
   // Gather foreign objects that need to be recreated after restore
   var foreignObjects = [];
