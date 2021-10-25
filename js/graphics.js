@@ -324,9 +324,9 @@ function drawLevel() {
         }
     }
 
-    var activeRegionIndex = getActiveRegionIndex();
-    if (activeRegionIndex != null) {
-        var outlinePolygon = regions[curlevel][activeRegionIndex].outlinePolygon;
+    var activeRegion = getActiveRegion();
+    if (activeRegion != null) {
+        var outlinePolygon = activeRegion.outlinePolygon;
 
         levelCtx.save();
         levelCtx.beginPath();
