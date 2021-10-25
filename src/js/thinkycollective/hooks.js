@@ -1,39 +1,22 @@
 function onStateUpdate(againing, action) {
   drawLevel();
-  redraw();
 
   if (!isOpenWorldLevel()) {
+    redraw();
     return;
   }
 
   var activeRegion = getActiveRegion();
-  var region = activeRegion[0];
-  var isPrimary = activeRegion[1];
-
-  if (currentRegion == null) {
-    currentRegion = region;
-    currentRegionPrimary = isPrimary;
-  }
-
-  if (region.cameraFollowPlayer) {
+  var activeArea = getActiveArea();
+  if (activeArea.camera === 'region-center') {
+    transitionCameraToRegion(activeRegion);
+  } else if (activeArea.camera === 'pull-horizontal') {
+    transitionCameraPulledByPlayer(activeRegion, true);
+  } else if (activeArea.camera === 'pull-vertical') {
+    transitionCameraPulledByPlayer(activeRegion, false);
+  } else if (activeArea.camera === 'follow-player') {
     transitionCameraToPlayer();
-
-    if (isPrimary) {
-      currentRegion = region;
-    }
-  } else {
-    if (isPrimary) {
-      if (region !== currentRegion || isPrimary !== currentRegionPrimary) {
-        transitionCameraToRegion(activeRegion);
-      }
-
-      currentRegion = region;
-    } else {
-      transitionCameraPulledByPlayer();
-    }
   }
-
-  currentRegionPrimary = isPrimary;
 }
 
 function isOpenWorldLevel() {
@@ -46,7 +29,5 @@ function clearOpenWorldState() {
   regionMap = [];
   camera = null;
   cameraTransition = null;
-  currentRegion = null;
-  currentRegionPrimary = null;
   objectTrackers = [];
 }

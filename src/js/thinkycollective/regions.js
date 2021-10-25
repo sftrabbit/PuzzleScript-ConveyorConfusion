@@ -3,33 +3,38 @@ var regions = [
   [
     {
       offset: [0, 0],
-      primaryRects: [
-        [2, -1, 8, 9]
-      ],
-      secondaryRects: [
-        [0, -1, 2, 4],
-        [10, -1, 1, 9],
-        [1, 3, 1, 5]
+      areas: [
+        { rect: [2, 0, 8, 8] },
+        { rect: [0, -1, 2, 4], secondary: true, camera: 'pull-horizontal' },
+        { rect: [10, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [1, 3, 1, 5], secondary: true },
+        { rect: [4, -4, 3, 3], secondary: true, camera: 'follow-player' },
+        { rect: [4, -7, 9, 3], secondary: true, camera: 'follow-player' }
       ]
     },
     {
       offset: [11, 1],
-      primaryRects: [
-        [1, -1, 7, 9]
-      ],
-      secondaryRects: [
-        [0, -1, 1, 9],
-        [8, -1, 1, 9],
-        [9, 5, 1, 3]
+      areas: [
+        { rect: [1, -1, 7, 9] },
+        { rect: [0, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [8, -1, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ]
     },
     {
       offset: [21, 1],
-      primaryRects: [
-        [0, 0, 7, 7]
-      ],
-      secondaryRects: [
-        [5, -1, 1, 1]
+      areas: [
+        { rect: [0, 0, 8, 8] },
+        { rect: [-1, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [0, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
+      ]
+    },
+    {
+      offset: [26, -8],
+      areas: [
+        { rect: [-1, 0, 8, 7] },
+        { rect: [-1, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [-1, 7, 8, 1], secondary: true, camera: 'pull-vertical' }
       ]
     }
   ]
@@ -61,38 +66,30 @@ function initRegions() {
     var minY = Infinity;
     var maxY = 0;
 
+    for (var j = 0; j < region.areas.length; j++) {
+      if (region.areas[j].camera == null) {
+        region.areas[j].camera = 'region-center';
+      }
+
+      var rect = region.areas[j].rect;
+
+      var positionX = offsetX + rect[0];
+      var positionY = offsetY + rect[1];
+
+      for (var x = positionX; x < positionX + rect[2]; x++) {
+        for (var y = positionY; y < positionY + rect[3]; y++) {
+          regionMap[x][y] = [i, j];
+        }
+      }
+    }
+
     var regionBounds = getRegionBounds(region);
-
-    for (var j = 0; j < region.secondaryRects.length; j++) {
-      var rect = region.secondaryRects[j];
-
-      var positionX = offsetX + rect[0];
-      var positionY = offsetY + rect[1];
-
-      for (var x = positionX; x < positionX + rect[2]; x++) {
-        for (var y = positionY; y < positionY + rect[3]; y++) {
-          regionMap[x][y] = [i, false];
-        }
-      }
-    }
-
-    for (var j = 0; j < region.primaryRects.length; j++) {
-      var rect = region.primaryRects[j];
-
-      var positionX = offsetX + rect[0];
-      var positionY = offsetY + rect[1];
-
-      for (var x = positionX; x < positionX + rect[2]; x++) {
-        for (var y = positionY; y < positionY + rect[3]; y++) {
-          regionMap[x][y] = [i, true];
-        }
-      }
-    }
 
     var cameraAnchorX = regionBounds.minX + ((regionBounds.maxX - regionBounds.minX) / 2);
     var cameraAnchorY = regionBounds.minY + ((regionBounds.maxY - regionBounds.minY) / 2);
 
     region.cameraAnchor = [cameraAnchorX, cameraAnchorY];
+    region.bounds = regionBounds;
 
     region.outlinePolygon = calculateOutlinePolygon(region);
   }
@@ -102,16 +99,34 @@ function getRegion(position) {
   return (regions[curlevel] || [])[getRegionIndex(position.x, position.y)];
 }
 
-function isRegionPrimary(position) {
-  return regionMap[position.x][position.y][1];
+function getArea(position) {
+  var levelRegions = regions[curlevel] || [];
+
+  var areaIndex = getAreaIndex(position.x, position.y);
+
+  return levelRegions[areaIndex[0]].areas[areaIndex[1]];
 }
 
-function getRegionIndex(x, y) {
+function isAreaPrimary(position) {
+  var area = getArea(position);
+  return !area.secondary;
+}
+
+function getAreaIndex(x, y) {
   if ((regionMap[x] || [])[y] == null) {
     return null;
   }
 
-  return regionMap[x][y][0];
+  return regionMap[x][y];
+}
+
+function getRegionIndex(x, y) {
+  var areaIndex = getAreaIndex(x, y);
+  if (areaIndex == null) {
+    return null;
+  }
+
+  return areaIndex[0];
 }
 
 function getActiveRegion () {
@@ -122,14 +137,10 @@ function getActiveRegion () {
     y: (playerPositions[0]%level.height)|0
   };
 
-  return [getRegion(playerPosition), isRegionPrimary(playerPosition)];
+  return getRegion(playerPosition);
 }
 
-function getActiveRegionIndex () {
-  if (!isOpenWorldLevel()) {
-    return null;
-  }
-
+function getActiveArea () {
   var playerPositions = getPlayerPositions();
 
   const playerPosition = {
@@ -137,7 +148,7 @@ function getActiveRegionIndex () {
     y: (playerPositions[0]%level.height)|0
   };
 
-  return getRegionIndex(playerPosition.x, playerPosition.y);
+  return getArea(playerPosition);
 }
 
 function formatRegionMap() {
@@ -163,10 +174,12 @@ function getRegionBounds(region, includeSecondary = false) {
   var offsetX = regionsOffset[0] + region.offset[0];
   var offsetY = regionsOffset[1] + region.offset[1];
 
-  var rects = region.primaryRects.concat(includeSecondary ? region.secondaryRects : []);
+  var areas = region.areas.filter(function (area) {
+    return includeSecondary || !area.secondary;
+  });
 
-  for (var j = 0; j < rects.length; j++) {
-    var rect = rects[j];
+  for (var j = 0; j < areas.length; j++) {
+    var rect = areas[j].rect;
 
     var positionX = offsetX + rect[0];
     var positionY = offsetY + rect[1];
@@ -213,7 +226,7 @@ function getMaxRegionSize() {
 }
 
 function calculateOutlinePolygon(region) {
-  var rects = region.primaryRects.concat(region.secondaryRects);
+  var rects = region.areas.map(function (area) { return area.rect; });
     
   // Implementation of algorithm described here: https://stackoverflow.com/a/13851341/150634
   var points = [];

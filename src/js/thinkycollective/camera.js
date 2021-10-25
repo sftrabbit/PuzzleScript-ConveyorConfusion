@@ -1,11 +1,10 @@
 var camera = null;
 var cameraTransition = null;
-var currentRegion = null;
-var currentRegionPrimary = null;
 
 function transitionCameraToRegion(activeRegion) {
-  var region = activeRegion[0];
-  var isPrimary = activeRegion[1];
+  if (cameraTransition && cameraTransition.to.position[0] === activeRegion.cameraAnchor[0] && cameraTransition.to.position[1] === activeRegion.cameraAnchor[1]) {
+    return;
+  }
 
   cameraTransition = {
     start: (new Date()).getTime(),
@@ -13,12 +12,12 @@ function transitionCameraToRegion(activeRegion) {
       position: [camera.position[0], camera.position[1]]
     },
     to: {
-      position: [region.cameraAnchor[0], region.cameraAnchor[1]]
+      position: [activeRegion.cameraAnchor[0], activeRegion.cameraAnchor[1]]
     }
   };
 }
 
-function transitionCameraPulledByPlayer() {
+function transitionCameraPulledByPlayer(activeRegion, horizontal) {
   var playerPositions = getPlayerPositions();
 
   const playerPosition = {
@@ -26,19 +25,20 @@ function transitionCameraPulledByPlayer() {
     y: (playerPositions[0]%level.height)|0
   };
 
-  var xDiff = Math.abs(playerPosition.x - currentRegion.cameraAnchor[0]);
-  var yDiff = Math.abs(playerPosition.y - currentRegion.cameraAnchor[1]);
-
   var targetPosition = [];
-  if (xDiff >= yDiff) {
+  if (horizontal) {
+    var regionWidth = activeRegion.bounds.maxX - activeRegion.bounds.minX;
+    var direction = Math.sign(playerPosition.x - activeRegion.cameraAnchor[0]);
+    var playerOffset = Math.abs((playerPosition.x + 0.5) - activeRegion.cameraAnchor[0]) - (regionWidth / 2);
+
     targetPosition = [
-      currentRegion.cameraAnchor[0] + (playerPosition.x - currentRegion.cameraAnchor[0]) * 0.4,
-      currentRegion.cameraAnchor[1]
+      activeRegion.cameraAnchor[0] + (playerOffset * direction),
+      activeRegion.cameraAnchor[1]
     ];
   } else {
     targetPosition = [
-      currentRegion.cameraAnchor[0],
-      currentRegion.cameraAnchor[1] + (playerPosition.y - currentRegion.cameraAnchor[1]) * 0.4
+      activeRegion.cameraAnchor[0],
+      activeRegion.cameraAnchor[1] + (playerPosition.y - activeRegion.cameraAnchor[1]) * 0.4
     ];
   }
 
@@ -73,7 +73,7 @@ function transitionCameraToPlayer() {
 }
 
 function initSmoothCamera() {
-  var region = getActiveRegion()[0];
+  var region = getActiveRegion();
 
   camera = {
     position: [region.cameraAnchor[0], region.cameraAnchor[1]]
