@@ -444,18 +444,25 @@ function redraw() {
             ctx.clip();
 
             if (cameraTransition != null) {
-                var now = (new Date()).getTime();
-                var transitionProgress = easeOutQuad(Math.min((now - cameraTransition.start) / 1000, 1));
+                if (cameraTransition.start != null) {
+                    var now = (new Date()).getTime();
+                    var transitionProgress = easeOutQuad(Math.min((now - cameraTransition.start) / 1000, 1));
 
-                var deltaX = cameraTransition.to.position[0] - cameraTransition.from.position[0];
-                camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
-                var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
-                camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
+                    var deltaX = cameraTransition.to.position[0] - cameraTransition.from.position[0];
+                    camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
+                    var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
+                    camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
 
-                if (transitionProgress >= 1) {
-                    camera.position[0] = cameraTransition.to.position[0];
-                    camera.position[1] = cameraTransition.to.position[1];
-                    cameraTransition = null;
+                    if (transitionProgress >= 1) {
+                        camera.position[0] = cameraTransition.to.position[0];
+                        camera.position[1] = cameraTransition.to.position[1];
+                        cameraTransition = null;
+                    }
+                } else {
+                    var deltaX = cameraTransition.to.position[0] - camera.position[0];
+                    camera.position[0] += deltaX * 0.03;
+                    var deltaY = cameraTransition.to.position[1] - camera.position[1];
+                    camera.position[1] += deltaY * 0.03;
                 }
             }
 

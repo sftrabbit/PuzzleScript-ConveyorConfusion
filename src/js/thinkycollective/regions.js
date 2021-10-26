@@ -1,43 +1,51 @@
-var regionsOffset = [1, 10];
+var regionsOffset = [0, 0];
 var regions = [
   [
     {
-      offset: [0, 0],
+      offset: [64, 70],
       areas: [
-        { rect: [2, 0, 8, 8] },
-        { rect: [0, -1, 2, 4], secondary: true, camera: 'pull-horizontal' },
-        { rect: [10, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
-        { rect: [2, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [1, 3, 1, 5], secondary: true },
-        { rect: [4, -4, 3, 3], secondary: true, camera: 'follow-player' },
-        { rect: [4, -7, 9, 3], secondary: true, camera: 'follow-player' }
-      ]
-    },
-    {
-      offset: [11, 1],
-      areas: [
-        { rect: [1, -1, 7, 9] },
-        { rect: [0, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
-        { rect: [8, -1, 1, 9], secondary: true, camera: 'pull-horizontal' }
-      ]
-    },
-    {
-      offset: [21, 1],
-      areas: [
-        { rect: [0, 0, 8, 8] },
-        { rect: [-1, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
-        { rect: [0, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
-      ]
-    },
-    {
-      offset: [26, -8],
-      areas: [
-        { rect: [-1, 0, 8, 7] },
-        { rect: [-1, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [-1, 7, 8, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [0, 0, 15, 9], camera: 'follow-player' }
       ]
     }
   ]
+  // [
+  //   {
+  //     offset: [0, 0],
+  //     areas: [
+  //       { rect: [2, 0, 8, 8] },
+  //       { rect: [0, -1, 2, 4], secondary: true, camera: 'pull-horizontal' },
+  //       { rect: [10, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
+  //       { rect: [2, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
+  //       { rect: [1, 3, 1, 5], secondary: true },
+  //       { rect: [4, -4, 3, 3], secondary: true, camera: 'follow-player' },
+  //       { rect: [4, -7, 9, 3], secondary: true, camera: 'follow-player' }
+  //     ]
+  //   },
+  //   {
+  //     offset: [11, 1],
+  //     areas: [
+  //       { rect: [1, -1, 7, 9] },
+  //       { rect: [0, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
+  //       { rect: [8, -1, 1, 9], secondary: true, camera: 'pull-horizontal' }
+  //     ]
+  //   },
+  //   {
+  //     offset: [21, 1],
+  //     areas: [
+  //       { rect: [0, 0, 8, 8] },
+  //       { rect: [-1, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
+  //       { rect: [0, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
+  //     ]
+  //   },
+  //   {
+  //     offset: [26, -8],
+  //     areas: [
+  //       { rect: [-1, 0, 8, 7] },
+  //       { rect: [-1, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
+  //       { rect: [-1, 7, 8, 1], secondary: true, camera: 'pull-vertical' }
+  //     ]
+  //   }
+  // ]
 ];
 
 var regionMap = [];

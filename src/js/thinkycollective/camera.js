@@ -62,10 +62,10 @@ function transitionCameraToPlayer() {
   };
 
   cameraTransition = {
-    start: (new Date()).getTime(),
-    from: {
-      position: [camera.position[0], camera.position[1]]
-    },
+    // start: (new Date()).getTime(),
+    // from: {
+    //   position: [camera.position[0], camera.position[1]]
+    // },
     to: {
       position: [playerPosition.x, playerPosition.y]
     }
