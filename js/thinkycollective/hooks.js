@@ -1,3 +1,5 @@
+var playerPosition = null;
+
 function onStateUpdate(againing, action) {
   drawLevel();
 

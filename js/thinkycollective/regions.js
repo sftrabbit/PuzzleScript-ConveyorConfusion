@@ -138,24 +138,10 @@ function getRegionIndex(x, y) {
 }
 
 function getActiveRegion () {
-  var playerPositions = getPlayerPositions();
-
-  const playerPosition = {
-    x: (playerPositions[0]/(level.height))|0,
-    y: (playerPositions[0]%level.height)|0
-  };
-
   return getRegion(playerPosition);
 }
 
 function getActiveArea () {
-  var playerPositions = getPlayerPositions();
-
-  const playerPosition = {
-    x: (playerPositions[0]/(level.height))|0,
-    y: (playerPositions[0]%level.height)|0
-  };
-
   return getArea(playerPosition);
 }
 

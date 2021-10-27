@@ -287,7 +287,7 @@ function drawLevel() {
         return;
     }
 
-    if (spriteimages===undefined) {
+    if (spriteimages===undefined || spriteimages.length === 0) {
         regenSpriteImages();
     }
 

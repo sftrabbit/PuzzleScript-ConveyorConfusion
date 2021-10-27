@@ -18,13 +18,6 @@ function transitionCameraToRegion(activeRegion) {
 }
 
 function transitionCameraPulledByPlayer(activeRegion, horizontal) {
-  var playerPositions = getPlayerPositions();
-
-  const playerPosition = {
-    x: (playerPositions[0]/(level.height))|0,
-    y: (playerPositions[0]%level.height)|0
-  };
-
   var targetPosition = [];
   if (horizontal) {
     var regionWidth = activeRegion.bounds.maxX - activeRegion.bounds.minX;
@@ -54,18 +47,7 @@ function transitionCameraPulledByPlayer(activeRegion, horizontal) {
 }
 
 function transitionCameraToPlayer() {
-  var playerPositions = getPlayerPositions();
-
-  const playerPosition = {
-    x: (playerPositions[0]/(level.height))|0,
-    y: (playerPositions[0]%level.height)|0
-  };
-
   cameraTransition = {
-    // start: (new Date()).getTime(),
-    // from: {
-    //   position: [camera.position[0], camera.position[1]]
-    // },
     to: {
       position: [playerPosition.x, playerPosition.y]
     }

@@ -445,6 +445,12 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    restartTarget=backupLevel();
 		keybuffer=[];
 
+	    var playerPositions = getPlayerPositions();
+		playerPosition = {
+		    x: (playerPositions[0]/(level.height))|0,
+		    y: (playerPositions[0]%level.height)|0
+		};
+
         if (isOpenWorldLevel()) {
           initRegions();
           initObjectTrackers();
@@ -1123,14 +1129,12 @@ function moveEntitiesAtIndex(positionIndex, entityMask, dirMask) {
 }
 
 
-function startMovement(dir) {
+function startMovement(playerPositions, dir) {
 	var movedany=false;
-    var playerPositions = getPlayerPositions();
     for (var i=0;i<playerPositions.length;i++) {
         var playerPosIndex = playerPositions[i];
         moveEntitiesAtIndex(playerPosIndex,state.playerMask,dir);
     }
-    return playerPositions;
 }
 
 var dirMasksDelta = {
@@ -1927,10 +1931,18 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 		return result;
 	}
 
-	var xmin=0;
-	var xmax=level.width;
-	var ymin=0;
-	var ymax=level.height;
+	var xmin, xmax, ymin, ymax;
+	if (!isOpenWorldLevel()) {
+		xmin=0;
+		xmax=level.width;
+		ymin=0;
+		ymax=level.height;
+	} else {
+		xmin=Math.max(0, playerPosition.x - 12);
+		xmax=Math.min(level.width, playerPosition.x + 13);
+		ymin=Math.max(0, playerPosition.y - 8);
+		ymax=Math.min(level.height, playerPosition.y + 9);
+	}
 
     var len=cellRow.length;
 
@@ -1963,11 +1975,13 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 
     var horizontal=direction>2;
     if (horizontal) {
+    	// console.log('row start', performance.now())
 		for (var y=ymin;y<ymax;y++) {
 			if (!cellRowMask.bitsSetInArray(level.rowCellContents[y].data) 
 			|| !cellRowMask_Movements.bitsSetInArray(level.rowCellContents_Movements[y].data)) {
 				continue;
 			}
+            // console.log('column start', performance.now())
 
 			for (var x=xmin;x<xmax;x++) {
 				var i = x*level.height+y;
@@ -1976,7 +1990,9 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 					result.push(i);
 				}
 			}
+            // console.log('column end', performance.now())
 		}
+    	// console.log('row end', performance.now())
 	} else {
 		for (var x=xmin;x<xmax;x++) {
 			if (!cellRowMask.bitsSetInArray(level.colCellContents[x].data)
@@ -2109,6 +2125,7 @@ function generateTuples(lists) {
     return tuples;
 }
 
+var previousTime = performance.now();
 
 
 Rule.prototype.findMatches = function() {	
@@ -2358,7 +2375,6 @@ function applyRandomRuleGroup(level,ruleGroup) {
 	return modified;
 }
 
-
 function applyRuleGroup(ruleGroup) {
 	if (ruleGroup[0].isRandom) {
 		return applyRandomRuleGroup(level,ruleGroup);
@@ -2561,12 +2577,15 @@ function calculateRowColMasks() {
 function processInput(dir,dontDoWin,dontModify) {
 	againing = false;
 
-
-
 	var bak = backupLevel();
 	var inputindex=dir;
 
-	var playerPositions=[];
+    var playerPositions = getPlayerPositions();
+	playerPosition = {
+	    x: (playerPositions[0]/(level.height))|0,
+	    y: (playerPositions[0]%level.height)|0
+	};
+
     if (dir<=4) {//when is dir>4???
 
 
@@ -2604,7 +2623,7 @@ function processInput(dir,dontDoWin,dontModify) {
 	                break;
 	            }
 	        }
-	        playerPositions = startMovement(dir);
+	        startMovement(playerPositions, dir);
 		}
 			
 		
@@ -3072,6 +3091,8 @@ function nextLevel() {
 	if (state!==undefined && state.metadata.flickscreen!==undefined){
 		oldflickscreendat=[0,0,Math.min(state.metadata.flickscreen[0],level.width),Math.min(state.metadata.flickscreen[1],level.height)];
 	}
+
+	canvasResize();
 }
 
 function goToTitleScreen(){
