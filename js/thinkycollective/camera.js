@@ -54,6 +54,22 @@ function transitionCameraToPlayer() {
   };
 }
 
+function transitionCameraToPlayerAnchored(activeRegion, horizontal) {
+  if (horizontal) {
+    cameraTransition = {
+      to: {
+        position: [activeRegion.cameraAnchor[0], playerPosition.y]
+      }
+    };
+  } else {
+    cameraTransition = {
+      to: {
+        position: [playerPosition.x, activeRegion.cameraAnchor[1]]
+      }
+    };
+  }
+}
+
 function initSmoothCamera() {
   var region = getActiveRegion();
 

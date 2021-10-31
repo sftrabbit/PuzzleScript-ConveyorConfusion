@@ -1,14 +1,16 @@
 var playerPosition = null;
 
 function onStateUpdate(againing, action) {
-  drawLevel();
-
   if (!isOpenWorldLevel()) {
     redraw();
     return;
   }
 
   var activeRegion = getActiveRegion();
+  if (activeRegion == null) {
+    transitionCameraToPlayer();
+    return;
+  }
   var activeArea = getActiveArea();
   if (activeArea.camera === 'region-center') {
     transitionCameraToRegion(activeRegion);
@@ -18,6 +20,10 @@ function onStateUpdate(againing, action) {
     transitionCameraPulledByPlayer(activeRegion, false);
   } else if (activeArea.camera === 'follow-player') {
     transitionCameraToPlayer();
+  } else if (activeArea.camera === 'follow-player-anchored-x') {
+    transitionCameraToPlayerAnchored(activeRegion, true);
+  } else if (activeArea.camera === 'follow-player-anchored-y') {
+    transitionCameraToPlayerAnchored(activeRegion, false);
   }
 }
 

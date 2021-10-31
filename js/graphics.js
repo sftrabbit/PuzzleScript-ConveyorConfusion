@@ -330,14 +330,14 @@ function drawLevel() {
 
         levelCtx.save();
         levelCtx.beginPath();
-        levelCtx.moveTo((outlinePolygon[0][0]- cameraOrigin.x) * cellwidth, (outlinePolygon[0][1] - cameraOrigin.y) * cellheight);
+        levelCtx.moveTo((outlinePolygon[0][0]- cameraOrigin.x) * cellwidth, (outlinePolygon[0][1] - cameraOrigin.y - 0.8) * cellheight);
         for (var i = 0; i < outlinePolygon.length; i++) {
             var nextPoint = outlinePolygon[(i + 1) % outlinePolygon.length];
-            levelCtx.lineTo((nextPoint[0] - cameraOrigin.x) * cellwidth, (nextPoint[1] - cameraOrigin.y) * cellheight);
+            levelCtx.lineTo((nextPoint[0] - cameraOrigin.x) * cellwidth, (nextPoint[1] - cameraOrigin.y - 0.8) * cellheight);
         }
         levelCtx.lineWidth = Math.floor(cellwidth * 0.4);
-        levelCtx.strokeStyle = '#555';
-        levelCtx.setLineDash([Math.floor(cellwidth * 0.4), Math.floor(cellwidth * 0.2)]);
+        levelCtx.strokeStyle = 'rgba(128, 128, 128, 0.3)';
+        levelCtx.setLineDash([Math.floor(cellwidth * 0.2), Math.floor(cellwidth * 0.4)]);
         levelCtx.clip();
         levelCtx.stroke();
         levelCtx.restore();
@@ -460,9 +460,9 @@ function redraw() {
                     }
                 } else {
                     var deltaX = cameraTransition.to.position[0] - camera.position[0];
-                    camera.position[0] += deltaX * 0.03;
+                    camera.position[0] += deltaX * 0.05;
                     var deltaY = cameraTransition.to.position[1] - camera.position[1];
-                    camera.position[1] += deltaY * 0.03;
+                    camera.position[1] += deltaY * 0.05;
                 }
             }
 

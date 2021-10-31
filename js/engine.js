@@ -397,6 +397,7 @@ function drawMessageScreen() {
 }
 
 var loadedLevelSeed=0;
+var firstTurn = true;
 
 function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {	
 	if (randomseed==null) {
@@ -445,6 +446,8 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    restartTarget=backupLevel();
 		keybuffer=[];
 
+		firstTurn = true;
+
 	    var playerPositions = getPlayerPositions();
 		playerPosition = {
 		    x: (playerPositions[0]/(level.height))|0,
@@ -467,6 +470,8 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    } else {
 			onStateUpdate(false, false);
 	    }
+
+	    firstTurn = false;
 
 	    canvasResize();
 	    drawLevel();
@@ -599,7 +604,7 @@ function backupLevel() {
 		width : level.width,
 		height : level.height,
 		oldflickscreendat: oldflickscreendat.concat([]),
-    objectTrackers: JSON.parse(JSON.stringify(objectTrackers))
+    objectTrackers: null
 	};
 	return ret;
 }
@@ -894,7 +899,7 @@ function restoreLevel(lev) {
 		}
 	} else {	
 		level.objects = new Int32Array(lev.dat);
-		objectTrackers = JSON.parse(JSON.stringify(lev.objectTrackers));
+		// objectTrackers = JSON.parse(JSON.stringify(lev.objectTrackers));
 	}
 
 	if (level.width !== lev.width || level.height !== lev.height) {
@@ -1214,12 +1219,12 @@ function repositionEntitiesOnLayer(positionIndex,layer,dirMask)
 
 	//corresponding movement stuff in setmovements
 
-    if (isOpenWorldLevel()) {
-      if (!movingEntities.anyBitsInCommon(state.objectMasks["player"])) {
-        objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
-        delete objectTrackers[tx][ty][layer];
-      }
-    }
+    // if (isOpenWorldLevel()) {
+    //   if (!movingEntities.anyBitsInCommon(state.objectMasks["player"])) {
+    //     objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
+    //     delete objectTrackers[tx][ty][layer];
+    //   }
+    // }
 
     return true;
 }
@@ -1461,7 +1466,7 @@ function Rule(rule) {
 	this.lineNumber = rule[3];		/* rule source for debugging */
 	this.isEllipsis = rule[4];		/* true if pattern has ellipsis */
 	this.groupNumber = rule[5];		/* execution group number of rule */
-	this.isRigid = rule[6];
+	this.firstTurnOnly = rule[6]; // This is actually the rigid keyword... HACK!!
 	this.commands = rule[7];		/* cancel, restart, sfx, etc */
 	this.isRandom = rule[8];
 	this.cellRowMasks = rule[9];
@@ -1773,47 +1778,47 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 		level.rowCellContents_Movements[rowIndex].ior(curMovementMask);
 		level.mapCellContents_Movements.ior(curMovementMask);
 
-    if (isOpenWorldLevel()) {
-      // Remove the tracker for any tracked objects that we're removing
-      if (destroyed.anyBitsInCommon(state.moverMask)) {
-        var layers = getLayersOfMask(destroyed);
-        for (var i = 0; i < layers.length; i++) {
-          var layer = layers[i];
-          delete objectTrackers[colIndex][rowIndex][layer];
-        }
-      }
+    // if (isOpenWorldLevel()) {
+    //   // Remove the tracker for any tracked objects that we're removing
+    //   if (destroyed.anyBitsInCommon(state.moverMask)) {
+    //     var layers = getLayersOfMask(destroyed);
+    //     for (var i = 0; i < layers.length; i++) {
+    //       var layer = layers[i];
+    //       delete objectTrackers[colIndex][rowIndex][layer];
+    //     }
+    //   }
 
-      // Transfer the trackers for any tracked objects that we're creating
-      if (created.anyBitsInCommon(state.moverMask)) {
-        var layers = getLayersOfMask(created);
-        for (var i = 0; i < layers.length; i++) {
-          var layer = layers[i];
-          var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
-            return trackerTransfer[0] === layer;
-          });
+    //   // Transfer the trackers for any tracked objects that we're creating
+    //   if (created.anyBitsInCommon(state.moverMask)) {
+    //     var layers = getLayersOfMask(created);
+    //     for (var i = 0; i < layers.length; i++) {
+    //       var layer = layers[i];
+    //       var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
+    //         return trackerTransfer[0] === layer;
+    //       });
 
-          if (trackerTransfer == null) {
-            continue;
-          }
+    //       if (trackerTransfer == null) {
+    //         continue;
+    //       }
 
-          var transferCellRowIndex = trackerTransfer[1];
-          var transferCellIndex = trackerTransfer[2];
-          var transferLayer = trackerTransfer[3];
+    //       var transferCellRowIndex = trackerTransfer[1];
+    //       var transferCellIndex = trackerTransfer[2];
+    //       var transferLayer = trackerTransfer[3];
 
-          var transferCellRowPosition = tuple[transferCellRowIndex];
+    //       var transferCellRowPosition = tuple[transferCellRowIndex];
 
-          var d0 = delta[0] * level.height;
-          var d1 = delta[1];
+    //       var d0 = delta[0] * level.height;
+    //       var d1 = delta[1];
 
-          var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
+    //       var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
 
-          var transferFromX = (transferFromPosition / level.height) | 0;
-          var transferFromY = (transferFromPosition % level.height);
+    //       var transferFromX = (transferFromPosition / level.height) | 0;
+    //       var transferFromY = (transferFromPosition % level.height);
 
-          objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
-        }
-      }
-    }
+    //       // objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
+    //     }
+    //   }
+    // }
 	}
 
 	return result;
@@ -1923,7 +1928,7 @@ function DoesCellRowMatch(direction,cellRow,i,k) {
     return false;
 }
 */
-function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_Movements,d) {	
+function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_Movements,d,isGlobal) {	
 	var result=[];
 	
 	if ((!cellRowMask.bitsSetInArray(level.mapCellContents.data))||
@@ -1932,16 +1937,16 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 	}
 
 	var xmin, xmax, ymin, ymax;
-	if (!isOpenWorldLevel()) {
+	if (isGlobal || !isOpenWorldLevel()) {
 		xmin=0;
 		xmax=level.width;
 		ymin=0;
 		ymax=level.height;
 	} else {
-		xmin=Math.max(0, playerPosition.x - 12);
-		xmax=Math.min(level.width, playerPosition.x + 13);
-		ymin=Math.max(0, playerPosition.y - 8);
-		ymax=Math.min(level.height, playerPosition.y + 9);
+		xmin=Math.max(0, playerPosition.x - 20);
+		xmax=Math.min(level.width, playerPosition.x + 21);
+		ymin=Math.max(0, playerPosition.y - 12);
+		ymax=Math.min(level.height, playerPosition.y + 13);
 	}
 
     var len=cellRow.length;
@@ -2140,11 +2145,11 @@ Rule.prototype.findMatches = function() {
     for (var cellRowIndex=0;cellRowIndex<this.patterns.length;cellRowIndex++) {
         var cellRow = this.patterns[cellRowIndex];
         var matchFunction = this.cellRowMatches[cellRowIndex];
-        if (this.isEllipsis[cellRowIndex]) {//if ellipsis     
-        	var match = matchCellRowWildCard(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d);  
-        } else {
-        	var match = matchCellRow(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d);               	
-        }
+        // if (this.isEllipsis[cellRowIndex]) {//if ellipsis     
+        // 	var match = matchCellRowWildCard(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d);  
+        // } else {
+        	var match = matchCellRow(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d,this.firstTurnOnly);               	
+        // }
         if (match.length===0) {
             return [];
         } else {
@@ -2229,6 +2234,9 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
 };
 
 Rule.prototype.tryApply = function(level) {
+	if (!firstTurn && this.firstTurnOnly) {
+		return false;
+	}
 	const delta = level.delta_index(this.direction);
 
     //get all cellrow matches
@@ -2376,9 +2384,9 @@ function applyRandomRuleGroup(level,ruleGroup) {
 }
 
 function applyRuleGroup(ruleGroup) {
-	if (ruleGroup[0].isRandom) {
-		return applyRandomRuleGroup(level,ruleGroup);
-	}
+	// if (ruleGroup[0].isRandom) {
+	// 	return applyRandomRuleGroup(level,ruleGroup);
+	// }
 
 	var loopPropagated=false;
     var propagated=true;
@@ -2396,6 +2404,7 @@ function applyRuleGroup(ruleGroup) {
         for (var ruleIndex=0;ruleIndex<ruleGroup.length;ruleIndex++) {
             var rule = ruleGroup[ruleIndex];     
 			if (rule.tryApply(level)){
+				anythingModified = true;
 				propagated=true;
 				nothing_happened_counter=0;//why am I resetting to 1 rather than 0? because I've just verified that applications of the current rule are exhausted
 			} else {
@@ -2418,13 +2427,15 @@ function applyRuleGroup(ruleGroup) {
 }
 
 var previousObjectTrackers = null;
+var anythingModified = false;
 
-function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup){
+function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup, exitEarly){
+    anythingModified = false;
     //for each rule
     //try to match it
 
     // We make a copy of object trackers to transfer trackers from while modifying the original ones
-    previousObjectTrackers = JSON.parse(JSON.stringify(objectTrackers));
+    // previousObjectTrackers = JSON.parse(JSON.stringify(objectTrackers));
 
     //when we're going back in, let's loop, to be sure to be sure
     var loopPropagated = startRuleGroupindex>0;
@@ -2435,6 +2446,9 @@ function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup){
     	} else {
     		var ruleGroup=rules[ruleGroupIndex];
 			loopPropagated = applyRuleGroup(ruleGroup) || loopPropagated;
+			if (exitEarly && anythingModified) {
+				break;
+			}
 	    }
         if (loopPropagated && loopPoint[ruleGroupIndex]!==undefined) {
         	ruleGroupIndex = loopPoint[ruleGroupIndex];
@@ -2472,7 +2486,9 @@ function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup){
         }
     }
 
-    previousObjectTrackers = null;
+    // previousObjectTrackers = null;
+
+    // return anythingModified;
 }
 
 
@@ -2589,10 +2605,10 @@ function processInput(dir,dontDoWin,dontModify) {
     if (dir<=4) {//when is dir>4???
 
 
-		if (verbose_logging) { 
-			debugger_turnIndex++;
-			addToDebugTimeline(level,-2);//pre-movement-applied debug state
-		}
+		// if (verbose_logging) { 
+		// 	debugger_turnIndex++;
+		// 	addToDebugTimeline(level,-2);//pre-movement-applied debug state
+		// }
 
 
     	if (dir>=0) {
@@ -2627,18 +2643,18 @@ function processInput(dir,dontDoWin,dontModify) {
 		}
 			
 		
-		if (verbose_logging) { 
-			consolePrint('Applying rules');
+		// if (verbose_logging) { 
+		// 	consolePrint('Applying rules');
 
-			var inspect_ID = addToDebugTimeline(level,-1);
+		// 	var inspect_ID = addToDebugTimeline(level,-1);
 				
-			 if (dir===-1) {
-				 consolePrint(`Turn starts with no input.`,false,null,inspect_ID)
-			 } else {
-				//  consolePrint('=======================');
-				consolePrint(`Turn starts with input of ${['up','left','down','right','action'][inputindex]}.`,false,null,inspect_ID);
-			 }
-		}
+		// 	 if (dir===-1) {
+		// 		 consolePrint(`Turn starts with no input.`,false,null,inspect_ID)
+		// 	 } else {
+		// 		//  consolePrint('=======================');
+		// 		consolePrint(`Turn starts with input of ${['up','left','down','right','action'][inputindex]}.`,false,null,inspect_ID);
+		// 	 }
+		// }
 
 		
         bannedGroup = [];
@@ -2662,122 +2678,129 @@ function processInput(dir,dontDoWin,dontModify) {
 
 		calculateRowColMasks();
 
-        var i=0;
-        do {
-        //not particularly elegant, but it'll do for now - should copy the world state and check
-        //after each iteration
-        	rigidloop=false;
-        	i++;
+        // var i=0;
+        // do {
+        // //not particularly elegant, but it'll do for now - should copy the world state and check
+        // //after each iteration
+        // 	rigidloop=false;
+        // 	i++;
         	
 
-
-        	applyRules(state.rules, state.loopPoint, startRuleGroupIndex, bannedGroup);
+        	applyRules(state.rules, state.loopPoint, startRuleGroupIndex, bannedGroup, dontModify);
         	var shouldUndo = resolveMovements(level,bannedGroup);
 
-        	if (shouldUndo) {
-        		rigidloop=true;
+    //     	if (shouldUndo) {
+    //     		rigidloop=true;
 
-				{
-					// trackback
-					consolePrint("Rigid movement application failed. Rolling back...")
-					//don't need to concat or anythign here, once something is restored it won't be used again.
-					level.objects = new Int32Array(startState.objects)
-					level.movements = new Int32Array(startState.movements)
-					level.rigidGroupIndexMask = startState.rigidGroupIndexMask.concat([])
-					level.rigidMovementAppliedMask = startState.rigidMovementAppliedMask.concat([])
-					// TODO: shouldn't we also save/restore the level data computed by level.calculateRowColMasks() ?
-					level.commandQueue = startState.commandQueue.concat([])
-					level.commandQueueSourceRules = startState.commandQueueSourceRules.concat([])
-					sfxCreateMask.setZero()
-					sfxDestroyMask.setZero()
-					// TODO: should
+				// {
+				// 	// trackback
+				// 	consolePrint("Rigid movement application failed. Rolling back...")
+				// 	//don't need to concat or anythign here, once something is restored it won't be used again.
+				// 	level.objects = new Int32Array(startState.objects)
+				// 	level.movements = new Int32Array(startState.movements)
+				// 	level.rigidGroupIndexMask = startState.rigidGroupIndexMask.concat([])
+				// 	level.rigidMovementAppliedMask = startState.rigidMovementAppliedMask.concat([])
+				// 	// TODO: shouldn't we also save/restore the level data computed by level.calculateRowColMasks() ?
+				// 	level.commandQueue = startState.commandQueue.concat([])
+				// 	level.commandQueueSourceRules = startState.commandQueueSourceRules.concat([])
+				// 	sfxCreateMask.setZero()
+				// 	sfxDestroyMask.setZero()
+				// 	// TODO: should
 
-				}
+				// }
 
-				if (verbose_logging && rigidloop && i>0){				
-					consolePrint('Relooping through rules because of rigid.');
+				// if (verbose_logging && rigidloop && i>0){				
+				// 	consolePrint('Relooping through rules because of rigid.');
 						
-					debugger_turnIndex++;
-					addToDebugTimeline(level,-2);//pre-movement-applied debug state
-				}
+				// 	debugger_turnIndex++;
+				// 	addToDebugTimeline(level,-2);//pre-movement-applied debug state
+				// }
 
-        		startRuleGroupIndex=0;//rigidGroupUndoDat.ruleGroupIndex+1;
-        	} else {
-        		if (verbose_logging){
+    //     		startRuleGroupIndex=0;//rigidGroupUndoDat.ruleGroupIndex+1;
+    //     	} else {
+    //     		if (verbose_logging){
 
-					var eof_idx = debug_visualisation_array[debugger_turnIndex].length+1;//just need some number greater than any rule group
-					var inspect_ID = addToDebugTimeline(level,eof_idx);
+				// 	var eof_idx = debug_visualisation_array[debugger_turnIndex].length+1;//just need some number greater than any rule group
+				// 	var inspect_ID = addToDebugTimeline(level,eof_idx);
 
-					consolePrint(`Processed movements.`,false,null,inspect_ID);
+				// 	consolePrint(`Processed movements.`,false,null,inspect_ID);
 					
-					if (state.lateRules.length>0){
+				// 	if (state.lateRules.length>0){
 											
-						debugger_turnIndex++;
-						addToDebugTimeline(level,-2);//pre-movement-applied debug state
+				// 		debugger_turnIndex++;
+				// 		addToDebugTimeline(level,-2);//pre-movement-applied debug state
 					
-						consolePrint('Applying late rules');
-					}
-				}
-        		applyRules(state.lateRules, state.lateLoopPoint, 0);
-        		startRuleGroupIndex=0;
-        	}
-        } while (i < 50 && rigidloop);
-
-        if (i>=50) {
-            consolePrint("Looped through 50 times, gave up.  too many loops!");
-        }
-
-
-        if (playerPositions.length>0 && state.metadata.require_player_movement!==undefined) {
-        	var somemoved=false;
-        	for (var i=0;i<playerPositions.length;i++) {
-        		var pos = playerPositions[i];
-        		var val = level.getCell(pos);
-        		if (state.playerMask.bitsClearInArray(val.data)) {
-        			somemoved=true;
-        			break;
+				// 		consolePrint('Applying late rules');
+				// 	}
+				// }
+				if (!dontModify) {
+        			applyRules(state.lateRules, state.lateLoopPoint, 0);
+        			startRuleGroupIndex=0;
         		}
-        	}
-        	if (somemoved===false) {
-        		if (verbose_logging){
-	    			consolePrint('require_player_movement set, but no player movement detected, so cancelling turn.');
-	    			consoleCacheDump();
-				}
-        		addUndoState(bak);
-        		DoUndo(true,false);
-        		return false;
-        	}
-        	//play player cantmove sounds here
-        }
+        	// }
+        // } while (i < 50 && rigidloop);
+
+        // if (i>=50) {
+        //     consolePrint("Looped through 50 times, gave up.  too many loops!");
+        // }
+
+
+    //     if (playerPositions.length>0 && state.metadata.require_player_movement!==undefined) {
+    //     	var somemoved=false;
+    //     	for (var i=0;i<playerPositions.length;i++) {
+    //     		var pos = playerPositions[i];
+    //     		var val = level.getCell(pos);
+    //     		if (state.playerMask.bitsClearInArray(val.data)) {
+    //     			somemoved=true;
+    //     			break;
+    //     		}
+    //     	}
+    //     	if (somemoved===false) {
+    //     		if (verbose_logging){
+	   //  			consolePrint('require_player_movement set, but no player movement detected, so cancelling turn.');
+	   //  			consoleCacheDump();
+				// }
+    //     		addUndoState(bak);
+    //     		DoUndo(true,false);
+    //     		return false;
+    //     	}
+    //     	//play player cantmove sounds here
+    //     }
 
 
 
-	    if (level.commandQueue.indexOf('cancel')>=0) {
-	    	if (verbose_logging) { 
-	    		consoleCacheDump();
-	    		var r = level.commandQueueSourceRules[level.commandQueue.indexOf('cancel')];
-	    		consolePrintFromRule('CANCEL command executed, cancelling turn.',r,true);
-			}
-			processOutputCommands(level.commandQueue);
+	 //    if (level.commandQueue.indexOf('cancel')>=0) {
+	 //    	if (verbose_logging) { 
+	 //    		consoleCacheDump();
+	 //    		var r = level.commandQueueSourceRules[level.commandQueue.indexOf('cancel')];
+	 //    		consolePrintFromRule('CANCEL command executed, cancelling turn.',r,true);
+		// 	}
+		// 	processOutputCommands(level.commandQueue);
+  //   		addUndoState(bak);
+  //   		DoUndo(true,false);
+  //   		tryPlayCancelSound();
+  //   		return false;
+	 //    } 
+
+	 //    if (level.commandQueue.indexOf('restart')>=0) {
+	 //    	if (verbose_logging) { 
+	 //    		var r = level.commandQueueSourceRules[level.commandQueue.indexOf('restart')];
+	 //    		consolePrintFromRule('RESTART command executed, reverting to restart state.',r);
+	 //    		consoleCacheDump();
+		// 	}
+		// 	processOutputCommands(level.commandQueue);
+  //   		addUndoState(bak);
+	 //    	DoRestart(true);
+  //   		return true;
+		// } 
+		
+		
+		if (dontModify && anythingModified) {
     		addUndoState(bak);
     		DoUndo(true,false);
-    		tryPlayCancelSound();
-    		return false;
-	    } 
+			return true;
+		}
 
-	    if (level.commandQueue.indexOf('restart')>=0) {
-	    	if (verbose_logging) { 
-	    		var r = level.commandQueueSourceRules[level.commandQueue.indexOf('restart')];
-	    		consolePrintFromRule('RESTART command executed, reverting to restart state.',r);
-	    		consoleCacheDump();
-			}
-			processOutputCommands(level.commandQueue);
-    		addUndoState(bak);
-	    	DoRestart(true);
-    		return true;
-		} 
-		
-		
         var modified=false;
 	    for (var i=0;i<level.objects.length;i++) {
 	    	if (level.objects[i]!==bak.dat[i]) {
@@ -2807,6 +2830,10 @@ function processInput(dir,dontDoWin,dontModify) {
     			consoleCacheDump();
     		}
 			return false;
+		}
+
+		if (!dontModify) {
+			drawLevel();
 		}
 
         for (var i=0;i<seedsToPlay_CantMove.length;i++) {
@@ -2884,9 +2911,9 @@ function processInput(dir,dontDoWin,dontModify) {
 		    }   
 		}
 		
-		if (verbose_logging) { 
-			consolePrint(`Turn complete`);    
-		}
+		// if (verbose_logging) { 
+		// 	consolePrint(`Turn complete`);    
+		// }
 
   onStateUpdate(againing, dir === 16);
 
@@ -2895,9 +2922,9 @@ function processInput(dir,dontDoWin,dontModify) {
 
     }
 
-	if (verbose_logging) {
-		consoleCacheDump();
-	}
+	// if (verbose_logging) {
+	// 	consoleCacheDump();
+	// }
 
 	if (winning) {
 		againing=false;

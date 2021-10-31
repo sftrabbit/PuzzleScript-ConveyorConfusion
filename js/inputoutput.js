@@ -411,12 +411,15 @@ function onKeyDown(event) {
     	return;
     }
 
+    console.log('onKeyDown')
+
     if(lastDownTarget === canvas || (window.Mobile && (lastDownTarget === window.Mobile.focusIndicator) ) ){
     	if (keybuffer.indexOf(event.keyCode)===-1) {
     		if (event&&(event.ctrlKey || event.metaKey)){
 		    } else {
     		    keybuffer.splice(keyRepeatIndex,0,event.keyCode);
 	    	    keyRepeatTimer=0;
+	    	    console.log('checkKey')
 	    	    checkKey(event,!event.repeat);
 		    }
 		}
@@ -621,7 +624,6 @@ function checkKey(e,justPressed) {
         {
             //undo
             if (textMode===false) {
-                pushInput("undo");
                 DoUndo(false,true);
                 canvasResize(); // calls redraw
             	return prevent(e);
@@ -632,7 +634,6 @@ function checkKey(e,justPressed) {
         {
         	if (textMode===false) {
         		if (justPressed) {
-	        		pushInput("restart");
 	        		DoRestart();
 	                canvasResize(); // calls redraw
             		return prevent(e);
@@ -784,16 +785,22 @@ function checkKey(e,justPressed) {
     		}
     	}
     } else {
-	    if (!againing && inputdir>=0) {
+	    if (inputdir>=0) {
             if (inputdir===4 && ('noaction' in state.metadata)) {
 
             } else {
-                pushInput(inputdir);
-                processInput(inputdir)
+                console.log('queueInput')
+                queueInput(inputdir)
 	        }
 	       	return prevent(e);
     	}
     }
+}
+
+var inputQueue = [];
+
+function queueInput(inputdir) {
+    inputQueue.push(inputdir);
 }
 
 function update() {
@@ -814,6 +821,11 @@ function update() {
                 keyRepeatTimer=0;
                 autotick=0;
             }
+        }
+    } else {
+        if (inputQueue.length > 0) {
+            var inputdir = inputQueue.shift();
+            processInput(inputdir)
         }
     }
     if (quittingMessageScreen) {
