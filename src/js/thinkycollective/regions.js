@@ -1,10 +1,244 @@
 var regionsOffset = [0, 0];
 var regions = [
   [
+    //////////////
+    // INTRO
+    //////////////
+    // Intro
     {
       offset: [64, 70],
       areas: [
-        { rect: [0, 0, 15, 9], camera: 'follow-player' }
+        { rect: [-1, 0, 17, 9], camera: 'follow-player-anchored-x' },
+        { rect: [5, -34, 5, 34], secondary: true, camera: 'follow-player-anchored-x' },
+        // Bottom left arm
+        { rect: [-14, -7, 19, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-14, -3, 4, 6], secondary: true, camera: 'follow-player' },
+        { rect: [-31, -1, 17, 4], secondary: true, camera: 'follow-player' },
+        // Bottom right arm
+        { rect: [10, -7, 25, 4], secondary: true, camera: 'follow-player' },
+        // Top left arm
+        { rect: [-6, -30, 11, 4], secondary: true, camera: 'follow-player' },
+        // Top right arm
+        { rect: [10, -30, 1, 4], secondary: true, camera: 'follow-player' },
+        { rect: [11, -36, 4, 10], secondary: true, camera: 'follow-player' },
+        { rect: [15, -40, 4, 8], secondary: true, camera: 'follow-player' },
+        { rect: [19, -40, 3, 4], secondary: true, camera: 'follow-player' }
+      ]
+    },
+    // Block push intro (Jumble)
+    {
+      offset: [60, 33],
+      areas: [
+        { rect: [-1, 0, 10, 7] },
+        { rect: [9, 0, 5, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-5, 0, 4, 3], secondary: true, camera: 'pull-horizontal' }
+      ]
+    },
+    // Block push intro secret
+    {
+      offset: [50, 32],
+      areas: [
+        { rect: [0, 0, 4, 5] },
+        { rect: [4, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
+      ]
+    },
+    // Two level intro (Patrick)
+    {
+      offset: [52, 22],
+      areas: [
+        { rect: [0, 0, 12, 11] },
+      ]
+    },
+    // Seed level (Joseph Mansfield)
+    {
+      offset: [64, 21],
+      areas: [
+        { rect: [0, 0, 3, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [3, 0, 1, 8] },
+        { rect: [4, 0, 5, 9] },
+        { rect: [9, 0, 1, 5] },
+        { rect: [9, 5, 3, 3] },
+        { rect: [10, 0, 1, 5] }
+      ]
+    },
+    // Infinite loop intro (Blookerstein)
+    {
+      offset: [75, 19],
+      areas: [
+        { rect: [0, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 5, 11] }
+      ]
+    },
+    // Seed level secret
+    {
+      offset: [72, 29],
+      areas: [
+        { rect: [0, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 7, 4] }
+      ]
+    },
+    // Hub
+    {
+      offset: [72, 10],
+      areas: [
+        { rect: [0, 0, 14, 9] },
+        { rect: [2, -4, 10, 4] }
+      ]
+    },
+    //////////////
+    // BRANCH A
+    //////////////
+    // (marcosd)
+    {
+      offset: [63, 11],
+      areas: [
+        { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 7, 9] },
+        { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
+      ]
+    },
+    // (knexator)
+    {
+      offset: [54, 11],
+      areas: [
+        { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 7, 9] },
+        { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
+      ]
+    },
+    // (knexator) - secret
+    {
+      offset: [49, 13],
+      areas: [
+        { rect: [0, 0, 1, 5], secondary: true },
+        { rect: [1, 0, 3, 5] },
+        { rect: [4, 0, 1, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 5, 3, 4], secondary: true, camera: 'follow-player-anchored-y' },
+        { rect: [4, 6, 8, 3], secondary: true, camera: 'follow-player-anchored-y' },
+        { rect: [12, 7, 2, 2], secondary: true, camera: 'follow-player-anchored-y' }
+      ]
+    },
+    // Branch A exit corridor
+    {
+      offset: [33, 9],
+      areas: [
+        { rect: [0, 0, 27, 3], camera: 'follow-player' },
+        { rect: [22, -2, 3, 2], camera: 'follow-player' }
+      ]
+    },
+    // (Corey Hardt)
+    {
+      offset: [43, 2],
+      areas: [
+        { rect: [0, 4, 2, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [3, 0, 7, 8] },
+        { rect: [10, 0, 2, 8], secondary: true, camera: 'pull-horizontal' },
+      ]
+    },
+    // (Auroriax)
+    {
+      offset: [40, 12],
+      areas: [
+        { rect: [0, 0, 9, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 9, 6] },
+        { rect: [1, 7, 7, 2] },
+        { rect: [2, 9, 5, 4] },
+        { rect: [2, 13, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [3, 14, 3, 2], secondary: true, camera: 'pull-vertical' }
+      ]
+    },
+    // (Kristian Hedeholm)
+    {
+      offset: [39, 25],
+      areas: [
+        { rect: [7, 0, 3, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 2, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 3, 11, 8] },
+        { rect: [0, 11, 7, 1], secondary: true, camera: 'pull-vertical' }
+      ]
+    },
+    // The clock (Zomulgustar)
+    {
+      offset: [26, 37],
+      areas: [
+        { rect: [1, 0, 19, 5] },
+        { rect: [0, 5, 21, 11] },
+        { rect: [1, 16, 19, 5] },
+        { rect: [12, 21, 8, 1], secondary: true, camera: 'pull-vertical' }
+      ]
+    },
+    // 1:00 (CHz)
+    {
+      offset: [46, 37],
+      areas: [
+        { rect: [0, 0, 1, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 1, 11], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 0, 7, 11] },
+        { rect: [9, 0, 1, 11], secondary: true }
+      ]
+    },
+    // 3:00 (Menderbug)
+    {
+      offset: [47, 48],
+      areas: [
+        { rect: [0, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-1, 6, 2, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 8, 9] },
+        { rect: [9, 0, 1, 9], secondary: true }
+      ]
+    },
+    // 5:00 #1 (Draknek)
+    {
+      offset: [39, 59],
+      areas: [
+        { rect: [0, 0, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 1, 10], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 1, 9, 9] },
+        { rect: [10, 1, 1, 10], secondary: true },
+        { rect: [1, 10, 9, 1], secondary: true }
+      ]
+    },
+    // 5:00 #2 (Aspeon)
+    {
+      offset: [33, 58],
+      areas: [
+        { rect: [0, 0, 6, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 1, 7], secondary: true },
+        { rect: [1, 1, 4, 7] },
+        { rect: [0, 8, 6, 1], secondary: true },
+        { rect: [5, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
+      ]
+    },
+    // 7:00 #1 (KirraLuan)
+    {
+      offset: [16, 51],
+      areas: [
+        { rect: [0, 0, 9, 4] },
+        { rect: [9, 0, 2, 4], secondary: true },
+        { rect: [0, 4, 9, 6] },
+        { rect: [9, 4, 2, 6], secondary: true, camera: 'pull-horizontal' }
+      ]
+    },
+    // 7:00 #2 (Clickmazes)
+    {
+      offset: [25, 59],
+      areas: [
+        { rect: [2, 0, 3, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 8, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 2, 8, 7] },
+        { rect: [0, 9, 8, 1], secondary: true, camera: 'pull-vertical' }
+      ]
+    },
+    // 7:00 #3 (pancelor)
+    {
+      offset: [19, 69],
+      areas: [
+        { rect: [1, 0, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [1, 1, 1, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-1, 3, 2, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 1, 9, 8] },
+        { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-vertical' }
       ]
     }
   ]
@@ -203,6 +437,11 @@ function getMaxRegionSize() {
   };
 
   for (var i = 0; i < (regions[curlevel] || []).length; i++) {
+    var hasPrimary = regions[curlevel][i].areas.some(function(area) { return !area.secondary; })
+    if (!hasPrimary) {
+      continue;
+    }
+
     var regionBounds = getRegionBounds(regions[curlevel][i]);
     var regionWidth = regionBounds.maxX - regionBounds.minX;
     var regionHeight = regionBounds.maxY - regionBounds.minY;
