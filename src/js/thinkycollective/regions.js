@@ -609,7 +609,7 @@ function getMaxRegionSize() {
     }
   }
 
-  return maxRegionSize;
+  return { width: 20, height: 15 };
 }
 
 function calculateOutlinePolygon(region) {

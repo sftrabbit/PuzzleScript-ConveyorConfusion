@@ -2833,7 +2833,7 @@ function processInput(dir,dontDoWin,dontModify) {
 		}
 
 		if (!dontModify) {
-			drawLevel();
+			levelNeedsDraw = true;
 		}
 
         for (var i=0;i<seedsToPlay_CantMove.length;i++) {

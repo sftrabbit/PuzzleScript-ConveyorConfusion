@@ -282,7 +282,7 @@ function glyphCount(){
     return count;
 }
 
-function drawLevel() {
+function drawLevel(cameraOrigin) {
     if (cellwidth===0||cellheight===0||textMode) {
         return;
     }
@@ -294,15 +294,15 @@ function drawLevel() {
     levelCtx.fillStyle = state.bgcolor;
     levelCtx.fillRect(0, 0, levelCanvas.width, levelCanvas.height);
 
-    var cameraOrigin = isOpenWorldLevel()
-        ? {
-            x: Math.floor(camera.position[0] - (screenwidth / 2)),
-            y: Math.floor(camera.position[1] - (screenheight / 2))
-        }
-        : {
-            x: 0,
-            y: 0
-        };
+    // var cameraOrigin = isOpenWorldLevel()
+    //     ? {
+    //         x: Math.floor(camera.position[0] - (screenwidth / 2)),
+    //         y: Math.floor(camera.position[1] - (screenheight / 2))
+    //     }
+    //     : {
+    //         x: 0,
+    //         y: 0
+    //     };
 
     for (var i = 0; i < screenwidth + 1; i++) {
         for (var j = 0; j < screenheight + 1; j++) {
@@ -343,10 +343,14 @@ function drawLevel() {
         levelCtx.restore();
     }
 
+    levelNeedsDraw = false;
+
     // var dataUrl = levelCanvas.toDataURL('image/png')
     // var w = window.open()
     // w.document.write('<img src="' + dataUrl + '" />')
 }
+
+var previousCameraOrigin = { x: 0, y: 0 };
 
 function redraw() {
     if (cellwidth===0||cellheight===0) {
@@ -466,7 +470,14 @@ function redraw() {
                 }
             }
 
-            drawLevel();
+            var cameraOrigin = {
+                x: Math.floor(camera.position[0] - (screenwidth / 2)),
+                y: Math.floor(camera.position[1] - (screenheight / 2))
+            };
+            if (levelNeedsDraw || cameraOrigin.x !== previousCameraOrigin.x || cameraOrigin.y !== previousCameraOrigin.y) {
+                drawLevel(cameraOrigin);
+                previousCameraOrigin = cameraOrigin;
+            }
 
             var cameraOriginX = camera.position[0] - (screenwidth / 2);
             var cameraOriginY = camera.position[1] - (screenheight / 2);
@@ -687,8 +698,8 @@ function canvasResize() {
     // levelViewOffsetY = Math.floor((canvas.height / 2) - (levelViewHeight / 2));
 
     levelCtx = levelCanvas.getContext('2d');
+    levelNeedsDraw = true;
 
-    drawLevel();
     if (!isOpenWorldLevel()) {
         redraw();
     }

@@ -1,5 +1,7 @@
 var playerPosition = null;
 
+var levelNeedsDraw = true;
+
 function onStateUpdate(againing, action) {
   if (!isOpenWorldLevel()) {
     redraw();
