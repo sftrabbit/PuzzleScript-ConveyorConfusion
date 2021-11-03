@@ -800,7 +800,10 @@ function checkKey(e,justPressed) {
 var inputQueue = [];
 
 function queueInput(inputdir) {
-    inputQueue.push(inputdir);
+    inputQueue.push({
+        time: new Date(),
+        inputdir: inputdir
+    });
 }
 
 function update() {
@@ -823,9 +826,12 @@ function update() {
             }
         }
     } else {
-        if (inputQueue.length > 0) {
-            var inputdir = inputQueue.shift();
-            processInput(inputdir)
+        while (inputQueue.length > 0) {
+            var input = inputQueue.shift();
+            if (input.time >= (new Date() - 500)) {
+                processInput(input.inputdir);
+                break;
+            }
         }
     }
     if (quittingMessageScreen) {
