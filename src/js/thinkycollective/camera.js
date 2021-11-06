@@ -3,9 +3,11 @@ var cameraTransition = null;
 var cameraZoomTransition = null;
 
 function transitionCameraToRegion(activeRegion) {
-  if (cameraTransition && cameraTransition.to.position[0] === activeRegion.cameraAnchor[0] && cameraTransition.to.position[1] === activeRegion.cameraAnchor[1]) {
+  if (cameraTransition && cameraTransition.to.position[0] === activeRegion.cameraAnchor[0] && cameraTransition.to.position[1] === (activeRegion.cameraAnchor[1] - 0.8)) {
     return;
   }
+
+  console.log('transition to Region')
 
   cameraTransition = {
     start: (new Date()).getTime(),

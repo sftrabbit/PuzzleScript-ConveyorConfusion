@@ -615,6 +615,7 @@ function processRuleString(rule, state, curRules) {
     var late = false;
     var rigid = false;
     var global = false;
+    var noagaincheck = false;
     var init = false;
     var groupNumber = lineNumber;
     var commands = [];
@@ -668,6 +669,8 @@ function processRuleString(rule, state, curRules) {
                         rigid = true;
                     } else if (token === 'global') {
                         global = true;
+                    } else if (token === 'noagaincheck') {
+                        noagaincheck = true;
                     } else if (token === 'init') {
                         init = true;
                     } else if (token === 'random') {
@@ -829,6 +832,7 @@ function processRuleString(rule, state, curRules) {
         late: late,
         rigid: rigid,
         global: global,
+        noagaincheck: noagaincheck,
         init: init,
         groupNumber: groupNumber,
         commands: commands,
@@ -858,6 +862,7 @@ function deepCloneRule(rule) {
         late: rule.late,
         rigid: rule.rigid,
         global: rule.global,
+        noagaincheck: rule.noagaincheck,
         init: rule.init,
         groupNumber: rule.groupNumber,
         commands: rule.commands,
@@ -1941,6 +1946,7 @@ function collapseRules(groups) {
             newrule.push(cellRowMasks_Movements(newrule));
             newrule.push(oldrule.global);
             newrule.push(oldrule.init);
+            newrule.push(oldrule.noagaincheck);
             rules[i] = new Rule(newrule);
         }
     }
@@ -2267,6 +2273,9 @@ function cacheRuleStringRep(rule) {
     }
     if (rule.global) {
         result = "GLOBAL " + result + " ";
+    }
+    if (rule.noagaincheck) {
+        result = "NOAGAINCHECK " + result + " ";
     }
     if (rule.init) {
         result = "INIT " + result + " ";
