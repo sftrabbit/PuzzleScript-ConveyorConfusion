@@ -474,8 +474,11 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    firstTurn = false;
 
 	    canvasResize();
-	    drawLevel();
-	    redraw();
+
+	    if (!isOpenWorldLevel()) {
+		    drawLevel();
+		    redraw();
+		}
 	} else {
 		ignoreNotJustPressedAction=true;
 		tryPlayShowMessageSound();
@@ -1466,11 +1469,13 @@ function Rule(rule) {
 	this.lineNumber = rule[3];		/* rule source for debugging */
 	this.isEllipsis = rule[4];		/* true if pattern has ellipsis */
 	this.groupNumber = rule[5];		/* execution group number of rule */
-	this.firstTurnOnly = rule[6]; // This is actually the rigid keyword... HACK!!
+	this.rigid = rule[6];
 	this.commands = rule[7];		/* cancel, restart, sfx, etc */
 	this.isRandom = rule[8];
 	this.cellRowMasks = rule[9];
 	this.cellRowMasks_Movements = rule[10];
+	this.global = rule[11];
+	this.init = rule[12];
 	this.ruleMask = this.cellRowMasks.reduce( (acc, m) => { acc.ior(m); return acc }, new BitVec(STRIDE_OBJ) );
 
 	/*I tried out doing a ruleMask_movements as well along the lines of the above,
@@ -1928,7 +1933,7 @@ function DoesCellRowMatch(direction,cellRow,i,k) {
     return false;
 }
 */
-function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_Movements,d,isGlobal) {	
+function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_Movements,d,global) {	
 	var result=[];
 	
 	if ((!cellRowMask.bitsSetInArray(level.mapCellContents.data))||
@@ -1937,7 +1942,7 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 	}
 
 	var xmin, xmax, ymin, ymax;
-	if (isGlobal || !isOpenWorldLevel()) {
+	if (global || !isOpenWorldLevel()) {
 		xmin=0;
 		xmax=level.width;
 		ymin=0;
@@ -2148,7 +2153,7 @@ Rule.prototype.findMatches = function() {
         // if (this.isEllipsis[cellRowIndex]) {//if ellipsis     
         // 	var match = matchCellRowWildCard(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d);  
         // } else {
-        	var match = matchCellRow(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d,this.firstTurnOnly);               	
+        	var match = matchCellRow(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d,this.global);               	
         // }
         if (match.length===0) {
             return [];
@@ -2234,7 +2239,7 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
 };
 
 Rule.prototype.tryApply = function(level) {
-	if (!firstTurn && this.firstTurnOnly) {
+	if (!firstTurn && this.init) {
 		return false;
 	}
 	const delta = level.delta_index(this.direction);

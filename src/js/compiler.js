@@ -614,6 +614,8 @@ function processRuleString(rule, state, curRules) {
     var rhs_cells = [];
     var late = false;
     var rigid = false;
+    var global = false;
+    var init = false;
     var groupNumber = lineNumber;
     var commands = [];
     var randomRule = false;
@@ -664,6 +666,10 @@ function processRuleString(rule, state, curRules) {
                         late = true;
                     } else if (token === 'rigid') {
                         rigid = true;
+                    } else if (token === 'global') {
+                        global = true;
+                    } else if (token === 'init') {
+                        init = true;
                     } else if (token === 'random') {
                         randomRule = true;
                         if (has_plus)
@@ -822,6 +828,8 @@ function processRuleString(rule, state, curRules) {
         lineNumber: lineNumber,
         late: late,
         rigid: rigid,
+        global: global,
+        init: init,
         groupNumber: groupNumber,
         commands: commands,
         randomRule: randomRule
@@ -849,6 +857,8 @@ function deepCloneRule(rule) {
         lineNumber: rule.lineNumber,
         late: rule.late,
         rigid: rule.rigid,
+        global: rule.global,
+        init: rule.init,
         groupNumber: rule.groupNumber,
         commands: rule.commands,
         randomRule: rule.randomRule
@@ -1929,6 +1939,8 @@ function collapseRules(groups) {
             newrule.push(oldrule.randomRule);
             newrule.push(cellRowMasks(newrule));
             newrule.push(cellRowMasks_Movements(newrule));
+            newrule.push(oldrule.global);
+            newrule.push(oldrule.init);
             rules[i] = new Rule(newrule);
         }
     }
@@ -2252,6 +2264,12 @@ function cacheRuleStringRep(rule) {
     var result = "(<a onclick=\"jumpToLine('" + rule.lineNumber.toString() + "');\"  href=\"javascript:void(0);\">" + rule.lineNumber + "</a>) " + rule.direction.toString().toUpperCase() + " ";
     if (rule.rigid) {
         result = "RIGID " + result + " ";
+    }
+    if (rule.global) {
+        result = "GLOBAL " + result + " ";
+    }
+    if (rule.init) {
+        result = "INIT " + result + " ";
     }
     if (rule.randomRule) {
         result = "RANDOM " + result + " ";
