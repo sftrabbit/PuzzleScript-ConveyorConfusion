@@ -1476,6 +1476,7 @@ function Rule(rule) {
 	this.cellRowMasks_Movements = rule[10];
 	this.global = rule[11];
 	this.init = rule[12];
+	this.noagaincheck = rule[13];
 	this.ruleMask = this.cellRowMasks.reduce( (acc, m) => { acc.ior(m); return acc }, new BitVec(STRIDE_OBJ) );
 
 	/*I tried out doing a ruleMask_movements as well along the lines of the above,
@@ -2388,7 +2389,7 @@ function applyRandomRuleGroup(level,ruleGroup) {
 	return modified;
 }
 
-function applyRuleGroup(ruleGroup) {
+function applyRuleGroup(ruleGroup, againing) {
 	// if (ruleGroup[0].isRandom) {
 	// 	return applyRandomRuleGroup(level,ruleGroup);
 	// }
@@ -2408,8 +2409,11 @@ function applyRuleGroup(ruleGroup) {
 
         for (var ruleIndex=0;ruleIndex<ruleGroup.length;ruleIndex++) {
             var rule = ruleGroup[ruleIndex];     
+            if (againing && rule.noagaincheck) {
+              break;
+            }
 			if (rule.tryApply(level)){
-				anythingModified = true;
+				// anythingModified = true;
 				propagated=true;
 				nothing_happened_counter=0;//why am I resetting to 1 rather than 0? because I've just verified that applications of the current rule are exhausted
 			} else {
@@ -2434,8 +2438,8 @@ function applyRuleGroup(ruleGroup) {
 var previousObjectTrackers = null;
 var anythingModified = false;
 
-function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup, exitEarly){
-    anythingModified = false;
+function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup, againing){
+    // anythingModified = false;
     //for each rule
     //try to match it
 
@@ -2450,10 +2454,11 @@ function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup, exitEarl
     		//do nothing
     	} else {
     		var ruleGroup=rules[ruleGroupIndex];
-			loopPropagated = applyRuleGroup(ruleGroup) || loopPropagated;
-			if (exitEarly && anythingModified) {
-				break;
-			}
+			loopPropagated = applyRuleGroup(ruleGroup, againing) || loopPropagated;
+			// if (exitEarly && anythingModified) {
+			// 	console.log('early exit')
+			// 	break;
+			// }
 	    }
         if (loopPropagated && loopPoint[ruleGroupIndex]!==undefined) {
         	ruleGroupIndex = loopPoint[ruleGroupIndex];
@@ -2739,7 +2744,7 @@ function processInput(dir,dontDoWin,dontModify) {
 				// 	}
 				// }
 				if (!dontModify) {
-        			applyRules(state.lateRules, state.lateLoopPoint, 0);
+        			applyRules(state.lateRules, state.lateLoopPoint, 0, undefined, dontModify);
         			startRuleGroupIndex=0;
         		}
         	// }
@@ -2800,16 +2805,41 @@ function processInput(dir,dontDoWin,dontModify) {
 		// } 
 		
 		
-		if (dontModify && anythingModified) {
-    		addUndoState(bak);
-    		DoUndo(true,false);
-			return true;
-		}
+		// if (dontModify && anythingModified) {
+		// 	console.log('something was modified')
+  //   		addUndoState(bak);
+  //   		DoUndo(true,false);
+		// 	return true;
+		// }
 
         var modified=false;
 	    for (var i=0;i<level.objects.length;i++) {
 	    	if (level.objects[i]!==bak.dat[i]) {
 				if (dontModify) {
+				// 	var index = Math.floor(i / STRIDE_OBJ);
+				// 	var colIndex=(index/level.height)|0;
+				// 	var rowIndex=(index%level.height);
+				// 	var cell = level.getCell(index);
+
+				// 	var backupCell = new BitVec(bak.dat.subarray(index * STRIDE_OBJ, index * STRIDE_OBJ + STRIDE_OBJ));
+
+				// 	var objectNames = Object.keys(state.objectMasks);
+				// 	var foundObjects = [];
+				// 	var foundObjectsBackup = [];
+				// 	for (var j = 0; j < objectNames.length; j++) {
+				// 		var objectName = objectNames[j];
+				// 		if (cell.anyBitsInCommon(state.objectMasks[objectName])) {
+				// 			foundObjects.push(objectName);
+				// 		}
+				// 		if (backupCell.anyBitsInCommon(state.objectMasks[objectName])) {
+				// 			foundObjectsBackup.push(objectName);
+				// 		}
+				// 	}
+    // //   if (!movingEntities.anyBitsInCommon(state.objectMasks["player"])) {
+    // //     objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
+    // //     delete objectTrackers[tx][ty][layer];
+    // //   }
+	   //      		console.log('found a diff', colIndex, rowIndex, cell, foundObjects, foundObjectsBackup)
 	        		if (verbose_logging) {
 	        			consoleCacheDump();
 	        		}

@@ -8,6 +8,8 @@ function onStateUpdate(againing, action) {
     return;
   }
 
+  console.log('update')
+
   var activeRegion = getActiveRegion();
   if (activeRegion == null) {
     transitionCameraToPlayer(activeRegion);

@@ -411,15 +411,12 @@ function onKeyDown(event) {
     	return;
     }
 
-    console.log('onKeyDown')
-
     if(lastDownTarget === canvas || (window.Mobile && (lastDownTarget === window.Mobile.focusIndicator) ) ){
     	if (keybuffer.indexOf(event.keyCode)===-1) {
     		if (event&&(event.ctrlKey || event.metaKey)){
 		    } else {
     		    keybuffer.splice(keyRepeatIndex,0,event.keyCode);
 	    	    keyRepeatTimer=0;
-	    	    console.log('checkKey')
 	    	    checkKey(event,!event.repeat);
 		    }
 		}
@@ -789,7 +786,6 @@ function checkKey(e,justPressed) {
             if (inputdir===4 && ('noaction' in state.metadata)) {
 
             } else {
-                console.log('queueInput')
                 queueInput(inputdir)
 	        }
 	       	return prevent(e);
