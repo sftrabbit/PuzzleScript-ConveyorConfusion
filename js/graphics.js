@@ -304,8 +304,8 @@ function drawLevel(cameraOrigin) {
     //         y: 0
     //     };
 
-    for (var i = 0; i < screenwidth + 1; i++) {
-        for (var j = 0; j < screenheight + 1; j++) {
+    for (var i = 0; i < levelCanvasSize.width + 1; i++) {
+        for (var j = 0; j < levelCanvasSize.height + 1; j++) {
             var posX = cameraOrigin.x + i;
             var posY = cameraOrigin.y + j;
 
@@ -456,31 +456,57 @@ function redraw() {
                     camera.position[0] = cameraTransition.from.position[0] + deltaX * transitionProgress;
                     var deltaY = cameraTransition.to.position[1] - cameraTransition.from.position[1];
                     camera.position[1] = cameraTransition.from.position[1] + deltaY * transitionProgress;
+                    var deltaZoom = cameraTransition.to.zoom - cameraTransition.from.zoom;
+                    camera.zoom = cameraTransition.from.zoom + deltaZoom * transitionProgress;
 
                     if (transitionProgress >= 1) {
                         camera.position[0] = cameraTransition.to.position[0];
                         camera.position[1] = cameraTransition.to.position[1];
+                        camera.zoom = cameraTransition.to.zoom;
                         cameraTransition = null;
                     }
                 } else {
+                    var transitionHappening = false;
+
                     var deltaX = cameraTransition.to.position[0] - camera.position[0];
-                    camera.position[0] += deltaX * 0.05;
+                    if (Math.abs(deltaX) >= 0.005) {
+                        camera.position[0] += deltaX * 0.05;
+                        transitionHappening = true;
+                    } else {
+                        camera.position[0] = cameraTransition.to.position[0];
+                    }
                     var deltaY = cameraTransition.to.position[1] - camera.position[1];
-                    camera.position[1] += deltaY * 0.05;
+                    if (Math.abs(deltaY) >= 0.005) {
+                        camera.position[1] += deltaY * 0.05;
+                        transitionHappening = true;
+                    } else {
+                        camera.position[1] = cameraTransition.to.position[1];
+                    }
+                    var deltaZoom = cameraTransition.to.zoom - camera.zoom;
+                    if (Math.abs(deltaZoom) >= 0.0001) {
+                        camera.zoom += deltaZoom * 0.05;
+                        transitionHappening = true;
+                    } else {
+                        camera.zoom = cameraTransition.to.zoom;
+                    }
+
+                    if (!transitionHappening) {
+                        cameraTransition = null;
+                    }
                 }
             }
 
             var cameraOrigin = {
-                x: Math.floor(camera.position[0] - (screenwidth / 2)),
-                y: Math.floor(camera.position[1] - (screenheight / 2))
+                x: Math.floor(camera.position[0] - (levelCanvasSize.width / 2)),
+                y: Math.floor(camera.position[1] - (levelCanvasSize.height / 2))
             };
             if (levelNeedsDraw || cameraOrigin.x !== previousCameraOrigin.x || cameraOrigin.y !== previousCameraOrigin.y) {
                 drawLevel(cameraOrigin);
                 previousCameraOrigin = cameraOrigin;
             }
 
-            var cameraOriginX = camera.position[0] - (screenwidth / 2);
-            var cameraOriginY = camera.position[1] - (screenheight / 2);
+            var cameraOriginX = camera.position[0] - (levelCanvasSize.width / 2);
+            var cameraOriginY = camera.position[1] - (levelCanvasSize.height / 2);
 
             levelCanvasOffsetX = Math.floor(((cameraOriginX - Math.floor(cameraOriginX)) % 1) * cellwidth);
             levelCanvasOffsetY = Math.floor(((cameraOriginY - Math.floor(cameraOriginY)) % 1) * cellheight);
@@ -490,8 +516,9 @@ function redraw() {
             levelCanvas,
             0, 0,
             levelCanvas.width, levelCanvas.height,
-            xoffset - levelCanvasOffsetX, yoffset - levelCanvasOffsetY,
-            levelCanvas.width, levelCanvas.height
+            (canvas.width / 2) - ((levelCanvasSize.width * cellwidth / 2) + levelCanvasOffsetX) * camera.zoom,
+            (canvas.height / 2) - ((levelCanvasSize.height * cellheight / 2) + levelCanvasOffsetY) * camera.zoom,
+            levelCanvas.width * camera.zoom, levelCanvas.height * camera.zoom
         );
 
         ctx.restore()
@@ -594,10 +621,7 @@ var oldtextmode=-1;
 var oldfgcolor=-1;
 var forceRegenImages=false;
 
-var levelViewHeight = null;
-var levelViewWidth = null;
-var levelViewOffsetX = null;
-var levelViewOffsetY = null;
+var levelCanvasSize = null;
 
 function canvasResize() {
     canvas.width = canvas.parentNode.clientWidth;
@@ -622,16 +646,27 @@ function canvasResize() {
 	    }
 	}
 
+    levelCanvasSize = {
+        width: screenwidth,
+        height: screenheight
+    };
+
     if (textMode) {
         screenwidth=titleWidth;
         screenheight=titleHeight;
-    } else if (isOpenWorldLevel()) {
-        var maxRegionSize = getMaxRegionSize();
-        // These need to be about the size of the smallest zoom region
-        screenwidth = maxRegionSize.width + 7;
-        screenheight = maxRegionSize.height + 7;
+    } else {
+        if (isOpenWorldLevel()) {
+            // This needs to be about the size of the smallest space we'd want to view at once
+            screenwidth = 16;
+            screenheight = 9;
+
+            var maxRegionSize = getMaxRegionSize();
+            levelCanvasSize = {
+                width: maxRegionSize.width + 3,
+                height: maxRegionSize.height + 3
+            };
+        }
     }
-    
     cellwidth = canvas.width / screenwidth;
     cellheight = canvas.height / screenheight;
 
@@ -683,19 +718,8 @@ function canvasResize() {
     oldfgcolor=state.fgcolor;
 
     levelCanvas = document.createElement('canvas');
-    levelCanvas.width = cellwidth * (screenwidth + 1);
-    levelCanvas.height = cellheight * (screenheight + 1);
-
-    // levelViewHeight = canvas.height;
-    // levelViewWidth = Math.floor(levelViewHeight * (16 / 9));
-
-    // if (levelViewWidth > canvas.width) {
-    //     levelViewWidth = canvas.width;
-    //     levelViewHeight = Math.floor(levelViewWidth / (16 / 9));
-    // }
-
-    // levelViewOffsetX = Math.floor((canvas.width / 2) - (levelViewWidth / 2));
-    // levelViewOffsetY = Math.floor((canvas.height / 2) - (levelViewHeight / 2));
+    levelCanvas.width = cellwidth * (levelCanvasSize.width + 1);
+    levelCanvas.height = cellheight * (levelCanvasSize.height + 1);
 
     levelCtx = levelCanvas.getContext('2d');
     levelNeedsDraw = true;

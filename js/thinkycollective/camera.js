@@ -1,5 +1,6 @@
 var camera = null;
 var cameraTransition = null;
+var cameraZoomTransition = null;
 
 function transitionCameraToRegion(activeRegion) {
   if (cameraTransition && cameraTransition.to.position[0] === activeRegion.cameraAnchor[0] && cameraTransition.to.position[1] === activeRegion.cameraAnchor[1]) {
@@ -9,10 +10,12 @@ function transitionCameraToRegion(activeRegion) {
   cameraTransition = {
     start: (new Date()).getTime(),
     from: {
-      position: [camera.position[0], camera.position[1]]
+      position: [camera.position[0], camera.position[1]],
+      zoom: camera.zoom
     },
     to: {
-      position: [activeRegion.cameraAnchor[0], activeRegion.cameraAnchor[1]]
+      position: [activeRegion.cameraAnchor[0], activeRegion.cameraAnchor[1] - 0.8],
+      zoom: activeRegion.zoom || 1
     }
   };
 }
@@ -26,30 +29,30 @@ function transitionCameraPulledByPlayer(activeRegion, horizontal) {
 
     targetPosition = [
       activeRegion.cameraAnchor[0] + (playerOffset * direction),
-      activeRegion.cameraAnchor[1]
+      activeRegion.cameraAnchor[1] - 0.8
     ];
   } else {
     targetPosition = [
       activeRegion.cameraAnchor[0],
-      activeRegion.cameraAnchor[1] + (playerPosition.y - activeRegion.cameraAnchor[1]) * 0.4
+      activeRegion.cameraAnchor[1] - 0.8 + (playerPosition.y - activeRegion.cameraAnchor[1] - 0.8) * 0.4
     ];
   }
 
   cameraTransition = {
-    start: (new Date()).getTime(),
-    from: {
-      position: [camera.position[0], camera.position[1]]
-    },
     to: {
-      position: targetPosition
+      position: targetPosition,
+      zoom: activeRegion.zoom || 1
     }
   };
 }
 
-function transitionCameraToPlayer() {
+function transitionCameraToPlayer(activeRegion) {
+  var zoom = activeRegion != null ? (activeRegion.zoom || 1) : 1;
+
   cameraTransition = {
     to: {
-      position: [playerPosition.x, playerPosition.y]
+      position: [playerPosition.x + 0.5, playerPosition.y + 0.5],
+      zoom: zoom
     }
   };
 }
@@ -58,13 +61,15 @@ function transitionCameraToPlayerAnchored(activeRegion, horizontal) {
   if (horizontal) {
     cameraTransition = {
       to: {
-        position: [activeRegion.cameraAnchor[0], playerPosition.y]
+        position: [activeRegion.cameraAnchor[0], playerPosition.y],
+        zoom: activeRegion.zoom || 1
       }
     };
   } else {
     cameraTransition = {
       to: {
-        position: [playerPosition.x, activeRegion.cameraAnchor[1]]
+        position: [playerPosition.x, activeRegion.cameraAnchor[1] - 0.8],
+        zoom: activeRegion.zoom || 1
       }
     };
   }
@@ -74,7 +79,8 @@ function initSmoothCamera() {
   var region = getActiveRegion();
 
   camera = {
-    position: [region.cameraAnchor[0], region.cameraAnchor[1]]
+    position: [region.cameraAnchor[0], region.cameraAnchor[1] - 0.8],
+    zoom: region.zoom || 1
   };
 }
 

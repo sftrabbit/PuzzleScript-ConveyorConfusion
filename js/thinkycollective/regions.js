@@ -23,7 +23,8 @@ var regions = [
         { rect: [11, -36, 4, 10], secondary: true, camera: 'follow-player' },
         { rect: [15, -40, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -40, 3, 4], secondary: true, camera: 'follow-player' }
-      ]
+      ],
+      zoom: 0.7
     },
     // Block push intro (Jumble)
     {
@@ -32,7 +33,8 @@ var regions = [
         { rect: [-1, 0, 10, 7] },
         { rect: [9, 0, 5, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [-5, 0, 4, 3], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.8
     },
     // Block push intro secret
     {
@@ -40,14 +42,16 @@ var regions = [
       areas: [
         { rect: [0, 0, 4, 5] },
         { rect: [4, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.8
     },
     // Two level intro (Patrick)
     {
       offset: [52, 22],
       areas: [
         { rect: [0, 0, 12, 11] },
-      ]
+      ],
+      zoom: 0.7
     },
     // Seed level (Joseph Mansfield)
     {
@@ -59,7 +63,8 @@ var regions = [
         { rect: [9, 0, 1, 5] },
         { rect: [9, 5, 3, 3] },
         { rect: [10, 0, 1, 5] }
-      ]
+      ],
+      zoom: 0.8
     },
     // Infinite loop intro (Blookerstein)
     {
@@ -67,7 +72,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 5, 11] }
-      ]
+      ],
+      zoom: 0.7
     },
     // Seed level secret
     {
@@ -75,7 +81,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 7, 4] }
-      ]
+      ],
+      zoom: 0.8
     },
     // Hub
     {
@@ -83,7 +90,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 14, 9] },
         { rect: [2, -4, 10, 4] }
-      ]
+      ],
+      zoom: 0.6
     },
     //////////////
     // BRANCH A
@@ -95,7 +103,8 @@ var regions = [
         { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 7, 9] },
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.8
     },
     // (knexator)
     {
@@ -104,7 +113,8 @@ var regions = [
         { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 7, 9] },
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.8
     },
     // (knexator) - secret
     {
@@ -116,7 +126,8 @@ var regions = [
         { rect: [1, 5, 3, 4], secondary: true, camera: 'follow-player-anchored-y' },
         { rect: [4, 6, 8, 3], secondary: true, camera: 'follow-player-anchored-y' },
         { rect: [12, 7, 2, 2], secondary: true, camera: 'follow-player-anchored-y' }
-      ]
+      ],
+      zoom: 0.8
     },
     // Branch A exit corridor
     {
@@ -124,7 +135,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 27, 3], camera: 'follow-player' },
         { rect: [22, -2, 3, 2], camera: 'follow-player' }
-      ]
+      ],
+      zoom: 0.8
     },
     // (Corey Hardt)
     {
@@ -134,7 +146,8 @@ var regions = [
         { rect: [2, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [3, 0, 7, 8] },
         { rect: [10, 0, 2, 8], secondary: true, camera: 'pull-horizontal' },
-      ]
+      ],
+      zoom: 0.8
     },
     // (Auroriax)
     {
@@ -146,7 +159,8 @@ var regions = [
         { rect: [2, 9, 5, 4] },
         { rect: [2, 13, 5, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [3, 14, 3, 2], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.6
     },
     // (Kristian Hedeholm)
     {
@@ -156,7 +170,8 @@ var regions = [
         { rect: [0, 2, 11, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 3, 11, 8] },
         { rect: [0, 11, 7, 1], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.75
     },
     // The clock (Zomulgustar)
     {
@@ -167,7 +182,8 @@ var regions = [
         { rect: [1, 16, 19, 5] },
         { rect: [12, 21, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [6, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.4
     },
     // Clock shortcut surround
     {
@@ -609,7 +625,35 @@ function getMaxRegionSize() {
     }
   }
 
-  return { width: 20, height: 15 };
+  return maxRegionSize;
+}
+
+function getMinRegionSize() {
+  var minRegionSize = {
+    width: Infinity,
+    height: Infinity
+  };
+
+  for (var i = 0; i < (regions[curlevel] || []).length; i++) {
+    var hasPrimary = regions[curlevel][i].areas.some(function(area) { return !area.secondary; })
+    if (!hasPrimary) {
+      continue;
+    }
+
+    var regionBounds = getRegionBounds(regions[curlevel][i]);
+    var regionWidth = regionBounds.maxX - regionBounds.minX;
+    var regionHeight = regionBounds.maxY - regionBounds.minY;
+
+    if (regionWidth < minRegionSize.width) {
+      minRegionSize.width = regionWidth;
+    }
+
+    if (regionHeight < minRegionSize.height) {
+      minRegionSize.height = regionHeight;
+    }
+  }
+
+  return minRegionSize;
 }
 
 function calculateOutlinePolygon(region) {
