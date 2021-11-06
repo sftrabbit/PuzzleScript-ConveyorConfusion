@@ -160,7 +160,7 @@ var regions = [
         { rect: [2, 13, 5, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [3, 14, 3, 2], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.55
     },
     // (Kristian Hedeholm)
     {
@@ -209,7 +209,8 @@ var regions = [
         { rect: [1, 0, 1, 11], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 0, 7, 11] },
         { rect: [9, 0, 1, 11], secondary: true }
-      ]
+      ],
+      zoom: 0.75
     },
     // 3:00 (Menderbug)
     {
@@ -219,7 +220,8 @@ var regions = [
         { rect: [-1, 6, 2, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 8, 9] },
         { rect: [9, 0, 1, 9], secondary: true }
-      ]
+      ],
+      zoom: 0.75
     },
     // 5:00 #1 (Draknek)
     {
@@ -230,7 +232,8 @@ var regions = [
         { rect: [1, 1, 9, 9] },
         { rect: [10, 1, 1, 10], secondary: true },
         { rect: [1, 10, 9, 1], secondary: true }
-      ]
+      ],
+      zoom: 0.7
     },
     // 5:00 #2 (Aspeon)
     {
@@ -241,7 +244,8 @@ var regions = [
         { rect: [1, 1, 4, 7] },
         { rect: [0, 8, 6, 1], secondary: true },
         { rect: [5, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 #1 (KirraLuan)
     {
@@ -251,7 +255,8 @@ var regions = [
         { rect: [9, 0, 2, 4], secondary: true },
         { rect: [0, 4, 9, 6] },
         { rect: [9, 4, 2, 6], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 #2 (Clickmazes)
     {
@@ -261,7 +266,8 @@ var regions = [
         { rect: [0, 1, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 2, 8, 7] },
         { rect: [0, 9, 8, 1], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 #3 (pancelor)
     {
@@ -272,7 +278,8 @@ var regions = [
         { rect: [-1, 3, 2, 5], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 1, 9, 8] },
         { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 #4 (Norgg)
     {
@@ -284,7 +291,8 @@ var regions = [
         { rect: [0, 1, 1, 6], secondary: true },
         { rect: [1, 6, 7, 1], secondary: true },
         { rect: [1, 1, 7, 5] }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 #5 Post-Norgg
     {
@@ -295,7 +303,8 @@ var regions = [
         { rect: [5, 0, 4, 1], secondary: true },
         { rect: [0, 7, 9, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [10, 0, 1, 7], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 Le Slo Secret
     {
@@ -306,7 +315,8 @@ var regions = [
         { rect: [0, 5, 1, 2], secondary: true },
         { rect: [1, 0, 3, 8] },
         { rect: [4, 0, 1, 8], secondary: true }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 #6 (Le Slo)
     {
@@ -317,7 +327,8 @@ var regions = [
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 8, 6, 1], secondary: true },
         { rect: [7, 8, 1, 1], secondary: true }
-      ]
+      ],
+      zoom: 0.7
     },
     // 7:00 Return to clock
     {
@@ -326,7 +337,8 @@ var regions = [
         { rect: [0, 0, 3, 12], camera: 'follow-player' },
         { rect: [1, 12, 2, 2], camera: 'follow-player' },
         { rect: [3, 0, 9, 3], camera: 'follow-player' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 9:00 #1 (Joseph Mansfield)
     {
@@ -337,7 +349,8 @@ var regions = [
         { rect: [9, 5, 1, 6], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 2, 1, 9], secondary: true, camera: 'pull-horizontal' },
         { rect: [-1, 8, 1, 3], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 9:00 #2 (clementsparrow)
     {
@@ -349,7 +362,8 @@ var regions = [
         { rect: [1, 1, 7, 7] },
         { rect: [2, 8, 4, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [8, 3, 2, 5], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 9:00 clementsparrow secret 1
     {
@@ -358,7 +372,8 @@ var regions = [
         { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 0, 5, 4] },
         { rect: [0, 4, 5, 1], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.7
     },
     // 9:00 clementsparrow secret 2
     {
@@ -369,17 +384,19 @@ var regions = [
         { rect: [6, 5, 3, 2], secondary: true, camera: 'follow-player' },
         { rect: [9, 0, 3, 7], secondary: true, camera: 'follow-player' },
         { rect: [6, 1, 3, 4] }
-      ]
+      ],
+      zoom: 0.7
     },
     // 9:00 #3 (Deusovi)
     {
       offset: [6, 26],
       areas: [
-        { rect: [0, 0, 13, 10] },
+        { rect: [0, -1, 13, 11] },
         { rect: [0, 10, 4, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [6, 10, 7, 1], secondary: true },
         { rect: [13, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.65
     },
     // 9:00 #4 (crychair)
     {
@@ -389,7 +406,8 @@ var regions = [
         { rect: [1, 0, 7, 10] },
         { rect: [8, 2, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [9, 7, 2, 3], secondary: true, camera: 'pull-horizontal' }
-      ]
+      ],
+      zoom: 0.7
     },
     // Fusion intro
     {
@@ -398,7 +416,8 @@ var regions = [
         { rect: [0, 0, 9, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 9, 6] },
         { rect: [0, 7, 9, 1], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.7
     },
     // (PedroPSI)
     {
@@ -409,7 +428,8 @@ var regions = [
         { rect: [3, 2, 7, 1] },
         { rect: [0, 3, 13, 7] },
         { rect: [0, 10, 13, 1], secondary: true, camera: 'pull-vertical' }
-      ]
+      ],
+      zoom: 0.7
     }
   ]
   // [
