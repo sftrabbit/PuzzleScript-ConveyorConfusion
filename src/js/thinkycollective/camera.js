@@ -7,8 +7,6 @@ function transitionCameraToRegion(activeRegion) {
     return;
   }
 
-  console.log('transition to Region')
-
   cameraTransition = {
     start: (new Date()).getTime(),
     from: {
@@ -16,7 +14,10 @@ function transitionCameraToRegion(activeRegion) {
       zoom: camera.zoom
     },
     to: {
-      position: [activeRegion.cameraAnchor[0], activeRegion.cameraAnchor[1] - 0.8],
+      position: clampCameraPosition(activeRegion, [
+        activeRegion.cameraAnchor[0],
+        activeRegion.cameraAnchor[1] - 0.8
+      ]),
       zoom: activeRegion.zoom || 1
     }
   };
@@ -42,7 +43,7 @@ function transitionCameraPulledByPlayer(activeRegion, horizontal) {
 
   cameraTransition = {
     to: {
-      position: targetPosition,
+      position: clampCameraPosition(activeRegion, targetPosition),
       zoom: activeRegion.zoom || 1
     }
   };
@@ -53,39 +54,60 @@ function transitionCameraToPlayer(activeRegion) {
 
   cameraTransition = {
     to: {
-      position: [playerPosition.x + 0.5, playerPosition.y + 0.5],
+      position: clampCameraPosition(activeRegion, [playerPosition.x + 0.5, playerPosition.y + 0.5]),
       zoom: zoom
     }
   };
 }
 
 function transitionCameraToPlayerAnchored(activeRegion, horizontal) {
+  var targetPosition = [];
+
   if (horizontal) {
-    cameraTransition = {
-      to: {
-        position: [activeRegion.cameraAnchor[0], playerPosition.y],
-        zoom: activeRegion.zoom || 1
-      }
-    };
+    targetPosition = [activeRegion.cameraAnchor[0], playerPosition.y]
   } else {
-    cameraTransition = {
-      to: {
-        position: [playerPosition.x, activeRegion.cameraAnchor[1] - 0.8],
-        zoom: activeRegion.zoom || 1
-      }
-    };
+    targetPosition = [playerPosition.x, activeRegion.cameraAnchor[1] - 0.8]
   }
+
+  cameraTransition = {
+    to: {
+      position: clampCameraPosition(activeRegion, targetPosition),
+      zoom: activeRegion.zoom || 1
+    }
+  };
 }
 
 function initSmoothCamera() {
   var region = getActiveRegion();
 
   camera = {
-    position: [region.cameraAnchor[0], region.cameraAnchor[1] - 0.8],
+    position: clampCameraPosition(region, [region.cameraAnchor[0], region.cameraAnchor[1] - 0.8]),
     zoom: region.zoom || 1
   };
 }
 
 function easeOutQuad(x) {
   return 1 - (1 - x) * (1 - x);
+}
+
+function clampCameraPosition(activeRegion, position) {
+  var cameraMarginX = (screenwidth / 2) / activeRegion.zoom;
+  var cameraMarginY = (screenheight / 2) / activeRegion.zoom;
+
+  return [
+    Math.min(
+      Math.max(
+        position[0],
+        cameraMarginX
+      ),
+      level.width - cameraMarginX
+    ),
+    Math.min(
+      Math.max(
+        position[1] - 0.8,
+        cameraMarginY
+      ),
+      level.height - cameraMarginY
+    )
+  ];
 }

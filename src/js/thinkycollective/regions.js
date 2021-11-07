@@ -8,7 +8,7 @@ var regions = [
     {
       offset: [64, 70],
       areas: [
-        { rect: [-1, 0, 17, 9], camera: 'follow-player-anchored-x' },
+        { rect: [-1, 0, 17, 10], camera: 'follow-player-anchored-x' },
         { rect: [5, -34, 5, 34], secondary: true, camera: 'follow-player-anchored-x' },
         // Bottom left arm
         { rect: [-14, -7, 19, 4], secondary: true, camera: 'follow-player' },
