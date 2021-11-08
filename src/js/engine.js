@@ -1087,8 +1087,13 @@ function DoUndo(force,ignoreDuplicates) {
 		var torestore = backups[backups.length-1];
 		restoreLevel(torestore);
 		backups = backups.splice(0,backups.length-1);
-		if (! force) {
-      onStateUpdate(againing);
+		if (!force) {
+			var playerPositions = getPlayerPositions();
+			playerPosition = {
+				x: (playerPositions[0]/(level.height))|0,
+				y: (playerPositions[0]%level.height)|0
+			};
+			onStateUpdate(false, false);
 			tryPlayUndoSound();
 		}
 	}
