@@ -2,13 +2,17 @@ var playerPosition = null;
 
 var levelNeedsDraw = true;
 
+function initOpenWorld() {
+  initRegions();
+  initLevelState();
+  initObjectTrackers();
+}
+
 function onStateUpdate(againing, action) {
   if (!isOpenWorldLevel()) {
     redraw();
     return;
   }
-
-  console.log('update')
 
   var activeRegion = getActiveRegion();
   if (activeRegion == null) {
@@ -43,4 +47,21 @@ function clearOpenWorldState() {
   camera = null;
   cameraTransition = null;
   objectTrackers = [];
+}
+
+function initLevelState() {
+  for (var y = 0; y < level.height; y++) {
+    for (var x = 0; x < level.width; x++) {
+      var index = x * level.height + y;
+      var cell = level.getCellInto(index, _o10);
+
+      if (cell.anyBitsInCommon(state.objectMasks['player'])) {
+        var region = getRegion({ x: x, y: y });
+        if (!region.start) {
+          cell.iclear(state.objectMasks['player']);
+          level.setCell(index, _o10);
+        }
+      }
+    }
+  }
 }

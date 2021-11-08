@@ -24,7 +24,8 @@ var regions = [
         { rect: [15, -40, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -40, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     // Block push intro (Jumble)
     {
@@ -479,6 +480,8 @@ function initRegions() {
 
   var levelRegions = regions[curlevel] || [];
 
+  var haveStartRegion = false;
+
   for (var x = 0; x < level.width; x++) {
     var regionMapColumn = [];
     for (var y = 0; y < level.height; y++) {
@@ -489,6 +492,14 @@ function initRegions() {
 
   for (var i = 0; i < levelRegions.length; i++) {
     var region = levelRegions[i];
+
+    if (region.start) {
+      if (haveStartRegion) {
+        throw new Error('More than one start region')
+      } else {
+        haveStartRegion = true;
+      }
+    }
 
     var offsetX = regionsOffset[0] + region.offset[0];
     var offsetY = regionsOffset[1] + region.offset[1];
