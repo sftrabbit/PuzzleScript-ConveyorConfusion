@@ -455,8 +455,7 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 		};
 
         if (isOpenWorldLevel()) {
-          initRegions();
-          initObjectTrackers();
+          initOpenWorld();
         } else {
           clearOpenWorldState();
         }
