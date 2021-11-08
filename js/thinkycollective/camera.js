@@ -80,6 +80,8 @@ function transitionCameraToPlayerAnchored(activeRegion, horizontal) {
 function initSmoothCamera() {
   var region = getActiveRegion();
 
+  cameraTransition = null;
+
   camera = {
     position: clampCameraPosition(region, [region.cameraAnchor[0], region.cameraAnchor[1] - 0.8]),
     zoom: region.zoom || 1

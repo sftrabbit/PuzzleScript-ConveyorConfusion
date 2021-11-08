@@ -457,8 +457,6 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
         if (isOpenWorldLevel()) {
           initRegions();
           initObjectTrackers();
-          initSmoothCamera();
-          startRealtimeRenderer();
         } else {
           clearOpenWorldState();
         }
@@ -478,7 +476,10 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    if (!isOpenWorldLevel()) {
 		    drawLevel();
 		    redraw();
-		}
+		} else {
+	        initSmoothCamera();
+	        startRealtimeRenderer();
+	    }
 	} else {
 		ignoreNotJustPressedAction=true;
 		tryPlayShowMessageSound();
