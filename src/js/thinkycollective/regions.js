@@ -27,6 +27,13 @@ var regions = [
       zoom: 0.7,
       start: true
     },
+    {
+      offset: [64, 70],
+      areas: [
+        { rect: [-11, 0, 10, 9] },
+      ],
+      zoom: 0.7
+    },
     // Block push intro (Jumble)
     {
       offset: [60, 33],

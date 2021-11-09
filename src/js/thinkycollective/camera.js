@@ -93,8 +93,10 @@ function easeOutQuad(x) {
 }
 
 function clampCameraPosition(activeRegion, position) {
-  var cameraMarginX = (screenwidth / 2) / activeRegion.zoom;
-  var cameraMarginY = (screenheight / 2) / activeRegion.zoom;
+  var zoom = activeRegion ? activeRegion.zoom : camera.zoom;
+
+  var cameraMarginX = (screenwidth / 2) / zoom;
+  var cameraMarginY = (screenheight / 2) / zoom;
 
   return [
     Math.min(
