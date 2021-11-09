@@ -2733,8 +2733,6 @@ function loadFile(str) {
 
     rulesToMask(state);
 
-    generateMoverObjectLayers(state);
-
     if (debugMode) {
         printRules(state);
     }

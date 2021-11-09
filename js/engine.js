@@ -1041,7 +1041,9 @@ function DoRestart(force) {
     }
 
 	if ('run_rules_on_level_start' in state.metadata) {
+		firstTurn = true;
     	processInput(-1,true);
+    	firstTurn = false;
 	} else {
         onStateUpdate(false, false);
     }
@@ -1227,12 +1229,24 @@ function repositionEntitiesOnLayer(positionIndex,layer,dirMask)
 
 	//corresponding movement stuff in setmovements
 
-    // if (isOpenWorldLevel()) {
-    //   if (!movingEntities.anyBitsInCommon(state.objectMasks["player"])) {
-    //     objectTrackers[colIndex][rowIndex][layer] = objectTrackers[tx][ty][layer];
-    //     delete objectTrackers[tx][ty][layer];
-    //   }
-    // }
+    if (isOpenWorldLevel()) {
+      for (var i = 0; i < TRACKED_LAYERS.length; i++) {
+        var trackedLayer = TRACKED_LAYERS[i];
+        if (movingEntities.anyBitsInCommon(state.objectMasks[trackedLayer[1]])) {
+          var objectType = movingEntities.anyBitsInCommon(state.objectMasks[trackedLayer[2]]) ? TRACKED_BELT : TRACKED_EXPLOSIVE;
+          if (isObjectTracked(trackedLayer[0], objectType, tx, ty)) {
+            moveObjectTracker(trackedLayer[0], tx, ty, colIndex, rowIndex);
+          } else {
+            var beforeRegion = regionMap[tx][ty][0];
+            var afterRegion = regionMap[colIndex][rowIndex][0];
+
+            if (beforeRegion !== afterRegion) {
+              startObjectTracker(trackedLayer[0], objectType, colIndex, rowIndex, beforeRegion);
+            }
+          }
+        }
+      }
+    }
 
     return true;
 }
