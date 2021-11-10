@@ -2626,10 +2626,12 @@ function processInput(dir,dontDoWin,dontModify) {
 	var inputindex=dir;
 
     var playerPositions = getPlayerPositions();
-	playerPosition = {
-	    x: (playerPositions[0]/(level.height))|0,
-	    y: (playerPositions[0]%level.height)|0
-	};
+    if (playerPositions.length > 0) {
+		playerPosition = {
+		    x: (playerPositions[0]/(level.height))|0,
+		    y: (playerPositions[0]%level.height)|0
+		};
+	}
 
     if (dir<=4) {//when is dir>4???
 
