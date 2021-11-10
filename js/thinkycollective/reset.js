@@ -49,6 +49,7 @@ function restoreActiveRegion(lev) {
     cell.iclear(state.objectMasks[objectTracker[0] ? 'dynamic_above' : 'dynamic_below']);
     level.setCell(positionIndex, cell);
   }
+  removeObjectTrackers(dispersedObjectTrackers);
 
   // Copy original state of level for the active region
   for (var x = regionBounds.minX; x < regionBounds.maxX; x++) {
@@ -189,6 +190,16 @@ function getObjectTrackersFromOrigin(originRegion) {
     }
   }
   return fromOrigin;
+}
+
+function removeObjectTrackers(objectTrackersToRemove) {
+  objectTrackers = objectTrackers.filter(function(objectTracker) {
+    return !objectTrackersToRemove.find(function(objectTrackerToRemove) {
+      return (objectTracker & 0x00000080) > 0 === objectTrackerToRemove[0]
+        && ((objectTracker & 0x0000FF00) >> 8) === objectTrackerToRemove[1]
+        && ((objectTracker & 0x00FF0000) >> 16) === objectTrackerToRemove[2];
+    });
+  });
 }
 
 var TRACKED_BELT = 0;
