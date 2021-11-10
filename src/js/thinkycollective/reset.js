@@ -206,3 +206,13 @@ var TRACKED_BELT = 0;
 var TRACKED_EXPLOSIVE = 1;
 
 var TRACKED_LAYERS = [[false, 'tracked_below', 'belt_below'], [true, 'tracked_above', 'belt_above']];
+
+function printObjectTrackers() {
+  for (var i = 0; i < objectTrackers.length; i++) {
+    var line = '';
+    line += (objectTrackers[i] & 0x0000000F) === TRACKED_BELT ? 'belt_' : 'explosive_';
+    line += (objectTrackers[i] & 0x00000080) > 0 ? 'above ' : 'below ';
+    line += ((objectTrackers[i] & 0x0000FF00) >> 8) + ',' + ((objectTrackers[i] & 0x00FF0000) >> 16);
+    console.log(line)
+  }
+}
