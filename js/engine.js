@@ -607,7 +607,7 @@ function backupLevel() {
 		width : level.width,
 		height : level.height,
 		oldflickscreendat: oldflickscreendat.concat([]),
-    objectTrackers: null
+		objectTrackers: new Int32Array(objectTrackers)
 	};
 	return ret;
 }
@@ -617,7 +617,8 @@ function level4Serialization() {
 		dat : Array.from(level.objects),
 		width : level.width,
 		height : level.height,
-		oldflickscreendat: oldflickscreendat.concat([])
+		oldflickscreendat: oldflickscreendat.concat([]),
+		objectTrackers: Array.from(objectTrackers)
 	};
 	return ret;
 }
@@ -902,8 +903,9 @@ function restoreLevel(lev) {
 		}
 	} else {	
 		level.objects = new Int32Array(lev.dat);
-		// objectTrackers = JSON.parse(JSON.stringify(lev.objectTrackers));
 	}
+
+	objectTrackers = new Int32Array(lev.objectTrackers);
 
 	if (level.width !== lev.width || level.height !== lev.height) {
 		level.width = lev.width;
@@ -1001,7 +1003,8 @@ function consolidateDiff(before,after){
 		dat : result,
 		width : before.width,
 		height : before.height,
-		oldflickscreendat: before.oldflickscreendat
+		oldflickscreendat: before.oldflickscreendat,
+		objectTrackers: before.objectTrackers
 	}
 }
 
