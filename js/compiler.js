@@ -1247,10 +1247,11 @@ function makeSpawnedObjectsStationary(state,rule,lineNumber){
                 if (dir!==""){
                     continue;
                 }
-                var name = cell[l + 1];
+                var name = cell[l + 1].split('@')[0];
                 if (name in state.propertiesDict || objects_l.indexOf(name)>=0){
                     continue;
                 }
+
                 var r_layer = state.objects[name].layer;
                 if (layers.indexOf(r_layer)===-1){
                     cell[l]='stationary';
@@ -1600,9 +1601,7 @@ function rulesToMask(state) {
                             logError('Tracker @' + tracker_name + ' cannot appear more than once on the left side of a rule.', rule.lineNumber);
                         }
 
-                        var object = state.objects[object_name_parts[0]];
-
-                        trackerSources[tracker_name] = [j, k, object.layer];
+                        trackerSources[tracker_name] = [j, k, object_name_parts[0].includes('above')];
                     }
                 }
             }
@@ -1838,7 +1837,7 @@ function rulesToMask(state) {
                                 continue;
                             }
 
-                            trackerTransfers.push([layerIndex, trackerSource[0], trackerSource[1], trackerSource[2]]);
+                            trackerTransfers.push([object_name.includes('above'), trackerSource[0], trackerSource[1], trackerSource[2]]);
                         }
                     }
                 }

@@ -1238,7 +1238,7 @@ function repositionEntitiesOnLayer(positionIndex,layer,dirMask)
         if (movingEntities.anyBitsInCommon(state.objectMasks[trackedLayer[1]])) {
           var objectType = movingEntities.anyBitsInCommon(state.objectMasks[trackedLayer[2]]) ? TRACKED_BELT : TRACKED_EXPLOSIVE;
           if (isObjectTracked(trackedLayer[0], objectType, tx, ty)) {
-            moveObjectTracker(trackedLayer[0], tx, ty, colIndex, rowIndex);
+            moveObjectTracker(trackedLayer[0], tx, ty, trackedLayer[0], colIndex, rowIndex);
           } else {
             var beforeRegion = regionMap[tx][ty][0];
             var afterRegion = regionMap[colIndex][rowIndex][0];
@@ -1806,47 +1806,41 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 		level.rowCellContents_Movements[rowIndex].ior(curMovementMask);
 		level.mapCellContents_Movements.ior(curMovementMask);
 
-    // if (isOpenWorldLevel()) {
-    //   // Remove the tracker for any tracked objects that we're removing
-    //   if (destroyed.anyBitsInCommon(state.moverMask)) {
-    //     var layers = getLayersOfMask(destroyed);
-    //     for (var i = 0; i < layers.length; i++) {
-    //       var layer = layers[i];
-    //       delete objectTrackers[colIndex][rowIndex][layer];
-    //     }
-    //   }
+		if (isOpenWorldLevel()) {
+			for (var i = 0; i < TRACKED_LAYERS.length; i++) {
+				var trackedLayer = TRACKED_LAYERS[i];
 
-    //   // Transfer the trackers for any tracked objects that we're creating
-    //   if (created.anyBitsInCommon(state.moverMask)) {
-    //     var layers = getLayersOfMask(created);
-    //     for (var i = 0; i < layers.length; i++) {
-    //       var layer = layers[i];
-    //       var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
-    //         return trackerTransfer[0] === layer;
-    //       });
+				// Transfer the trackers for any tracked objects that we're creating
+				if (created.anyBitsInCommon(state.objectMasks[trackedLayer[1]])) {
+					var trackerTransfer = replace.trackerTransfers.find(function(trackerTransfer) {
+						return trackerTransfer[0] === trackedLayer[0];
+					});
 
-    //       if (trackerTransfer == null) {
-    //         continue;
-    //       }
+					if (trackerTransfer == null) {
+						continue;
+					}
 
-    //       var transferCellRowIndex = trackerTransfer[1];
-    //       var transferCellIndex = trackerTransfer[2];
-    //       var transferLayer = trackerTransfer[3];
+					var transferCellRowIndex = trackerTransfer[1];
+					var transferCellIndex = trackerTransfer[2];
+					var transferLayer = trackerTransfer[3];
 
-    //       var transferCellRowPosition = tuple[transferCellRowIndex];
+					var transferCellRowPosition = tuple[transferCellRowIndex];
 
-    //       var d0 = delta[0] * level.height;
-    //       var d1 = delta[1];
+					var transferFromPosition = transferCellRowPosition + delta * transferCellIndex;
 
-    //       var transferFromPosition = transferCellRowPosition + (d0 + d1) * transferCellIndex;
+					var transferFromX = (transferFromPosition / level.height) | 0;
+					var transferFromY = (transferFromPosition % level.height);
 
-    //       var transferFromX = (transferFromPosition / level.height) | 0;
-    //       var transferFromY = (transferFromPosition % level.height);
+					console.log('moving object tracker', trackedLayer[0], transferFromX, transferFromY, transferLayer, colIndex, rowIndex)
+					moveObjectTracker(transferLayer, transferFromX, transferFromY, trackedLayer[0], colIndex, rowIndex);
+				}
 
-    //       // objectTrackers[colIndex][rowIndex][layer] = previousObjectTrackers[transferFromX][transferFromY][transferLayer];
-    //     }
-    //   }
-    // }
+				// Remove the tracker for any tracked objects that we're removing
+				if (destroyed.anyBitsInCommon(state.objectMasks[trackedLayer[1]])) {
+					removeObjectTrackers([[trackedLayer[0], colIndex, rowIndex]]);
+				}
+			}
+		}
 	}
 
 	return result;
@@ -2466,7 +2460,7 @@ function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup, againing
     //try to match it
 
     // We make a copy of object trackers to transfer trackers from while modifying the original ones
-    // previousObjectTrackers = JSON.parse(JSON.stringify(objectTrackers));
+    previousObjectTrackers = new Int32Array(objectTrackers);
 
     //when we're going back in, let's loop, to be sure to be sure
     var loopPropagated = startRuleGroupindex>0;
@@ -2518,7 +2512,7 @@ function applyRules(rules, loopPoint, startRuleGroupindex, bannedGroup, againing
         }
     }
 
-    // previousObjectTrackers = null;
+    previousObjectTrackers = null;
 
     // return anythingModified;
 }
