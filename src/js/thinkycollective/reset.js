@@ -189,12 +189,12 @@ function startObjectTracker(above, objectType, x, y, originRegion) {
   objectTrackers[objectTrackers.length - 1] = tracker;
 }
 
-function moveObjectTracker(above, fromX, fromY, toX, toY) {
+function moveObjectTracker(fromAbove, fromX, fromY, toAbove, toX, toY) {
   for (var i = 0; i < objectTrackers.length; i++) {
-    if ((objectTrackers[i] & 0x00000080) > 0 === above
+    if ((objectTrackers[i] & 0x00000080) > 0 === fromAbove
       && ((objectTrackers[i] & 0x0000FF00) >> 8) === fromX
       && ((objectTrackers[i] & 0x00FF0000) >> 16) === fromY) {
-      objectTrackers[i] = (objectTrackers[i] & 0xFF0000FF) | (toX << 8) | (toY << 16);
+      objectTrackers[i] = (objectTrackers[i] & 0xFF00007F) | (toAbove << 7) | (toX << 8) | (toY << 16);
       break;
     }
   }
