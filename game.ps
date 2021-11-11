@@ -1,0 +1,5687 @@
+title Dispatch Mismatch (title idea by Corey Hardt, doesn't need to be final)
+author Thinky Collective
+homepage http://thinkycollective.itch.io/
+again_interval 0.06
+background_color #201c1c
+run_rules_on_level_start
+
+(verbose_logging)
+
+(
+
+## IMPORTANT
+
+
+Please read the accompanying README and instructions before getting started.
+In particular, keep in mind the project-specific guidelines.
+If you have any questions, contact Joseph Mansfield (sftrabbit#7783) on Discord.
+
+
+## DEV LOG (GROUP A)
+
+
+0. Joseph Mansfield (sftrabbit): Created the game seed! Conveyor belt blocks can be pushed around, climb up ladders to get on top of conveyor belts. Conveyor belts can also be pushed on top of conveyor belts.
+1. Marcos Donnantuoni: bugfix on wincondition, and added a simple level
+2. Corey Hardt: title suggestion, added an early level, gave the player some overalls for his tough job in the warehouse
+3. pancelor: added buttons + wires + doors, and a tutorial level
+4. knexator: added a level with two exits, more bugfix on wincondition
+5. Martin Ender (Menderbug): updated conveyor sprites, add death sound, add introductory level exploring specific conveyor interaction
+6. Norgg: fixed double stacking on doors and made a level using that, a couple sprite tweaks
+7. Le Slo: fixed death bug and multi push with layered belts, changed below_objects graphics so it is easier to distinguish them, I read the document after that change, so feel free to revert it
+8. KristianHedeholm: Added a simple level and give the player character some nice red boots. There are well deserved after solving all these good puzzles.Also made the player character's gloves a bit easier to see on the top platforms.
+9. Kirraluan: Thanks for Joseph so much. I design a puzzle from the start to the end at the first time so my idea is terrible at the beginning. Joseph helps a lot on optimzing the difficulty.
+10. Draknek: made a simple tutorial level
+11. Aspeon: made another simple tutorial level
+12. CHz: just added a level
+13. Pedro PSI: introduced the "belt fusion" mechanic, along with a level that requires it.
+14. Clickmazes: Added a level. Remodelled the red button. Darkened the wall to improve visibility of the ladders and red-wire. Added some provisional opening narrative and a proposal for a new player sprite (see under FEATURES). All changes very open for further iteration.
+15. ClementSparrow: introduced the "inflatable" walls and made a level for it and unit tests. Added graphical details (orange danger stripes, shadows, continuous wires) and changed the textures of background, platforms, doors, and walls. Added bugs #4 and #5
+16. Jumble: Added another starter level because I somehow managed to trip myself up on the first levels and I want to make sure nobody has to repeat my mistake
+17. Zomulgustar:  Added hub level
+18. Joseph Mansfield (sftrabbit): Me again! I jumped in here to finish off implementing Pedro PSI's mechanic, partly because I had encouraged the idea and partly because I knew it'd be very complicated to expect someone to implement as their contribution. So, we now have (A) belt fusion on the lower floor using clementsparrow's inflatable walls, and (B) belt fusion that is able to create diagonal belts and those diagonal belts can move objects diagonally... it's horrendously complicated so the rules are definitely more brittle but at least we're getting towards the end of the project so it shouldn't matter too much. There's probably some weird edge cases too. Let me know if you need anything fixed for a puzzle.
+19. Auroriax: Added a level!
+20. Deusovi: Added level focused around accidental discovery of belt fusion.
+21. Harry Damm: Applied Joseph's bug fix to Pedro PSI's mechanic.
+22. Crychair (Evan Malmud): Added a level that requires the player to setup all pieces before pressing the inflatable button. Wanted to show the pushing mechanism WITHOUT combining blocks. Also updated the look of the XBelt/Block(no push) to not have inverted colors compared to the other belts.
+
+
+(DEV LOG GROUP B)
+
+(#0 Joseph Mansfield (sftrabbit): Created the game seed! Conveyor belt blocks can be pushed around, climb up ladders to get on top of conveyor belts. Conveyor belts can also be pushed on top of conveyor belts.)
+(#1 That Scar: Made belts carry attached ladders and belts that sit on top of them. Also a level with hints at a connection idea.
+Renamed LadderU to LadderUpleaseReadTheGuidelines as a warning to myself and others; not sure if it's helpful because you kind of forget when making levels anyways :/
+)
+(#2 Joel: Added bombs, which blow stuff up in extremely subtle ways. Graphics are placeholder, and I didn't animate explosions.
+Made a level that probably shouldn't be the first bomb level.
+Renamed LadderUpleaseReadTheGuidelines to LadderU for obvious reasons.)
+(#3 Pichusuperlover: Everyone before me added mechanics so there is no way I could do that, instead I used some unused default mechanics in my level. No other major changes, just a bit of formatting. Pretty happy with it.)
+(#4 Notan: Made a level using bombs. Fixed bug #1-3. I'm not sure if the behaviour of bug #3 is actually more intuitive for players than the fixed version, so I left the Joel's original code in commented-out sections.)
+(#5 Guilherme Tows (zaratustra): Added a tile with only a wall on upper floor, and a level to demo it.)
+(#6 Patrick: Added starting level)
+(#7 Justas: Filed bug #5. Added a level. Changed the 'End' sprite. Added a hole to the Belt sprites)
+(#8 Blookerstein: Added a simple tutorial level.)
+(#9 Muftwin: Found and fixed an error in pichus level. Found a bug in Justas level. Made my own level thats pretty open to be made harder by any connections)
+(#10 Colin: Filed bugs #6-8. Bug #6 fixed and bugs 7 & 8 can be easily avoided since it's the edge of the level that causes them. Made a small level using aboveWalls.) 
+(#11 Dan Williams (@videospacegames): added a level with ladders, overhead blocks, and conveyors)
+(#12 winterbeak: Added a level)
+(#13 Toombler: Moved Colin's level. Added a level that introduces bombs.)
+(#14 Zach: Added a level designed to enable alternate solutions in other levels)
+(#15 Joseph Mansfield (sftrabbit): Me again! Added a mechanic (and one simple puzzle) that "explains" the stickiness of the blocks. There are practical reasons for doing this for when I get to the phase where I join everything together into one world. Would love to see some puzzles with this mechanic. Note that now green blocks are sticky, and blue are not. Also changed detonation distance back to 2D manhattan distance because I think it'll be easier to visualise.)
+(#16 Shark: Graphical overhaul, added a level involving a slime vat.)
+
+
+(DEV LOG GROUP MERGE)
+
+#1: domcamus: Added a level exploring interactions between bombs, inflatables and doors.
+#2: jackk: added another level using bombs with inflatables
+#3: stevenjmiller: Tested interactions and added a level (plus a bonus one).
+
+
+## BUGS / FEATURES (GROUP A)
+
+
+If you encounted any bugs, list them here. If you do fix a bug, mark it as fixed and add a unit test level to the bottom if you can. Ideally, we shouldn't have any levels that depend on bugs, but if fixing a bug means breaking a level, don't fix it (or speak to the person who created that level).
+
+0. Example bug: Doing the thingy breaks the thingy
+1. Failing to climb a ladder (because there's a dynamic block blocking you on the upper floor) still plays a "you moved upstairs" sound effect. probably best to not fix this until wayyy later b/c it'll make the code harder to read/modify
+2. I think I've noticed a bug when you get pushed into a wall by a belt on a belt. It seems the only direction you can move in then is towards the crate (which immediately pushes you back). This should probably be resolved either by killing the player or letting them move away, but it's not relevant to my level so I'll leave this for someone else. Example level:
+
+   #####
+   #saa#
+   #ddM#
+   ###:#
+   #####
+
+3 (fixed). Anything on top of a something that gets lifted by a door was being destroyed. Doors now won't lift if they have two things on them.
+
+4 the fusion of boxes is inconsistent. Currently, two Belt{Y} for some direction Y are fused to make a Belt{Y}, and belts with oposite directions are fused to make a BeltX, but belts with orthogonal directions are not fused, as can be seen in this example leading to an infinite loop:
+
+###
+#.#
+#ǩ#
+#s#
+#ł#
+#w#
+#;#
+
+I (ClementSparrow) suggest that all belts should fuse into a BeltX whatever their direction. It would change the current behavior of fusing belts with the same direction but this feature is currently used by no level as far as I can tell, and its usefulness seem dubious: If you need the fused belt and already have two of them, why would you do the fusion? So the feature seem only useful for levels where you actually need to avoid the fusion, in which case it does not really matter if the result of the fusion is a BeltX or a directional belt. Of course there could be more subtle designs that legitimate the current feature, but we also need to think about how the player could discover this feature and make sense of it.
+
+
+5 Player can sometime appear in inflated walls, either temporarily during the turn, or even at the end of the turn. Example:
+
+####ccc
+####c#c
+###+rr+
+#+r..##
+##e+###
+##;####
+
+
+(BUGS / FEATURES) (GROUP B)
+(If you encounted any bugs, list them here. If you do fix a bug, mark it as fixed and add a unit test level to the bottom if you can. Ideally, we shouldn't have any levels that depend on bugs, but if fixing a bug means breaking a level, don't fix it (or speak to the person who created that level).)
+(#1 bug (FIXED): When you push stacked objects but the upstairs object is also pushed by other upstairs objects, the first force is ignored.)
+(#2 bug (FIXED): When an upstairs object is pushed by a belt below it but it's also pushed by other upstairs objects, the first force is ignored.)
+(#3 bug (FIXED, but can be restored): The detonation range uses a manhattan distance in 2D space, while the explosion range uses a manhattan distance in 3D space. i.e. for the detonation range, the distance between two points (0, 0, above) and (2, 1, below) is counted as 3, not 4.)
+(#4 bug / feature (FIXED): When the lower part of stacked objects with a ladder is exploded, the ladder stays there and gets attached to the remaining part.)
+(#5 bug (NOT A BUG, Player is squashed): Pushing 2 blue crates stacked on top of each other into a Wall_above object causes the player to disappear: https://i.imgur.com/m2MNdSA.gif)
+(#6 bug (fixed): Climbing a ladder underneath a wallAbove deletes the wallAbove.)
+(#7 bug (avoidable): Pushing a chain of dynamic objects with a ladder towards the edge of level doesn't move the blocks but moves the ladder. Can be avoided if walls surround the level.)
+(#8 bug (avoidable): Pushing a block with a west ladder into the west edge doesn't move the ladder, which can reattach to another block afterwards. See unit test below. Can be avoided if walls surround the level.)
+(#X Example bug: Doing the thingy breaks the thingy)
+
+
+
+## IDEAS / COMMENTS (GROUP A)
+
+
+Joseph Mansfield (sftrabbit) - some thoughts I've had:
+* There's totally room for a little intro section of very basic stuff leading into my seed level. In particular, could introduce the ladders and belt multi-pushing behaviour with only BeltXs.
+* I feel like mechanics that make interesting conveyor contraptions would be interesting.
+* Right now, I don't think there is any way to cause two chain reactions at the same time. A mechanic that allowed this could result in some interesting things happening (like belts landing on the player's head). Although this would also have some ambiguities to resolve (e.g. two blocks moving into same space at the same time, or what if player with block on head climbs ladder).
+* Can an infinite loop somehow be made into a useful thing? (I guess only if it can get interrupted by something)
+
+Corey Hardt -
+* Added the first potential title, mostly think it's funny, OK if it doesn't stick. Dispatch here refers to sending things along the conveyor belts, maybe theme is we're in a big interconnected factory/warehouse? 
+
+pancelor -
+* note that wires can go over walls! so you can leave trailing wires out to other people's puzzles and make a note in your level's CONNECT section.
+* I'm imagining a secret room with 5 wires coming in, and if all 5 are active, a bridge of 3 doors is extended that lets you go to the secret zone! and possibly each wire also has a one-way path leading back out to the puzzle where the bonus wire came from, so you can easily walk back and try to solve it in the alternate way
+* the implementation of active wires (vWire_On) can maybe be more performant by pre-calculating all connections to ConnectsToWires objects, instead of re-calculating them every step. I'm not gonna optimize it now and make the code harder to modify, but it's something to maybe look into if we run into performance issues later
+
+knexator -
+* it is possible with the initial mechanics to be crushed by a conveyor belt: get one top of another (against a wall, so the top one doesn't move) and push the bottom one.
+* I like the idea of a conveyor belt factory that uses its own conveyor belts as soon as they are produced
+
+Martin Ender (Menderbug) -
+* Updated the conveyor sprites to be more readable when many of them are together. Doesn't have to be final.
+* The wires and doors are really cool, but I wanted to explore conveyors a little further.
+* Since knexator noticed that it's possible to die, I added a sound effect, but anyone feel free to change the actual sound if you find a better one.
+* read this AFTER beating my level (because spoilers): I think we can do a lot with the idea of pushing bottom-layer belts that have top-layer belts on them, to create weirdly shifting rafts that carry other belts to their destination. Pretty sure my level is only the tip of the iceberg of this specific interaction.
+* Joseph's assumption that the current rules don't allow for simultaneous chain reactions are actually wrong. You can set this up by putting belts on top of other belts and pushing the bottom layer. Example:
+
+  ########
+  ###d~a##
+  #;wĽwŁ.#
+  ########
+
+  The current behaviour is that the two belts get pushed sequentially, so for this particular setup you end up with an infinite loop. It would probably good for some future participant to resolve this somehow.
+
+Norgg -
+* Found another situation where you could die if you stand on top of a belt which is on a door that activates, this was also destroying the top crates if two crates were on a door, have changed it so that doors won't lift up if there's two things on them
+* Made a level using stacking multiple blocks on a door to push one back the other way
+* Put a border around stationary belts
+* Gave the player a hard hat for safety
+
+Le Slo -
+*Wow, really cool so far, enjoying this a lot
+*I think blocks taken from other levels can sometimes be used just to access "secrets" and not just to add a whole layer to the puzzle (which is very cool too, but probably much harder than bring-a-block-out level design type), so we could leave those secret spaces to discover the narrative, nonexistent for now (Sorry, future participants).
+
+Pedro PSI - extra thoughts:
+* Currently, stray ladders are buggy, as they can be crossed first... and then used to climb a block... Example:
+
+###
+#.#
+#8#
+#x#
+#.#
+#:#
+
+* I really liked the idea of chain reactions, so added a mechanic to combine two blocks arriving into an empty square at the same time. This resolves the loop in Menderbug's example.
+* It would be great to see the "belt fusion" mechanic extended. Some ideas: it could produce "diagonal belts" (U+R=UR) or be modified to generate two-step jump belts (l+L=LL).
+
+Clickmazes - 
+* the wall was previously "#222222 brown" but I found this confusing when there were lots of ladders. Also a red wire passing through a wall was almost invisible (to me). Can anyone propose a better color scheme?
+* I had a idea that the player-sprite might look more consistent if it was a bird-eye view. I mocked up a sprite that looks vaguely like a small robot on wheels. I leave it for a future contributor to consider if this (or something similar) is worth further development. There is also some extra opening narrative (commented out) that could be used if the sprite was ultimately a robot (in any perspective). No problem if the whole idea is shelved/deleted.
+
+Robot_Player_Above 
+#00cc00 #009900 #808080 #606060
+22.22
+31113
+.100.
+31113
+22.22
+Robot_Player_Below 
+#00b300 #008000 #707070 #505050
+[ditto]
+
+ClementSparrow -
+Very cool puzzles so far.
+* I have tried to improve the readability of the levels, because without the pseudo-3D rendering promised by Joseph, I often mistake a Belt_Below for a Belt_Above and reciproquely. I tried to add graphical details that would help figure that out, but it also increased the visual noise, so I tried to remove some visual noise elsewhere too (e.g., in the walls). Feel free to change all that, especially the colors.
+* I thought the fusion mechanism was underused (only one level so far), and that it might be because the setup to cause a fusion is a little bit complex. Because of this complexity, I also thought it was a little bit unfair to ask the player to think about this possibility without prior introduction. So I added an "inflatable walls" mechanic to create more ways to push belts against each other. (And it would also be a good reason to use buttons that control multiple things, as this feature too is currently only used in one puzzle.)
+* Unfortunately, adding this mechanic created a lot of bugs and edge cases (some of which may still be unfixed) and in the end I worked too hard on it to also add the fusion of boxes at ground level. The feature should however be easy to add following Pedro PSI's method.
+* I see these "inflatable walls" as an extension of the "doors" mechanic: the doors are in the ground and extend upward, the inflatable walls are in the walls and extend horizontally in all directions. We might want to use similar representations for both if needed (I just use the same colors).
+* Inflatable walls allow to reuse the tricks already used with doors, but horizontally. As players can walk on them, it also allows to make bridges between platforms.
+* The inflatable walls mechanic could be made more specific, to have walls that extend only in some directions, or it could be extended to allow inflatable platforms (would they also extend upward and behave like a wall?) or even inflatable BeltX (but then, how do you wire them?).
+* This is a very basic implementation and a lot of edge cases exist, so use the feature wisely and improve the implementation if you need it.
+* Inflated walls don't weight on buttons. That's on purpose ;-D. Changing that would break my level, so please, don't.
+* About connections between levels: I think pancelor's remark about the possibility to use wires to create connections has been greatly overlooked. This can be a great way to create connections. However, I would discourage you to place wires that exit the level, as anyone can think about reusing a button in a level to make a connection. What is important is to specify what states a button can be at the end of the level, especially if there is a harder solution with a different button state. And what is equally important is remarks like "The level could have an interesting twist if there was a Door_Base at that position instead of the ground, or if there was a Door_Extended at that position instead of a platform". Of course, inflatable walls provide even more connection possibilities. However, notice that pushing a button in one level could activate an inflatable wall in another level, which would push a BeltX, and thus have a permanent effect even if the button does not remain pushed at the end of the level it is in. We may want to avoid that, especially if the effect happens before the player had a chance to visit the level in which the effect happens.
+
+Jumble - I thought this game didn't have multipush and was stuck at the first level for like 2 minutes >.>
+
+Auroriax - A thing I noticed I didn't have time to fix, is that it is not possible to see when two things are stacked on top of each other. I think there should be some kind of highlight or other visual effect in those cases. Other than that, this is pretty promising so far! [Though a little tricky to design levels for, I explored four level ideas before I got something I was satisfied with >_< ] )
+
+
+
+(IDEAS / COMMENTS) (GROUP B)
+(Joseph Mansfield (sftrabbit) - some thoughts I've had:
+- There's totally room for a little intro section of very basic stuff leading into my seed level. In particular, could introduce the ladders and belt multi-pushing behaviour with only BeltXs.
+- I feel like mechanics that make interesting conveyor contraptions would be interesting.
+- Can an infinite loop somehow be made into a useful thing? (I guess only if it can get interrupted by something)
+
+ThatScar: I think the belts are too dark and the ground is too light. A belt should match the luminance of the surface it provides, not the surface it sits on top of. Remove this comment if fixed.
+Patrick: agreed
+
+Joel: I wonder if walls should behave like height 2 destroyable objects, so they can be exploded by bombs that are on platforms. This could allow for interesting alternate connections between levels, or it might be too unwieldy.
+Also, it would be cool if there was some hub area where if you gathered enough bombs from its branches, you could explode your way to the centre of the hub where secret treasure awaits.
+V
+Pichu: "Don't add mechanics that break the wall boundaries of levels" is one of our rules, joseph is fairly against that
+V
+Notan: I guess it would be ok if there were destructible walls in addition to normal walls. But belts and platforms are already kinda destructible walls so I doubt we need another one of those types.
+
+Pichu: I think explosives should blow up ladders they are next to but I cant read others' code well enough to do it so hopefully someone else does.
+V
+Notan: In my opiniton the ladders should be treated like they are in the cells of the objects they are attatched to, rather than the cells of those ladders. But the current visualization suggests otherwise so ¯\_(ツ)_/¯
+
+Notan: I think if you can optionally bring out objects from a level, the game should explicitly say so. I don't know how ENIGMASH handled this, but it would be annoying for a player to be stuck on a level not realizing they didn't bring an object from 3 levels before.
+Patrick: agreed
+Joseph Mansfield (sftrabbit): I'll make sure this isn't a problem by constraining how blocks can be used when brought out of levels. If bringing a block out of the level is an intended part of the main solution, then that block will be required immediately. If bringing a block out is optional, it will be used only to get a secret. I have plans for how secrets will work.
+
+Colin: I wanted to have a conveyor push a block with a ladder attached, but this would require conveyors in the floor or ladders above 
+
+
+Toombler: The level with solution starting "push M left, push x up then left once" seemed easier than winterbeak's level (at least after already solving winterbeak's level) while exploring similar ideas, so their ordering could maybe be considered - possibly both levels could be accessible at the same time, and they could be beaten in either order.
+
+Twak: I tried making a puzzle involving standing in specific spots to set off specific bombs, but couldn't find a way to prevent the player from just blowing up the area under the goal without using a lot of space. Decided to make a different level.
+
+
+(IDEAS / COMMENTS) (GROUP MERGE)
+
+domcamus: Haven't thought very much about interconnections; level is mostly standalone. Seems like there's a lot of scope for doing stuff with stickiness, which I didn't explore at all because sticky goo requires a lot of bombs and bombs mess up puzzles! :-D
+
+stevenjmiller: The level design on display here is phenomenal. I really hope ladder fusion makes it into the game. As an example, you might want to create a diagonal, but in doing so, the resulting belt gets a ladder that makes it difficult to maneuver around the level. I also noticed that fusion involving BeltX's hasn't been explored very heavily, presumably because it doesn't normally have an impact on the resulting belt. Ladder and sticky fusion change that, and I think it opens up some interesting possibilities.
+)
+
+
+========
+OBJECTS
+========
+
+Background1
+#b5b5b5 #b8b8b7
+00000
+00010
+01000
+00001
+00000
+
+Background2
+#a6a0a2
+
+Platform1
+#e9e9e9 #e6e7e6 #cfcfcf
+00010
+10000
+00100
+00000
+01000
+
+Platform1_Front
+#cfcfcf
+.....
+.....
+00000
+00000
+00000
+
+Platform1_Top
+#e9e9e9 #e6e7e6 #cfcfcf
+.....
+.....
+00100
+00000
+01000
+
+Platform2
+#E2D9DC #F2E6EA
+00100
+00000
+00000
+00100
+01110
+
+Platform2_Front
+#c3bbbd
+.....
+.....
+00000
+00000
+00000
+
+Platform2_Top
+#E2D9DC #F2E6EA
+.....
+.....
+00000
+00100
+01110
+
+Wall1
+#201c1c
+
+Wall1_Front
+#484040 #444444
+.....
+00010
+00000
+00100
+10000
+
+Wall1_Top
+#201c1c
+.....
+00000
+00000
+00000
+00000
+
+Wall2
+#110b0d
+
+Wall2_Front
+#2b1b20 #190f12
+.....
+00000
+00100
+00000
+00000
+
+Wall2_Top
+#110b0d
+.....
+00000
+00000
+00000
+00000
+
+Player_Above1
+#f7f725 #fb9234 #d8d6d6 #215cff #f50f0f #000000
+.444.
+.....
+.....
+.....
+.....
+
+Render_Player_Above1_Top
+#f7f725 #fb9234 #d8d6d6 #215cff #f50f0f #000000
+.000.
+.000.
+.000.
+.111.
+.333.
+
+Player_Below1
+#d7d721 #da7f2d #adacac #1a4fe1 #d30c0c #000000
+.000.
+.111.
+.333.
+.444.
+.....
+
+Render_Player_Below1_Top
+#d7d721 #da7f2d #adacac #1a4fe1 #d30c0c #000000
+.....
+.....
+.....
+.000.
+.000.
+
+Render_Player_Below_U
+#c3c31c
+.....
+.000.
+.....
+.....
+.....
+
+Render_Player_Below_R
+#c3c31c
+.....
+.00..
+.....
+.....
+.....
+
+Render_Player_Below_L
+#c3c31c
+.....
+..00.
+.....
+.....
+.....
+
+Render_Player_Above_Top_U
+#dede23
+.....
+.....
+.....
+.000.
+.....
+
+Render_Player_Above_Top_R
+#dede23
+.....
+.....
+.....
+.00..
+.....
+
+Render_Player_Above_Top_L
+#dede23
+.....
+.....
+.....
+..00.
+.....
+
+End_Below
+#1bbd1b
+.....
+.000.
+.0.0.
+.000.
+.....
+
+End_Above
+#1bbd1b
+.000.
+.....
+.....
+.....
+.....
+
+End_Above_Top
+#1bbd1b
+.....
+.....
+.....
+.000.
+.0.0.
+
+
+(CONVEYOR BELTS)
+
+BeltX_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltX_Above_Top
+#29b4d0 #1987b3 #25a4be
+01110
+01110
+01110
+00000
+22222
+
+BeltX_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00000
+
+BeltU_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltU_Above_Top
+#29b4d0 #1987b3 #25a4be
+00100
+01110
+11111
+00000
+22222
+
+BeltU_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00000
+
+BeltR_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltR_Above_Top
+#29b4d0 #1987b3 #25a4be
+01100
+01110
+01100
+01000
+22222
+
+BeltR_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+01000
+
+BeltD_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltD_Above_Top
+#29b4d0 #1987b3 #25a4be
+11111
+01110
+00100
+00000
+22222
+
+BeltD_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00000
+
+BeltL_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltL_Above_Top
+#29b4d0 #1987b3 #25a4be
+00110
+01110
+00110
+00010
+22222
+
+BeltL_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00010
+
+BeltUR_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltUR_Above_Top
+#29b4d0 #1987b3 #25a4be
+01110
+00110
+00010
+00000
+22222
+
+BeltUR_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00000
+
+BeltRD_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltRD_Above_Top
+#29b4d0 #1987b3 #25a4be
+00010
+00110
+01110
+00000
+22222
+
+BeltRD_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00000
+
+BeltDL_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltDL_Above_Top
+#29b4d0 #1987b3 #25a4be
+01000
+01100
+01110
+00000
+22222
+
+BeltDL_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00000
+
+BeltLU_Above
+#29b4d0 #1987b3 #25a4be
+22222
+22222
+.....
+.....
+.....
+
+BeltLU_Above_Top
+#29b4d0 #1987b3 #25a4be
+01110
+01100
+01000
+00000
+22222
+
+BeltLU_Above_Top2
+#29b4d0 #1987b3 #25a4be
+.....
+.....
+.....
+.....
+00000
+
+BeltX_Below
+#2295ac #157094 #1e869b
+01110
+00000
+22222
+22222
+22222
+
+BeltX_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00000
+01110
+01110
+
+BeltU_Below
+#2295ac #157094 #1e869b
+11111
+00000
+22222
+22222
+22222
+
+BeltU_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00000
+00100
+01110
+
+BeltR_Below
+#2295ac #157094 #1e869b
+01100
+01000
+22222
+22222
+22222
+
+BeltR_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+01000
+01100
+01110
+
+BeltD_Below
+#2295ac #157094 #1e869b
+00100
+00000
+22222
+22222
+22222
+
+
+BeltD_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00000
+11111
+01110
+
+BeltL_Below
+#2295ac #157094 #1e869b
+00110
+00010
+22222
+22222
+22222
+
+BeltL_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00010
+00110
+01110
+
+BeltUR_Below
+#2295ac #157094 #1e869b
+00010
+00000
+22222
+22222
+22222
+
+BeltUR_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00000
+01110
+00110
+
+BeltRD_Below
+#2295ac #157094 #1e869b
+01110
+00000
+22222
+22222
+22222
+
+BeltRD_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00000
+00010
+00110
+
+BeltDL_Below
+#2295ac #157094 #1e869b
+01110
+00000
+22222
+22222
+22222
+
+BeltDL_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00000
+01000
+01100
+
+BeltLU_Below
+#2295ac #157094 #1e869b
+01000
+00000
+22222
+22222
+22222
+
+BeltLU_Below_Top
+#2295ac #157094 #1e869b
+.....
+.....
+00000
+01110
+01100
+
+Sticky_Above
+transparent
+
+Sticky_Below
+transparent
+
+Render_Sticky_BeltX_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltX_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee  #8334f3
+73346
+84557
+83436
+68877
+01101
+
+Render_Sticky_BeltX_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+77668
+
+Render_Sticky_BeltU_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltU_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+78386
+84557
+33435
+68877
+01101
+
+Render_Sticky_BeltU_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+77668
+
+Render_Sticky_BeltR_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltR_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+73378
+64557
+63487
+63867
+01101
+
+Render_Sticky_BeltR_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+74878
+
+Render_Sticky_BeltD_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltD_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+33435
+84557
+78386
+68877
+01101
+
+Render_Sticky_BeltD_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+77668
+
+
+Render_Sticky_BeltL_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltL_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+76338
+65547
+66437
+68837
+01101
+
+Render_Sticky_BeltL_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+78848
+
+Render_Sticky_BeltUR_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltUR_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+74346
+88557
+66737
+68877
+01101
+
+Render_Sticky_BeltUR_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+77668
+
+Render_Sticky_BeltRD_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltRD_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+78848
+67457
+63357
+68877
+01101
+
+Render_Sticky_BeltRD_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+77878
+
+Render_Sticky_BeltDL_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltDL_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+83887
+83567
+74456
+68877
+01101
+
+Render_Sticky_BeltDL_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+77668
+
+Render_Sticky_BeltLU_Above
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+0.02.
+.....
+.....
+.....
+.....
+
+Render_Sticky_BeltLU_Above_Top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+76338
+65547
+66437
+68837
+01101
+
+Render_Sticky_BeltLU_Above_Top2
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee #8334f3
+.....
+.....
+.....
+.....
+78868
+
+Render_Sticky_BeltX_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+83436
+68877
+01101
+0.02.
+.....
+
+Render_Sticky_BeltX_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+77668
+73346
+84557
+
+Render_Sticky_BeltU_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+33435
+68877
+01101
+0.02.
+.....
+
+Render_Sticky_BeltU_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+77668
+78386
+84557
+
+Render_Sticky_BeltR_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+63487
+63867
+01101
+0.02.
+.....
+
+Render_Sticky_BeltR_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+74878
+73378
+64557
+
+Render_Sticky_BeltD_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+78386
+68877
+01101
+0.02.
+.....
+
+Render_Sticky_BeltD_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+77668
+33435
+84557
+
+Render_Sticky_BeltL_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+66437
+68837
+01101
+0.02.
+.....
+
+Render_Sticky_BeltL_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+78848
+76338
+65547
+
+Render_Sticky_BeltUR_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+66737
+68877
+01101
+0.02.
+.....
+
+Render_Sticky_BeltUR_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+77668
+74346
+88557
+
+Render_Sticky_BeltRD_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+63357
+68877
+01101
+0.02.
+.....
+
+Render_Sticky_BeltRD_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+77878
+78848
+67457
+
+Render_Sticky_BeltDL_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+74456
+68877
+01101
+0.02.
+.....
+
+Render_Sticky_BeltDL_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+77668
+83887
+83567
+
+
+Render_Sticky_BeltLU_Below
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+66437
+68837
+01101
+0.02.
+.....
+
+Render_Sticky_BeltLU_Below_Top
+#4a24a4 #541ca8 #47188c #451a8b #50128f #3e2289 #6c1de0 #572fd1 #6325da
+.....
+.....
+78868
+76338
+65547
+
+
+Wall_above1
+#110b0d #2b1b20
+0.0.0
+.....
+.....
+.....
+.....
+
+Wall_above1_top
+#110b0d #2b1b20
+.....
+0.0.0
+.0.0.
+0.0.0
+.0.0.
+
+Wall_above2
+#110b0d #2b1b20
+.0.0.
+.....
+.....
+.....
+.....
+
+Wall_above2_top
+#110b0d #2b1b20
+.....
+.0.0.
+0.0.0
+.0.0.
+0.0.0
+
+Wall_above_Front
+#110b0d #2b1b20
+.....
+11111
+.....
+.....
+.....
+
+Explosive_above
+#f94361 black #d83e58
+.222.
+.....
+.....
+.....
+.....
+
+Render_Explosive_Above_Top
+#f94361 black #d83e58
+.000.
+.000.
+.001.
+.222.
+.222.
+
+Explosive_below
+#d13851 black #a62e42
+.001.
+.222.
+.222.
+.222.
+.....
+
+Render_Explosive_Below_Top
+#d13851 black #a62e42
+.....
+.....
+.....
+.000.
+.000.
+
+Render_ExplosivePrimed_Above_Top
+#ee7a8e
+.....
+.....
+...0.
+.....
+.....
+
+Render_ExplosivePrimed_Below
+#ee7a8e
+...0.
+.....
+.....
+.....
+.....
+
+Render_Sticky_Explosive_above_top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee black #d83e58
+.766.
+.677.
+.678.
+.449.
+.939.
+
+Render_Sticky_Explosive_below
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee black
+.678.
+.44..
+..3..
+.....
+.....
+
+Render_Sticky_Explosive_below_top
+#6533ca #7028ce #6123b1 #5e25b0 #6b19b4 #5530ad #8d2af6 #7542ee black
+.....
+.....
+.....
+.766.
+.677.
+
+
+(LADDERS)
+
+Ladder1U
+#894f21 #a56029
+0...0
+.....
+.....
+.....
+.....
+
+Ladder1R
+#894f21 #a56029
+....0
+....1
+....0
+....0
+....0
+
+Ladder1D
+#894f21 #a56029
+.....
+1...1
+.....
+.....
+.....
+
+Ladder1L
+#894f21 #a56029
+0....
+1....
+0....
+0....
+0....
+
+Render_Ladder1U_Top
+#894f21 #a56029
+.....
+1...1
+00000
+0...0
+00000
+
+Render_Ladder1R_Top
+#894f21 #a56029
+.....
+.....
+....1
+....0
+....0
+
+Render_Ladder1L_Top
+#894f21 #a56029
+.....
+.....
+1....
+0....
+0....
+
+Render_Ladder1R_Overhang
+#894f21 #a56029
+.....
+1....
+.....
+.....
+.....
+
+Render_Ladder1D_Overhang
+#894f21 #a56029
+.....
+.....
+1...1
+.....
+.....
+
+Render_Ladder1L_Overhang
+#894f21 #a56029
+.....
+....1
+.....
+.....
+.....
+
+Render_Ladder1R_Overhang_Top
+#894f21 #a56029
+.....
+.....
+1....
+.....
+.....
+
+Render_Ladder1L_Overhang_Top
+#894f21 #a56029
+.....
+.....
+....1
+.....
+.....
+
+Ladder2U
+#70485e #8c5a73
+0...0
+.....
+.....
+.....
+.....
+
+Ladder2R
+#70485e #8c5a73
+....0
+....1
+....0
+....0
+....0
+
+Ladder2D
+#70485e #8c5a73
+.....
+1...1
+.....
+.....
+.....
+
+Ladder2L
+#70485e #8c5a73
+0....
+1....
+0....
+0....
+0....
+
+Render_Ladder2U_Top
+#70485e #8c5a73
+.....
+1...1
+00000
+0...0
+00000
+
+Render_Ladder2R_Top
+#70485e #8c5a73
+.....
+.....
+....1
+....0
+....0
+
+Render_Ladder2L_Top
+#70485e #8c5a73
+.....
+.....
+1....
+0....
+0....
+
+Render_Ladder2R_Overhang
+#70485e #8c5a73
+.....
+1....
+.....
+.....
+.....
+
+Render_Ladder2D_Overhang
+#70485e #8c5a73
+.....
+.....
+1...1
+.....
+.....
+
+Render_Ladder2L_Overhang
+#70485e #8c5a73
+.....
+....1
+.....
+.....
+.....
+
+Render_Ladder2R_Overhang_Top
+#70485e #8c5a73
+.....
+.....
+1....
+.....
+.....
+
+Render_Ladder2L_Overhang_Top
+#70485e #8c5a73
+.....
+.....
+....1
+.....
+.....
+
+Exploded_above
+transparent
+
+Exploded_below
+transparent
+
+
+(BUTTONS)
+
+Button_Above
+#cfcfcf #660000 #c31515 #d41d1d #ff3333 #ff6666
+01110
+.000.
+.....
+.....
+.....
+
+Button_Above_Top
+#cfcfcf #660000 #c31515 #d41d1d #ff3333 #ff6666
+.....
+.....
+.544.
+04320
+03220
+
+Button_Below
+#a5a5a5 #660000 #c31515 #d41d1d #ff3333 #ff6666
+.544.
+04320
+03220
+01110
+.000.
+
+SlimeVat_Above
+#4e4143 #9066f2 #ac54fa #9b5cf5
+01230
+00000
+.....
+.....
+.....
+
+SlimeVat_Above_Top
+#4e4143 #9066f2 #ac54fa #9b5cf5 #68585b #ac48fc #a75af7
+41624
+46254
+43114
+44444
+02310
+
+SlimeVat_Above_Top2
+#4e4143 #9066f2 #ac54fa #9b5cf5 #68585b
+.....
+.....
+.....
+.....
+44444
+
+SlimeVat_Broken_Above
+#4e4143 #9b5cf5 #8334f3
+02.20
+00010
+.....
+.....
+.....
+
+SlimeVat_Broken_Above_Top
+#4e4143 #68585b #9b5cf5 #8334f3 #9066f2
+1...0
+0...0
+01210
+133.1
+1.240
+
+SlimeVat_Broken_Below
+#4e4143 #68585b #9b5cf5 #8334f3 #9066f2
+01210
+133.1
+1.240
+02.20
+00010
+
+SlimeVat_Broken_Below_Top
+#4e4143 #68585b #9b5cf5 #8334f3 #9066f2
+.....
+.....
+.....
+1...0
+0...0
+
+SlimeVat_Mess_Above
+#9b5cf5 #8334f3 #9066f2
+....2
+1....
+.....
+.....
+.....
+
+Render_SlimeVat_Mess_Above_Top
+#9b5cf5 #8334f3 #9066f2
+.....
+.....
+.0...
+...1.
+.2...
+
+SlimeVat_Mess_Below
+#9b5cf5 #8334f3 #9066f2
+.0...
+...1.
+.2...
+....2
+1....
+
+(manhattan distance in 2d space)
+Distance0
+transparent
+
+Distance1
+transparent
+
+Distance2
+transparent
+
+Distance3
+transparent
+
+
+(WIRES)
+
+Wire
+transparent
+
+
+Wire_Below_U
+#9f7b7e
+..0..
+..0..
+..0..
+.....
+.....
+
+Wire_Below_R
+#9f7b7e
+.....
+.....
+..000
+.....
+.....
+
+Wire_Below_D
+#9f7b7e
+.....
+.....
+..0..
+..0..
+..0..
+
+Wire_Below_L
+#9f7b7e
+.....
+.....
+000..
+.....
+.....
+
+Wire_AboveWall_U_Top
+#444
+.....
+..0..
+..0..
+..0..
+.....
+
+Wire_AboveWall_R_Top
+#444
+.....
+.....
+.....
+..000
+.....
+
+Wire_AboveWall_D
+#444
+..0..
+.....
+.....
+.....
+.....
+
+Wire_AboveWall_D_Top
+#444
+.....
+.....
+.....
+..0..
+..0..
+
+Wire_AboveWall_L_Top
+#444
+.....
+.....
+.....
+000..
+.....
+
+Wire_Above_U
+transparent
+
+Wire_Above_U_Top
+#c3989c
+.....
+.....
+..0..
+..0..
+..0..
+
+Wire_Above_R
+transparent
+
+Wire_Above_R_Top
+#c3989c
+.....
+.....
+.....
+.....
+..000
+
+Wire_Above_D
+#c3989c
+..0..
+..0..
+.....
+.....
+.....
+
+Wire_Above_D_Top
+#c3989c
+.....
+.....
+.....
+.....
+..0..
+
+Wire_Above_L
+transparent
+
+Wire_Above_L_Top
+#c3989c
+.....
+.....
+.....
+.....
+000..
+
+Render_WireOn_AboveWall_U_Top
+#551b20
+.....
+..0..
+..0..
+..0..
+.....
+
+Render_WireOn_AboveWall_R_Top
+#551b20
+.....
+.....
+.....
+..000
+.....
+
+Render_WireOn_AboveWall_D
+#551b20
+..0..
+.....
+.....
+.....
+.....
+
+Render_WireOn_AboveWall_D_Top
+#551b20
+.....
+.....
+.....
+..0..
+..0..
+
+Render_WireOn_AboveWall_L_Top
+#551b20
+.....
+.....
+.....
+000..
+.....
+
+Render_WireOn_Above_U_Top
+#de3e4a
+.....
+.....
+..0..
+..0..
+..0..
+
+Render_WireOn_Above_R_Top
+#de3e4a
+.....
+.....
+.....
+.....
+..000
+
+Render_WireOn_Above_D
+#de3e4a
+..0..
+..0..
+.....
+.....
+.....
+
+Render_WireOn_Above_D_Top
+#de3e4a
+.....
+.....
+.....
+.....
+..0..
+
+Render_WireOn_Above_L_Top
+#de3e4a
+.....
+.....
+.....
+.....
+000..
+
+
+Render_WireOn_Below_U
+#b3303a
+..0..
+..0..
+..0..
+.....
+.....
+
+Render_WireOn_Below_R
+#b3303a
+.....
+.....
+..000
+.....
+.....
+
+Render_WireOn_Below_D
+#b3303a
+.....
+.....
+..0..
+..0..
+..0..
+
+Render_WireOn_Below_L
+#b3303a
+.....
+.....
+000..
+.....
+.....
+
+(used to propagate electricity)
+Spark
+transparent
+
+
+
+(DOORS)
+
+(I'm imagining these doors as square columns that extend out of the ground)
+DoorBase
+#a88285 #e9e9e9
+00000
+01110
+01110
+01110
+00000
+
+DoorExtended
+#de3e4a #e9e9e9 #cfcfcf
+01110
+00000
+22222
+22222
+22222
+
+Render_DoorExtended_Top
+#de3e4a #e9e9e9 #cfcfcf
+.....
+.....
+00000
+01110
+01110
+
+Anim_DoorBlocked
+#cfcfcf #1e869b
+.....
+.....
+.....
+.....
+00000
+
+
+(INFLATABLE WALLS)
+
+(Like the "Doors", but horizontally)
+Inflatable
+transparent
+
+Inflatable_Top
+#ff8888 #eb9f9b
+.....
+.....
+..0..
+.010.
+..0..
+
+InflatedU
+#e9e9e9 #de3e4a
+00000
+.....
+.....
+.....
+.....
+
+Render_InflatedU_Top
+#e9e9e9 #de3e4a
+.....
+.....
+11111
+00100
+00000
+
+InflatedR
+#e9e9e9 #de3e4a #484040
+00001
+00001
+22222
+22222
+22222
+
+Render_InflatedR_Top
+#e9e9e9 #de3e4a #484040
+.....
+.....
+00001
+00001
+00011
+
+InflatedD
+#e9e9e9 #de3e4a #484040
+00100
+11111
+22222
+22222
+22222
+
+Render_InflatedD_Top
+#e9e9e9 #de3e4a #484040
+.....
+.....
+00000
+00000
+00000
+
+InflatedL
+#e9e9e9 #de3e4a #484040
+10000
+10000
+22222
+22222
+22222
+
+Render_InflatedL_Top
+#e9e9e9 #de3e4a #484040
+.....
+.....
+10000
+10000
+11000
+
+
+
+(FUSION OF COLLIDING BELTS)
+
+(used to mark blocks for fusion)
+Fusing
+transparent
+
+Fused
+transparent
+
+FusingDone_NonMidMove
+transparent
+
+FusingDone_MidMove
+transparent
+
+FuseIntention_BeltX_Above
+transparent
+
+FuseIntention_BeltU_Above
+transparent
+
+FuseIntention_BeltR_Above
+transparent
+
+FuseIntention_BeltD_Above
+transparent
+
+FuseIntention_BeltL_Above
+transparent
+
+FuseIntention_BeltUR_Above
+transparent
+
+FuseIntention_BeltRD_Above
+transparent
+
+FuseIntention_BeltDL_Above
+transparent
+
+FuseIntention_BeltLU_Above
+transparent
+
+FuseIntention_Explosive_Above
+transparent
+
+FuseIntention_BeltX_Below
+transparent
+
+FuseIntention_BeltU_Below
+transparent
+
+FuseIntention_BeltR_Below
+transparent
+
+FuseIntention_BeltD_Below
+transparent
+
+FuseIntention_BeltL_Below
+transparent
+
+FuseIntention_BeltUR_Below
+transparent
+
+FuseIntention_BeltRD_Below
+transparent
+
+FuseIntention_BeltDL_Below
+transparent
+
+FuseIntention_BeltLU_Below
+transparent
+
+
+
+(INVISIBLE MARKERS)
+
+Blocked_Below
+transparent
+
+Blocked_Above
+transparent
+
+(these markers identify the cause of the motion of an object in order to deal with conflicting motions and priorities)
+
+PlayerMoved_Below
+transparent
+
+PlayerMoved_Above
+transparent
+
+BeltMoved
+transparent
+
+StickyMoved
+transparent
+
+InflationMoved
+transparent
+
+(diagonal movement markers)
+
+DiagMoveOrtho_U
+transparent
+
+DiagMoveOrtho_R
+transparent
+
+DiagMoveOrtho_D
+transparent
+
+DiagMoveOrtho_L
+transparent
+
+DiagMoveDiag_UR
+transparent
+
+DiagMoveDiag_RD
+transparent
+
+DiagMoveDiag_DL
+transparent
+
+DiagMoveDiag_LU
+transparent
+
+DiagSendDir_UR
+transparent
+
+DiagSendDir_RD
+transparent
+
+DiagSendDir_DL
+transparent
+
+DiagSendDir_LU
+transparent
+
+DiagOrthoPending
+transparent
+
+DiagDiagPending
+transparent
+
+DiagReturn
+transparent
+
+DiagReturnDir_UR
+transparent
+
+DiagReturnDir_RD
+transparent
+
+DiagReturnDir_DL
+transparent
+
+DiagReturnDir_LU
+transparent
+
+DiagReturnValue_Blocked
+transparent
+
+DiagReturnValue_Unblocked
+transparent
+
+MovementCanceller
+transparent
+
+DiagMidMove_Player
+transparent
+
+DiagMidMove_BeltX
+transparent
+
+DiagMidMove_BeltU
+transparent
+
+DiagMidMove_BeltR
+transparent
+
+DiagMidMove_BeltD
+transparent
+
+DiagMidMove_BeltL
+transparent
+
+DiagMidMove_BeltUR
+transparent
+
+DiagMidMove_BeltRD
+transparent
+
+DiagMidMove_BeltDL
+transparent
+
+DiagMidMove_BeltLU
+transparent
+
+DiagMidMove_Explosive
+transparent
+
+PlayerMovement
+transparent
+
+
+(GRAPHICAL DETAILS)
+
+vDangerStripeU_Top
+#ffbb00 #ffc425
+.....
+.....
+00010
+.....
+.....
+
+vDangerStripeR
+#ffbb00 #ffc425
+....0
+....0
+.....
+.....
+.....
+
+vDangerStripeR_Top
+#ffbb00 #ffc425
+.....
+.....
+....0
+....0
+....1
+
+vDangerStripeD
+#ffbb00 #ffc425
+.....
+00100
+.....
+.....
+.....
+
+vDangerStripeL
+#ffbb00 #ffc425
+0....
+0....
+.....
+.....
+.....
+
+vDangerStripeL_Top
+#ffbb00 #ffc425
+.....
+.....
+0....
+1....
+0....
+
+vDangerStripeUR_Top
+#ffbb00
+.....
+.....
+....0
+.....
+.....
+
+vDangerStripeRD
+#ffbb00
+.....
+....0
+.....
+.....
+.....
+
+vDangerStripeDL
+#ffbb00
+.....
+0....
+.....
+.....
+.....
+
+vDangerStripeLU_Top
+#ffbb00
+.....
+.....
+0....
+.....
+.....
+
+vAmbiantOcclusionU
+#ababab #a9a9a9
+00010
+.....
+.....
+.....
+.....
+
+vAmbiantOcclusionR
+#ababab #a9a9a9
+....0
+....0
+....1
+....0
+....0
+
+
+vAmbiantOcclusionL
+#ababab #a9a9a9
+0....
+1....
+0....
+0....
+0....
+
+
+vDoor_AO_U
+#9a7679
+00000
+.....
+.....
+.....
+.....
+
+vDoor_AO_R
+#9a7679
+....0
+....0
+....0
+....0
+....0
+
+vDoor_AO_D
+#9a7679
+.....
+.....
+.....
+.....
+00000
+
+vDoor_AO_L
+#9a7679
+0....
+0....
+0....
+0....
+0....
+
+
+vWallBorderU_Top
+#363030
+.....
+00000
+.....
+.....
+.....
+
+vWallBorderR
+#363030
+....0
+.....
+.....
+.....
+.....
+
+vWallBorderR_Top
+#363030
+.....
+....0
+....0
+....0
+....0
+
+vWallBorderD
+#363030
+00000
+.....
+.....
+.....
+.....
+
+vWallBorderL
+#363030
+0....
+.....
+.....
+.....
+.....
+
+vWallBorderL_Top
+#363030
+.....
+0....
+0....
+0....
+0....
+
+Anim_FusionBelow_0_Top
+#ffffff
+.....
+.....
+.....
+.....
+..0..
+
+Anim_FusionBelow_1
+#ffffff
+.000.
+..0..
+.....
+.....
+.....
+
+Anim_FusionBelow_1_Top
+#ffffff
+.....
+.....
+..0..
+.000.
+00000
+
+Anim_FusionBelow_2
+#ffffff
+00000
+00000
+.000.
+..0..
+.....
+
+Anim_FusionBelow_2_Top
+#ffffff
+.....
+.....
+00000
+00000
+00000
+
+Anim_FusionBelow_3
+#ffffff
+00000
+00000
+00000
+00000
+.000.
+
+Anim_FusionBelow_4
+#ffffff
+00000
+00000
+00000
+00000
+00000
+
+Anim_FusionBelow_5
+#b2d0dc #b6dce4 #b5d7de
+11111
+01110
+22222
+22222
+22222
+
+Anim_FusionBelow_5_Top
+#b2d0dc #b6dce4
+.....
+.....
+01110
+11111
+11111
+
+Anim_FusionBelow_6
+#65a1b9 #6db9c8 #6bafbd
+10101
+11111
+22222
+22222
+22222
+
+Anim_FusionBelow_6_Top
+#65a1b9 #6db9c8
+.....
+.....
+11111
+10101
+11111
+
+Anim_FusionBelow_7
+#157094 #2295ac #1e869b
+11111
+11111
+22222
+22222
+22222
+
+Anim_FusionBelow_7_Top
+#157094 #2295ac
+.....
+.....
+11111
+11111
+11011
+
+Anim_FusionAbove_0_Top
+#ffffff
+.....
+..0..
+.....
+.....
+.....
+
+Anim_FusionAbove_1_Top
+#ffffff
+.000.
+00000
+.000.
+..0..
+.....
+
+Anim_FusionAbove_1_Top2
+#ffffff
+.....
+.....
+.....
+.....
+..0..
+
+Anim_FusionAbove_2
+#ffffff
+..0..
+.....
+.....
+.....
+.....
+
+Anim_FusionAbove_2_Top
+#ffffff
+00000
+00000
+00000
+00000
+.000.
+
+Anim_FusionAbove_2_Top2
+#ffffff
+.....
+.....
+.....
+.....
+00000
+
+Anim_FusionAbove_3
+#ffffff
+00000
+.000.
+.....
+.....
+.....
+
+Anim_FusionAbove_3_Top
+#ffffff
+00000
+00000
+00000
+00000
+00000
+
+Anim_FusionAbove_4
+#ffffff
+00000
+00000
+.....
+.....
+.....
+
+Anim_FusionAbove_5
+#b2d0dc #b6dce4 #b5d7de
+22222
+22222
+.....
+.....
+.....
+
+Anim_FusionAbove_5_Top
+#b2d0dc #b6dce4 #b5d7de
+11111
+11111
+11111
+01110
+22222
+
+Anim_FusionAbove_5_Top2
+#b2d0dc #b6dce4 #b5d7de
+.....
+.....
+.....
+.....
+01110
+
+Anim_FusionAbove_6
+#65a1b9 #6db9c8 #6bafbd
+22222
+22222
+.....
+.....
+.....
+
+Anim_FusionAbove_6_Top
+#65a1b9 #6db9c8 #6bafbd
+10101
+11111
+10101
+11111
+22222
+
+Anim_FusionAbove_6_Top2
+#65a1b9 #6db9c8 #6bafbd
+.....
+.....
+.....
+.....
+11111
+
+Anim_FusionAbove_7
+#157094 #2295ac #1e869b
+22222
+22222
+.....
+.....
+.....
+
+Anim_FusionAbove_7_Top
+#157094 #2295ac #1e869b
+11111
+11011
+11111
+11111
+22222
+
+Anim_FusionAbove_7_Top2
+#157094 #2295ac #1e869b
+.....
+.....
+.....
+.....
+11111
+
+
+Theme2
+transparent
+
+Init2
+transparent
+
+MovedU
+transparent
+
+MovedR
+transparent
+
+MovedD
+transparent
+
+MovedL
+transparent
+
+ToExplode_Below
+transparent
+
+ToExplode_Above
+transparent
+
+
+=======
+LEGEND
+=======
+
+(Joseph Mansfield (sftrabbit): I tried to use fun arrow symbols for all the directional things here, but it turns out every browser/OS renders them differently and for some the levels looked really broken. So you get WASD-like directions instead.)
+
+. = Background1
+` = Background1 and PlayerMovement
+# = Wall1
+" = Wall_Above1
+~ = Platform1
+: = Player_Above1 and Platform1 and MovedR
+; = Player_Below1 and MovedR
+0 = End_Above and Platform1
+O = End_Below
+e = Explosive_below and Sticky_Below
+ĕ = Explosive_below
+3 = Explosive_above and Sticky_Above and Platform1
+£ = Explosive_above and Platform1
+5 = Explosive_above and Sticky_Above and Explosive_below and Sticky_Below
+(IJKL and M)
+I = BeltU_Above and Sticky_Above and Platform1
+J = BeltL_Above and Sticky_Above and Platform1
+K = BeltD_Above and Sticky_Above and Platform1
+L = BeltR_Above and Sticky_Above and Platform1
+M = BeltX_Above and Sticky_Above and Platform1
+N = BeltX_Below and Sticky_Above and BeltX_Above
+Ī = BeltU_Above and Platform1
+Ł = BeltR_Above and Platform1
+Ķ = BeltD_Above and Platform1
+Ĵ = BeltL_Above and Platform1
+Ň = BeltX_Above and Platform1
+(wasd and x - intentionally lowercase to distinguish from above belts)
+w = BeltU_Below and Sticky_Below
+a = BeltL_Below and Sticky_Below
+s = BeltD_Below and Sticky_Below
+d = BeltR_Below and Sticky_Below
+x = BeltX_Below and Sticky_Below
+y = BeltX_Below and Sticky_Below and Explosive_above
+ŵ = BeltU_Below
+đ = BeltR_Below
+ŝ = BeltD_Below
+ă = BeltL_Below
+ž = BeltX_Below
+(diagonals)
+┓ = BeltUR_Above and Platform1
+┛ = BeltRD_Above and Platform1
+┗ = BeltDL_Above and Platform1
+┏ = BeltLU_Above and Platform1
+┐ = BeltUR_Below
+┘ = BeltRD_Below
+└ = BeltDL_Below
+┌ = BeltLU_Below
+(8426 - numpad directions)
+8 = Ladder1U
+4 = Ladder1L
+2 = Ladder1D
+6 = Ladder1R
+↔ = Ladder1L and Ladder1R
+
+$ = SlimeVat_Above and Platform1
+
+@ = Wall1
+_ = Wall1 and Theme2
+
+(Belt on top of BeltX - needed for a unit test, but should probably be avoided for actual levels, because the player can't tell what's underneath the belt)
+Ľ = BeltR_Above and BeltX_Below
+
+(more superimposed belts for fusion unit tests)
+Î = BeltU_Below and BeltU_Above
+Ì = BeltL_Below and BeltU_Above
+Ï = BeltD_Below and BeltU_Above
+Í = BeltR_Below and BeltU_Above
+
+Ḱ = BeltU_Below and BeltD_Above
+Ǩ = BeltL_Below and BeltD_Above
+Ḳ = BeltD_Below and BeltD_Above
+Ḵ = BeltR_Below and BeltD_Above
+
+ų = BeltU_Below and Wire
+
+q = Wire and Platform1
+z = Button_Above and Platform1
+c = Wire and Wall1
+p = Wire
+r = Button_Below
+t = DoorBase
+
++ = Inflatable and Wall1
+? = Button_Below and BeltX_Below
+
+Ġ = Platform1 and Button_Above and BeltX_Above
+
+Ĉ = BeltX_Below and BeltX_Above
+
+Wall = Wall1 or Wall2
+Wall_Front = Wall1_Front or Wall2_Front
+Wall_Top = Wall1_Top or Wall2_Top
+
+Wall_Above = Wall_above1 or Wall_above2
+Wall_above_top = Wall_above1_top or Wall_above2_top
+
+Walls = Wall or Wall_Above
+
+End = End_Below or End_Above
+
+Render_LadderR_Overhang = Render_Ladder1R_Overhang or Render_Ladder2R_Overhang
+Render_LadderD_Overhang = Render_Ladder1D_Overhang or Render_Ladder2D_Overhang
+Render_LadderL_Overhang = Render_Ladder1L_Overhang or Render_Ladder2L_Overhang
+
+Render_LadderR_Overhang_Top = Render_Ladder1R_Overhang_Top or Render_Ladder2R_Overhang_Top
+Render_LadderL_Overhang_Top = Render_Ladder1L_Overhang_Top or Render_Ladder2L_Overhang_Top
+
+Render_Ladder_Overhang = Render_LadderR_Overhang or Render_LadderD_Overhang or Render_LadderL_Overhang
+Render_ladder_Overhang_Top = Render_LadderR_Overhang_Top or Render_LadderL_Overhang_Top
+
+Background = Background1 or Background2
+Platform = Platform1 or Platform2
+Platform_Front = Platform1_Front or Platform2_Front
+Platform_Top = Platform1_Top or Platform2_Top
+Player_Above = Player_Above1
+Player_Below = Player_Below1
+
+Player = Player_Above or Player_Below
+
+BeltURDL_Above = BeltU_Above or BeltR_Above or BeltD_Above or BeltL_Above
+BeltURDL_Below = BeltU_Below or BeltR_Below or BeltD_Below or BeltL_Below
+
+BeltDiag_Above = BeltUR_Above or BeltRD_Above or BeltDL_Above or BeltLU_Above
+BeltDiag_Below = BeltUR_Below or BeltRD_Below or BeltDL_Below or BeltLU_Below
+
+Belt_Above = BeltURDL_Above or BeltX_Above or BeltDiag_Above
+Belt_Below = BeltURDL_Below or BeltX_Below or BeltDiag_Below
+
+Belt_Below_Top = BeltX_Below_Top or BeltU_Below_Top or BeltR_Below_Top or BeltD_Below_Top or BeltL_Below_Top or BeltUR_Below_Top or BeltRD_Below_Top or BeltDL_Below_Top or BeltLU_Below_Top
+
+Belt_Above_Top = BeltX_Above_Top or BeltU_Above_Top or BeltR_Above_Top or BeltD_Above_Top or BeltL_Above_Top or BeltUR_Above_Top or BeltRD_Above_Top or BeltDL_Above_Top or BeltLU_Above_Top
+Belt_Above_Top2 = BeltX_Above_Top2 or BeltU_Above_Top2 or BeltR_Above_Top2 or BeltD_Above_Top2 or BeltL_Above_Top2 or BeltUR_Above_Top2 or BeltRD_Above_Top2 or BeltDL_Above_Top2 or BeltLU_Above_Top2
+
+BeltU = BeltU_Above or BeltU_Below
+BeltR = BeltR_Above or BeltR_Below
+BeltD = BeltD_Above or BeltD_Below
+BeltL = BeltL_Above or BeltL_Below
+BeltX = BeltX_Above or BeltX_Below
+Belt = Belt_Above or Belt_Below
+
+Explosive = Explosive_above or Explosive_below
+Exploded = Exploded_above or Exploded_below
+
+vDangerStripe = vDangerStripeR or vDangerStripeD or vDangerStripeL or vDangerStripeRD or vDangerStripeDL
+
+Destructible_below = Belt_Below or Player_Below or Platform or Sticky_Below or DoorExtended or Button_Below or SlimeVat_Broken_Below or vDangerStripe or Platform_Front or SlimeVat_Mess_Above or Explosive_below
+Destructible_above = Belt_Above or Player_Above or Sticky_Above or Button_Above or Explosive_above
+
+Inflated = InflatedU or InflatedR or InflatedD or InflatedL
+
+Distances = Distance0 or Distance1 or Distance2 or Distance3
+
+LadderU = Ladder1U or Ladder2U
+LadderR = Ladder1R or Ladder2R
+LadderD = Ladder1D or Ladder2D
+LadderL = Ladder1L or Ladder2L
+
+Render_LadderU_Top = Render_Ladder1U_Top or Render_Ladder2U_Top
+Render_LadderR_Top = Render_Ladder1R_Top or Render_Ladder2R_Top
+Render_LadderL_Top = Render_Ladder1L_Top or Render_Ladder2L_Top
+
+Ladder = LadderU or LadderR or LadderD or LadderL
+Render_LadderTop = Render_Ladder1U_Top or Render_Ladder1R_Top or Render_Ladder1L_Top or Render_Ladder2U_Top or Render_Ladder2R_Top or Render_Ladder2L_Top
+
+Button = Button_Above or Button_Below
+
+Tracked_Above = Belt_Above or Explosive_Above
+Tracked_Below = Belt_Below or Explosive_Below
+Tracked = Tracked_Above or Tracked_Below
+
+(Objects that can move)
+Dynamic_Above = Player_Above or Belt_Above or Explosive_Above
+Dynamic_Below = Player_Below or Belt_Below or Explosive_Below
+Dynamic = Dynamic_Above or Dynamic_Below
+
+(Objects that stop movement)
+Static_Above = Wall or SlimeVat_Above or SlimeVat_Broken_Above or Wall_Above
+Static_Below = Wall or Platform or DoorExtended or Inflated or SlimeVat_Broken_Below
+Static = Static_Above or Static_Below
+
+
+(Objects that push down buttons)
+(note that Inflateds do not push down buttons!)
+Weighted_Above = Dynamic_Above
+Weighted_Below = Dynamic_Below
+Weighted = Weighted_Above or Weighted_Below
+
+(Objects that conduct electricity)
+Sparkable = Wire or DoorBase or Inflatable
+SparkStopper = DoorBase or Inflatable (these stop spark propagation)
+ConnectsToWires = Sparkable or Button
+
+(Objects)
+Above = Dynamic_Above or Static_Above
+Below = Dynamic_Below or Static_Below
+
+(causes of motion)
+MotionCause_Below = PlayerMoved_Below or InflationMoved
+MotionCause_Above = PlayerMoved_Above or BeltMoved or StickyMoved
+Blocked = Blocked_Below or Blocked_Above
+
+(Diagonal movement markers)
+DiagMoveOrtho = DiagMoveOrtho_U or DiagMoveOrtho_R or DiagMoveOrtho_D or DiagMoveOrtho_L
+DiagMoveDiag = DiagMoveDiag_UR or DiagMoveDiag_RD or DiagMoveDiag_DL or DiagMoveDiag_LU
+DiagMove = DiagMoveOrtho or DiagMoveDiag
+DiagSendDir = DiagSendDir_UR or DiagSendDir_RD or DiagSendDir_DL or DiagSendDir_LU
+DiagPending = DiagOrthoPending or DiagDiagPending
+DiagReturnDir = DiagReturnDir_UR or DiagReturnDir_RD or DiagReturnDir_DL or DiagReturnDir_LU
+DiagReturnValue = DiagReturnValue_Blocked or DiagReturnValue_Unblocked
+DiagMidMove = DiagMidMove_Player or DiagMidMove_BeltX or DiagMidMove_BeltU or DiagMidMove_BeltR or DiagMidMove_BeltD or DiagMidMove_BeltL or DiagMidMove_BeltUR or DiagMidMove_BeltRD or DiagMidMove_BeltDL or DiagMidMove_BeltLU or DiagMidMove_Explosive
+
+Fuser_Above = DiagMidMove or Belt_Above
+Fuser = Fuser_Above or Belt_Below
+FusingDone = FusingDone_NonMidMove or FusingDone_MidMove
+
+Wire_Dirs = Wire_Below_U or Wire_Below_R or Wire_Below_D or Wire_Below_L or Wire_Above_U or Wire_Above_R or Wire_Above_D or Wire_Above_L
+Wire_Dirs_Top = Wire_Above_U_Top or Wire_Above_R_Top or Wire_Above_D_Top or Wire_Above_L_Top
+
+FuseIntention_Above_NonX = FuseIntention_BeltU_Above or FuseIntention_BeltR_Above or FuseIntention_BeltD_Above or FuseIntention_BeltL_Above or FuseIntention_BeltUR_Above or FuseIntention_BeltRD_Above or FuseIntention_BeltDL_Above or FuseIntention_BeltLU_Above or FuseIntention_Explosive_Above
+FuseIntention_Above = FuseIntention_BeltX_Above or FuseIntention_Above_NonX
+FuseIntention_Below_NonX = FuseIntention_BeltU_Below or FuseIntention_BeltR_Below or FuseIntention_BeltD_Below or FuseIntention_BeltL_Below or FuseIntention_BeltUR_Below or FuseIntention_BeltRD_Below or FuseIntention_BeltDL_Below or FuseIntention_BeltLU_Below
+FuseIntention_Below = FuseIntention_BeltX_Below or FuseIntention_Below_NonX
+FuseIntention = FuseIntention_Above or FuseIntention_Below
+
+Render_Player_Below_Cover = Render_Player_Below_U or Render_Player_Below_R or Render_Player_Below_L
+Render_Player_Above_Top_Cover = Render_Player_Above_Top_U or Render_Player_Above_Top_R or Render_Player_Above_Top_L
+
+Render_Inflated_Top = Render_InflatedU_Top or Render_InflatedR_Top or Render_InflatedD_Top or Render_InflatedL_Top
+
+Render_WireOn = Render_WireOn_Above_U_Top or Render_WireOn_Above_D or Render_WireOn_Above_R_Top or Render_WireOn_Above_D_Top or Render_WireOn_Above_L_Top or Render_WireOn_Below_U or Render_WireOn_Below_R or Render_WireOn_Below_D or Render_WireOn_Below_L or Render_WireOn_AboveWall_U_Top or Render_WireOn_AboveWall_D or Render_WireOn_AboveWall_R_Top or Render_WireOn_AboveWall_D_Top or Render_WireOn_AboveWall_L_Top 
+
+Render_Above = Render_Sticky_BeltX_Above or Render_Sticky_BeltU_Above or Render_Sticky_BeltR_Above or Render_Sticky_BeltD_Above or Render_Sticky_BeltL_Above or Render_Sticky_BeltUR_Above or Render_Sticky_BeltRD_Above or Render_Sticky_BeltDL_Above or Render_Sticky_BeltLU_Above
+Render_Above_Top = Render_Player_Above1_Top or Belt_Above_Top or Render_Explosive_Above_Top or Render_Sticky_BeltX_Above_Top or Render_Sticky_BeltU_Above_Top or Render_Sticky_BeltR_Above_Top or Render_Sticky_BeltD_Above_Top or Render_Sticky_BeltL_Above_Top or Render_Sticky_BeltUR_Above_Top or Render_Sticky_BeltRD_Above_Top or Render_Sticky_BeltDL_Above_Top or Render_Sticky_BeltLU_Above_Top or Render_Sticky_Explosive_above_top
+Render_Above_Top2 = Belt_Above_Top2 or Render_Sticky_BeltX_Above_Top2 or Render_Sticky_BeltU_Above_Top2 or Render_Sticky_BeltR_Above_Top2 or Render_Sticky_BeltD_Above_Top2 or Render_Sticky_BeltL_Above_Top2 or Render_Sticky_BeltUR_Above_Top2 or Render_Sticky_BeltRD_Above_Top2 or Render_Sticky_BeltDL_Above_Top2 or Render_Sticky_BeltLU_Above_Top2
+Render_Below = Render_Sticky_BeltX_Below or Render_Sticky_BeltU_Below or Render_Sticky_BeltR_Below or Render_Sticky_BeltD_Below or Render_Sticky_BeltL_Below or Render_Sticky_BeltUR_Below or Render_Sticky_BeltRD_Below or Render_Sticky_BeltDL_Below or Render_Sticky_BeltLU_Below or Render_Sticky_Explosive_below or Render_Player_Below_Cover
+Render_Below_Top = Render_Player_Below1_Top or Belt_Below_Top or Render_DoorExtended_Top or Render_Inflated_Top or Render_Explosive_Below_Top or Render_Sticky_BeltX_Below_Top or Render_Sticky_BeltU_Below_Top or Render_Sticky_BeltL_Below_Top or Render_Sticky_BeltR_Below_Top or Render_Sticky_BeltD_Below_Top or Render_Sticky_BeltUR_Below_Top or Render_Sticky_BeltLU_Below_Top or Render_Sticky_BeltRD_Below_Top or Render_Sticky_BeltDL_Below_Top or Render_Sticky_Explosive_below_top
+Render = Render_Above or Render_Above_Top or Render_Above_Top2 or Render_Below or Render_Below_Top or Render_LadderTop or Render_Ladder_Overhang or Render_ladder_Overhang_Top or Render_WireOn or Render_Player_Above_Top_Cover or Render_SlimeVat_Mess_Above_Top or Render_ExplosivePrimed_Above_Top or Render_ExplosivePrimed_Below
+
+Sticky = Sticky_Above or Sticky_Below
+
+Anim_FusionBelow = Anim_FusionBelow_1 or Anim_FusionBelow_2 or Anim_FusionBelow_3 or Anim_FusionBelow_4 or Anim_FusionBelow_5 or Anim_FusionBelow_6 or Anim_FusionBelow_7
+Anim_FusionBelow_Top = Anim_FusionBelow_0_Top or Anim_FusionBelow_1_Top or Anim_FusionBelow_2_Top or Anim_FusionBelow_5_Top or Anim_FusionBelow_6_Top or Anim_FusionBelow_7_Top
+
+Anim_FusionAbove = Anim_FusionAbove_2 or Anim_FusionAbove_3 or Anim_FusionAbove_4 or Anim_FusionAbove_5 or Anim_FusionAbove_6 or Anim_FusionAbove_7
+Anim_FusionAbove_Top = Anim_FusionAbove_0_Top or Anim_FusionAbove_1_Top or Anim_FusionAbove_2_Top or Anim_FusionAbove_3_Top or Anim_FusionAbove_5_Top or Anim_FusionAbove_6_Top or Anim_FusionAbove_7_Top
+Anim_FusionAbove_Top2 = Anim_FusionAbove_1_Top2 or Anim_FusionAbove_2_Top2 or Anim_FusionAbove_5_Top2 or Anim_FusionAbove_6_Top2 or Anim_FusionAbove_7_Top2
+
+Anim_Fusion = Anim_FusionAbove or Anim_FusionBelow
+Anim_Fusion_Top = Anim_FusionAbove_Top or Anim_FusionBelow_Top
+Anim_Fusion_7 = Anim_FusionBelow_7 or Anim_FusionAbove_7
+
+Moved = MovedU or MovedR or MovedD or MovedL
+
+vDoor_AO = vDoor_AO_U or vDoor_AO_R or vDoor_AO_D or vDoor_AO_L
+
+ClearOnTurnStart = Init2 or Render or PlayerMovement
+
+PlatformDecoration_Top = Platform_Top or vDangerStripeU_Top or vDangerStripeR_Top or vDangerStripeL_Top or vDangerStripeUR_Top or vDangerStripeLU_Top or Render_SlimeVat_Mess_Above_Top
+
+DiagCalculationMarkers = DiagSendDir or DiagReturn or DiagReturnValue or MovementCanceller
+DiagMoveMarkers = DiagMidMove or DiagMove
+FusionMarkers = Fusing or Fused
+MotionCause = MotionCause_Below or MotionCause_Above
+
+FloorDestructible = DoorBase or Wire
+
+Stickyable_Below = Belt_Below or Explosive_below
+
+(Objects that another object can be on top of)
+Upstairs = Platform or Belt_Below or DoorExtended or Inflated or Explosive_Below or SlimeVat_Broken_Below or FuseIntention
+
+=======
+SOUNDS
+=======
+
+sfx0 3924305 (climb)
+sfx1 50626704 (fall)
+sfx2 3262703 (belt move)
+sfx3 40424908 (door extend)
+sfx4 7458108 (door rectract)
+sfx5 60314502 (player death)
+sfx6 55881701 (fusion)
+sfx7 50942902 (explosion)
+sfx8 47821307 (sticky push)
+sfx9 11307307 (normal push)
+sfx10 91417908 (vat explosion)
+
+endlevel 5477908 (finish)
+
+================
+COLLISIONLAYERS
+================
+
+(On the ground plane)
+Background
+vAmbiantOcclusionU
+vAmbiantOcclusionR
+vAmbiantOcclusionL
+DoorBase
+vDoor_AO_U
+vDoor_AO_R
+vDoor_AO_D
+vDoor_AO_L
+Wire
+Wire_Below_U
+Wire_Below_R
+Wire_Below_D
+Wire_Below_L
+Render_WireOn_Below_U
+Render_WireOn_Below_R
+Render_WireOn_Below_D
+Render_WireOn_Below_L
+Button_Below
+
+(Objects on lower level)
+InflatedU
+InflatedR
+InflatedD
+InflatedL
+LadderU ToExplode_Below
+LadderL ToExplode_Above
+LadderD
+LadderR
+Wall, Platform, DoorExtended
+Platform_Front Wall_Front
+SlimeVat_Mess_Below End_Below
+Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Broken_Below
+Render_Below
+
+Distances
+Exploded_below Anim_DoorBlocked
+
+(On the upper ground plane)
+vDangerStripeR Wall_above_Front
+vDangerStripeD
+vDangerStripeL
+vDangerStripeRD
+vDangerStripeDL
+Render_LadderU_Top
+Render_LadderR_Top
+Render_LadderL_Top
+Wire_Above_U
+Wire_Above_R
+Wire_Above_D
+Wire_Above_L
+Render_WireOn_Above_D
+Spark
+
+Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Broken_Below_Top
+Render_ExplosivePrimed_Below
+vDangerStripeL_Top
+vDangerStripeR_Top
+vDangerStripeUR_Top
+vDangerStripeLU_Top
+vDangerStripeU_Top
+Render_LadderR_Overhang
+Render_LadderL_Overhang
+Render_LadderD_Overhang
+Render_LadderL_Overhang_Top
+Render_LadderR_Overhang_Top
+
+Button_Above Button_Above_Top End_Above End_Above_Top Wire_Above_R_Top
+Wire_Above_L_Top
+Wire_Above_U_Top
+Wire_Above_D_Top
+Render_WireOn_Above_U_Top Render_SlimeVat_Mess_Above_Top
+Render_WireOn_Above_R_Top
+Render_WireOn_Above_D_Top
+Render_WireOn_Above_L_Top
+
+(Objects on upper level)
+SlimeVat_Mess_Above
+Belt_Above, Player_Above, Explosive_above, Wall_above, SlimeVat_Above, SlimeVat_Broken_Above, Anim_FusionAbove
+Render_Above
+Wire_AboveWall_D
+Render_WireOn_AboveWall_D
+vWallBorderR
+vWallBorderD
+vWallBorderL
+Render_Above_Top Wall_Top Wall_above_top Anim_FusionAbove_Top SlimeVat_Above_Top SlimeVat_Broken_Above_Top
+Wire_AboveWall_U_Top Render_Player_Above_Top_Cover Render_ExplosivePrimed_Above_Top
+Wire_AboveWall_R_Top
+Wire_AboveWall_D_Top
+Wire_AboveWall_L_Top Inflatable_Top
+Render_WireOn_AboveWall_U_Top
+Render_WireOn_AboveWall_R_Top
+Render_WireOn_AboveWall_D_Top
+Render_WireOn_AboveWall_L_Top
+vWallBorderL_Top
+vWallBorderU_Top
+vWallBorderR_Top
+Inflatable
+
+Render_Above_Top2 Anim_FusionAbove_Top2 SlimeVat_Above_Top2
+Exploded_above
+Fusing
+Fused
+PlayerMoved_Below, InflationMoved, Blocked_Below
+PlayerMoved_Above, BeltMoved, StickyMoved, Blocked_Above
+Sticky_Below
+Sticky_Above
+
+(Diagonal movement markers)
+DiagMoveOrtho_U
+DiagMoveOrtho_R
+DiagMoveOrtho_D
+DiagMoveOrtho_L
+DiagMoveDiag
+DiagSendDir_UR
+DiagSendDir_RD
+DiagSendDir_DL
+DiagSendDir_LU
+DiagPending
+DiagReturnDir
+DiagReturn
+DiagReturnValue FusingDone_MidMove
+DiagMidMove_Player
+DiagMidMove_BeltX
+DiagMidMove_BeltU
+DiagMidMove_BeltR
+DiagMidMove_BeltD
+DiagMidMove_BeltL
+DiagMidMove_BeltUR
+DiagMidMove_BeltRD
+DiagMidMove_BeltDL
+DiagMidMove_BeltLU
+DiagMidMove_Explosive
+MovementCanceller FusingDone_NonMidMove
+
+FuseIntention_BeltX_Above PlayerMovement
+FuseIntention_BeltU_Above
+FuseIntention_BeltR_Above
+FuseIntention_BeltD_Above
+FuseIntention_BeltL_Above
+FuseIntention_BeltUR_Above
+FuseIntention_BeltRD_Above
+FuseIntention_BeltDL_Above
+FuseIntention_BeltLU_Above
+FuseIntention_Explosive_Above
+FuseIntention_BeltX_Below
+FuseIntention_BeltU_Below
+FuseIntention_BeltR_Below
+FuseIntention_BeltD_Below
+FuseIntention_BeltL_Below
+FuseIntention_BeltUR_Below
+FuseIntention_BeltRD_Below
+FuseIntention_BeltDL_Below
+FuseIntention_BeltLU_Below
+
+Init2 Moved
+Theme2
+
+======
+RULES
+======
+((( INIT - these only runs on the very first turn )))
+
+(Static decoration)
+(- Platforms)
+GLOBAL DOWN INIT [ Platform1 | NO Platform1 NO Wall ] -> [ Platform1 Platform1_Front | ] 
+GLOBAL UP INIT [ Platform1 | NO Platform1 ] -> [ Platform1 | Platform1_Top ] 
+(- Walls)
+GLOBAL DOWN INIT [ Wall1 | NO Wall ] -> [ Wall1 Wall1_Front | ] 
+GLOBAL DOWN INIT [ | Wall1 ] -> [ Wall1_Top | Wall1 ]
+(- End)
+GLOBAL UP INIT [ End_Above | NO End_Above_Top ] -> [ End_Above | End_Above_Top ] 
+(- Button)
+GLOBAL UP INIT [ Button_Above | NO Button_Above_Top ] -> [ Button_Above | Button_Above_Top ] 
+(- Inflatable)
+GLOBAL UP INIT [ Inflatable | NO Inflatable_Top ] -> [ Inflatable | Inflatable_Top ]
+(- SlimeVat)
+GLOBAL UP INIT [ SlimeVat_Above | | ] -> [ SlimeVat_Above | SlimeVat_Above_Top | SlimeVat_Above_Top2 ]
+(- Wall_Above)
+GLOBAL RIGHT INIT [ Wall_above1 | Wall_above1 ] -> [ Wall_above1 | Wall_above2 ]
+GLOBAL DOWN INIT [ Wall_above1 | Wall_above1 ] -> [ Wall_above1 | Wall_above2 ]
+GLOBAL UP INIT [ Wall_above1 | ] -> [ Wall_above1 | Wall_above1_top ]
+GLOBAL UP INIT [ Wall_above2 | ] -> [ Wall_above2 | Wall_above2_top ]
+GLOBAL DOWN INIT [ Wall_above | NO Walls ] -> [ Wall_above Wall_above_Front | ]
+
+(Propagate Theme2)
+GLOBAL RIGHT INIT [ Theme2 | NO Theme2 ] -> [ Theme2 | Theme2 ]
+GLOBAL DOWN INIT [ Theme2 | NO Theme2 ] -> [ Theme2 | Theme2 ]
+
+(Change objects in Theme2 areas)
+GLOBAL INIT [ Background1 Theme2 ] -> [ Background2 Theme2 ]
+GLOBAL INIT [ Platform1 Theme2 ] -> [ Platform2 Theme2 ]
+GLOBAL INIT [ Platform1_Top Theme2 ] -> [ Platform2_Top Theme2 ]
+GLOBAL INIT [ Platform1_Front Theme2 ] -> [ Platform2_Front Theme2 ]
+GLOBAL INIT [ Wall1 Theme2 ] -> [ Wall2 Theme2 ]
+GLOBAL INIT [ Wall1_Front Theme2 ] -> [ Wall2_Front Theme2 ]
+GLOBAL UP INIT [ Wall Theme2 | Wall1_Top ] -> [ Wall Theme2 | Wall2_Top ]
+GLOBAL INIT [ Ladder1U Theme2 ] -> [ Ladder2U Theme2 ]
+GLOBAL INIT [ Ladder1R Theme2 ] -> [ Ladder2R Theme2 ]
+GLOBAL INIT [ Ladder1D Theme2 ] -> [ Ladder2D Theme2 ]
+GLOBAL INIT [ Ladder1L Theme2 ] -> [ Ladder2L Theme2 ]
+
+(Danger stripes - only in Theme1 area)
+GLOBAL up    INIT [ Platform NO Theme2 | Background no Platform no Wall no vDangerStripeU_Top no PlayerMovement ] -> [ Platform | Background vDangerStripeU_Top ]
+GLOBAL right INIT [ Platform NO Theme2 no vDangerStripeR | Background no Platform no Wall no PlayerMovement ] -> [ Platform vDangerStripeR | Background ]
+GLOBAL down  INIT [ Platform NO Theme2 no vDangerStripeD | Background no Platform no Wall no PlayerMovement ] -> [ Platform vDangerStripeD | Background ]
+GLOBAL left  INIT [ Platform NO Theme2 no vDangerStripeL | Background no Platform no Wall no PlayerMovement ] -> [ Platform vDangerStripeL | Background ]
+GLOBAL up INIT [ vDangerStripeR NO Theme2 | no vDangerStripeR_Top ] -> [ vDangerStripeR | vDangerStripeR_Top ]
+GLOBAL up INIT [ vDangerStripeL NO Theme2 | no vDangerStripeL_Top ] -> [ vDangerStripeL | vDangerStripeL_Top ]
+GLOBAL up INIT [ vDangerStripeR NO Theme2 | Platform no vDangerStripeR NO Theme2 ] -> [ vDangerStripeR | Platform vDangerStripeRD ]
+GLOBAL up INIT [ vDangerStripeL NO Theme2 | Platform no vDangerStripeL NO Theme2 ] -> [ vDangerStripeL | Platform vDangerStripeDL ]
+GLOBAL down INIT [ vDangerStripeR NO Theme2 | Platform no vDangerStripeR NO Theme2 ] -> [ vDangerStripeR vDangerStripeUR_Top | Platform ]
+GLOBAL down INIT [ vDangerStripeL NO Theme2 | Platform no vDangerStripeL NO Theme2 ] -> [ vDangerStripeL vDangerStripeLU_Top | Platform ]
+GLOBAL left INIT [ vDangerStripeU_Top NO Theme2 no vDangerStripeL_Top NO Theme2 | Platform no vDangerStripeU_Top ] -> [ vDangerStripeU_Top | Platform vDangerStripeUR_Top ]
+GLOBAL left INIT [ vDangerStripeD NO Theme2 | Platform no vDangerStripeD NO Theme2 ] -> [ vDangerStripeD | Platform vDangerStripeRD ]
+GLOBAL right INIT [ vDangerStripeU_Top NO Theme2 no vDangerStripeR_Top | no vDangerStripeU_Top NO Theme2 Platform ] -> [ vDangerStripeU_Top | vDangerStripeLU_Top Platform ]
+GLOBAL right INIT [ vDangerStripeD NO Theme2 | Platform no vDangerStripeD NO Theme2 ] -> [ vDangerStripeD | Platform vDangerStripeDL ]
+
+(Place directional wires)
+(- wires below)
+GLOBAL UP    INIT [ Wire | ConnectsToWires ] -> [ Wire Wire_Below_U | ConnectsToWires ]
+GLOBAL RIGHT INIT [ Wire | ConnectsToWires ] -> [ Wire Wire_Below_R | ConnectsToWires ]
+GLOBAL DOWN  INIT [ Wire | ConnectsToWires ] -> [ Wire Wire_Below_D | ConnectsToWires ]
+GLOBAL LEFT  INIT [ Wire | ConnectsToWires ] -> [ Wire Wire_Below_L | ConnectsToWires ]
+(- wires above)
+GLOBAL UP    INIT [ Platform Wire_Below_U | ] -> [ Platform Wire_Below_U Wire_Above_U | Wire_Above_U_Top ]
+GLOBAL UP    INIT [ Platform Wire_Below_R | ] -> [ Platform Wire_Below_R Wire_Above_R | Wire_Above_R_Top ]
+GLOBAL UP    INIT [ Platform Wire_Below_D | ] -> [ Platform Wire_Below_D Wire_Above_D | Wire_Above_D_Top ]
+GLOBAL UP    INIT [ Platform Wire_Below_L | ] -> [ Platform Wire_Below_L Wire_Above_L | Wire_Above_L_Top ]
+(- wires on walls)
+GLOBAL UP    INIT [ Wall Wire_Below_U | ] -> [ Wall Wire_Below_U | Wire_AboveWall_U_Top ]
+GLOBAL UP    INIT [ Wall Wire_Below_R | ] -> [ Wall Wire_Below_R | Wire_AboveWall_R_Top ]
+GLOBAL UP    INIT [ Wall Wire_Below_D | ] -> [ Wall Wire_Below_D Wire_AboveWall_D | Wire_AboveWall_D_Top ]
+GLOBAL UP    INIT [ Wall Wire_Below_L | ] -> [ Wall Wire_Below_L | Wire_AboveWall_L_Top ]
+
+(- wall borders)
+GLOBAL right INIT [ Walls no vWallBorderR | no Walls ] -> [ Walls vWallBorderR | ]
+GLOBAL down INIT  [ Walls no vWallBorderD | no Walls ] -> [ Walls vWallBorderD | ]
+GLOBAL left INIT  [ Walls no vWallBorderL | no Walls ] -> [ Walls vWallBorderL | ]
+GLOBAL up INIT [ vWallBorderR | no vWallBorderR_Top ] -> [ vWallBorderR | vWallBorderR_Top ]
+GLOBAL up INIT [ vWallBorderL | no vWallBorderL_Top ] -> [ vWallBorderL | vWallBorderL_Top ]
+GLOBAL up INIT [ Walls | no Walls no vWallBorderU_Top ] -> [ Walls | vWallBorderU_Top ]
+
+NOAGAINCHECK [ ClearOnTurnStart ] -> [ ]
+
+(Player death sound effect. Actual death will happen implicitly due to falling belt.
+ Note: this would have to get expanded if we add other sources of player death, like being
+ crushed into a wall.)
+(Le Slo: with the doors, death is not always implicit, because Belt won't fall when on top of an activated door. Hence, forcing player's elimination)
+[ Player_Below Belt_Above ] -> [ Belt_Above ] sfx5
+
+
+
+(((WIRES)))
+
+(Objects drop to lower level)
+[ Player_Above NO Upstairs ] -> [ Player_Below1 ] sfx1
+[ BeltU_Above@ NO Upstairs ] -> [ BeltU_Below@ ] sfx1
+[ BeltR_Above@ NO Upstairs ] -> [ BeltR_Below@ ] sfx1
+[ BeltD_Above@ NO Upstairs ] -> [ BeltD_Below@ ] sfx1
+[ BeltL_Above@ NO Upstairs ] -> [ BeltL_Below@ ] sfx1
+[ BeltX_Above@ NO Upstairs ] -> [ BeltX_Below@ ] sfx1
+[ BeltUR_Above@ NO Upstairs ] -> [ BeltUR_Below@ ] sfx1
+[ BeltRD_Above@ NO Upstairs ] -> [ BeltRD_Below@ ] sfx1
+[ BeltDL_Above@ NO Upstairs ] -> [ BeltDL_Below@ ] sfx1
+[ BeltLU_Above@ NO Upstairs ] -> [ BeltLU_Below@ ] sfx1
+[ Explosive_Above@ NO Upstairs] -> [Explosive_Below@] sfx1
+( when a non-broken slime vat has no platform below it anymore, we drop it and also splat the floor around it with mess)
+UP [ SlimeVat_Above NO Upstairs | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ ACTION SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top | ]
+[ ACTION SlimeVat_Broken_Below | NO Static_Below NO Dynamic_Below ] -> [ ACTION SlimeVat_Broken_Below | SlimeVat_Mess_Below ]
+UP [ SlimeVat_Broken_Above NO Upstairs | SlimeVat_Broken_Above_Top ] -> [ SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ]
+[ Sticky_Above NO Dynamic_Above Dynamic_Below ] -> [ Sticky_Below Dynamic_Below ]
+
+(Calculate sparks)
+GLOBAL [ Spark ] -> []
+GLOBAL [ Weighted_Above Button_Above ] -> [ Weighted_Above Button_Above Spark ]
+GLOBAL [ Weighted_Below Button_Below ] -> [ Weighted_Below Button_Below Spark ]
+GLOBAL [ Spark NO SparkStopper | Sparkable ] -> [ Spark | Sparkable Spark ]
+(Activate/deactivate doors)
+GLOBAL [ Spark DoorBase NO Dynamic_Above NO DoorExtended ] -> [ Spark DoorBase DoorExtended ] again sfx3
+[ Anim_DoorBlocked ] -> [ ]
+GLOBAL [ Spark DoorBase NO DoorExtended NO Wire_Below_U ] -> [ Spark DoorBase NO DoorExtended Wire_Below_U Anim_DoorBlocked ] again sfx8
+GLOBAL [ DoorExtended NO Spark ] -> [ ] again sfx4
+GLOBAL [ DoorBase NO Spark Wire_Below_U ] -> [ DoorBase ]
+(Activate inflatables)
+GLOBAL up    [ Spark Inflatable NO InflatedU | no InflatedU ] -> [ Spark Inflatable InflatedU | ] again sfx3
+GLOBAL right [ Spark Inflatable NO InflatedR | no InflatedR ] -> [ Spark Inflatable InflatedR | ] again sfx3
+GLOBAL down  [ Spark Inflatable NO InflatedD | no InflatedD ] -> [ Spark Inflatable InflatedD | ] again sfx3
+GLOBAL left  [ Spark Inflatable NO InflatedL | no InflatedL ] -> [ Spark Inflatable InflatedL | ] again sfx3
+(Deactivate inflatables)
+GLOBAL [ Inflatable Inflated no Spark ] -> [ Inflatable ]
+GLOBAL up    [ Inflatable no Spark | InflatedU ] -> [ Inflatable | ] again sfx4
+GLOBAL right [ Inflatable no Spark | InflatedR ] -> [ Inflatable | ] again sfx4
+GLOBAL down  [ Inflatable no Spark | InflatedD ] -> [ Inflatable | ] again sfx4
+GLOBAL left  [ Inflatable no Spark | InflatedL ] -> [ Inflatable | ] again sfx4
+
+(((UNCONDITIONAL MOVES)))
+
+(Keep track of which way the player moved)
+UP [ > Player ] -> [ > Player MovedU ]
+RIGHT [ > Player ] -> [ > Player MovedR ]
+DOWN [ > Player ] -> [ > Player MovedD ]
+LEFT [ > Player ] -> [ > Player MovedL ]
+
+
+(((EXPLOSIVES)))
+
+(Distances cover an area around the Player in which bombs should detonate - they are placed in the LATE rules of the previous turn, so they already exist)
+(If player pressed action, we mark all Distances for detonation)
+[ ACTION Player ] [ Distances ] -> [ ACTION Player ] [ ACTION Distances ]
+
+(We also add Distances marked for detonation to any explosives that are being chain-detonated by an explosion from the previous turn)
+[ToExplode_Below Explosive_below] -> [ACTION Distance3 Explosive_below]
+[ToExplode_Above Explosive_above] -> [ACTION Distance3 Explosive_above]
+
+(Explode spaces adjacent to detonated explosives)
+[ACTION Distances Explosive_below|] -> [ACTION Distances Explosive_below Exploded_below Exploded_above|Exploded_below] sfx7 again
+[ACTION Distances Explosive_above|] -> [ACTION Distances Explosive_above Exploded_above Exploded_below|Exploded_above] sfx7 again
+
+(Explosive destroys DoorBase it's on top of)
+[ACTION Distances Explosive_below FloorDestructible] -> [ACTION Distances Explosive_below NO vDoor_AO]
+
+(Instead of immediately exploding other explosives hit by the explosion, we mark them to explode next turn - this results in a fun chain-reaction effect)
+[ Exploded_below Explosive_below NO Distances ] -> [ Exploded_below Explosive_below ToExplode_Below ] again
+[ Exploded_above Explosive_above NO Distances ] -> [ Exploded_above Explosive_above ToExplode_Above ] again
+
+
+(Destroy everything that can be destroyed by an explosion)
+(- Destroy ladders attached to objects being exploded)
+UP [Exploded_below Destructible_below | LadderD] -> [Exploded_below Destructible_below |]
+RIGHT [Exploded_below Destructible_below | LadderL] -> [Exploded_below Destructible_below |]
+DOWN [Exploded_below Destructible_below | LadderU] -> [Exploded_below Destructible_below |]
+LEFT [Exploded_below Destructible_below | LadderR] -> [Exploded_below Destructible_below |]
+(- Destroy extended doors)
+[ Exploded_below DoorBase DoorExtended ] -> [ Exploded_below ]
+(- Destroy inflateds and leave a marker on the inflatable to ensure the inflated doesn't get created again)
+DOWN [Exploded_below InflatedU | Inflatable ] -> [Exploded_below | Inflatable Wire_Below_U ]
+LEFT [Exploded_below InflatedR | Inflatable ] -> [Exploded_below | Inflatable Wire_Below_R ]
+UP [Exploded_below InflatedD | Inflatable ] -> [Exploded_below | Inflatable Wire_Below_D ]
+RIGHT [Exploded_below InflatedL | Inflatable ] -> [Exploded_below | Inflatable Wire_Below_L ]
+(- Destroy slimevat)
+[Exploded_above SlimeVat_Above] -> [Exploded_above ACTION SlimeVat_Above]
+[ Exploded_above SlimeVat_Above | Stickyable_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | Stickyable_Below Sticky_Below ]
+[ Exploded_above SlimeVat_Above | NO Static_Below NO Stickyable_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | SlimeVat_Mess_Below ] sfx10
+[ Exploded_above SlimeVat_Above | Static_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | Static_Below SlimeVat_Mess_Above ] sfx10
+[ Exploded_above SlimeVat_Above | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ SlimeVat_Broken_Above | SlimeVat_Broken_Above_Top | ]
+(- Destroy all remaining descructibles)
+[Exploded_below Destructible_below NO Wall NO ToExplode_Below] -> [Exploded_below]
+[Exploded_above Destructible_above NO Wall NO ToExplode_Above] -> [Exploded_above]
+
+(Fix-up decorations after explosions)
+UP [Exploded_Below NO Platform | Platform1] -> [Exploded_Below | Platform1 Platform1_Front NO Platform]
+UP [Exploded_Below NO Platform | Platform2] -> [Exploded_Below | Platform2 Platform2_Front]
+DOWN [Exploded_Below NO Platform | Platform1] -> [Exploded_Below Platform1_Top | Platform1]
+DOWN [Exploded_Below NO Platform | Platform2] -> [Exploded_Below Platform2_Top | Platform2]
+UP [Exploded_Below NO Platform | PlatformDecoration_Top] -> [Exploded_Below |]
+
+(We're done with explosions now)
+[Exploded_above] -> []
+[Exploded_below] -> []
+
+(Remove wire dirs that might be left behind after explosion)
+UP [ NO Wire NO Inflatable NO DoorBase Wire_Dirs | ] -> [ | NO Wire_Dirs_Top ]
+[ vDoor_AO NO DoorBase ] -> [ ]
+
+UP [ NO SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ] -> [ | ] (TODO should this be a Render?)
+
+
+(((MOVEMENT)))
+
+(Player climbing ladder)
+UP    [ > Player_Below LadderU NO Static_Above | Upstairs ] -> [ > Player_Above LadderU | Upstairs ] sfx0 again
+RIGHT [ > Player_Below LadderR NO Static_Above | Upstairs ] -> [ > Player_Above LadderR | Upstairs ] sfx0 again
+DOWN  [ > Player_Below LadderD NO Static_Above | Upstairs ] -> [ > Player_Above LadderD | Upstairs ] sfx0 again
+LEFT  [ > Player_Below LadderL NO Static_Above | Upstairs ] -> [ > Player_Above LadderL | Upstairs ] sfx0 again
+
+
+(Initial causes for motion)
+(- Belts - orthogonal)
+[ BeltU_Below STATIONARY Dynamic_Above ] -> [ BeltU_Below UP    Dynamic_Above BeltMoved ]
+[ BeltR_Below STATIONARY Dynamic_Above ] -> [ BeltR_Below RIGHT Dynamic_Above BeltMoved ]
+[ BeltD_Below STATIONARY Dynamic_Above ] -> [ BeltD_Below DOWN  Dynamic_Above BeltMoved ]
+[ BeltL_Below STATIONARY Dynamic_Above ] -> [ BeltL_Below LEFT  Dynamic_Above BeltMoved ]
+
+(- Belts - diagonal)
+[ BeltUR_Below STATIONARY Dynamic_Above ] -> [ BeltUR_Below DiagOrthoPending DiagMoveOrtho_U DiagMoveOrtho_R DiagMoveDiag_UR Dynamic_Above BeltMoved ]
+[ BeltRD_Below STATIONARY Dynamic_Above ] -> [ BeltRD_Below DiagOrthoPending DiagMoveOrtho_R DiagMoveOrtho_D DiagMoveDiag_RD Dynamic_Above BeltMoved ]
+[ BeltDL_Below STATIONARY Dynamic_Above ] -> [ BeltDL_Below DiagOrthoPending DiagMoveOrtho_D DiagMoveOrtho_L DiagMoveDiag_DL Dynamic_Above BeltMoved ]
+[ BeltLU_Below STATIONARY Dynamic_Above ] -> [ BeltLU_Below DiagOrthoPending DiagMoveOrtho_L DiagMoveOrtho_U DiagMoveDiag_LU Dynamic_Above BeltMoved ]
+
+(- Player)
+[ > Player_Above NO BeltMoved ] -> [ > Player_Above PlayerMoved_Above ]
+[ > Player_Below ] -> [ > Player_Below PlayerMoved_Below ]
+
+(- Inflatables)
+(the Wire_Belows used below are simply markers for when an inflated has been destroyed so shouldn't inflate any more, not actual wires)
+up    [ Inflatable InflatedU NO Wire_Below_U | NO Platform NO Wall ] -> [ Inflatable > InflatedU InflationMoved | ]
+right [ Inflatable InflatedR NO Wire_Below_R | NO Platform NO Wall ] -> [ Inflatable > InflatedR InflationMoved | ]
+down  [ Inflatable InflatedD NO Wire_Below_D | NO Platform NO Wall ] -> [ Inflatable > InflatedD InflationMoved | ]
+left  [ Inflatable InflatedL NO Wire_Below_L | NO Platform NO Wall ] -> [ Inflatable > InflatedL InflationMoved | ]
+
+(We add an object to remember player movement in case it gets removed during diagonal motion calculation)
+[ > Player_Above ] -> [ > Player_Above > PlayerMovement ] (TODO - do we need this if we have Moved?)
+
+
+(Pushing and collision)
+(We implement collisions manually because built-in collision layers won't be good enough)
+
+startloop
+
+(inflation pushes other things, but only if they were not moving)
+up    [ > InflatedU | stationary Dynamic_Below ] -> [ > InflatedU | > Dynamic_Below InflationMoved ]
+right [ > InflatedR | stationary Dynamic_Below ] -> [ > InflatedR | > Dynamic_Below InflationMoved ]
+down  [ > InflatedD | stationary Dynamic_Below ] -> [ > InflatedD | > Dynamic_Below InflationMoved ]
+left  [ > InflatedL | stationary Dynamic_Below ] -> [ > InflatedL | > Dynamic_Below InflationMoved ]
+
+(diagonal motion pushes adjacent objects)
+UP [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_U MotionCause_Above | Dynamic_Above no MotionCause_Above ] -> [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_U MotionCause_Above | UP Dynamic_Above MotionCause_Above ]
++ RIGHT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_R MotionCause_Above | Dynamic_Above no MotionCause_Above ] -> [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_R MotionCause_Above | RIGHT Dynamic_Above MotionCause_Above ]
++ DOWN [ Dynamic_Above  DiagOrthoPending DiagMoveOrtho_D MotionCause_Above | Dynamic_Above no MotionCause_Above ] -> [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_D MotionCause_Above | DOWN Dynamic_Above MotionCause_Above ]
++ LEFT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_L MotionCause_Above | Dynamic_Above no MotionCause_Above ] -> [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_L MotionCause_Above | LEFT Dynamic_Above MotionCause_Above ]
+
+(Move objects being pushed by other objects on the same layer)
+[ > Dynamic_Below MotionCause_Below | Dynamic_Below NO MotionCause_Below ] -> [ > Dynamic_Below MotionCause_Below | > Dynamic_Below MotionCause_Below ]
+[ > Dynamic_Above MotionCause_Above | Dynamic_Above NO MotionCause_Above ] -> [ > Dynamic_Above MotionCause_Above | > Dynamic_Above MotionCause_Above ]
+
+(Deal with priorities)
+[ > Dynamic_Below PlayerMoved_Below | Dynamic_Below InflationMoved ] -> [ > Dynamic_Below PlayerMoved_Below | > Dynamic_Below PlayerMoved_Below ]
+[ > Dynamic_Above PlayerMoved_Above | Dynamic_Above BeltMoved ] -> [ > Dynamic_Above PlayerMoved_Above | > Dynamic_Above PlayerMoved_Above ]
+[ > Dynamic_Above BeltMoved | Dynamic_Above PlayerMoved_Above ] -> [ Dynamic_Above Blocked_Above | Dynamic_Above PlayerMoved_Above ]
+
+(Cancel dependent motions with wrong priorities)
+[ moving Dynamic_Below no InflationMoved | > Dynamic_Below InflationMoved ] -> [ moving Dynamic_Below | Dynamic_Below ]
+[ moving Dynamic_Above no PlayerMoved_Above | > Dynamic_Above PlayerMoved_Above no Player_Above ] -> [ moving Dynamic_Above | Dynamic_Above ]
+
+(Block source motions with wrong priorities)
+[ moving Dynamic_Below no InflationMoved | < Dynamic_Below InflationMoved ] -> [ moving Dynamic_Below | < Dynamic_Below Blocked_Below ]
+[ moving Dynamic_Below no InflationMoved | < Inflated InflationMoved ] -> [ moving Dynamic_Below | Inflated ]
+[ moving Dynamic_Above no PlayerMoved_Above | < Dynamic_Above PlayerMoved_Above no Player_Above ] -> [ moving Dynamic_Above | < Dynamic_Above Blocked_Above ]
+
+(propagate sticky movement to object above)
+[ UP Dynamic_Below STATIONARY Sticky_Below STATIONARY Dynamic_Above NO Blocked ] -> [ UP Dynamic_Below ACTION Sticky_Below UP Dynamic_Above StickyMoved ]
+[ RIGHT Dynamic_Below STATIONARY Sticky_Below STATIONARY Dynamic_Above NO Blocked ] -> [ RIGHT Dynamic_Below ACTION Sticky_Below RIGHT Dynamic_Above StickyMoved ]
+[ DOWN Dynamic_Below STATIONARY Sticky_Below STATIONARY Dynamic_Above NO Blocked ] -> [ DOWN Dynamic_Below ACTION Sticky_Below DOWN Dynamic_Above StickyMoved ]
+[ LEFT Dynamic_Below STATIONARY Sticky_Below STATIONARY Dynamic_Above NO Blocked ] -> [ LEFT Dynamic_Below ACTION Sticky_Below LEFT Dynamic_Above StickyMoved ]
+
+(Stop objects if they're moving into something static on the same layer)
+[ > Dynamic_Below MotionCause_Below no Blocked_Below | Static_Below no Dynamic_Below ] -> [ > Dynamic_Below Blocked_Below | Static_Below ]
+[ > Dynamic_Above MotionCause_Above no Blocked_Above | Static_Above ] -> [ > Dynamic_Above Blocked_Above | Static_Above ]
+
+(Stop objects if they're moving into something moving in the opposite direction on the same layer)
+[ > Dynamic_Below MotionCause_Below no Blocked_Below | < Dynamic_Below ] -> [ > Dynamic_Below Blocked_Below | < Dynamic_Below Blocked_Below ]
+[ > Dynamic_Above MotionCause_Above no Blocked_Above | < Dynamic_Above ] -> [ > Dynamic_Above Blocked_Above | < Dynamic_Above Blocked_Above ]
+
+(stop objects if they are pushing something that has been stopped)
+[ > Dynamic_Below MotionCause_Below no Blocked_Below | > Dynamic_Below Blocked_Below ] -> [ > Dynamic_Below Blocked_Below | > Dynamic_Below Blocked_Below ]
+[ > Dynamic_Above MotionCause_Above no Blocked_Above | > Dynamic_Above Blocked_Above ] -> [ > Dynamic_Above Blocked_Above | > Dynamic_Above Blocked_Above ]
+[ > Inflated | Dynamic_Below Blocked_Below ] -> [ Inflated | > Dynamic_Below Blocked_Below ]
+
+(Remove sticky movement)
+[ > Dynamic_Below Sticky_Below Blocked_Below > Dynamic_Above StickyMoved ] -> [ > Dynamic_Below Sticky_Below Blocked_Below STATIONARY Dynamic_Above ]
+
+(remove diagonal motion markers if they are pushing something that has been stopped)
+UP [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_U MotionCause_Above | > Dynamic_Above Blocked_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | > Dynamic_Above Blocked_Above ]
+RIGHT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_R MotionCause_Above | > Dynamic_Above Blocked_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | > Dynamic_Above Blocked_Above ]
+DOWN [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_D MotionCause_Above | > Dynamic_Above Blocked_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | > Dynamic_Above Blocked_Above ]
+LEFT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_L MotionCause_Above | > Dynamic_Above Blocked_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | > Dynamic_Above Blocked_Above ]
+
+(remove diagonal motion markers if they are pushing something static)
+UP [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_U MotionCause_Above | Static_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | Static_Above ]
+RIGHT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_R MotionCause_Above | Static_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | Static_Above ]
+DOWN [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_D MotionCause_Above | Static_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | Static_Above ]
+LEFT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_L MotionCause_Above | Static_Above ] -> [ Dynamic_Above DiagOrthoPending MotionCause_Above | Static_Above ]
+
+(diagonal case 1: orthogonal motion blocked in both orthogonal directions, so block movement)
+[ Dynamic_Above DiagOrthoPending NO DiagMoveOrtho DiagMoveDiag MotionCause_Above ] -> [ Dynamic_Above Blocked_Above ]
+
+(diagonal case 2: orthogonal motion in one direction, so slide in that direction instead of diagonal)
+UP [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_U NO DiagMoveOrtho_L NO DiagMoveOrtho_R DiagMoveDiag MotionCause_Above ] -> [ > Dynamic_Above MotionCause_Above ]
+RIGHT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_R NO DiagMoveOrtho_U NO DiagMoveOrtho_D DiagMoveDiag MotionCause_Above ] -> [ > Dynamic_Above MotionCause_Above ]
+DOWN [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_D NO DiagMoveOrtho_R NO DiagMoveOrtho_L DiagMoveDiag MotionCause_Above ] -> [ > Dynamic_Above MotionCause_Above ]
+LEFT [ Dynamic_Above DiagOrthoPending DiagMoveOrtho_L NO DiagMoveOrtho_D NO DiagMoveOrtho_U DiagMoveDiag MotionCause_Above ] -> [ > Dynamic_Above MotionCause_Above ]
+
+(diagonal case 3: orthogonal motion on both directions, so now we need to check the diagonal direction)
+(- step 1 )
+UP [ Dynamic_Above STATIONARY DiagOrthoPending DiagMoveOrtho_U DiagMoveOrtho_R DiagMoveDiag_UR MotionCause_Above | NO DiagSendDir ] -> [ Dynamic_Above DiagDiagPending DiagMoveOrtho_U DiagMoveOrtho_R DiagMoveDiag_UR MotionCause_Above | RIGHT DiagSendDir_UR ]
++ RIGHT [ Dynamic_Above STATIONARY DiagOrthoPending DiagMoveOrtho_R DiagMoveOrtho_D DiagMoveDiag_RD MotionCause_Above | NO DiagSendDir ] -> [ Dynamic_Above DiagDiagPending DiagMoveOrtho_R DiagMoveOrtho_D DiagMoveDiag_RD MotionCause_Above | DOWN DiagSendDir_RD ]
++ DOWN [ Dynamic_Above STATIONARY DiagOrthoPending DiagMoveOrtho_D DiagMoveOrtho_L DiagMoveDiag_DL MotionCause_Above | NO DiagSendDir ] -> [ Dynamic_Above DiagDiagPending DiagMoveOrtho_D DiagMoveOrtho_L DiagMoveDiag_DL MotionCause_Above | LEFT DiagSendDir_DL ]
++ LEFT [ Dynamic_Above STATIONARY DiagOrthoPending DiagMoveOrtho_L DiagMoveOrtho_U DiagMoveDiag_LU MotionCause_Above | NO DiagSendDir ] -> [ Dynamic_Above DiagDiagPending DiagMoveOrtho_L DiagMoveOrtho_U DiagMoveDiag_LU MotionCause_Above | UP DiagSendDir_LU ]
+(- step 2 )
++ [ > DiagSendDir_UR | NO DiagMove ] -> [ | ACTION DiagOrthoPending DiagMoveOrtho_U DiagMoveOrtho_R DiagMoveDiag_UR BeltMoved ]
++ [ > DiagSendDir_RD | NO DiagMove ] -> [ | ACTION DiagOrthoPending DiagMoveOrtho_R DiagMoveOrtho_D DiagMoveDiag_RD BeltMoved ]
++ [ > DiagSendDir_DL | NO DiagMove ] -> [ | ACTION DiagOrthoPending DiagMoveOrtho_D DiagMoveOrtho_L DiagMoveDiag_DL BeltMoved ]
++ [ > DiagSendDir_LU | NO DiagMove ] -> [ | ACTION DiagOrthoPending DiagMoveOrtho_L DiagMoveOrtho_U DiagMoveDiag_LU BeltMoved ]
+
+
+(diagonal propagation case 1: if we've propagated diagonal motion to a static object, return blocked)
+[ ACTION DiagOrthoPending BeltMoved NO DiagReturn Static_Above ] -> [ Static_Above ACTION DiagReturn DiagReturnValue_Blocked ]
+([ Static_Above MoveDiag ] -> [ Static_Above ] (clean up stranded MoveDiags))
+
+(diagonal propagation case 2: if we've propagated diagonal motion to a dynamic object, we wait until we know if it can move)
+[ ACTION DiagOrthoPending BeltMoved NO DiagReturn Dynamic_Above ] -> [ STATIONARY DiagOrthoPending BeltMoved Dynamic_Above ACTION DiagReturn ]
+
+(diagonal propagation case 3: otherwise, we're not blocked)
+[ ACTION DiagOrthoPending BeltMoved NO DiagReturn ] -> [ ACTION DiagReturn DiagReturnValue_Unblocked ]
+
+(we need to know which way to send the return value)
+[ ACTION DiagReturn DiagMoveDiag_UR ] -> [ STATIONARY DiagReturn DiagReturnDir_UR DiagMoveDiag_UR ]
+[ ACTION DiagReturn DiagMoveDiag_RD ] -> [ STATIONARY DiagReturn DiagReturnDir_RD DiagMoveDiag_RD ]
+[ ACTION DiagReturn DiagMoveDiag_DL ] -> [ STATIONARY DiagReturn DiagReturnDir_DL DiagMoveDiag_DL ]
+[ ACTION DiagReturn DiagMoveDiag_LU ] -> [ STATIONARY DiagReturn DiagReturnDir_LU DiagMoveDiag_LU ]
+
+(send diagonal result back to originating object)
+(- step 1 )
+DOWN [ DiagReturn STATIONARY DiagReturnValue DiagReturnDir_UR | NO DiagReturnValue ] -> [ | LEFT DiagReturnValue ]
++ LEFT [ DiagReturn STATIONARY DiagReturnValue DiagReturnDir_RD | NO DiagReturnValue ] -> [ | UP DiagReturnValue ]
++ UP [ DiagReturn STATIONARY DiagReturnValue DiagReturnDir_DL | NO DiagReturnValue ] -> [ | RIGHT DiagReturnValue ]
++ RIGHT [ DiagReturn STATIONARY DiagReturnValue DiagReturnDir_LU | NO DiagReturnValue ] -> [ | DOWN DiagReturnValue ]
+(- step 2 )
++ [ > DiagReturnValue | ] -> [ | ACTION DiagReturnValue ]
+
+(diagonal return value case 1: if we're blocked, remove movement markers and cancel orthogonal movement)
+UP [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked DiagMoveOrtho_U | > Dynamic_Above NO PlayerMoved_Above ] -> [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked | > Dynamic_Above > MovementCanceller ]
+RIGHT [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked DiagMoveOrtho_R | > Dynamic_Above NO PlayerMoved_Above ] -> [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked | > Dynamic_Above > MovementCanceller ]
+DOWN [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked DiagMoveOrtho_D | > Dynamic_Above NO PlayerMoved_Above ] -> [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked | > Dynamic_Above > MovementCanceller ]
+LEFT [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked DiagMoveOrtho_L | > Dynamic_Above NO PlayerMoved_Above ] -> [ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked | > Dynamic_Above > MovementCanceller ]
+[ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Blocked DiagMoveDiag ] -> [ Dynamic_Above DiagDiagPending Blocked_Above DiagReturnValue_Blocked ]
+  [ Player_Above NO PlayerMoved_Above MovementCanceller > PlayerMovement ] -> [ > Player_above PlayerMoved_Above > PlayerMovement ]
++ [ Player_Above NO PlayerMovement NO PlayerMoved_Above > MovementCanceller | ] -> [ STATIONARY Player_Above Blocked_Above | > MovementCanceller ]
++ [ > Dynamic_Above NO PlayerMoved_Above > MovementCanceller | ] -> [ STATIONARY Dynamic_Above Blocked_Above | > MovementCanceller ]
+[ MovementCanceller ] -> [ ]
+
+(diagonal return value case 2: if we're not blocked, we mark our intention to move diagonally) 
+[ Dynamic_Above DiagDiagPending ACTION DiagReturnValue_Unblocked DiagMoveDiag ] -> [ Dynamic_Above DiagDiagPending STATIONARY DiagReturnValue_Unblocked ACTION DiagMoveDiag ]
+
+[ DiagMove NO Dynamic_Above ] -> [ ]
+(reset diagonal calculations for any belts that couldn't complete their "send" step - we'll do it on the next loop)
+UP [ DiagDiagPending DiagMoveDiag_UR NO DiagReturnValue | RIGHT DiagSendDir_UR ] -> [ DiagOrthoPending DiagMoveDiag_UR | ]
+RIGHT [ DiagDiagPending DiagMoveDiag_RD NO DiagReturnValue | DOWN DiagSendDir_RD ] -> [ DiagOrthoPending DiagMoveDiag_RD | ]
+DOWN [ DiagDiagPending DiagMoveDiag_DL NO DiagReturnValue | LEFT DiagSendDir_DL ] -> [ DiagOrthoPending DiagMoveDiag_DL | ]
+LEFT [ DiagDiagPending DiagMoveDiag_LU NO DiagReturnValue | UP DiagSendDir_LU ] -> [ DiagOrthoPending DiagMoveDiag_LU | ]
+
+(Remove movement from anything moving into something else on the same layer that isn't moving)
+[ > Dynamic_Below Blocked_Below ] -> [ Dynamic_Below Blocked_Below ]
+[ > Dynamic_Above Blocked_Above ] -> [ Dynamic_Above Blocked_Above ]
+[ Blocked ] -> [ ]
+
+
+endloop
+
+(cleanup, and trigger "again" if something moves)
+[ STATIONARY DiagMove ] -> [] (DiagMoves with an ACTION represent intended diagonal motion, so we clean that up later after that motion has happened)
+[ ACTION Sticky ] -> [ STATIONARY Sticky ]
+[ DiagCalculationMarkers ] -> []
+
+(Manual diagonal movement of objects - part 1)
+(sorry for the mega-duplication... it was just the easier way)
+startloop
+UP [ Player_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_Player ] sfx2
+UP [ BeltX_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltX ] sfx2
+UP [ BeltU_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltU ] sfx2
+UP [ BeltR_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltR ] sfx2
+UP [ BeltD_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltD ] sfx2
+UP [ BeltL_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltL ] sfx2
+UP [ BeltUR_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltUR ] sfx2
+UP [ BeltRD_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltRD ] sfx2
+UP [ BeltDL_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltDL ] sfx2
+UP [ BeltLU_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltLU ] sfx2
+UP [ Explosive_above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_Explosive ] sfx2
+
+RIGHT [ Player_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_Player ] sfx2
+RIGHT [ BeltX_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltX ] sfx2
+RIGHT [ BeltU_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltU ] sfx2
+RIGHT [ BeltR_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltR ] sfx2
+RIGHT [ BeltD_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltD ] sfx2
+RIGHT [ BeltL_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltL ] sfx2
+RIGHT [ BeltUR_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltUR ] sfx2
+RIGHT [ BeltRD_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltRD ] sfx2
+RIGHT [ BeltDL_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltDL ] sfx2
+RIGHT [ BeltLU_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltLU ] sfx2
+RIGHT [ Explosive_above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_Explosive ] sfx2
+
+DOWN [ Player_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_Player ] sfx2
+DOWN [ BeltX_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltX ] sfx2
+DOWN [ BeltU_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltU ] sfx2
+DOWN [ BeltR_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltR ] sfx2
+DOWN [ BeltD_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltD ] sfx2
+DOWN [ BeltL_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltL ] sfx2
+DOWN [ BeltUR_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltUR ] sfx2
+DOWN [ BeltRD_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltRD ] sfx2
+DOWN [ BeltDL_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltDL ] sfx2
+DOWN [ BeltLU_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltLU ] sfx2
+DOWN [ Explosive_above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_Explosive ] sfx2
+
+LEFT [ Player_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_Player ] sfx2
+LEFT [ BeltX_Above DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltX ] sfx2
+LEFT [ BeltU_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltU ] sfx2
+LEFT [ BeltR_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltR ] sfx2
+LEFT [ BeltD_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltD ] sfx2
+LEFT [ BeltL_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltL ] sfx2
+LEFT [ BeltUR_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltUR ] sfx2
+LEFT [ BeltRD_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltRD ] sfx2
+LEFT [ BeltDL_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltDL ] sfx2
+LEFT [ BeltLU_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltLU ] sfx2
+LEFT [ Explosive_above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_Explosive ] sfx2
+
+(Fuse colliding blocks --Pedro PSI)
+(Above fusing)
+[ > BeltL_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltL_Above | Fusing FuseIntention_BeltL_Above ]
+[ > BeltU_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltU_Above | Fusing FuseIntention_BeltU_Above ]
+[ > BeltR_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltR_Above | Fusing FuseIntention_BeltR_Above ]
+[ > BeltD_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltD_Above | Fusing FuseIntention_BeltD_Above ]
+[ > BeltX_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltX_Above | Fusing FuseIntention_BeltX_Above ]
+[ > BeltUR_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltUR_Above | Fusing FuseIntention_BeltUR_Above ]
+[ > BeltRD_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltRD_Above | Fusing FuseIntention_BeltRD_Above ]
+[ > BeltDL_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltDL_Above | Fusing FuseIntention_BeltDL_Above ]
+[ > BeltLU_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltLU_Above | Fusing FuseIntention_BeltLU_Above ]
+[ > DiagMidMove_BeltX NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltX | Fusing FuseIntention_BeltX_Above ]
+[ > DiagMidMove_BeltU NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltU | Fusing FuseIntention_BeltU_Above ]
+[ > DiagMidMove_BeltR NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltR | Fusing FuseIntention_BeltR_Above ]
+[ > DiagMidMove_BeltD NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltD | Fusing FuseIntention_BeltD_Above ]
+[ > DiagMidMove_BeltL NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltL | Fusing FuseIntention_BeltL_Above ]
+[ > DiagMidMove_BeltUR NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltUR | Fusing FuseIntention_BeltUR_Above ]
+[ > DiagMidMove_BeltRD NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltRD | Fusing FuseIntention_BeltRD_Above ]
+[ > DiagMidMove_BeltDL NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltDL | Fusing FuseIntention_BeltDL_Above ]
+[ > DiagMidMove_BeltLU NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltLU | Fusing FuseIntention_BeltLU_Above ]
+
+(Determine which fusing intentions are actually fusing (i.e. there's more than one fuser moving into that space))
+  [ > Belt_Above NO FusingDone_NonMidMove | STATIONARY Fusing ] -> [ > Belt_Above FusingDone_NonMidMove | ACTION Fusing ]
++ [ > DiagMidMove NO FusingDone_MidMove | STATIONARY Fusing ] -> [ > DiagMidMove FusingDone_MidMove | ACTION Fusing ]
++ [ > Belt_Above NO FusingDone_NonMidMove | ACTION Fusing NO Fused ] -> [ > Belt_Above FusingDone_NonMidMove | ACTION Fusing Fused ] sfx6
++ [ > DiagMidMove NO FusingDone_MidMove | ACTION Fusing NO Fused ] -> [ > DiagMidMove FusingDone_MidMove | ACTION Fusing Fused ] sfx6
+endloop
+
+(If not actually fusing, revert to normal block movement (except for DiagMidMoves))
+[ > Belt_Above | ACTION Fusing NO Fused FuseIntention_Above ] -> [ > Belt_Above | ]
+(Otherwise, if actually fusing, remove origin belt)
+[ > Belt_Above Sticky_Above | ACTION Fusing Fused ] -> [ | ACTION Fusing Fused Sticky_Above ] sfx2
+[ > Belt_Above | ACTION Fusing Fused ] -> [ | ACTION Fusing Fused ] sfx2
+[ FusingDone ] -> []
+
+startloop
+[ FuseIntention_BeltX_Above FuseIntention_Above_NonX ] -> [ FuseIntention_Above_NonX ] (remove X so it has no effect)
+
+[ FuseIntention_BeltU_Above FuseIntention_BeltR_Above ] -> [ FuseIntention_BeltUR_Above ] (fuse orthogonal)
+[ FuseIntention_BeltU_Above FuseIntention_BeltD_Above ] -> [ FuseIntention_BeltX_Above ]
+[ FuseIntention_BeltU_Above FuseIntention_BeltL_Above ] -> [ FuseIntention_BeltLU_Above ]
+[ FuseIntention_BeltR_Above FuseIntention_BeltD_Above ] -> [ FuseIntention_BeltRD_Above ]
+[ FuseIntention_BeltR_Above FuseIntention_BeltL_Above ] -> [ FuseIntention_BeltX_Above ]
+[ FuseIntention_BeltD_Above FuseIntention_BeltL_Above ] -> [ FuseIntention_BeltDL_Above ]
+
+[ FuseIntention_BeltU_Above FuseIntention_BeltUR_Above ] -> [ FuseIntention_BeltU_Above ] ( fuse orthogonal with diagonal)
+[ FuseIntention_BeltU_Above FuseIntention_BeltRD_Above ] -> [ FuseIntention_BeltR_Above ] 
+[ FuseIntention_BeltU_Above FuseIntention_BeltDL_Above ] -> [ FuseIntention_BeltL_Above ]
+[ FuseIntention_BeltU_Above FuseIntention_BeltLU_Above ] -> [ FuseIntention_BeltU_Above ]
+[ FuseIntention_BeltR_Above FuseIntention_BeltUR_Above ] -> [ FuseIntention_BeltR_Above ]
+[ FuseIntention_BeltR_Above FuseIntention_BeltRD_Above ] -> [ FuseIntention_BeltR_Above ]
+[ FuseIntention_BeltR_Above FuseIntention_BeltDL_Above ] -> [ FuseIntention_BeltD_Above ]
+[ FuseIntention_BeltR_Above FuseIntention_BeltLU_Above ] -> [ FuseIntention_BeltU_Above ]
+[ FuseIntention_BeltD_Above FuseIntention_BeltUR_Above ] -> [ FuseIntention_BeltR_Above ]
+[ FuseIntention_BeltD_Above FuseIntention_BeltRD_Above ] -> [ FuseIntention_BeltD_Above ]
+[ FuseIntention_BeltD_Above FuseIntention_BeltDL_Above ] -> [ FuseIntention_BeltD_Above ]
+[ FuseIntention_BeltD_Above FuseIntention_BeltLU_Above ] -> [ FuseIntention_BeltL_Above ]
+[ FuseIntention_BeltL_Above FuseIntention_BeltUR_Above ] -> [ FuseIntention_BeltU_Above ]
+[ FuseIntention_BeltL_Above FuseIntention_BeltRD_Above ] -> [ FuseIntention_BeltD_Above ]
+[ FuseIntention_BeltL_Above FuseIntention_BeltDL_Above ] -> [ FuseIntention_BeltL_Above ]
+[ FuseIntention_BeltL_Above FuseIntention_BeltLU_Above ] -> [ FuseIntention_BeltL_Above ]
+
+[ FuseIntention_BeltUR_Above FuseIntention_BeltRD_Above ] -> [ FuseIntention_BeltR_Above ] ( fuse diagonal with diagonal)
+[ FuseIntention_BeltUR_Above FuseIntention_BeltDL_Above ] -> [ FuseIntention_BeltX_Above ]
+[ FuseIntention_BeltUR_Above FuseIntention_BeltLU_Above ] -> [ FuseIntention_BeltU_Above ]
+[ FuseIntention_BeltRD_Above FuseIntention_BeltDL_Above ] -> [ FuseIntention_BeltD_Above ]
+[ FuseIntention_BeltRD_Above FuseIntention_BeltLU_Above ] -> [ FuseIntention_BeltX_Above ]
+[ FuseIntention_BeltDL_Above FuseIntention_BeltLU_Above ] -> [ FuseIntention_BeltL_Above ]
+endloop
+
+(diagonal movement - part 2)
+[ > DiagMidMove_Player | NO Above ] -> [ | Player_Above ]
+[ > DiagMidMove_Explosive | NO Above ] -> [ | Explosive_above ]
+
+[ DiagMoveMarkers ] -> []
+
+UP [ FuseIntention_BeltX_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltX_Above | ]
+UP [ FuseIntention_BeltU_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltU_Above | ]
+UP [ FuseIntention_BeltR_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltR_Above | ]
+UP [ FuseIntention_BeltD_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltD_Above | ]
+UP [ FuseIntention_BeltL_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltL_Above | ]
+UP [ FuseIntention_BeltUR_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltUR_Above | ]
+UP [ FuseIntention_BeltRD_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltRD_Above | ]
+UP [ FuseIntention_BeltDL_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltDL_Above | ]
+UP [ FuseIntention_BeltLU_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltLU_Above | ]
+UP [ FuseIntention_Explosive_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ Explosive_above | ]
+
+UP [ FuseIntention_BeltX_Above Anim_FusionAbove_7 ] -> [ BeltX_Above ]
+UP [ FuseIntention_BeltU_Above Anim_FusionAbove_7 ] -> [ BeltU_Above ]
+UP [ FuseIntention_BeltR_Above Anim_FusionAbove_7 ] -> [ BeltR_Above ]
+UP [ FuseIntention_BeltD_Above Anim_FusionAbove_7 ] -> [ BeltD_Above ]
+UP [ FuseIntention_BeltL_Above Anim_FusionAbove_7 ] -> [ BeltL_Above ]
+UP [ FuseIntention_BeltUR_Above Anim_FusionAbove_7 ] -> [ BeltUR_Above ]
+UP [ FuseIntention_BeltRD_Above Anim_FusionAbove_7 ] -> [ BeltRD_Above ]
+UP [ FuseIntention_BeltDL_Above Anim_FusionAbove_7 ] -> [ BeltDL_Above ]
+UP [ FuseIntention_BeltLU_Above Anim_FusionAbove_7 ] -> [ BeltLU_Above ]
+
+UP [ NO Anim_FusionAbove_7 | Anim_FusionAbove_7_Top | Anim_FusionAbove_7_Top2 ] -> [ | | ] again
+
+(Fuse animation)
+UP [ Anim_FusionAbove_6 | Anim_FusionAbove_6_Top | Anim_FusionAbove_6_Top2 ] -> [ Anim_FusionAbove_7 | Anim_FusionAbove_7_Top | Anim_FusionAbove_7_Top2 ] again
+UP [ Anim_FusionAbove_5 | Anim_FusionAbove_5_Top | Anim_FusionAbove_5_Top2 ] -> [ Anim_FusionAbove_6 | Anim_FusionAbove_6_Top | Anim_FusionAbove_6_Top2 ] again
+UP [ Anim_FusionAbove_4 | Anim_FusionAbove_3_Top | Anim_FusionAbove_2_Top2 ] -> [ Anim_FusionAbove_5 | Anim_FusionAbove_5_Top | Anim_FusionAbove_5_Top2 ] again
+UP [ Anim_FusionAbove_3 ] -> [ Anim_FusionAbove_4 ] again
+UP [ Anim_FusionAbove_2 | Anim_FusionAbove_2_Top ] -> [ Anim_FusionAbove_3 | Anim_FusionAbove_3_Top ] again
+UP [ | Anim_FusionAbove_1_Top | Anim_FusionAbove_1_Top2 ] -> [ Anim_FusionAbove_2 | Anim_FusionAbove_2_Top | Anim_FusionAbove_2_Top2 ] again
+UP [ | Anim_FusionAbove_0_Top | ] -> [ | Anim_FusionAbove_1_Top | Anim_FusionAbove_1_Top2 ] again
+
+UP [ FuseIntention_Above | NO Anim_FusionAbove_Top ] -> [ FuseIntention_Above | Anim_FusionAbove_0_Top ] again
+
+[ FusionMarkers ] -> [ ]
+
+(Below fusing)
+[ > BeltL_Below | no Below ] -> [ > BeltL_Below | Fusing FuseIntention_BeltL_Below ] (register fusion intent as a fake duplicate belt)
+[ > BeltU_Below | no Below ] -> [ > BeltU_Below | Fusing FuseIntention_BeltU_Below ]
+[ > BeltR_Below | no Below ] -> [ > BeltR_Below | Fusing FuseIntention_BeltR_Below ]
+[ > BeltD_Below | no Below ] -> [ > BeltD_Below | Fusing FuseIntention_BeltD_Below ]
+[ > BeltX_Below | no Below ] -> [ > BeltX_Below | Fusing FuseIntention_BeltX_Below ]
+[ > BeltUR_Below | no Below ] -> [ > BeltUR_Below | Fusing FuseIntention_BeltUR_Below ]
+[ > BeltRD_Below | no Below ] -> [ > BeltRD_Below | Fusing FuseIntention_BeltRD_Below ]
+[ > BeltDL_Below | no Below ] -> [ > BeltDL_Below | Fusing FuseIntention_BeltDL_Below ]
+[ > BeltLU_Below | no Below ] -> [ > BeltLU_Below | Fusing FuseIntention_BeltLU_Below ]
+
+(Determine which fusing intentions are actually fusing (i.e. there's more than one fuser moving into that space))
+(reusing PlayerMovement here just to avoid processing the same fuser twice)
+  [ > Belt_Below NO PlayerMovement | STATIONARY Fusing ] -> [ > Belt_Below PlayerMovement | ACTION Fusing ]
++ [ > Belt_Below NO PlayerMovement | ACTION Fusing ] -> [ > Belt_Below PlayerMovement | ACTION Fusing Fused ] sfx6
+
+(If not actually fusing, revert to normal block movement (except for DiagMidMoves))
+[ > Belt_Below | ACTION Fusing NO Fused FuseIntention_Below ] -> [ > Belt_Below | ]
+(Otherwise, if actually fusing, remove origin belt)
+[ > Belt_Below | ACTION Fusing Fused ] -> [ > Belt_Below > Init2 | ACTION Fusing Fused ]
+UP [ MOVING Init2 | LadderD ] -> [ | MOVING Init2 MOVING LadderD ]
+RIGHT [ MOVING Init2 | LadderL ] -> [ | MOVING Init2 MOVING LadderL ]
+DOWN [ MOVING Init2 | LadderU ] -> [ | MOVING Init2 MOVING LadderU ]
+LEFT [ MOVING Init2 | LadderR ] -> [ | MOVING Init2 MOVING LadderR ]
+[ > Init2 > Ladder | ] -> [ | Ladder ]
+[ > Belt_Below Sticky_Below | ACTION Fusing Fused ] -> [ | ACTION Fusing Fused Sticky_Below ]
+[ > Belt_Below | ACTION Fusing Fused ] -> [ | ACTION Fusing Fused ]
+[ PlayerMovement ] -> []
+
+startloop
+[ FuseIntention_BeltX_Below FuseIntention_Below_NonX ] -> [ FuseIntention_Below_NonX ] (remove X so it has no effect)
+
+[ FuseIntention_BeltU_Below FuseIntention_BeltR_Below ] -> [ FuseIntention_BeltUR_Below ] (fuse orthogonal)
+[ FuseIntention_BeltU_Below FuseIntention_BeltD_Below ] -> [ FuseIntention_BeltX_Below ]
+[ FuseIntention_BeltU_Below FuseIntention_BeltL_Below ] -> [ FuseIntention_BeltLU_Below ]
+[ FuseIntention_BeltR_Below FuseIntention_BeltD_Below ] -> [ FuseIntention_BeltRD_Below ]
+[ FuseIntention_BeltR_Below FuseIntention_BeltL_Below ] -> [ FuseIntention_BeltX_Below ]
+[ FuseIntention_BeltD_Below FuseIntention_BeltL_Below ] -> [ FuseIntention_BeltDL_Below ]
+
+[ FuseIntention_BeltU_Below FuseIntention_BeltUR_Below ] -> [ FuseIntention_BeltU_Below ] ( fuse orthogonal with diagonal)
+[ FuseIntention_BeltU_Below FuseIntention_BeltRD_Below ] -> [ FuseIntention_BeltR_Below ] 
+[ FuseIntention_BeltU_Below FuseIntention_BeltDL_Below ] -> [ FuseIntention_BeltL_Below ]
+[ FuseIntention_BeltU_Below FuseIntention_BeltLU_Below ] -> [ FuseIntention_BeltU_Below ]
+[ FuseIntention_BeltR_Below FuseIntention_BeltUR_Below ] -> [ FuseIntention_BeltR_Below ]
+[ FuseIntention_BeltR_Below FuseIntention_BeltRD_Below ] -> [ FuseIntention_BeltR_Below ]
+[ FuseIntention_BeltR_Below FuseIntention_BeltDL_Below ] -> [ FuseIntention_BeltD_Below ]
+[ FuseIntention_BeltR_Below FuseIntention_BeltLU_Below ] -> [ FuseIntention_BeltU_Below ]
+[ FuseIntention_BeltD_Below FuseIntention_BeltUR_Below ] -> [ FuseIntention_BeltR_Below ]
+[ FuseIntention_BeltD_Below FuseIntention_BeltRD_Below ] -> [ FuseIntention_BeltD_Below ]
+[ FuseIntention_BeltD_Below FuseIntention_BeltDL_Below ] -> [ FuseIntention_BeltD_Below ]
+[ FuseIntention_BeltD_Below FuseIntention_BeltLU_Below ] -> [ FuseIntention_BeltL_Below ]
+[ FuseIntention_BeltL_Below FuseIntention_BeltUR_Below ] -> [ FuseIntention_BeltU_Below ]
+[ FuseIntention_BeltL_Below FuseIntention_BeltRD_Below ] -> [ FuseIntention_BeltD_Below ]
+[ FuseIntention_BeltL_Below FuseIntention_BeltDL_Below ] -> [ FuseIntention_BeltL_Below ]
+[ FuseIntention_BeltL_Below FuseIntention_BeltLU_Below ] -> [ FuseIntention_BeltL_Below ]
+
+[ FuseIntention_BeltUR_Below FuseIntention_BeltRD_Below ] -> [ FuseIntention_BeltR_Below ] ( fuse diagonal with diagonal)
+[ FuseIntention_BeltUR_Below FuseIntention_BeltDL_Below ] -> [ FuseIntention_BeltX_Below ]
+[ FuseIntention_BeltUR_Below FuseIntention_BeltLU_Below ] -> [ FuseIntention_BeltU_Below ]
+[ FuseIntention_BeltRD_Below FuseIntention_BeltDL_Below ] -> [ FuseIntention_BeltD_Below ]
+[ FuseIntention_BeltRD_Below FuseIntention_BeltLU_Below ] -> [ FuseIntention_BeltX_Below ]
+[ FuseIntention_BeltDL_Below FuseIntention_BeltLU_Below ] -> [ FuseIntention_BeltL_Below ]
+endloop
+
+UP [ FuseIntention_BeltX_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltX_Below | ]
+UP [ FuseIntention_BeltU_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltU_Below | ]
+UP [ FuseIntention_BeltR_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltR_Below | ]
+UP [ FuseIntention_BeltD_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltD_Below | ]
+UP [ FuseIntention_BeltL_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltL_Below | ]
+UP [ FuseIntention_BeltUR_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltUR_Below | ]
+UP [ FuseIntention_BeltRD_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltRD_Below | ]
+UP [ FuseIntention_BeltDL_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltDL_Below | ]
+UP [ FuseIntention_BeltLU_Below NO Fused NO Anim_FusionBelow | NO Anim_FusionBelow_Top ] -> [ BeltLU_Below | ]
+
+(Fuse animation end)
+UP [ FuseIntention_BeltX_Below Anim_FusionBelow_7 ] -> [ BeltX_Below ]
+UP [ FuseIntention_BeltU_Below Anim_FusionBelow_7 ] -> [ BeltU_Below ]
+UP [ FuseIntention_BeltR_Below Anim_FusionBelow_7 ] -> [ BeltR_Below ]
+UP [ FuseIntention_BeltD_Below Anim_FusionBelow_7 ] -> [ BeltD_Below ]
+UP [ FuseIntention_BeltL_Below Anim_FusionBelow_7 ] -> [ BeltL_Below ]
+UP [ FuseIntention_BeltUR_Below Anim_FusionBelow_7 ] -> [ BeltUR_Below ]
+UP [ FuseIntention_BeltRD_Below Anim_FusionBelow_7 ] -> [ BeltRD_Below ]
+UP [ FuseIntention_BeltDL_Below Anim_FusionBelow_7 ] -> [ BeltDL_Below ]
+UP [ FuseIntention_BeltLU_Below Anim_FusionBelow_7 ] -> [ BeltLU_Below ]
+
+UP [ NO Anim_FusionBelow_7 | Anim_FusionBelow_7_Top ] -> [ | ] again
+
+(Fuse animation)
+UP [ Anim_FusionBelow_6 | Anim_FusionBelow_6_Top ] -> [ Anim_FusionBelow_7 | Anim_FusionBelow_7_Top ] again
+UP [ Anim_FusionBelow_5 | Anim_FusionBelow_5_Top ] -> [ Anim_FusionBelow_6 | Anim_FusionBelow_6_Top ] again
+UP [ Anim_FusionBelow_4 | Anim_FusionBelow_2_Top ] -> [ Anim_FusionBelow_5 | Anim_FusionBelow_5_Top ] again
+UP [ Anim_FusionBelow_3 ] -> [ Anim_FusionBelow_4 ] again
+UP [ Anim_FusionBelow_2 ] -> [ Anim_FusionBelow_3 ] again
+UP [ Anim_FusionBelow_1 | Anim_FusionBelow_1_Top ] -> [ Anim_FusionBelow_2 | Anim_FusionBelow_2_Top ] again
+UP [ | Anim_FusionBelow_0_Top ] -> [ Anim_FusionBelow_1 | Anim_FusionBelow_1_Top ] again
+
+UP [ FuseIntention_Below | NO Anim_FusionBelow_Top ] -> [ FuseIntention_Below | Anim_FusionBelow_0_Top ] again
+
+       
+[ FusionMarkers ] -> [ ]
+
+[ > Dynamic_Above Sticky_Above NO Blocked_Above ] -> [ > Dynamic_Above > Sticky_Above ]
+[ > Dynamic_Below Sticky_Below NO Blocked_Below ] -> [ > Dynamic_Below > Sticky_Below ]
+
+(ladders attached)
+UP    [ STATIONARY LadderU | MOVING Dynamic_Below NO Blocked_Below ] -> [ MOVING LadderU | MOVING Dynamic_Below ]
+RIGHT [ STATIONARY LadderR | MOVING Dynamic_Below NO Blocked_Below ] -> [ MOVING LadderR | MOVING Dynamic_Below ]
+DOWN  [ STATIONARY LadderD | MOVING Dynamic_Below NO Blocked_Below ] -> [ MOVING LadderD | MOVING Dynamic_Below ]
+LEFT  [ STATIONARY LadderL | MOVING Dynamic_Below NO Blocked_Below ] -> [ MOVING LadderL | MOVING Dynamic_Below ]
+
+(If a ladder isn't attached to anything, the substrate was probably destroyed, so it makes sense to also destroy the ladder)
+UP    [ LadderU | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
+RIGHT [ LadderR | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
+DOWN  [ LadderD | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
+LEFT  [ LadderL | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
+
+(If anything on a belt is moving in that direction, play sound - we do this here because we don't want to play the sound if things are sitting on a belt and not moving because they are blocked)
+[ Dynamic_Above DiagMoveDiag ] -> sfx2
+[ UP    Dynamic_Above BeltMoved BeltU_Below ] -> sfx2
+[ RIGHT Dynamic_Above BeltMoved BeltR_Below ] -> sfx2
+[ DOWN  Dynamic_Above BeltMoved BeltD_Below ] -> sfx2
+[ LEFT  Dynamic_Above BeltMoved BeltL_Below ] -> sfx2
+[ UP    Dynamic_Above BeltMoved BeltUR_Below ] -> sfx2
+[ RIGHT Dynamic_Above BeltMoved BeltRD_Below ] -> sfx2
+[ DOWN  Dynamic_Above BeltMoved BeltDL_Below ] -> sfx2
+[ LEFT  Dynamic_Above BeltMoved BeltLU_Below ] -> sfx2
+[ RIGHT Dynamic_Above BeltMoved BeltUR_Below ] -> sfx2
+[ DOWN  Dynamic_Above BeltMoved BeltRD_Below ] -> sfx2
+[ LEFT  Dynamic_Above BeltMoved BeltDL_Below ] -> sfx2
+[ UP    Dynamic_Above BeltMoved BeltLU_Below ] -> sfx2
+
+[ MotionCause ] -> [] again
+
+
+(Lift objects on doors)
+[ Sticky_Below NO Weighted_Above DoorExtended ] -> [ Sticky_Above DoorExtended ]
+[ Player_Below NO Weighted_Above DoorExtended ] -> [ Player_Above DoorExtended ]
+[ BeltU_Below NO Weighted_Above DoorExtended ] -> [ BeltU_Above DoorExtended ]
+[ BeltR_Below NO Weighted_Above DoorExtended ] -> [ BeltR_Above DoorExtended ]
+[ BeltD_Below NO Weighted_Above DoorExtended ] -> [ BeltD_Above DoorExtended ]
+[ BeltL_Below NO Weighted_Above DoorExtended ] -> [ BeltL_Above DoorExtended ]
+[ BeltUR_Below NO Weighted_Above DoorExtended ] -> [ BeltUR_Above DoorExtended ]
+[ BeltRD_Below NO Weighted_Above DoorExtended ] -> [ BeltRD_Above DoorExtended ]
+[ BeltDL_Below NO Weighted_Above DoorExtended ] -> [ BeltDL_Above DoorExtended ]
+[ BeltLU_Below NO Weighted_Above DoorExtended ] -> [ BeltLU_Above DoorExtended ]
+[ BeltX_Below NO Weighted_Above DoorExtended ] -> [ BeltX_Above DoorExtended ]
+[ Explosive_Below NO Weighted_Above DoorExtended ] -> [ Explosive_Above DoorExtended ]
+
+
+(GRAPHICAL DETAILS)
+(Player directions)
+NOAGAINCHECK LATE [ Moved NO Player ] [ Player ] -> [ ] [ Player Moved ]
+NOAGAINCHECK LATE [ Player_Below1 MovedU ] -> [ Player_Below1 MovedU Render_Player_Below_U ]
+NOAGAINCHECK LATE [ Player_Below1 MovedR ] -> [ Player_Below1 MovedR Render_Player_Below_R ]
+NOAGAINCHECK LATE [ Player_Below1 MovedL ] -> [ Player_Below1 MovedL Render_Player_Below_L ]
+NOAGAINCHECK LATE UP [ Player_Above1 MovedU | ] -> [ Player_Above1 MovedU | Render_Player_Above_Top_U ]
+NOAGAINCHECK LATE UP [ Player_Above1 MovedR | ] -> [ Player_Above1 MovedR | Render_Player_Above_Top_R ]
+NOAGAINCHECK LATE UP [ Player_Above1 MovedL | ] -> [ Player_Above1 MovedL | Render_Player_Above_Top_L ]
+
+(adding ambiant occlusion)
+NOAGAINCHECK late up    [ no Static_Below no vAmbiantOcclusionU no DoorBase no Theme2 | Static_Below ] -> [ vAmbiantOcclusionU | Static_Below ]
+NOAGAINCHECK late right [ no Static_Below no vAmbiantOcclusionR no DoorBase no Theme2 | Static_Below ] -> [ vAmbiantOcclusionR | Static_Below ]
+NOAGAINCHECK late left  [ no Static_Below no vAmbiantOcclusionL no DoorBase no Theme2 | Static_Below ] -> [ vAmbiantOcclusionL | Static_Below ]
+NOAGAINCHECK late up    [ no Static_Below no vDoor_AO_U DoorBase no Theme2 | Static_Below ] -> [ vDoor_AO_U DoorBase | Static_Below ]
+NOAGAINCHECK late right [ no Static_Below no vDoor_AO_R DoorBase no Theme2 | Static_Below ] -> [ vDoor_AO_R DoorBase | Static_Below ]
+NOAGAINCHECK late down  [ no Static_Below no vDoor_AO_D DoorBase no Theme2 | Static_Below ] -> [ vDoor_AO_D DoorBase | Static_Below ]
+NOAGAINCHECK late left  [ no Static_Below no vDoor_AO_L DoorBase no Theme2 | Static_Below ] -> [ vDoor_AO_L DoorBase | Static_Below ]
+(removing ambiant occlusion)
+NOAGAINCHECK late up    [ vAmbiantOcclusionU | no Static_Below ] -> [ | ]
+NOAGAINCHECK late right [ vAmbiantOcclusionR | no Static_Below ] -> [ | ]
+NOAGAINCHECK late left  [ vAmbiantOcclusionL | no Static_Below ] -> [ | ]
+
+(remove inflateds if they overlap dynamics)
+NOAGAINCHECK late up [ Inflatable | InflatedU Dynamic_Below ] -> [ Inflatable InflatedU | Dynamic_Below ]
+NOAGAINCHECK late right [ Inflatable | InflatedR Dynamic_Below ] -> [ Inflatable InflatedR | Dynamic_Below ]
+NOAGAINCHECK late down [ Inflatable | InflatedD Dynamic_Below ] -> [ Inflatable InflatedD | Dynamic_Below ]
+NOAGAINCHECK late left [ Inflatable | InflatedL Dynamic_Below ] -> [ Inflatable InflatedL | Dynamic_Below ]
+
+(ladders)
+NOAGAINCHECK LATE UP [ Ladder1U | ] -> [ Ladder1U | Render_Ladder1U_Top ]
+NOAGAINCHECK LATE UP [ Ladder1R | ] -> [ Ladder1R | Render_Ladder1R_Top ]
+NOAGAINCHECK LATE UP [ Ladder1L | ] -> [ Ladder1L | Render_Ladder1L_Top ]
+
+NOAGAINCHECK LATE RIGHT [ Ladder1R | ] -> [ Ladder1R | Render_Ladder1R_Overhang ]
+NOAGAINCHECK LATE       [ Ladder1D ] -> [ Ladder1D Render_Ladder1D_Overhang ]
+NOAGAINCHECK LATE LEFT  [ Ladder1L | ] -> [ Ladder1L | Render_Ladder1L_Overhang ]
+
+NOAGAINCHECK LATE UP [ Render_Ladder1R_Overhang | ] -> [ Render_Ladder1R_Overhang | Render_Ladder1R_Overhang_Top ]
+NOAGAINCHECK LATE UP [ Render_Ladder1L_Overhang | ] -> [ Render_Ladder1L_Overhang | Render_Ladder1L_Overhang_Top ]
+
+NOAGAINCHECK LATE UP [ Ladder2U | ] -> [ Ladder2U | Render_Ladder2U_Top ]
+NOAGAINCHECK LATE UP [ Ladder2R | ] -> [ Ladder2R | Render_Ladder2R_Top ]
+NOAGAINCHECK LATE UP [ Ladder2L | ] -> [ Ladder2L | Render_Ladder2L_Top ]
+
+NOAGAINCHECK LATE RIGHT [ Ladder2R | ] -> [ Ladder2R | Render_Ladder2R_Overhang ]
+NOAGAINCHECK LATE       [ Ladder2D ] -> [ Ladder2D Render_Ladder2D_Overhang ]
+NOAGAINCHECK LATE LEFT  [ Ladder2L | ] -> [ Ladder2L | Render_Ladder2L_Overhang ]
+
+NOAGAINCHECK LATE UP [ Render_Ladder2R_Overhang | ] -> [ Render_Ladder2R_Overhang | Render_Ladder2R_Overhang_Top ]
+NOAGAINCHECK LATE UP [ Render_Ladder2L_Overhang | ] -> [ Render_Ladder2L_Overhang | Render_Ladder2L_Overhang_Top ]
+
+(player tops)
+NOAGAINCHECK LATE UP [ Player_Below1 | ] -> [ Player_Below1 | Render_Player_Below1_Top ]
+NOAGAINCHECK LATE UP [ Player_Above1 | ] -> [ Player_Above1 | Render_Player_Above1_Top ]
+
+(belt tops)
+NOAGAINCHECK LATE UP [ BeltX_Above | | ] -> [ BeltX_Above | BeltX_Above_Top | BeltX_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltU_Above | | ] -> [ BeltU_Above | BeltU_Above_Top | BeltU_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltR_Above | | ] -> [ BeltR_Above | BeltR_Above_Top | BeltR_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltD_Above | | ] -> [ BeltD_Above | BeltD_Above_Top | BeltD_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltL_Above | | ] -> [ BeltL_Above | BeltL_Above_Top | BeltL_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltUR_Above | | ] -> [ BeltUR_Above | BeltUR_Above_Top | BeltUR_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltRD_Above | | ] -> [ BeltRD_Above | BeltRD_Above_Top | BeltRD_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltDL_Above | | ] -> [ BeltDL_Above | BeltDL_Above_Top | BeltDL_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltLU_Above | | ] -> [ BeltLU_Above | BeltLU_Above_Top | BeltLU_Above_Top2 ]
+
+NOAGAINCHECK LATE UP [ BeltX_Below | ] -> [ BeltX_Below | BeltX_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltU_Below | ] -> [ BeltU_Below | BeltU_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltR_Below | ] -> [ BeltR_Below | BeltR_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltD_Below | ] -> [ BeltD_Below | BeltD_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltL_Below | ] -> [ BeltL_Below | BeltL_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltUR_Below | ] -> [ BeltUR_Below | BeltUR_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltRD_Below | ] -> [ BeltRD_Below | BeltRD_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltDL_Below | ] -> [ BeltDL_Below | BeltDL_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltLU_Below | ] -> [ BeltLU_Below | BeltLU_Below_Top ]
+
+(Door tops)
+NOAGAINCHECK LATE UP [ DoorExtended NO Dynamic_Below | NO Render_DoorExtended_Top ] -> [ DoorExtended | Render_DoorExtended_Top ]
+
+(Inflated tops)
+NOAGAINCHECK LATE UP [ InflatedU NO Wall | NO Render_InflatedU_Top ] -> [ InflatedU | Render_InflatedU_Top ]
+NOAGAINCHECK LATE UP [ InflatedR NO Wall | NO Render_InflatedR_Top ] -> [ InflatedR | Render_InflatedR_Top ]
+NOAGAINCHECK LATE UP [ InflatedD NO Wall | NO Render_InflatedD_Top ] -> [ InflatedD | Render_InflatedD_Top ]
+NOAGAINCHECK LATE UP [ InflatedL NO Wall | NO Render_InflatedL_Top ] -> [ InflatedL | Render_InflatedL_Top ]
+
+(Stickiness)
+NOAGAINCHECK LATE UP [ BeltX_Above Sticky_Above | | ] -> [ BeltX_Above Sticky_Above Render_Sticky_BeltX_Above | Render_Sticky_BeltX_Above_Top | Render_Sticky_BeltX_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltU_Above Sticky_Above | | ] -> [ BeltU_Above Sticky_Above Render_Sticky_BeltU_Above | Render_Sticky_BeltU_Above_Top | Render_Sticky_BeltU_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltR_Above Sticky_Above | | ] -> [ BeltR_Above Sticky_Above Render_Sticky_BeltR_Above | Render_Sticky_BeltR_Above_Top | Render_Sticky_BeltR_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltD_Above Sticky_Above | | ] -> [ BeltD_Above Sticky_Above Render_Sticky_BeltD_Above | Render_Sticky_BeltD_Above_Top | Render_Sticky_BeltD_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltL_Above Sticky_Above | | ] -> [ BeltL_Above Sticky_Above Render_Sticky_BeltL_Above | Render_Sticky_BeltL_Above_Top | Render_Sticky_BeltL_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltUR_Above Sticky_Above | | ] -> [ BeltUR_Above Sticky_Above Render_Sticky_BeltUR_Above | Render_Sticky_BeltUR_Above_Top | Render_Sticky_BeltUR_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltRD_Above Sticky_Above | | ] -> [ BeltRD_Above Sticky_Above Render_Sticky_BeltRD_Above | Render_Sticky_BeltRD_Above_Top | Render_Sticky_BeltRD_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltDL_Above Sticky_Above | | ] -> [ BeltDL_Above Sticky_Above Render_Sticky_BeltDL_Above | Render_Sticky_BeltDL_Above_Top | Render_Sticky_BeltDL_Above_Top2 ]
+NOAGAINCHECK LATE UP [ BeltLU_Above Sticky_Above | | ] -> [ BeltLU_Above Sticky_Above Render_Sticky_BeltLU_Above | Render_Sticky_BeltLU_Above_Top | Render_Sticky_BeltLU_Above_Top2 ]
+
+NOAGAINCHECK LATE UP [ BeltX_Below Sticky_Below | ] -> [ BeltX_Below Sticky_Below Render_Sticky_BeltX_Below | Render_Sticky_BeltX_Below_Top ] 
+NOAGAINCHECK LATE UP [ BeltU_Below Sticky_Below | ] -> [ BeltU_Below Sticky_Below Render_Sticky_BeltU_Below | Render_Sticky_BeltU_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltR_Below Sticky_Below | ] -> [ BeltR_Below Sticky_Below Render_Sticky_BeltR_Below | Render_Sticky_BeltR_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltD_Below Sticky_Below | ] -> [ BeltD_Below Sticky_Below Render_Sticky_BeltD_Below | Render_Sticky_BeltD_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltL_Below Sticky_Below | ] -> [ BeltL_Below Sticky_Below Render_Sticky_BeltL_Below | Render_Sticky_BeltL_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltUR_Below Sticky_Below | ] -> [ BeltUR_Below Sticky_Below Render_Sticky_BeltUR_Below | Render_Sticky_BeltUR_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltRD_Below Sticky_Below | ] -> [ BeltRD_Below Sticky_Below Render_Sticky_BeltRD_Below | Render_Sticky_BeltRD_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltDL_Below Sticky_Below | ] -> [ BeltDL_Below Sticky_Below Render_Sticky_BeltDL_Below | Render_Sticky_BeltDL_Below_Top ]
+NOAGAINCHECK LATE UP [ BeltLU_Below Sticky_Below | ] -> [ BeltLU_Below Sticky_Below Render_Sticky_BeltLU_Below | Render_Sticky_BeltLU_Below_Top ]
+
+(Explosive tops)
+NOAGAINCHECK LATE UP [ Explosive_Below | NO Render_Explosive_Below_Top ] -> [ Explosive_Below | Render_Explosive_Below_Top ]
+NOAGAINCHECK LATE UP [ Explosive_Above | NO Render_Explosive_Above_Top ] -> [ Explosive_Above | Render_Explosive_Above_Top ]
+
+(Explosive stickiness)
+NOAGAINCHECK LATE UP [ Explosive_above Sticky_Above | ] -> [ Explosive_above Sticky_Above | Render_Sticky_Explosive_above_top ]
+NOAGAINCHECK LATE UP [ Explosive_below Sticky_Below | ] -> [ Explosive_below Sticky_Below Render_Sticky_Explosive_below | Render_Sticky_Explosive_below_top ]
+
+NOAGAINCHECK LATE UP [ SlimeVat_Mess_Above | ] -> [ SlimeVat_Mess_Above | Render_SlimeVat_Mess_Above_Top ]
+
+(Wires on)
+NOAGAINCHECK LATE UP [ Wire_Below_U Spark ] -> [ Wire_Below_U Spark Render_WireOn_Below_U ]
+NOAGAINCHECK LATE UP [ Wire_Below_R Spark ] -> [ Wire_Below_R Spark Render_WireOn_Below_R ]
+NOAGAINCHECK LATE UP [ Wire_Below_D Spark ] -> [ Wire_Below_D Spark Render_WireOn_Below_D ]
+NOAGAINCHECK LATE UP [ Wire_Below_L Spark ] -> [ Wire_Below_L Spark Render_WireOn_Below_L ]
+NOAGAINCHECK LATE UP [ Wire_Above_U NO Wall Spark | ] -> [ Wire_Above_U Spark | Render_WireOn_Above_U_Top ]
+NOAGAINCHECK LATE UP [ Wire_Above_R NO Wall Spark | ] -> [ Wire_Above_R Spark | Render_WireOn_Above_R_Top ]
+NOAGAINCHECK LATE UP [ Wire_Above_D NO Wall Spark | ] -> [ Wire_Above_D Spark Render_WireOn_Above_D | Render_WireOn_Above_D_Top ]
+NOAGAINCHECK LATE UP [ Wire_Above_L NO Wall Spark | ] -> [ Wire_Above_L Spark | Render_WireOn_Above_L_Top ]
+NOAGAINCHECK LATE UP [ Wall Spark | Wire_AboveWall_U_Top ] -> [ Wall Spark | Wire_AboveWall_U_Top Render_WireOn_AboveWall_U_Top ]
+NOAGAINCHECK LATE UP [ Wall Spark | Wire_AboveWall_R_Top ] -> [ Wall Spark | Wire_AboveWall_R_Top Render_WireOn_AboveWall_R_Top ]
+NOAGAINCHECK LATE UP [ Wire_AboveWall_D Wall Spark | Wire_AboveWall_D_Top ] -> [ Wire_AboveWall_D Wall Spark Render_WireOn_AboveWall_D | Wire_AboveWall_D_Top Render_WireOn_AboveWall_D_Top ]
+NOAGAINCHECK LATE UP [ Wall Spark | Wire_AboveWall_L_Top ] -> [ Wire_Above_L Wall Spark | Wire_AboveWall_L_Top Render_WireOn_AboveWall_L_Top ]
+
+(Calculate distances)
+NOAGAINCHECK LATE [ Distances ] -> []
+
+NOAGAINCHECK LATE [Player] -> [Player Distance0]
+NOAGAINCHECK LATE [Distance0 | no Distances] -> [Distance0 | Distance1]
+NOAGAINCHECK LATE [Distance1 | no Distances] -> [Distance1 | Distance2]
+NOAGAINCHECK LATE [Distance2 | no Distances] -> [Distance2 | Distance3]
+
+(Show which explosives are within detonation range)
+NOAGAINCHECK LATE UP [ Explosive_below Distances ] -> [ Explosive_below Distances Render_ExplosivePrimed_Below ]
+NOAGAINCHECK LATE UP [ Explosive_above Distances | ] -> [ Explosive_above Distances | Render_ExplosivePrimed_Above_Top ]
+
+==============
+WINCONDITIONS
+==============
+
+some End on Player
+
+=======
+LEVELS
+=======
+
+@##############################################################################_##################################################
+###############################################################################################################~~...~~############
+###############################################################################################################~.....~############
+##############################################.ŝĴ~~~~##########################################################~.Ĉ.x.~############
+##############################################.đ....~##########################################################~4....~############
+##############################################.ŝ.6~..##################################################~~~#####~.....~###~~~~~####
+##############################################....~..##################################################~ň~#####.#####~###.###~####
+############################################~~~~.Ł~4.######################?#cppcc?####################.........#####~##~~~##~####
+############################################~#.......:~~~##################c#+..+######################..6ž4ž...##~~~Ň~#~~~~#~####
+############################################~###########~##################c#+..+######################........###.8.ž...8.~#~####
+##################################đđđđđđđđđŁ~.đđđđđđđđđŁ~.~################cccppc#####~#################~#########~~~~~~~~~~#~####
+##################################ŵ#########~###########:################............#~#######~~~######.....######~M~########~####
+##################################ŵ#########:##########~....~~##......6:~~~~......~~~#.#~~~~~#~~~~~~###..6ž#######~~~########~####
+#################################~~~#####~~~~~~~#######~#...Ķ~##..~~~..##~~~......~~~~~Ň~~~~~##~~~~~~~~4..8##############..~~~~###
+#################################~~~#####~Ł~#~Ĵ~##~~~##~..~.~~##.~~Ķ~~.##~~~......~~~#~#.8ŵ8....8ŝ8.##.....#############...m~m~###
+################################đ...ă####~Ķ~#~Ķ~##~r~Ň~.~~~...##.~Ĵ~Ĵ~4##.8........8.#~####~~~~~~#######################...a...###
+#############################~~~ŵ~~~ŵ~~~#~Ł~#~Ĵ~##~~~##~Ī~~4..##.~~Ķ~~.##............#~####~~~~~~############žžžžžžžž###.s..d..###
+#############################~Ł~ŵŁĴŁŵ~Ĵ~#~~~#~~~###ŝ###~~Ň~.~~##..~~~..##.....22.....#~###############~~~~~~#........###.s.....###
+#############################888.888.888##.....####ŝ###....6~~:~.......#######:~######~~##############~~~~#.~..x4x6xx~M~6~.....###
+#############################...#...#...##.....####ŝ#########ŵ################~~#######~####~~~4.6s~~#~~~~###........#############
+#############################.ŵŵă...đŝŝ.###~#~#####đđđđđđđđđđŵ################~.##...~.~####~."....a.#~MM~###ž.žžžž.ž#############
+#############################.....2.....###~Ň~################################đă##...#######.."...####~~~~########################
+##################################:########~~~#####################~~~~~..##~~~4##......####.."........""8########################
+##################################~########...#######~~~~~~~~..##~~~~~~~~ŝ~:~Ň~###...ž..####.."...........########################
+#################################đ.ă#######~~~#######~~~~.~~~..##ŵ#~~~~~..##~~~###...2..####~."...........########################
+#################################ŵ#ŵ########~########~.ž....~..##ŵ#.8.....###~####..6x4.####~~~...........########################
+########cqzqc##################+žŵžŵ.+######~~~~#####~.....6~..##ŵ#...~~...##~####.~£8..######~###################################
+########c~~~c+žr###############q~~~~~q#########:#####~.........~~:###~Ň~...~~~~###.~~..6~~~~~.~Ĵ~~~~~~############################
+########+...+##c#####~~~~~.####z~Ĵ~Ł~z##~~~..~~~~####~......~~~######~~~##~##~~###......######~######~####~.~##~4..###~~~~~#######
+#######~~.pt...p..~~:~8.#..####~~~~~~~##~~~..~~~~####~......~Ň############Ň##ŵ###############.8.#####~####~.~##~#.....8###~#######
+#######~~.ct...pž.~##~.....r######:#####~~Ň..~Ĵ~~####~......~~###########~~~#ŵ_#######~####.......###ň~~~.~.~~~~#...£.~~~#.~~.~~##
+#######~~.ppppppă.~##c+žŝ.+p######~#####.....8...####~~~22~~~~###########~r~đŵ##đđđđđđŇ###.6L.K.J4.##.#####........ĕ$.£~~##...~~##
+#######~~pptt...ŝ.~##c+...+p#####~q+####ăă~~...~.#######~:###############~~~####ŵŝăăăă~~#4...."....##........##~#...~....##...~~##
+#######~~tt.~~~.đ.~##c+ŝŝ.+p#####~că####...~..~Ň~##~~~##~~######################ŵŝ########..M"~"J..##..#######~~#...~.~ň~##.ž.$£##
+#######~~4..~~~...~##q.....p#####~zđ~~~#~~....~~~##~r~:~~~~ăăă##q~ŇŇŇ~:~~#_#####ŵŝ#~~4..###.......############~ň~...~~~~~##...~~##
+#######:#####~~~~~~##q.....q~~####:.~~~#~~.~~######~~~#######~~####~##ŵ#ŝ###đđđđŵŝ#~Mx..###..#~#..###############......8.##..6~~##
+#######~~~~~#########ccccccc#~####~###~#~####################~Ň~###~##ŵ#ŝ###ŵŝăăăă#."....#####~##################........##...~Ň~#
+###########~#################~###~~~#~~:~###################~~~Ň###~##ŵ#ŝ###ŵŝ#######....#####~############################...~~~#
+#######......#####~~~~~######~###~~~#~~~####~~~:.......#####~~~~~Ň~~##ŵ#ŝ###ŵŝ#~~~~~~~.~J..~~~~######.~~...###################~###
+#######.ž.ž..#####~~Ķ~~~#####~~##~~~#~Ł~##~~~###...#...###############ŵ#ŝ###ŵŝ#ŝ#ŵ###....#...8#######.£~....~.################~###
+#######..ž.+p####~~~~~~~####~~~~.Ĵ~Ň.~~~.Ĵ~~~###.6~Ĵ~4.###############ŵ#ŝ_##ŵŝ#ŝ#ŵ#......"....#######.~~...##.##############..~.##
+#~~~~##+rŇ~.r:~##~.....~####~~Ī~~...~...~~~~~###.#ĶŁĪ#.6~~đđđđđđđđđđđđ~~~đđđŵŝ#ŝ#ŵ#.d...."..."#######.~....~..##############.~..##
+#~r~~Ň~...+.6~~#cqpr.rpqc####Ķ~~....ŵ....~~~####.6~Ł~4.##Ňăăăăăăăăăăăă~#~ăăăăă#ŝ#ŵ####...dw#..#######.~...e##########~~~~~~~~~..##
+#~~~~##...r.#~~~c~.....~c####.~...~~~~~...~.####..6~4..##~############ŵ#ŝ######~~~#################...~~..e##########~~#######~~##
+####ŝ####..##ŵ#~+......ă+:~~~~...~~...~~...Ī~~#####~##################ŵ#ŝ###~~~~m~~~~##############....~..e#...######~~#~~~~ă~~~##
+####ŝ#####~##ŵ#~.~....6~~~#~~~..~~.....~~..~Ķ~~~~~~..#################ŵ#ŝ###~~4...6~~######ŝă~~.~4..ĕ..~4..~~..######~~~Ĵ~~ŵ#~Ł~##
+####ŝ#####Ň##ŵ##.........##~~Ķ..~..~~~..~..~~~#####..#################ŵ#ŝ###~8aasdd8~###~~~~#8...##...~~...#...######~~~~~#.~~~~##
+####ŝ####~~~#ŵ###############.Ĵă~..~r~..~đŁ.##########################ŵ#ŝ###~.aswsd.~###~##đđ.ĕ..##...~~...#...########.....~~Ī~##
+####ŝ####~r~#ŵ#############~~~..~..~~~..~..Ī~~########################ŵ#ŝ###~.aasdd.~##.~.###~~..###########...########.....~~~~##
+####ŝ####~~~#ŵ#đđđđđđđđđđđđ~Ī~..~~.....~~..~~~~:6~......##############ŵ#ŝ###~.aswsd.~##...############.........########.......6~.#
+####đđđđđđđđđŵ#ŵ###########~~Ķ...~~...~~...~~~##~Ĵ......##############ŵ#ŝ###~2aasdd2~#""x""###########.######.#########.2.....~..#
+###############ŵ#############.~...~~~~~...~.####~~~4.6~~##############ŵ#ŝ###~~4...6~~#6xxx4########~~#.#~~##..2#########~#####~###
+###############ŵ##~4..t~~~###~~~....ŝ....~~Ī######..ž.Ķ~##############ŵ#ŝ###~~~#s#~~~##"8"#########~£~.~~~##~.~#########.#####Ň###
+###############ŵ##~~Ĵ.p.Ķ~##~~~~~...~...~~Ķ~~###~~~4.6~~##############ŵ#ŝ######s########2##########~J~.~L~##~..###~~~.##~~~##~~~##
+###############ŵ#~~~~.p.~###~~~Ł.~~Ł.~~Ł.~~~~~##~~......##############ŵ#ŝ######d.~~~~~~~~##########~Ķ~↔~Ķ~##~~~###~.~6~~.Ň~##~r~##
+#########~~~4##ŵ#Ķ~~~.p.ŝ####~~##~Ĵ~#~~~##~~#~~~6~......##############ŵ#ŝ##########################~~~.~~~###Ň####~£~.Ķ#..~##~~~##
+#######~~~~~ž.#ŵ#~.ŵ..p.~:~~~~###~~~#~~~##############################ŵ#ŝ##########################...#...##~~~###..ĕ.~###########
+#######.#~~~ŝ.#ŵ#~..~#p.~##########~###~~~~~~#########################ŵ#ŝ##########################...#...##~r~###~đ~.~###########
+######.r.žt...#ŵ#~~~Ī#p6~##########~########8#########################ŵ#ŝ##########################...#...##~~~###~.~.~###########
+#######p.tpž..#ŵ#z~~~#q~.~~~~#####~~~~######;#########################ŵ#ŝ##########################2..#...########~~~.~Ī~#########
+#######pcppđ.~~ŵ#cccccc#####8#####.rt.##.........#####################ŵ#ŝ##########################~#.#...##########~#~Ł~#########
+#######...;2##############..;...##....##.~~~.~~~.#####################ŵ#ŝ##########################~~...###~~~~~..##£#~~~#########
+###########~####~~~.#~~~##..tr..##..ž.##.~~~t~~~.#####################ŵ#ŝ#############################.##~~~~~~~ĕŝ~~~#############
+###########~~~~~~~~.:~Ň~##......##..~~##.~Ň~p~Ň~.#####################ŵ#ŝ##########################~##~~~~#~~~~~~e################
+###########~#####~~.#~~~##.ŝăŝĴ.##..Ň~:~..~.p.~..##đđđđđđđđđđđđđđđđđđđ~#~đđđđđđđđđđđđđđđđđđđđđđđđđđŇ##~####.2.....################
+###########đŝđđŝ#.###~~~##.đ....##.6~~##.~~~p~~~.##ŵŝăăăăăăăăăăăăăăăăă~~~ăăăăăăăăăăăăăăăăăăăăăăăăăă~~~~####...ĴŁ.ĕ.###############
+###########ŵđŵŝđ~.ăăă~r~##.ăŝŁ..########.~zqp~#~.##ŵŝ#################ŵ#ŝ####################################~~~...###############
+###########ŵăăăăĪ~###~~~##......########.~~~.~~~.##ŵŝ#################ŵ#ŝ####################################~~###################
+#################:##########~###########..8......##ŵŝ#########_#######ŵ#ŝ#########################################################
+#################~##########:###~##################ŵŝ#################ŵ#ŝ#########################################################
+###########.tĪ~~~~:~#....~.~~~##~đđđđđđđđđđđđđđđđđđŵŝ#################ŵ#ŝ#########################################################
+###########.p..8~~#~#~~4.~tŁ~~##Ňăăăăăăăăăăăăăăăăăăăă####~~~~~###~~~~~~~~~~~~~####################################################
+###########.r.....#~#~Ł..~p8r.##~#####################...~Ň~~~~~~~~~M~~~~~~~~~####################################################
+###########.ŵ.Ł.ŵ.#8#~~qt~q.p.##~#####################...~~~~~.##..~~~~~£~~~..####################################################
+###########...~4..#.#ppr.qqqq~##~#####################...ž.....##...~~~~~~~...####################################################
+###################..t..6q~~Ī~##~#####################......ž.;...ž4..8.8.....####################################################
+#####################q...p.~~~~~~#####################.........##...ĕ.........####################################################
+#####################ccccc############################.........##......;......####################################################
+#################################################################.............####################################################
+
+(-------)
+(GROUP A)
+(-------)
+
+Message Welcome to my dungeon! Ok, so really just a dusty basement in the depths of a mega-store distribution warehouse.
+Message It's the end of the season and the shelves are empty. The conveyor-belts have been dismantled and serviced, but not yet refitted.
+Message But I can't hang around to refit them now, I must escape before the next stock delivery arrives!
+
+(clickmazes: this extra narrative could be considered if the final player sprite was a robot, or something similar, as suggested under FEATURES above:
+Message Oh, I should introduce myself...
+Message I am what is called a "Storage Facility Track-and-trace" (SFT) robot. I can speed navigate these shallow tunnels faster than any human.
+Message My nickname is "Rabbit". You can guide me via the overhead cameras and a special keypad. Yes exactly... the one marked "SFT-Rabbit")
+
+(------------------)
+(INDIVIDUAL PUZZLES)
+(------------------)
+
+message "[Note] Branch A starts here"
+
+(Design and implement your puzzle in this section as its own isolated level. All of these levels will be combined into one large level at the end of the project. Please include a GIF or some other representation of your intended solution if you can.
+
+If you have ideas for how future puzzles could connect to your puzzle in interesting ways (e.g. passing belts between them), add a CONNECT comment below your puzzle. If you would like to provide an example of interesting layouts or directly join two puzzles together, do so in the CONNECTION EXAMPLES section further down. If you are using another puzzle's CONNECT comment as a prompt for your own puzzle, also mention that in your own CONNECT comment.)
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+(Wall: #  Platform: ~)
+
+(Jumble: Even smoother intro puzzle.  Clarifies that there is a multipush and that conveyers exist.)
+(DONE)
+@############
+#############
+:~ŇŇŇ~q##đđđ0
+###~####~~###
+###~###~Ň~###
+###~###Ň~~~##
+###~~Ň~~~~~##
+#############
+(CONNECT: Should also be the one of the easiest connection puzzles, pushing a box out isn't trivial but still very easy.  Honestly though you should still probably change the connection puzzle)
+
+(Joseph Mansfield (sftrabbit))
+(Joseph Mansfield (sftrabbit): I know this is the seed level, but feel free to add an earlier level if anyone thinks it would be good. I just wanted to make sure the base mechanics were covered.)
+(Draknek: I think marcos's level is probably a smoother introduction?)
+(DONE)
+@##########
+###########
+##~~~~~..##
+:~~~~~~~ŝ~0
+##~~~~~..##
+##.8.....##
+##...~~...#
+####~Ň~...#
+####~~~####
+###########
+(SOLUTION: https://i.imgur.com/DxxCtL9.gif)
+(CONNECT: No special inputs or outputs, can probably be placed anywhere.)
+
+(Marcos Donnantuoni (marcosd#7854))
+(feel free to reorder it)
+(flipped upside down for 3D clarity -JM)
+(DONE)
+Message how did those conveyor units get up there?
+@########
+#########
+#.......0
+#..~~~..#
+#.~~Ī~~.#
+#6~Ł~Ł~.#
+#.~~Ī~~.#
+#..~~~..#
+;.......#
+#########
+(solution: (with rot13): eqqqe eeheq yqyqe hehhe qyqyq ehheq q
+ gif with extra output: https://imgur.com/72ZNvUa)
+(CONNECT: No special inputs or outputs, can probably be placed anywhere.)
+(knexator edit: the player can take either a right or a down conveyor out of the level)
+
+(knexator)
+(should be inmediately after marcosd's)
+(DONE)
+@#####~##
+######0##
+#~~....~#
+#~Ķ...#~#
+#~~.~..~#
+#...~~~.0
+#..6~~Ī~#
+#~~.~Ň~~#
+~:~.....#
+#########
+(SOLUTIONS: https://imgur.com/a/X083eAP)
+(CONNECT: By default, the player can only use the exit at the top. If they bring a right conveyor in, however, they can exit to the right. Additionally, feel free to change the 3rd wall tile on the bottom row to an opening to a level that requires an extra down conveyor)
+
+(Corey Hardt)
+(I think this is pretty easy, set out to make an early/teaching level)
+(mirrored vertically for 3D clarity - JM)
+(DONE)
+@########
+#########
+#~~~~Łŝ.#
+#~....ă.#
+#..~4.ŝ.#
+#..~....#
+#.6~Ĵ.~~0
+;.......#
+#########
+(SOLUTION: https://i.imgur.com/niP3NP3.gif)
+(CONNECT: No special inputs or outputs, can probably be placed anywhere.)
+
+(Auroriax)
+(These mechanics don't really allow for nice symmetrical level layouts, but here's one anyway! Feel free to reorder or make slight adjustments.)
+@##~~~###
+###~0~###
+###...###
+###~~~###
+###~Ň~###
+###~#~###
+##.....##
+##.....##
+#~~~#~~~#
+#~Ł~#~Ĵ~#
+#~Ī~#~Ī~#
+#~Ł~#~Ĵ~#
+#~~~~~~~#
+####:####
+(SOLUTION: https://gyazo.com/dfd644486aca36d7a36e88fb89d13556)
+(CONNECT: No special inputs or outputs, can probably be placed anywhere.)
+
+(Kristian Hedeholm (KristianHedeholm#3080))
+(I thought the base mechanics was quite interesting on their own, so I decided to make a level using only those. While iterating on the design for this level I got an epiphany about how it could also be solved. This allowed me to make a much more simple and clean design for the level, Which I'm quite satisfied with. I'm a bit unsure about how difficult the level is since in hindsight the solution seems quite forward giving how the machines work, but it still took me quite some time before I realized it myself. My gut feeling is that this level could be after the introduction levels as one of the first levels that will start raising the difficulty curve. However, you are welcome to reorder it. If you have any feedback about my level you are very welcome to text me on Discord about it.)
+(rotated 90 degrees then flipped vertically for 3D clarity - JM)
+@##########
+#~~~..~~~~#
+#~~~..~~~~:
+#~~Ň..~Ĵ~~#
+#.....8...#
+#ăă~~...~.#
+#...~..~Ň~#
+0~~....~~~#
+#~~.~~#####
+###########
+(SOLUTION: https://imgur.com/a/tMhCNhJ)
+(CONNECT: No special connection features used in this. The starting position can be changed to any of the 3 first horizontal and vertical blocks from the upper-right corner. In the same way, the exit can be changed to any of the 2 first horizontal and vertical blocks from the lower-left corner.)
+
+
+(CHz)
+(Tight block manipulation + funky conveyer setup, maybe difficult?)
+(DONE)
+@###;####
+#.......#
+#...#...#
+#.6~Ĵ~4.#
+#.#ĶŁĪ#.#
+#.6~Ł~4.#
+#..6~4..#
+####~####
+0~~~....#
+####....#
+#########
+(SOLUTION: https://imgur.com/a/6EW5GX6)
+(CONNECT: The player start can be moved to any of the three walls to allow this room to be slotted into any formation with rotations/mirroring.
+The player start currently doesn't allow blocks to be brought in, but with an adjustment to be off-center, bringing in a block of any type will allow you to take out a block of a certain type:
+  • Bring in an up: take out a right or an up
+  • Bring in a down: take out a right or a down
+  • Bring in a left or a right: take out a right
+Example of up -> up: https://imgur.com/a/XR4eUld
+I don't think it's otherwise possible to take a block out of this level [famous last words])
+
+
+(Martin Ender (Menderbug))
+(Introductory level for exploring (ROT13) fgnpxvat pbairlbef naq chfuvat gur obggbz ynlre. I expect there's a lot more depth to explore here.)
+(DONE)
+@#########
+##########
+#......~4:
+#......Ł~#
+#~~4.6~~~#
+#~Ķ.ž..###
+#~~4.6~~~#
+#......~~#
+#......~40
+##########
+(SOLUTION: https://i.imgur.com/UlQINfo.gif)
+(CONNECT: Since both entrance and exit are on the same side, they (probably) connect to the same level, so this would allow someone else to build a level that needs to be exited in the top left and re-entered in the bottom left, either because the solution requires to go around some obstacles, or because it's some kind of 2-pass level. If no one ends up doing that, this can easily be turned into a more regular layout by shifting the entrance to the cell above the pit.)
+
+
+(Draknek)
+(made a simpler tutorial for buttons/doors/wires. maybe spoils a bit too much for the first instance though?)
+(rotated for clarity - JM)
+(DONE)
+Message what's that big red button?
+@##########
+###########
+#.........#
+#.~~~.~~~.#
+#.~~~t~~~.#
+#.~Ň~p~Ň~.#
+0..~.p.~..#
+#.~~~p~~~.#
+#.~zqp~#~.#
+#.~~~.~~~.#
+#..8......#
+###;#######
+(SOLUTION: https://i.imgur.com/Mq1TMHd.gif)
+(CONNECT: Whatever)
+
+(Aspeon)
+(a very simple tutorial for (rot13) hfvat n qbbe gb yvsg lbhefrys)
+(clickmazes: I pulled this one forward to a more suitable position for a tutorial - my own level builds on this)
+
+@#~######
+##:######
+#~~~...~#
+#~Ň~ž.t~0
+#8....r~#
+#......~#
+#########
+(SOLUTION: https://imgur.com/a/HnRs4FX)
+(CONNECT: If you brought two belts (one X/right, one of any type) into this room, you could take the "any type" out... but that also bypasses the intended solution/teaching of this puzzle)
+
+(Kirraluan)
+(I has nothing can elaborate...Enjoy!)
+@##########
+###########
+#~~~t..6~##
+#~Ķ.p.Ł~~##
+##~.p.~~~~#
+##ŝ.p.~~~Ķ#
+:~~.p..ŵ.~#
+##~.p#~..~#
+##~.p#Ī~~~#
+0~.~q#~~~z#
+####c####c#
+####cccccc#
+(SOLUTION: https://imgur.com/gallery/u6ETCuT)
+(CONNECT: Everything you wanna do is ok, no special stuff)
+
+(clickmazes)
+(My level feels about the same difficulty as Kirraluan's so placing it here. Feel free to bump up or down. Note the wire is superfluous and can be removed during the final merge if it serves no useful CONNECTION purpose)
+(rearranged starting belt positions with approval from clickmazes - JM)
+
+@##.####
+###;####
+#......#
+#..trppc
+#......#
+#.ŝăŝĴ.#
+#.đ....#
+#.ăŝŁ..#
+#......#
+###0####
+(SOLUTION:  https://drive.google.com/file/d/1uKdR_srMSBSyrighORhf3jtCB_W3VGQv/view?usp=sharing) 
+(CONNECT-IN: any of the ground-level blocks could be pushed in from the previous level but the resulting set must be "aasssd")
+(CONNECT-OUT: None of the blocks can exit the level, however the red button is left enabled at the end so the active wire could serve a purpose. See CONNECTION EXAMPLES)
+
+(pancelor)
+(a tutorial for buttons/doors/wires. maybe too difficult / too long?)
+(rotated for clarity - JM)
+@#~########
+##:########
+#~~~.~....#
+#~~Ĵt~.6~~#
+#.r8p~..Ĵ~#
+#.p.q~tq~~#
+#~qqqq.rpp#
+#~Ī~~q4..to
+#~~~.p...q#
+#####ccccc#
+###########
+(SOLUTION: https://youtu.be/pP9Sjp1IlK0)
+
+(Norgg)
+(Playing with having more than one block on top of a door)
+(rotated for clarity - JM)
+@######~#
+#######0#
+#đŝđđŝ#.#
+#ŵđŵŝđ~.#
+#ŵăăăăĪ~#
+#######~#
+#.tĪ~~~~:
+#.p..8~~#
+#.r.....#
+#.ŵ.Ł.ŵ.#
+#...~4..#
+#########
+(SOLUTION: https://i.imgur.com/U6jrzl7.gif)
+(CONNECT: No special connection features really, could be split into two rooms because the bit on the left was mostly to fill in some dead space)
+
+(Le Slo)
+(Another level with more than block on top of a door)
+(flipped upside down for clarity - JM)
+
+@#########
+##########
+##6~~~####
+#.ž~~~~~##
+#.ŝ~~~#.##
+#...tž.r.#
+#..žpt.p##
+#~.ăppcp##
+0~#.....##
+###:######
+
+(SOLUTION: https://imgur.com/a/hTijOLJ)
+(CONNECT: This level has an alternative solution (actually extending the original solution) to retrieve one left belt block back to the previous level. It is not initially thought to mix with any of the existing levels.)
+
+(Joseph Mansfield (again))
+(Felt like we could do with a slightly less noisy intro to the inflatables)
+@##########
+###########
+###~~~~~###
+##~~~Ķ~~###
+##~~~~~~~##
+##~.....~##
+#cqpr.rpqc#
+#c~.....~c#
+#+đ......+#
+:~~4....~.0
+#.........#
+###########
+(SOLUTION: https://i.imgur.com/NwFJ4aM.gif)
+
+(ClementSparrow)
+(A level introducing the "inflatable walls" mechanic with simple consequences of it - I say simple, because they are only horizontal versions of things that have already been done on a vertical axis with "doors" in previous levels.
+It has three exits: the north one is the simplest, the east one is slightly harder as it requires more planning, and the south one requires a BeltX from the western room.
+Feel free to remove exits if you don't need them or if they don't match the expected difficulty.)
+(Joseph Mansfield (sftrabbit) - moved this level above Pedro's since we'll probably use the inflatable walls to introduce the fusion mechanic)
+@##~#####
+###0#####
+##......#
+##..ž.ž.#
+##p+.ž..#
+:~r.~Ňr+#
+#~4.+...0
+###.r...#
+####..###
+####0####
+
+(SOLUTIONS: https://imgur.com/a/qm2UWf5
+- north: https://imgur.com/QepEXd9
+- east: https://imgur.com/089WWY3
+- south: https://imgur.com/883BNyr
+)
+(CONNECT-IN:
+- A BeltX  or Belt_R can be brought in from the west entrance, allowing to reach the south exit.
+- Belts can be brought in the room from any of the other sides, but the benefit would only be to make the level easier by having one more belt.
+- The westmost button could have a second wire comming from another room, but it would not allow new solutions. It may still be useful to create paths between two exits other than the west one.
+)
+(CONNECT-OUT:
+- It is possible to get the BeltX initially on the platform out of the room through the west or east exits, but only if there is a way to exit the room to the west and then reenter it from the east with a Belt_X or Belt_U (for the west exit) or Belt_R (for the east exit). The setup to do that would be a variation on the normal solution for the east exit.
+- All solutions end with the westmost button pressed, so it's unlikely to be useful for connections.
+- The southmost button is left unpressed for the north and east exits, but pressed for the south exit.
+- The eastmost button is left pressed for the east exit, but its final state can be choosen for the two other exits, although it's not an interesting challenge in itself since it's as simple as pushing the Belt_X on it from the platform.
+)
+
+(Joseph Mansfield (sftrabbit))
+(Potential level to go before Deusovi's if we find that the introduced mechanic is too difficult to discover)
+(@##~###
+###0###
+#cqrqc#
+#c~ž~c#
+#c~.~c#
+#+...+#
+#~...~#
+#8...8#
+#.ă.đ.#
+#.....#
+###;###)
+(SOLUTION: https://i.imgur.com/y626YeB.gif)
+
+
+(Deusovi)
+(An "accidental discovery" level showing the player that the fusion mechanic is a thing. Also introduces diagonal blocks, if those haven't been introduced before.)
+@############
+#############
+##cqzqc######
+##c~~~c+žr###
+##+...+##c###
+#~~.pt...p..#
+#~~.ct...pž.#
+:~~.ppppppă.#
+#~~pptt...ŝ.#
+#~~tt.~~~.đ.#
+#~~4..~~~...#
+#######0#####
+(UNSOLUTION: https://i.imgur.com/N2nBvQt.png)
+(SOLUTION: https://i.imgur.com/v1FFQT9.png)
+
+
+(crychair)
+(Wanted to build more on inflatables moving blocks aroung without combining. Im sure there is a solution with combining as well though.)
+
+@#########
+#ccccccc##
+#q.....q~0
+#q.....p##
+#c+ŵŵ.+p##
+:q+...+p##
+#q+žŵ.+p##
+#~.....r##
+#~2.#..###
+#~~~~~.###
+##########
+
+(SOLUTION: https://imgur.com/a/9UFkYZG)
+
+(CONNECT-IN: Cant really have a block brought in the way its setup. )
+(CONNECT-OUT: Feel free to modify the right side of the level this is just arbitrary.)
+
+(Joseph Mansfield (sftrabbit))
+(Another one to smooth out the difficulty around discovering things - this is hopefully a nice intro to Pedro's level without spoiling most of what Pedro's level is about - Pedro has okayed me introducing this)
+@###~####
+####0####
+###đ.ă###
+###ŵ#ŵ###
+#+žŵžŵ.+#
+#q~~~~~q#
+#z~Ĵ~Ł~z#
+#~~~~~~~#
+####:####
+(SOLUTION: https://i.imgur.com/ZXzBv3E.gif)
+
+(Pedro PSI)
+(a level introducing the combining mechanic - opposing belts)
+
+@#####~######
+######0######
+#####~~~#####
+#####~~~#####
+####đ...ă####
+#~~~ŵ~~~ŵ~~~#
+#~Ł~ŵŁĴŁŵ~Ĵ~#
+#888.888.888#
+#...#...#...#
+#.ŵŵă...đŝŝ.#
+#...........#
+######:######
+
+(SOLUTION: https://imgur.com/a/CjuHqkH)
+(CONNECT-IN: optionally you can replace the last block in the chain with any block brought from another level, since it is there simply to "bridge" the two sides of the mechanism. Also, you can displace or enlarge the entrance freely at the bottom)
+(CONNECT-OUT: None of the blocks in the level can reach the exit, no matter how many blocks we start with at the bottom.)
+
+
+
+(-------------------)
+(CONNECTION EXAMPLES)
+(-------------------)
+(If you have suggestions around how your puzzles could be connected to other puzzles or just general examples of interesting layouts, provide examples here. Please leave a comment saying which puzzles you combined and any other information. NOTE: This is not meant to be where the final giant level is created - that will be done at the end of the project.)
+
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+
+
+((John Doe)
+(Combined: John Doe + Sally Smith)
+(John Doe: I thought it'd be interesting if the belt you can remove from Sally Smith's puzzle can be used as the initial belt in mine.)
+#######
+#.....#
+#.....#
+#.....#
+#.....#
+#######)
+
+
+((knexator)
+(Combined: marcosd + knexator)
+(knexator: the player can extract either a down or a right conveyor from marcosd's level. My level is designed so the entrance lines up with the exit of marcosd's level)
+@#############0##
+;.......#~~....~#
+#..~~~..#~Ķ...#~#
+#.~~Ķ~~.#~~.~..~#
+#6~Ł~Ł~.#...~~~.0
+#.~~Ķ~~.#..6~~Ī~#
+#..~~~..#~~.~Ň~~#
+#.......0~~.....#
+#################)
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+
+(clickmazes)
+(A simple illustration of how the button on my level could open a door on a passage between later levels. 
+@##;####~#
+#......#~#
+#..trppct#
+#......#~#
+#.ŝ..Ĵ.#~#
+#.đ..ŝ.#~#
+#.ăŝŁă.#~#
+#......#~#
+###0####~#)
+
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+
+
+(-------)
+(GROUP B)
+(-------)
+
+message "[Note] Branch B starts here"
+
+(------------------)
+(INDIVIDUAL PUZZLES)
+(------------------)
+
+
+
+(Design and implement your puzzle in this section as its own isolated level. All of these levels will be combined into one large level at the end of the project. Please include a GIF or some other representation of your intended solution if you can.
+
+If you have ideas for how future puzzles could connect to your puzzle in interesting ways (e.g. passing belts between them), add a CONNECT comment below your puzzle. If you would like to provide an example of interesting layouts or directly join two puzzles together, do so in the CONNECTION EXAMPLES section further down. If you are using another puzzle's CONNECT comment as a prompt for your own puzzle, also mention that in your own CONNECT comment.)
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+(Wall: #  Platform: ~)
+
+(Patrick: Intended as the starting level, feel free to tweak etc.)
+(DONE)
+_############
+#############
+#~~~~~~~~..##
+#~~~~.~~~..##
+#~.ž....~..##
+#~.....6~..##
+#~.........~0
+#~...;..~~~##
+#~......~Ň###
+#~......~~###
+#~~~..~~~~###
+#############
+(SOLUTION: https://i.imgur.com/I9ohlU3.gif)
+
+
+
+(Joseph Mansfield (sftrabbit))
+(Joseph Mansfield (sftrabbit): I know this is the seed level, but feel free to add an earlier level if anyone thinks it would be good. I just wanted to make sure the base mechanics were covered.)
+(That Scar: can optionally transfer a Dynamic_Above)
+(DONE)
+_##########
+###########
+##~~~~~..##
+:~~~~~~~ŝ~0
+##~~~~~..##
+##.8.....##
+##...~~...#
+####~Ň~...#
+####~~~####
+###########
+(SOLUTION: https://i.imgur.com/DxxCtL9.gif)
+(CONNECT: No special inputs or outputs, can probably be placed anywhere.)
+
+
+(Blookerstein: simple tutorial level demonstrating that infinite loops are bad.)
+_##~##
+###0##
+###~.#
+###đă#
+#~~~4#
+#~Ň~##
+#~~~##
+###:##
+(SOLUTION: Push the left facing conveyor up one, then push the block onto the right facing conveyor.)
+(CONNECT: No special inputs or outputs, but cannot be traversed backwards)
+
+
+
+(Pichusuperlover: Made using default mechanics, I liked the idea of a channel in the middle and this seemed to be the most interesting way to do it, might be a bit too much walking up and down over and over but I think its fine)
+(Notan: unintended solution? https://youtu.be/lFVzcmMIH5w)
+(Muftwin: Added hole to the end since it was trivial)
+(Joseph Mansfield (sftrabbit): I think Pichusuperlover intended it as a level to extract a block, but I would inevitably have to use that block to fill in a hole like Muftwin has added, so this is effectively what's intended.)
+_##~####
+###:####
+##~Ň.###
+##~~4###
+##~~ă###
+##~~4~~#
+##~~.~~#
+####.~~#
+#~~#.~~#
+#~~~.~~#
+#~~~4~~#
+##~~đ###
+##~~4###
+##~~.###
+###.####
+###0####
+(SOLUTION: https://imgur.com/LEk6OAQ)
+(CONNECT: Box in Box out)
+
+(Mischka Kamener: A puzzle about blocks with ladders. feel free to make adjustments etc, or even remove the starting mini puzzle at the bottom and just go into the harder one)
+_########~#
+#########0#
+#~~~#####~#
+#~ň~#####.#
+#.........#
+#..6ž4ž...#
+#........##
+##~########
+#.....#####
+#..6ž######
+;.ž.8######
+#....######
+###########
+(SOLUTION: https://i.imgur.com/ctNfhzD.mp4)
+(CONNECT: Could be adjusted to accept a regular box in)
+
+message Huh, this block seems to be sticky on top. How did that happen?
+
+(Joseph Mansfield (sftrabbit): Another simple level just to show that stickiness is a thing that may or may not be there)
+_###~###~###
+####:###0###
+####~###.###
+####~##~~~##
+#~~~Ň~#~~~~#
+#.8.ž...8.~#
+#~~~~~~~~~~#
+#~M~########
+#~~~########
+############
+(SOLUTION: https://i.imgur.com/YEYlB3z.gif)
+
+(Justas: A puzzle about using immovable solids to cancel belt movement.)
+(Muftwin: Bug a third box appears when I step on to the box meaning I only need 3 of the belts)
+(Joseph Mansfield (sftrabbit): I let Justas know about the alt solution and they provided a fixed version of the level)
+_#####~##
+######:##
+##..~~~~#
+#...m~m~#
+#...a...#
+#.s..d..#
+#.s.....#
+06~.....#
+#########
+(SOLUTION: https://i.imgur.com/J0z3ZJj.gif)
+(CONNECT: All 4 belts can be sourced from other levels. The solution to this makes the level impossible to backtrack without restarting. If possible, please preserve the starting location of the player. Thank you. :)
+
+
+
+(That Scar: I made this. It supports transfering a Dynamic_Above to be passed from one side to the other but only once (currently simulated with a box/hole at start/finish; these can be altered)
+It's a nice easy level if there is no box/hole (commented out level just below it)
+Not sure how the big-connected-level will evolve but yeah, it could have an optional objective to take a box with you, where there's less challenge without it. Anyways, the easier version can definitely be scrapped if it's not needed.)
+(Notan: unintended solution? https://youtu.be/SPS4qYjZ88M)
+_#############
+##############
+###xxxxxxxx###
+###........###
+:M~xx4x6x..~.0
+###........###
+###x.xxxx.x###
+##############
+
+(
+@#############
+###xxxxxxxx###
+###........###
+:~~xx4x6x..~~0
+###........###
+###x.xxxx.x###
+##############
+)
+(SOLUTION: https://i.imgur.com/BzAElSv.gif)
+(CONNECT: No requirements. Optional belt transfer (read main comment))
+
+
+
+(winterbeak)
+(Kind of an introduction to Wall_above.)
+_##~############
+###0############
+#~~~...........#
+#~."...........#
+#.."...........#
+#.."........"".#
+#.."...####~~~~#
+#~."....a.#~MM~#
+#~~~4.6w~~#~~~~#
+###########~~~~#
+##############:#
+(SOLUTION: https://i.imgur.com/qOY5Edk.gif)
+(Not sure if this solution feels cheap. Also not sure if it's treading on a later level's ideas.)
+(CONNECTION: Can bring up to two blocks in. No output.)
+
+_####.#####
+#####;#####
+####...####
+##.......##
+#.6L.K.J4.#
+#...."....#
+#..M"~"J..#
+##.......##
+##..#~#..##
+#####0#####
+(SOLUTION: https://imgur.com/a/9UWJ7oB)
+(Dan Williams/@videospacegames I made this; not too challenging but I enjoyed the theme)
+
+
+(Guilherme Tows (zaratustra))
+_####~#####
+#####0#####
+#~~.#~#..##
+#~M"#~#.s##
+#8x..~...##
+#.........#
+#....~....#
+#....I....#
+#####.##"s#
+#####....a#
+#####~...##
+#####~....#
+#####~4.".#
+#####:#####
+(SOLUTION (adjusted after rotation): push M down, push x right then down once, then right 5 times.
+push rightmost s down 4 times, left once. push the block in the gap below you
+down once, then push the block stacked on top of the conveyor right twice. push the stack of two blocks to the
+gap in middle catwalk then go up)
+
+
+(Colin: A small puzzle about moving a block with a south ladder north.
+Feel free to order the level, it contains no conveyors or explosives so could go quite early.) 
+_##~###
+###0###
+##.~.##
+##...##
+#""x""#
+#6xxx4#
+##"8"##
+###;###
+(
+Solution: https://imgur.com/iHGuXvt
+Connection notes: objects shouldn't be brought in, can be backwards traversable
+)
+
+
+(Muftwin: this is pretty easy, but if CONNECT you also had to move an object across to one of the sides or you had to get the up arrows out somehow it could get quite tricky. You could also add some walls in the middle to make the route pass through more tiles. Changing any arrows is fine as long as there is exactly 7 downs. Point is this level is pretty open to do anything with.)
+_###~~~####
+####~:~####
+#~~~~m~~~~#
+#~~4...6~~#
+#~8aasdd8~#
+#~.aswsd.~#
+#~.aasdd.~#
+#~.aswsd.~#
+#~2aasdd2~#
+#~~4...6~~#
+#~~~#s#~~~#
+#####s#####
+#####d.~~~0
+###########
+
+message Press X to explode all bombs that are within 3 blocks of yourself.
+
+(Joseph Mansfield (sftrabbit): Just added this to introduce bombs in their normal form before making them sticky)
+_###o#
+####.#
+####.#
+:~..~#
+##.ĕ##
+##..##
+######
+
+message Oh no, some of the bombs are sticky too!
+
+(Toombler: A puzzle intended as an introduction to bombs. 
+Teaches/requires:
+- horizontal radius of bomb explosion
+- bomb chain reactions
+- walking on bombs
+- carrying objects on bombs)
+_############
+#############
+###.~~...####
+###.£~....~.#
+###.~~...##.#
+###.~....~..#
+###.~...e####
+#...~~..e####
+#....~..e####
+#.ĕ..~4..~~.o
+#...~~...####
+#...~~...####
+#.;.#########
+(SOLUTION: https://imgur.com/a/kJ0c3eh)
+(CONNECT: No input (well you could bring a bomb in but the level is intended as an introduction to bombs). 
+No output for the above puzzle. Below is a version which would output a bomb if you solve the above level, but still let you through if you just know how to blow stuff up (as a puzzle the harder version is much nicer). I found Notan's level really hard though so perhaps it would be worthwhile to force people to do the harder version, to prepare them for Notan's level which doesn't have an easy route.
+#############
+###.~~...####
+###.3~....~.#
+###.~~...##.#
+###.~....~..#
+###.~...e####
+#...~~..e####
+#....~..e####
+#.e..~4..~..o
+#...~~...####
+#...~~...####
+#.;.#########
+#...#########
+)
+
+
+(A bomb puzzle by Joel in 3 difficulties
+1 - make it to the exit
+2 - get the rightward conveyor to the exit
+3 - get the leftward conveyor to the exit)
+_##########
+###########
+####~~#####
+####~~~...#
+##...ĴŁ.ĕ.#
+##.2.....##
+##~~~~~~e##
+:~~~~~~ĕŵ~0
+##~~~~~..##
+###########
+(SOLUTIONS: https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+(CONNECTION IDEAS - since there aren't many levels yet I can't connect this to anything, but I think it's worth preserving the 3 difficulties by having it affect the next puzzle. If it's too hard to make it fit together perfectly with another puzzle, then at the end of the project this could connect to a 3-way non-puzzle corridor that sends you to different places depending on what you left this puzzle with.)
+(Justas: solution that doesn't require activating the bombs or using any of the belts: https://i.imgur.com/csTRddy.gif)
+(Blookerstein: or you could just, you know, push the upper rightmost bomb one up. the solution has the funny XcQ link so idk what it's actually supposed to be for the first one.)
+
+
+
+(Notan: I like how this level ended up having 4 little rooms of size 3x3. I know there are a few solutions, but I'm pretty sure they all require the same key idea. Feel free to reorder this level.)
+_######~###
+#######0###
+#######.###
+#~~~.##~~~#
+#~.~6~~.Ň~#
+#~£~.Ķ#..~#
+#..ĕ.~#####
+#~đ~.~#####
+#~.~.~#####
+#~~~.~Ī~###
+###~#~Ł~###
+###£#~~~###
+###:#######
+
+
+(SOLUTION: https://youtu.be/rtRyWjT2lUs)
+(CONNECT: Bring in an explosive, no output. If you change the level like the following, you can bring the belt near the goal out of the level.
+#######0###
+#~~~.##~~~#
+#~.~6~~.m~#
+#~3~.k#..~#
+#..e.~#####
+#~d~.~#####
+#~.~.~#####
+#~~~.~i~###
+###~#~l~###
+###3#~~~###
+###:#######
+This belt can have any direction, and it can be instead an explosive.)
+
+
+(Zach: this puzzle is intended mostly for CONNECTION - the right half is just for validation.  The intent is that the item at the top can be retrieved, but only by swapping it with an item from the bottom half - this could be a one-off or a chain of alternate solutions, depending on how many levels you can carry high items through)
+(Solution: https://i.imgur.com/8NyDyn6.gif)
+(After 3d-ifying, I restructured the platform a little because the "height" of the platform would get kind of lost because you couldn't see the front of it - JM)
+(Joseph Mansfield (sftrabbit): As far as I can tell, the right half doesn't actually validate anything because you can easily push the BeltU into position without bringing it down. But I get the point, I think! Might have to adjust to make it actually work)
+_...#########
+#.;.#########
+#..~~~~~~~###
+#..~~Ī~~~~###
+#...#~~##~###
+#...#~~##~###
+#....đ~##.~.0
+#.~~~#ŵ###~##
+#.~~~~~###~##
+#2~Ł~Ķ~~~~~##
+#~~~~~~##~~##
+#############
+
+message Oh, who stored the bombs next to the slime vats? No wonder everything's so sticky!
+
+(Joseph Mansfield (sftrabbit): Simple puzzle to explain why everything is so sticky (as mentioned in notes at the top, I had to add stickiness for practical reasons which will be apparent when the game is done))
+(SOLUTION: https://i.imgur.com/YvhLxku.gif)
+
+_~#######
+#0#######
+#~#######
+#.~~.~~##
+##...~~##
+##...~~##
+##.ž.$£##
+##...~~##
+##..6~~##
+##...~Ň~#
+#....~~~#
+#;#######
+
+
+(Shark: puzzle involving stickying a bomb -- not sure how cheesable this is)
+(solution: https://cdn.discordapp.com/attachments/829727005938941954/874728781582073856/thinky-solution.gif)
+(NEW solution: https://i.imgur.com/4HXAQaU.gif (since exploded vat is now not traversable, but the puzzle is still solvable))
+_###################~#
+####################0#
+#######..6~##~.~####~#
+###......#~##~.~####~#
+#~~~.£...#~~~~.~.~~~ň#
+#~~£.$ĕ........#####.#
+#....~...#~##........#
+#~ň~.~...#~~#######..#
+#~~~~~...~ň~##########
+#...8....#############
+####;#################
+
+(twak: Little puzzle about a platform that can't be pushed normally.)
+(SOLUTION: https://imgur.com/a/cqSNi0y)
+(CONNECT: Could require the bomb to be brought from a previous level by making the level the following:
+
+@#######
+#...~.0#
+#...####
+#...;..#
+#...ž..#
+#...2..#
+#..6x4.#
+#~~~8..#
+#~~~...#
+#~~~...#
+########
+
+with the door from the previous level in the bottom-left corner.)
+
+_#######
+########
+#...~.~0
+#...####
+#......;
+#...ž..#
+#...2..#
+#..6x4.#
+#.~£8..#
+#.~~...#
+#......#
+########
+
+
+message "[Note] That's the two branches of the game done, and here begin the puzzles for after the two branches merge."
+
+
+(domcamus: A level about the interaction between bombs, inflatables and doors.)
+@####################
+#######ccccccccc#####
+#####.#p....++++....#
+#####..pr...........#
+#######~~~#~~~~~....#
+##....~~#~~~~£~~...##
+##..ŵ##~~~~z~~~~...##
+##.žž##tcc.p..~....##
+##.8ă#.tpcpp..~.£..##
+###..##tcc....~~~..##
+###.....#....pt...###
+#####2#2cppppp~~~..##
+#####~~~c....p~....##
+0~đ.####c....p8...+cc
+#ŝ......c+đžđ+....+cc
+#.~....rp....#...##ĕc
+#.8.....#...6~....žrc
+###############;#####
+(SOLUTION: http://heffalumps.org/upload/doms_level_solution.png - an earlier version, but solution method is unchanged)
+(CONNECT: Currently nothing fancy, but could bring in the three floor-level pieces from elsewhere.)
+
+
+
+
+(jackk: bombs and inflatables...again. and also about iterated fusion)
+@~###############################
+#0###############################
+#~đđ....`~``~```~..~~############
+#ŝ┌.ppcpq~~4.?.~~...`.###########
+#ŝ.~p.+.p.~`#q~~qqppq..#`########
+#..8p~~~+.~#~q`~+..r+ă.~~`#######
+#...pt`~..#~`p.#..pp~~``~~##.####
+##..p~~`.tpppp#".#p....~`~#...###
+##..pq+~~......".+pŵ....ŝ...ă.#`#
+##""~q.~``~..`.`~~~~`..........~#
+##..#ppqz~~~4~``~`~~~.....#`##``#
+###`~..~~~`~#``~~~~~~".....~~~££#
+###~...`~~``#..~~...."6~~~~~££££#
+####.~~~``..#.6~.....".~~~~~~£~£#
+################;#########`###`#.
+(solution: https://imgur.com/a/fWVMi8p)
+(connect: no thoughts)
+
+
+(stevenjmiller: A level about fusion, quite complex.)
+@#############################
+##############################
+######~~~~~~~##r.+###..#######
+######~ĶĴĴĴĶ~#cc.r.....#######
+######~Ķ~~~Ķ~.p......ct#######
+######~~~~~Ķ~ppp~~~..c.#######
+###.......~~~ttt~Ň~..c.#.....#
+###.......~~~...~~~..cr~~....#
+###...rppp...........#~Ň~....#
+###......p...........#~~~....#
+###""...#+.ă.+..ă.đ.##.8.....#
+#~£..........c..ă.đ.##......~#
+#~Ň..........p..ă.đ.##......~#
+#~Ň...+...rppp......##......~#
+#~Ł...p..r....#.....##......~0
+#~~4..p..p....└..$..##########
+######c#žc####~#.£..##########
+######cr"+####~###############
+##############:###############
+(SOLUTION: https://youtu.be/BIyj-m9uh0Y)
+(CONNECT: The diagonal block at the start could technically come from another level, but I think it would lead to a lot of frustration.)
+
+(stevenjmiller: A simpler level.)
+(
+@##################
+####0##############
+#...~.............#
+#...~.............#
+#..~~~.......~~~..#
+#..~~~.......~~~..#
+#..~~t.......~~~..#
+#....ppppcppppt...#
+#..┌đ....r...~~~..#
+#..ăĕđ.......~~~..#
+#..ŝđđ.......~~~..#
+#.............8...#
+#.................#
+#########;#########
+)
+(SOLUTION: https://youtu.be/x34txYpBebs)
+(CONNECT: This should probably stand on its own.)
+
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+
+(-------------------)
+(CONNECTION EXAMPLES)
+(-------------------)
+(If you have suggestions around how your puzzles could be connected to other puzzles or just general examples of interesting layouts, provide examples here. Please leave a comment saying which puzzles you combined and any other information. NOTE: This is not meant to be where the final giant level is created - that will be done at the end of the project.)
+
+((John Doe)
+(Combined: John Doe + Sally Smith)
+(John Doe: I thought it'd be interesting if the belt you can remove from Sally Smith's puzzle can be used as the initial belt in mine.)
+#######
+#.....#
+#.....#
+#.....#
+#.....#
+#######)
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+
+message "[Note] This next puzzle is actually going to come earlier but it's not really a solvable level in its current form, so feel free to skip it. You're done!"
+Message  "Zomulgustar:  This is a hub level first appearing (with sftrabbit's blessing) much earlier in the game, with the '...' crates substituting for paths leading off through other puzzles." 
+Message  "Zomulgustar: The intention is that, starting from 1-o-clock, it's trivial to get from 1->2, 3->4, etc. but impossible to get from 2->3, 4->5, etc. without traversing those paths.  (Please let me know if this is breakable!) 
+Message "Zomulgustar: Getting to earlier positions when entering from later should be simple, and reaching the secret (pushing the big red button and returning to tell the tale) should only be possible entering from 12-o-clock (the setup given here)."
+(SOLUTION:     https://drive.google.com/file/d/1u77FocVVJAy1hsR38e8leEc9AvlAJntc/view?usp=sharing )
+(CONNECT:  Sounds like sftrabbit already has some good ideas how to weave in and out of this one, but the possibility of sequence-breaking if foreign objects are carried in probably means they won't be allowed through.)
+
+@########0#########
+########~t~########
+######~~~c~~~######
+##~~##~:~c~Ł~##~~##
+#~~~~.Ĵ~Ňp~~~.Ĵ~~~#
+~~~Ī~~...q...~~~~~~
+~#Ķ~~....ų....~~~#~
+~#.~...~~q~~...~.#~
+~~~...~~.p.~~...Ī~~
+~~~..~~..p..~~..~Ķ~
+~~Ķ..~..~q~..~..~~~
+##.Ĵă~..~r~..~đŁ.##
+~~~..~..~~~..~..Ī~~
+~Ī~..~~.....~~..~~~
+~~Ķ...~~...~~...~~~
+~#.~...~~~~~...~.#~
+~#~~~....ŝ....~~Ī#~
+~~~~~~...~...~~Ķ~~~
+#~~~Ł.~~Ł.~~Ł.~~~~#
+##~~##~Ĵ~#~~~##~~##
+######~~~#~~~######
+########~~~########
+
+
+(----------)
+(UNIT TESTS) (GROUP A)
+(----------)
+
+message "The following are unit tests to ensure behaviour stays consistent. Please ensure these don't break."
+(Feel free to add more tests for behaviour that you needs to stay consistent to avoid breaking puzzles.)
+
+(Infinite loop, alternating BeltX and Player)
+@######
+###:###
+#ŝŇăă##
+#đŝ0ŵ##
+#~đŝŵ##
+#~~đŵ##
+#######
+
+
+(Cascading belts)
+(Pressing right 6 times should reach End)
+@###########
+###~~~~~~..#
+#;6ĶŁđŁŝ...#
+###~~~~.~..#
+####~~~~..0#
+############
+
+(Belts against wall)
+(Should be able to walk around path to the exit)
+@#############
+##############
+#####ŵ########
+#:Ň~ŵŵŵ..ŵŵ~0#
+#~~~..đ##ă.~~#
+#.....ŝŵŵŝ~..#
+##############
+
+(doors stop sparks)
+(should be able to win directly)
+@########o##
+#####....tq#
+#rqttžr~~~q#
+#ž.t.~qqqqt#
+#.~~~~~~~~~#
+#;##########
+
+(regression test)
+(the button should NOT activate any doors)
+@######
+#ttttt#
+#tt.tt#
+#t.r.t#
+#tt.tt#
+#ttttt#
+##;#o##
+
+(bottom layer can pushed independently of belts stacked on top)
+@#######
+##~~~~.0
+##8###ŵ#
+#;ŝĽžŵ.#
+###đđđŵ#
+########
+
+(doors with two things on top of them don't lift until the top thing is removed)
+@#######
+########
+0.rtŇŇŇ:
+########
+
+(fusion - neutralisation)
+(a path to the exit should be produced, with sound)
+@###########
+###Ḳ###Ḳ#Ï##
+###ŝ###ŝ#ŝ##
+#Íđ.~~~.~.0#
+###~###ŵ#ŵ##
+#Ḵđ.ăÌ#Î#Ḱ##
+###~########
+#Íđ.ăǨ######
+###~########
+###8########
+###:########
+
+(fusion - preventing Menderbug's loop)
+(two equal belts should now fuse into one of the same kind, with sound)
+@#######
+########
+###đ~ă##
+#;ŵĽŵĽ.#
+##o#####
+
+(inflatable walls - we can walk on inflated blocs)
+@####
+#~.~#
+#p+.0
+#q###
+#q.~#
+#r+.#
+#Ķ.~#
+#:###
+
+(inflatable walls - when the buttons are near them. You should be able to reach the exit but not directly through right up.)
+@#######
+#...####
+#o+...##
+:rp~r+##
+#..+..##
+##.r.###
+###..###
+########
+
+(inflatable walls - they won't inflate if there is no room to push blocs, but they won't prevent us from pushing these blocs)
+@########
+#########
+##...ž..#
+;.žr#ž2##
+###cc+0##
+
+(inflatable walls - things can be pushed on inflated blocks and then dropped by retracting them)
+@#######
+########
+:ŇŇz~..0
+###cc+##
+
+(fusing belts with inflatable walls - after pressing the button, the fused belts top-to-bottom on the left then the right should be: D, UR, X, D, UR, U, X, DL, R)
+@#############
+#c+└.đ+c######
+#c#####c#cccc#
+#c+ŵ.đ+c#c+#c#
+#c#####cccž#c#
+#c+ă.đ+c+ă..+#
+#c#####cccŝ###
+#c+ŝ.ŝ+r;c+###
+#c#####cccŵ###
+#c+┐.┐+c+ž.đ+#
+#c#####cccŝ#c#
+#c+┌.┐+c#c+#c#
+#c#####c#cccc#
+#c+┌.┘+c######
+#ccccccc######
+##############
+
+(just a complicated diagonal belt situation - moving up should eventually result in the player landing on the exit, the three directional belts should have fused into a single R belt)
+@##########
+#~đđđđđđ┘~#
+#┐~~~~~~~ŝ#
+#ŵ~~đđ┘~~ŝ#
+#ŵ~┐~┌~Ň~ŝ#
+#ŵ~ŵ~ŵ~ŵŇO#
+#ŵ~ĪĽ~~ŵ~ŝ#
+#ŵ~┐┛đđŵ~ŝ#
+#ŵ~ŵ~~~~~ŝ#
+#~┌Ňăăăăăă#
+#~#:#~~~~~#
+###########
+
+(another diagonal belt setup - press right only should get the player to the exit)
+@########
+#########
+####~~.0#
+####┐ăă##
+#:Ī┘Ň~ŵ##
+###.┛ŝ┌##
+####..ŵ##
+#####..##
+#########
+
+(diagonals pushing against walls - pressing right once should take the player to the exit)
+@########
+#:┐┐┐┐┘##
+##..┘.┘.#
+##.┐└ă.┘#
+##.└┌└└└#
+#O└..Ň###
+#########
+
+(testing fusion of diagonally moving belts - first two belts shoudl fuse into an UR, the second two belts should fuse into a D, player should be able to reach the goal)
+@##########
+###########
+###.~~Ň┘┛ŝ#
+#đđ..##┗.ŝ#
+#.┌.┌#ŝă.ŝ#
+##Ī.ŵ#đ┘.└#
+##┐Ľŵ##...#
+##Ň####.0.#
+##:####...#
+###########
+
+
+(----------)
+(UNIT TESTS) (GROUP B)
+(----------)
+
+(Infinite loop, alternating BeltX and Player)
+@######
+###:###
+#sMaa##
+#ds0w##
+#~dsw##
+#~~dw##
+#######
+
+(Cascading belts, strong push)
+(Pressing right 6 times should reach End)
+@###########
+###~~~~~~..#
+#;6KLdLs...#
+###~~~~.~..#
+####~~~~..0#
+############
+
+(Belts against wall)
+(Should be able to walk around path to the exit)
+@#############
+##############
+#####w########
+#:M~www..ww~0#
+#~~~..d##a.~~#
+#.....swws~..#
+##############
+
+(chain explosions)
+@##########
+###########
+##~~~~~..##
+~~~:33~es~0
+##~3~3~~e##
+##.8.5eee##
+##..ejl.e.#
+####~~~...#
+####~~#####
+###########
+(the above should turn into the following when you press X:
+###########
+##~~~~~..##
+~~~~..~e.~0
+##~.~....##
+##.......##
+##..e.d...#
+####~~~...#
+####~~#####
+###########)
+
+(movement evaluation order 1)
+(related to bug #1/2)
+(rrrr)
+(After this move, the explosive should fall off)
+@#########
+#~~~~....#
+:~M3~s...#
+#~~~~d#..#
+#~~~~....#
+#~~~~....O
+##########
+
+(movement evaluation order 2)
+(related to bug #1/2)
+(rrrrrdrr)
+(After this move, the stacked belts on the right should move as a whole to the right, and the explosive and the second beltX should fall onto the player)
+@##########
+#~~~~~....#
+:~M3M~ds#.#
+#~~~~~.x..#
+#~~~~~.#..#
+#~~~~~....O
+###########
+
+(detonation range 1)
+(related to bug #3)
+(Pressing X denotes all of the explosive)
+@########
+#~e~:~~3#
+#~~e~~3~#
+#~~~~e~~#
+#~~~e~~0#
+#########
+
+(detonation range 2)
+(related to bug #3)
+(Pressing X denotes all of the explosive)
+@########
+#.3.;..e#
+#..3..e.#
+#....3..#
+#...3..o#
+#########
+
+(destruction of ladders)
+(related to bug #4)
+(Pressing X should detonate the surrounding bombs, destroying both the platforms and the ladders connected to them.)
+@##########
+#####2#####
+#####M#####
+#####e#####
+###########
+#6Me#;#eM4#
+###########
+#####e#####
+#####M#####
+#####8#####
+###########
+
+
+(No destruction of wall above when using ladder)
+(related to bug #6)
+(urul)
+
+@#.##
+##o##
+#"""#
+#.x4#
+##;##
+#####
+
+(Bugs with moving ladders with no outer walls)
+(Not used in any puzzle at time of writing, related to bugs 7 & 8) 
+(lll)
+(lldllu)
+.0....
+.6xx;.
+...8..
+
+(not really a bug but slime droplets still render as above after exploding platform below)
+@################
+#################
+#...............#
+#.ĕĕĕ...........#
+#.............2.#
+#..........~~~~~#
+#..........~$~~~#
+#......£...~~~~~#
+#.....~$~..~~££~#
+#......~...~~££~#
+#.;........~~~~~#
+#################
+
+(For reference:)
+(Belt_Above: IJKLM  Belt_Below: wasdx  Ladder: 8426)
+
+
+(Just to test the two themes:
+@###########_##########
+#######################
+##..~~~~.~....~~~~.~.##
+##...~~~#~.~~~.~~~#~.##
+##.s..~~.~.~.~..~~4~.##
+##...d..2~.~~~.~...~.##
+##......~~4...~;.6~~.##
+##..w...~~...~....~~.##
+##....x..8.....~..~2.##
+##.a.......##.~.~~~~.##
+##.....######~.~~~~~.##
+##......##.......8...##
+#######################
+#######################)
+
+message "Joe's experiments"
+
+(Sandboxes)
+
+@################
+#################
+#..+qqqqqq......#
+#...ĕptx.p......#
+#....r...r....2.#
+#..........~~~~~#
+#.ŝ4ŝ......~$q~~#
+#+..8+.£...qqq~~#
+#pprpp~$~..q~££~#
+#;.....~...~~££~#
+#..........~~~~~#
+#################
+
+@#################
+##################
+#................#
+#......2.2.......#
+#...2..Ī.Ī.......#
+#...Ī.+x4x+y.y+..#
+#..đĕ.p..8p...p..#
+#.....pppprpppp..#
+#................#
+################;#
+
+@##################
+###################
+#.................#
+#.................#
+#......ž.ž........#
+#.....+prp+.......#
+#.................#
+#.....pppp........#
+#.................#
+###############;###
+
+@#################
+##################
+#................#
+#......2.2.......#
+#...2..Ī.Ī.......#
+#...Ī.+x.ž+y.y+..#
+#..đĕ.p...p...p..#
+#.....pppprpppp..#
+#................#
+################;#
+
+(Joe's extra puzzle ideas)
+
+@##########
+###########
+#####~#####
+#####.~~~~0
+#####~#####
+#....t~Ī~~:
+#.ŝŵ.p...8#
+#.ŝđ.r.####
+#.ž....####
+#......####
+###########
+
+@################
+#################
+#...............#
+#...............#
+#...............#
+#...............#
+#...............#
+#################
+#~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~#
+#~~~~~~~~~~~~~~~#
+########:########
+
+@########.########
+#cccccc#cpcccccccc
+#c####+#c.#######c
+#c#+?žž+cp#######c
+#c##c#ž##r#######c
+#c##c#rc#.#######c
+#c##c#+ccpcccccc#c
+#c##c####.+####c#c
+#c##ccccc.#####c#c
+#c#####+cpc+###c#c
+;p....r.....r..p.c
+#ccccccccpccc##c.c
+#########.#####c.c
+#########.+ccccc.c
+#########r######.c
+#########pccccccpc
+#########........#
+##################
+
+(Interconnected level)
+
+(stevenjmiller's experiments)
+
+(just a silly idea, not serious)
+@###############
+#####cccccc#####
+#####c"Ḱŝ+c#####
+#####c"Ḱŝ+c#####
+#####c"Ḱŝ+c#####
+#####c"Ḱŝ+c#####
+#####c"Ḱŝ+c#####
+#cc+#c"Ḱŝ+c#####
+#c#žžr+ŝ########
+#c#..ppŝ"#######
+#c#rž.t.""######
+#c#c.+".žăăăăăŇ:
+#c#+.c#........#
+#c##.p#...6x...#
+#c###r#........#
+#c#####~~~~~~~~#
+#c#####r.......#
+#c#####p~~~~~~~#
+#ccccccc~~~~~~~0
+################
+
+(actual puzzle, could be main game puzzle?)
+(must be in merge section)
+@################
+#################
+#~đ...........ă~#
+#ŝ.............ŝ#
+#...+đ.ŝ+ž.žr...#
+#...p...p...p...#
+#...p.......p...#
+#...pprpp.~~t...#
+#.........8.....#
+#...đ.ŝ.x.đ.ŝ...#
+#ŵ.............ŵ#
+#~đ...........ă~0
+########;########
+
+(another puzzle, could be secret puzzle? or main game?)
+(must be in merge section)
+@##################
+####0##############
+#...~.............#
+#...~.............#
+#..~~~.......~~~..#
+#..~~~.......~~~..#
+#..~~t.......~~~..#
+#....ppppcppppt...#
+#..┌đ....r...~~~..#
+#..ăĕđ.......~~~..#
+#..ŝđđ.......~~~..#
+#.............8...#
+#.................#
+#########;#########
+
+(remote bomb ideas)
+@############
+#########o###
+#########~..#
+###...£ĕ~...#
+;....######.o
+#############
+
+@##################
+###££££##########o#
+######£##########.#
+#~~###£##########.#
+:~~###£###~~~~~~~~#
+~#~###££ĕ~........o
+~#~~~~~##.........#
+~##################
+~~~~~~~~~~#########
+###################
+
+@##################
+###£££££###########
+#######£###########
+#~~####£#########.o
+:~Ň####£##~~~~~~~~#
+~#~###££ĕ~........o
+~#đđđđđŵ#.........#
+~##################
+~~~~~~~~~~#########
+###################
