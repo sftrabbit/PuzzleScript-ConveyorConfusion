@@ -44,10 +44,32 @@ function restoreActiveRegion(lev) {
   var dispersedObjectTrackers = getObjectTrackersFromOrigin(activeRegionIndex);
   for (var i = 0; i < dispersedObjectTrackers.length; i++) {
     var objectTracker = dispersedObjectTrackers[i];
-    var positionIndex = objectTracker[1] * level.height + objectTracker[2];
+    var x = objectTracker[1];
+    var y = objectTracker[2];
+    var above = objectTracker[0];
+    var positionIndex = x * level.height + y;
     var cell = level.getCell(positionIndex);
-    cell.iclear(state.objectMasks[objectTracker[0] ? 'dynamic_above' : 'dynamic_below']);
+    cell.iclear(state.objectMasks[above ? 'dynamic_above' : 'dynamic_below']);
+    cell.iclear(state.objectMasks[above ? 'sticky_above' : 'sticky_below']);
     level.setCell(positionIndex, cell);
+
+    if (!above) {
+      var cellUp = level.getCell(positionIndex - 1);
+      cellUp.iclear(state.objectMasks['ladderd']);
+      level.setCell(positionIndex - 1, cellUp);
+
+      var cellDown = level.getCell(positionIndex + 1);
+      cellDown.iclear(state.objectMasks['ladderu']);
+      level.setCell(positionIndex + 1, cellDown);
+
+      var cellLeft = level.getCell(positionIndex - level.height);
+      cellLeft.iclear(state.objectMasks['ladderr']);
+      level.setCell(positionIndex - level.height, cellLeft);
+
+      var cellRight = level.getCell(positionIndex + level.height);
+      cellRight.iclear(state.objectMasks['ladderl']);
+      level.setCell(positionIndex + level.height, cellRight);
+    }
   }
   removeObjectTrackers(dispersedObjectTrackers);
 
