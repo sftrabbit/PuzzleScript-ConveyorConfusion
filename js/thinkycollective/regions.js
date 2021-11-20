@@ -98,7 +98,8 @@ var regions = [
         { rect: [0, 0, 14, 10] },
         { rect: [3, -2, 8, 2] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      start: true
     },
     //////////////
     // BRANCH A
@@ -640,8 +641,7 @@ var regions = [
         { rect: [2, 0, 5, 6] },
         { rect: [7, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     // (Toombler)
     {
@@ -905,6 +905,7 @@ function initRegions() {
     region.bounds = regionBounds;
 
     region.outlinePolygon = calculateOutlinePolygon(region);
+    region.index = i;
   }
 }
 

@@ -1,4 +1,5 @@
 var playerPosition = null;
+var previousActiveRegionIndex = null;
 
 var levelNeedsDraw = true;
 
@@ -20,6 +21,10 @@ function onStateUpdate(againing, action) {
     return;
   }
 
+  if (previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex) {
+    saveLevelState();
+  }
+
   var activeArea = getActiveArea();
   if (activeArea.camera === 'region-center') {
     transitionCameraToRegion(activeRegion);
@@ -34,6 +39,8 @@ function onStateUpdate(againing, action) {
   } else if (activeArea.camera === 'follow-player-anchored-y') {
     transitionCameraToPlayerAnchored(activeRegion, false);
   }
+
+  previousActiveRegionIndex = activeRegion.index;
 }
 
 function isOpenWorldLevel() {

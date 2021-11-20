@@ -41,9 +41,10 @@ function restoreActiveRegion(lev) {
   //   }
   // }
 
-  var dispersedObjectTrackers = getObjectTrackersFromOrigin(activeRegionIndex);
-  for (var i = 0; i < dispersedObjectTrackers.length; i++) {
-    var objectTracker = dispersedObjectTrackers[i];
+  var trackersToRemove = getObjectTrackersFromOrigin(activeRegionIndex);
+
+  for (var i = 0; i < trackersToRemove.length; i++) {
+    var objectTracker = trackersToRemove[i];
     var x = objectTracker[1];
     var y = objectTracker[2];
     var above = objectTracker[0];
@@ -71,7 +72,6 @@ function restoreActiveRegion(lev) {
       level.setCell(positionIndex + level.height, cellRight);
     }
   }
-  removeObjectTrackers(dispersedObjectTrackers);
 
   // Copy original state of level for the active region
   for (var x = regionBounds.minX; x < regionBounds.maxX; x++) {
@@ -81,28 +81,22 @@ function restoreActiveRegion(lev) {
       var inRegion = getRegionIndex(x, y) === activeRegionIndex;
 
       if (inRegion) {
+        var cell = level.getCell(positionIndex);
+        if (cell.anyBitsInCommon(state.objectMasks['dynamic_above'])) {
+          trackersToRemove.push([true, x, y]);
+        }
+        if (cell.anyBitsInCommon(state.objectMasks['dynamic_below'])) {
+          trackersToRemove.push([false, x, y]);
+        }
+
         for (var i = 0; i < STRIDE_OBJ; i++) {
           level.objects[positionIndex * STRIDE_OBJ + i] = lev.dat[positionIndex * STRIDE_OBJ + i];
         }
-
-        // objectTrackers[x][y] = JSON.parse(JSON.stringify(initialObjectTrackers[x][y]))
-      } else {
-        // var layers = Object.keys(objectTrackers[x][y]);
-        // for (var i = 0; i < layers.length; i++) {
-        //   var layer = layers[i];
-
-        //   if (objectTrackers[x][y][layer] === activeRegionIndex) {
-        //     var cell = level.getCell(positionIndex);
-        //     var layerMask = state.layerMasks[layer];
-        //     cell.iclear(layerMask);
-        //     level.setCell(positionIndex, cell);
-
-        //     delete objectTrackers[x][y][layer];
-        //   }
-        // }
       }
     }
   }
+
+  removeObjectTrackers(trackersToRemove);
 
   // Recreate foreign objects
   // for (var i = 0; i < foreignObjects.length; i++) {
