@@ -505,6 +505,21 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
     loadLevelFromLevelDat(state,state.levels[levelindex],randomseed);
     restoreLevel(target);
     restartTarget=target;
+
+    var playerPositions = getPlayerPositions();
+    if (playerPositions.length > 0) {
+		playerPosition = {
+		    x: (playerPositions[0]/(level.height))|0,
+		    y: (playerPositions[0]%level.height)|0
+		};
+	}
+
+	if (!isOpenWorldLevel()) {
+		drawLevel();
+		redraw();
+	} else {
+		initSmoothCamera();
+	}
 }
 
 function loadLevelFromState(state,levelindex,randomseed) {	
@@ -1831,7 +1846,6 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 					var transferFromX = (transferFromPosition / level.height) | 0;
 					var transferFromY = (transferFromPosition % level.height);
 
-					console.log('moving object tracker', trackedLayer[0], transferFromX, transferFromY, transferLayer, colIndex, rowIndex)
 					moveObjectTracker(transferLayer, transferFromX, transferFromY, trackedLayer[0], colIndex, rowIndex);
 				}
 
@@ -2936,15 +2950,11 @@ function processInput(dir,dontDoWin,dontModify) {
 	    			var r = level.commandQueueSourceRules[level.commandQueue.indexOf('checkpoint')];
 		    		consolePrintFromRule('CHECKPOINT command executed, saving current state to the restart state.',r);
 				}
-				restartTarget=level4Serialization();
 				hasUsedCheckpoint=true;
-				var backupStr = JSON.stringify(restartTarget);
-				storage_set(document.URL+'_checkpoint',backupStr);
-				storage_set(document.URL,curlevel);				
+				saveLevelState();
 			}	 
-			console.log(level.commandQueue)
+
 			if (level.commandQueue.indexOf('shake')>=0) {
-				console.log('SHAKE')
 				shakeScreen(16);
 			} 
 
@@ -2996,6 +3006,13 @@ function processInput(dir,dontDoWin,dontModify) {
 	}
 
 	return modified;
+}
+
+function saveLevelState () {
+	restartTarget=level4Serialization();
+	var backupStr = JSON.stringify(restartTarget);
+	storage_set('slidetracked_save_checkpoint',backupStr);
+	storage_set('slidetracked_save',curlevel);
 }
 
 function checkWin(dontDoWin) {
@@ -3152,8 +3169,8 @@ function nextLevel() {
 			}
 		} else {
 			try{
-				storage_remove(document.URL);
-				storage_remove(document.URL+'_checkpoint');				
+				storage_remove('slidetracked_save');
+				storage_remove('slidetracked_save_checkpoint');				
 			} catch(ex){
 					
 			}
@@ -3167,13 +3184,13 @@ function nextLevel() {
 	}
 	try {
 		
-		storage_set(document.URL,curlevel);
+		storage_set('slidetracked_save',curlevel);
 		if (curlevelTarget!==null){
 			restartTarget=level4Serialization();
 			var backupStr = JSON.stringify(restartTarget);
-			storage_set(document.URL+'_checkpoint',backupStr);
+			storage_set('slidetracked_save_checkpoint',backupStr);
 		} else {
-			storage_remove(document.URL+"_checkpoint");
+			storage_remove('slidetracked_save_checkpoint');
 		}		
 		
 	} catch (ex) {

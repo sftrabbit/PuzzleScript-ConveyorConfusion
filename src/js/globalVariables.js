@@ -9,9 +9,9 @@ var ignoreNotJustPressedAction=true;
 
 function doSetupTitleScreenLevelContinue(){
     try {
-        if (storage_has(document.URL)) {
-            if (storage_has(document.URL+'_checkpoint')){
-                var backupStr = storage_get(document.URL+'_checkpoint');
+        if (storage_has('slidetracked_save')) {
+            if (storage_has('slidetracked_save_checkpoint')){
+                var backupStr = storage_get('slidetracked_save_checkpoint');
                 curlevelTarget = JSON.parse(backupStr);
                 
                 var arr = [];
@@ -21,7 +21,7 @@ function doSetupTitleScreenLevelContinue(){
                 curlevelTarget.dat = new Int32Array(arr);
 
             }
-            curlevel = storage_get(document.URL); 
+            curlevel = storage_get('slidetracked_save'); 
         }
     } catch(ex) {
     }
