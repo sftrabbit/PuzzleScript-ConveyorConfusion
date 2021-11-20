@@ -447,6 +447,8 @@ function redraw() {
             ctx.lineTo(xoffset, yoffset + (cellheight * screenheight));
             ctx.clip();
 
+            updateShake();
+
             if (cameraTransition != null) {
                 if (cameraTransition.start != null) {
                     var now = (new Date()).getTime();
@@ -512,9 +514,11 @@ function redraw() {
             levelCanvasOffsetY = Math.floor(((cameraOriginY - Math.floor(cameraOriginY)) % 1) * cellheight);
         }
 
+        var cameraShakeOffset = getShakeOffset();
+
         ctx.drawImage(
             levelCanvas,
-            0, 0,
+            cameraShakeOffset.x * 2 * camera.zoom, cameraShakeOffset.y * 2 * camera.zoom,
             levelCanvas.width, levelCanvas.height,
             (canvas.width / 2) - ((levelCanvasSize.width * cellwidth / 2) + levelCanvasOffsetX) * camera.zoom,
             (canvas.height / 2) - ((levelCanvasSize.height * cellheight / 2) + levelCanvasOffsetY) * camera.zoom,

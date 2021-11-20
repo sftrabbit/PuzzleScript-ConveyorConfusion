@@ -2866,11 +2866,18 @@ function processInput(dir,dontDoWin,dontModify) {
 					return true;
 				} else {
 					if (dir!==-1) {
-	    				addUndoState(bak);
+						var index = Math.floor(i / STRIDE_OBJ);
+						var colIndex=(index/level.height)|0;
+						var rowIndex=(index%level.height);
+						if (colIndex !== playerPosition.x || rowIndex !== playerPosition.y) {
+	    					addUndoState(bak);
+	    					modified = true;
+	    					break;
+	    				}
+	    			} else {
+	    				modified=true;
 	    			}
-	    			modified=true;
 	    		}
-	    		break;
 	    	}
 	    }
 
@@ -2935,6 +2942,11 @@ function processInput(dir,dontDoWin,dontModify) {
 				storage_set(document.URL+'_checkpoint',backupStr);
 				storage_set(document.URL,curlevel);				
 			}	 
+			console.log(level.commandQueue)
+			if (level.commandQueue.indexOf('shake')>=0) {
+				console.log('SHAKE')
+				shakeScreen(16);
+			} 
 
 		    if (level.commandQueue.indexOf('again')>=0 && modified) {
 

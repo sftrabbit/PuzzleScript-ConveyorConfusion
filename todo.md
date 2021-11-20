@@ -1,0 +1,18 @@
+- Remove trackers on level restart
+- Check with Dan Williams (and others?) if level restructure is okay
+- Checkpoints/saving
+- Fix pushing belt down path that leaves local area
+- Fix local area being visible when zoomed out a lot
+- Fix graphical details vanishing after reset
+- Tracking for merging and explosions and stuff
+- Camera shake for explosion
+- Cool credits
+- Menu screen
+- End cutscene
+- Wire up secrets
+- Secret end
+- Fit merge levels in
+- Fit my and stevenjmiller's levels in
+- Vat falling behaviour
+- Ladders on door behaviour
+- Don't store undo if player only looked a different direction

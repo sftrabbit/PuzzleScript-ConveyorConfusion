@@ -9,10 +9,6 @@ function transitionCameraToRegion(activeRegion) {
 
   cameraTransition = {
     start: (new Date()).getTime(),
-    from: {
-      position: [camera.position[0], camera.position[1]],
-      zoom: camera.zoom
-    },
     to: {
       position: clampCameraPosition(activeRegion, [
         activeRegion.cameraAnchor[0],
@@ -21,6 +17,13 @@ function transitionCameraToRegion(activeRegion) {
       zoom: activeRegion.zoom || 1
     }
   };
+
+  if (camera != null) {
+    cameraTransition.from = {
+      position: [camera.position[0], camera.position[1]],
+      zoom: camera.zoom
+    };
+  }
 }
 
 function transitionCameraPulledByPlayer(activeRegion, horizontal) {
@@ -82,10 +85,17 @@ function initSmoothCamera() {
 
   cameraTransition = null;
 
-  camera = {
-    position: clampCameraPosition(region, [region.cameraAnchor[0], region.cameraAnchor[1] - 0.8]),
-    zoom: region.zoom || 1
-  };
+  if (cameraTransition != null) {
+    camera = {
+      position: cameraTransition.to.position,
+      zoom: cameraTransition.to.zoom
+    };
+  } else {
+    camera = {
+      position: clampCameraPosition(region, [region.cameraAnchor[0], region.cameraAnchor[1] - 0.8]),
+      zoom: region.zoom || 1
+    };
+  }
 }
 
 function easeOutQuad(x) {

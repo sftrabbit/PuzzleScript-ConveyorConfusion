@@ -1,4 +1,4 @@
-var regionsOffset = [0, 0];
+var regionsOffset = [0, 18];
 var regions = [
   [
     //////////////
@@ -8,24 +8,24 @@ var regions = [
     {
       offset: [64, 70],
       areas: [
-        { rect: [-1, 0, 17, 10], camera: 'follow-player-anchored-x' },
+        { rect: [0, 0, 15, 10], camera: 'follow-player-anchored-x' },
         { rect: [5, -34, 5, 34], secondary: true, camera: 'follow-player-anchored-x' },
         // Bottom left arm
-        { rect: [-14, -7, 19, 4], secondary: true, camera: 'follow-player' },
-        { rect: [-14, -3, 4, 6], secondary: true, camera: 'follow-player' },
-        { rect: [-31, -1, 17, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-14, -6, 19, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-14, -2, 4, 9], secondary: true, camera: 'follow-player' },
+        { rect: [-31, 3, 17, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-29, 2, 3, 1], secondary: true, camera: 'follow-player' },
         // Bottom right arm
-        { rect: [10, -7, 25, 4], secondary: true, camera: 'follow-player' },
+        { rect: [10, -6, 25, 4], secondary: true, camera: 'follow-player' },
         // Top left arm
-        { rect: [-6, -30, 11, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-4, -30, 9, 4], secondary: true, camera: 'follow-player' },
         // Top right arm
         { rect: [10, -30, 1, 4], secondary: true, camera: 'follow-player' },
-        { rect: [11, -36, 4, 10], secondary: true, camera: 'follow-player' },
-        { rect: [15, -40, 4, 8], secondary: true, camera: 'follow-player' },
-        { rect: [19, -40, 3, 4], secondary: true, camera: 'follow-player' }
+        { rect: [11, -35, 4, 9], secondary: true, camera: 'follow-player' },
+        { rect: [15, -39, 4, 8], secondary: true, camera: 'follow-player' },
+        { rect: [19, -39, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     {
       offset: [64, 70],
@@ -42,7 +42,7 @@ var regions = [
         { rect: [9, 0, 5, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [-5, 0, 4, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.8
+      zoom: 0.7
     },
     // Block push intro secret
     {
@@ -51,35 +51,34 @@ var regions = [
         { rect: [0, 0, 4, 5] },
         { rect: [4, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.8
+      zoom: 0.7
     },
     // Two level intro (Patrick)
     {
-      offset: [52, 22],
+      offset: [52, 21],
       areas: [
-        { rect: [0, 0, 12, 11] },
+        { rect: [0, 0, 12, 8] },
+        { rect: [0, 8, 11, 3] },
+        { rect: [3, 11, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.65
     },
     // Seed level (Joseph Mansfield)
     {
-      offset: [64, 21],
+      offset: [64, 20],
       areas: [
         { rect: [0, 0, 3, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [3, 0, 1, 8] },
-        { rect: [4, 0, 5, 9] },
-        { rect: [9, 0, 1, 5] },
-        { rect: [9, 5, 3, 3] },
-        { rect: [10, 0, 1, 5] }
+        { rect: [4, 0, 7, 9] },
+        { rect: [11, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.8
+      zoom: 0.7
     },
     // Infinite loop intro (Blookerstein)
     {
       offset: [75, 19],
       areas: [
-        { rect: [0, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 5, 11] }
+        { rect: [1, -1, 6, 11] }
       ],
       zoom: 0.7
     },
@@ -87,17 +86,17 @@ var regions = [
     {
       offset: [72, 29],
       areas: [
-        { rect: [0, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [0, 1, 7, 4] }
+        { rect: [-4, 0, 12, 3], camera: 'follow-player-anchored-y' },
+        { rect: [-9, -1, 5, 5], camera: 'follow-player-anchored-y' }
       ],
-      zoom: 0.8
+      zoom: 0.7
     },
     // Hub
     {
-      offset: [72, 10],
+      offset: [73, 7],
       areas: [
-        { rect: [0, 0, 14, 9] },
-        { rect: [2, -4, 10, 4] }
+        { rect: [0, 0, 14, 10] },
+        { rect: [3, -2, 8, 2] }
       ],
       zoom: 0.6
     },
@@ -106,7 +105,7 @@ var regions = [
     //////////////
     // (marcosd)
     {
-      offset: [63, 11],
+      offset: [64, 10],
       areas: [
         { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 7, 9] },
@@ -116,7 +115,7 @@ var regions = [
     },
     // (knexator)
     {
-      offset: [54, 11],
+      offset: [55, 10],
       areas: [
         { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 7, 9] },
@@ -126,34 +125,37 @@ var regions = [
     },
     // (knexator) - secret
     {
-      offset: [49, 13],
+      offset: [50, 12],
       areas: [
-        { rect: [0, 0, 1, 5], secondary: true },
-        { rect: [1, 0, 3, 5] },
-        { rect: [4, 0, 1, 5], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 5, 3, 4], secondary: true, camera: 'follow-player-anchored-y' },
-        { rect: [4, 6, 8, 3], secondary: true, camera: 'follow-player-anchored-y' },
-        { rect: [12, 7, 2, 2], secondary: true, camera: 'follow-player-anchored-y' }
+        { rect: [4, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-1, 0, 5, 5] },
+        { rect: [0, 5, 3, 1], secondary: true, camera: 'follow-player' },
+        { rect: [-2, 6, 13, 3], secondary: true, camera: 'follow-player' },
+        { rect: [11, 7, 2, 2], secondary: true, camera: 'follow-player' },
+        { rect: [-2, 9, 3, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-1, 13, 2, 3], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.8
     },
     // Branch A exit corridor
     {
-      offset: [33, 9],
+      offset: [43, 8],
       areas: [
-        { rect: [0, 0, 27, 3], camera: 'follow-player' },
-        { rect: [22, -2, 3, 2], camera: 'follow-player' }
+        { rect: [0, 0, 30, 3], camera: 'follow-player' },
+        { rect: [13, -3, 3, 3], camera: 'follow-player' },
+        { rect: [27, -4, 7, 4], camera: 'follow-player' }
       ],
       zoom: 0.8
     },
     // (Corey Hardt)
     {
-      offset: [43, 2],
+      offset: [43, 1],
       areas: [
         { rect: [0, 4, 2, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [3, 0, 7, 8] },
-        { rect: [10, 0, 2, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [10, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [11, 4, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8
     },
@@ -161,6 +163,7 @@ var regions = [
     {
       offset: [40, 12],
       areas: [
+        { rect: [3, -1, 3, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 0, 9, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 9, 6] },
         { rect: [1, 7, 7, 2] },
@@ -200,14 +203,16 @@ var regions = [
         { rect: [0, 0, 3, 5] },
         { rect: [3, 0, 1, 2] },
         { rect: [4, 0, 4, 5] }
-      ]
+      ],
+      zoom: 0.4
     },
     // Clock shortcut
     {
       offset: [32, 31],
       areas: [
         { rect: [3, 2, 1, 3] }
-      ]
+      ],
+      zoom: 0.4
     },
     // 1:00 (CHz)
     {
@@ -218,7 +223,15 @@ var regions = [
         { rect: [2, 0, 7, 11] },
         { rect: [9, 0, 1, 11], secondary: true }
       ],
-      zoom: 0.75
+      zoom: 0.7
+    },
+    // 1:00 Main path lock
+    {
+      offset: [56, 40],
+      areas: [
+        { rect: [0, 0, 4, 5] }
+      ],
+      zoom: 0.7
     },
     // 3:00 (Menderbug)
     {
@@ -229,7 +242,7 @@ var regions = [
         { rect: [1, 0, 8, 9] },
         { rect: [9, 0, 1, 9], secondary: true }
       ],
-      zoom: 0.75
+      zoom: 0.7
     },
     // 5:00 #1 (Draknek)
     {
@@ -285,7 +298,27 @@ var regions = [
         { rect: [1, 1, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [-1, 3, 2, 5], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 1, 9, 8] },
-        { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-vertical' }
+        { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.7
+    },
+    // 7:00 Main path lock
+    {
+      offset: [31, 69],
+      areas: [
+        { rect: [0, 0, 2, 8] },
+        { rect: [2, 0, 1, 4] }
+      ],
+      zoom: 0.7
+    },
+    // 7:00 Main path lock secret
+    {
+      offset: [34, 66],
+      areas: [
+        { rect: [0, 0, 5, 5] },
+        { rect: [1, 5, 2, 1] },
+        { rect: [3, 5, 2, 2], secondary: true, camera: 'follow-player' },
+        { rect: [5, 4, 11, 3], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7
     },
@@ -419,17 +452,18 @@ var regions = [
     },
     // Fusion intro
     {
-      offset: [30, 23],
+      offset: [29, 22],
       areas: [
         { rect: [0, 0, 9, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 9, 6] },
-        { rect: [0, 7, 9, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [0, 7, 9, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [3, 8, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7
     },
     // (PedroPSI)
     {
-      offset: [28, 12],
+      offset: [27, 11],
       areas: [
         { rect: [4, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [4, 1, 5, 1] },
@@ -438,46 +472,375 @@ var regions = [
         { rect: [0, 10, 13, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7
-    }
+    },
+    // Branch A finish
+    {
+      offset: [24, -4],
+      areas: [
+        { rect: [0, 0, 19, 15] },
+      ],
+      zoom: 0.58
+    },
+    //////////////
+    // BRANCH B
+    //////////////
+    // Branch B exit path
+    {
+      offset: [87, 8],
+      areas: [
+        { rect: [0, 0, 3, 9] }
+      ],
+      zoom: 0.6
+    },
+    // (Pichusuperlover)
+    {
+      offset: [90, 8],
+      areas: [
+        { rect: [0, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 12, 6] },
+        { rect: [13, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
+        { rect: [3, 6, 8, 2] }
+      ],
+      zoom: 0.7
+    },
+    // (Mischka Kamener)
+    {
+      offset: [104, 2],
+      areas: [
+        { rect: [0, 7, 1, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 6, 12] },
+        { rect: [7, 2, 1, 7] },
+        { rect: [8, 3, 4, 4] },
+        { rect: [8, 2, 4, 1], secondary: true, camera: 'follow-player' }
+      ],
+      zoom: 0.65
+    },
+    // (Joseph Mansfield #1)
+    {
+      offset: [113, -3],
+      areas: [
+        { rect: [0, 0, 9, 1], secondary: true },
+        { rect: [0, 1, 9, 5] },
+        { rect: [0, 6, 9, 1], secondary: true, camera: 'pull-vertical' },
+      ],
+      zoom: 0.8
+    },
+    // (Joseph Mansfield #2)
+    {
+      offset: [116, 2],
+      areas: [
+        { rect: [3, 2, 4, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [7, 0, 7, 3], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 3, 12, 5] },
+        { rect: [0, 8, 5, 2] },
+        { rect: [12, 3, 2, 5], secondary: true, camera: 'follow-player' }
+      ],
+      zoom: 0.7
+    },
+    // (Justas)
+    {
+      offset: [122, 10],
+      areas: [
+        { rect: [0, 0, 9, 8] }
+      ],
+      zoom: 0.7
+    },
+    // (That Scar)
+    {
+      offset: [110, 13],
+      areas: [
+        { rect: [11, 2, 1, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 10, 7] },
+        { rect: [-2, 1, 3, 5], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.7
+    },
+    // (winterbeak)
+    {
+      offset: [91, 14],
+      areas: [
+        { rect: [10, 0, 7, 1], secondary: true },
+        { rect: [16, 1, 1, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [10, 1, 6, 1] },
+        { rect: [0, 2, 16, 8] },
+        { rect: [0, 10, 17, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [2, 11, 3, 1], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.65
+    },
+    // Corridor
+    {
+      offset: [93, 26],
+      areas: [
+        { rect: [-3, 0, 10, 3] }
+      ],
+      zoom: 0.7
+    },
+    // (Dan Williams)
+    {
+      offset: [89, 29],
+      areas: [
+        { rect: [3, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 11, 7] },
+        { rect: [1, 8, 9, 1], secondary: true, camera: 'pull-vertical' },
+      ],
+      zoom: 0.7
+    },
+    // Main path lock
+    {
+      offset: [86, 30],
+      areas: [
+        { rect: [0, 0, 3, 5] }
+      ],
+      zoom: 0.7
+    },
+    // (Guilherme Tows (zaratustra))
+    {
+      offset: [82, 35],
+      areas: [
+        { rect: [0, 0, 8, 10] },
+        { rect: [8, 3, 4, 8] },
+        { rect: [3, 10, 5, 1] },
+        { rect: [12, 3, 1, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [13, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-4, 4, 4, 5], secondary: true, camera: 'pull-horizontal' },
+      ],
+      zoom: 0.7
+    },
+    // (Muftwin)
+    {
+      offset: [75, 44],
+      areas: [
+        { rect: [3, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 2, 11, 9] },
+        { rect: [0, 11, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [4, 12, 7, 2], secondary: true, camera: 'pull-vertical' },
+      ],
+      zoom: 0.6
+    },
+    // (Colin)
+    {
+      offset: [86, 47],
+      areas: [
+        { rect: [1, 0, 3, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 2, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 3, 5, 1] },
+        { rect: [-1, 4, 7, 5] },
+        { rect: [0, 9, 5, 2], secondary: true, camera: 'pull-vertical' },
+      ],
+      zoom: 0.6
+    },
+    // Explosive intro
+    {
+      offset: [90, 46],
+      areas: [
+        { rect: [0, 0, 1, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 1, 5] },
+        { rect: [2, 0, 5, 6] },
+        { rect: [7, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
+      ],
+      zoom: 0.6,
+      start: true
+    },
+    // (Toombler)
+    {
+      offset: [98, 37],
+      areas: [
+        { rect: [2, 0, 11, 5] },
+        { rect: [0, 5, 13, 1] },
+        { rect: [1, 6, 10, 6] },
+        { rect: [0, 6, 1, 6], secondary: true, camera: 'pull-horizontal' },
+      ],
+      zoom: 0.6
+    },
+    // stevenjmiller's bomb secret
+    {
+      offset: [109, 43],
+      areas: [
+        { rect: [0, 0, 5, 5] },
+        { rect: [1, 5, 3, 1] },
+        { rect: [-1, 6, 5, 2] },
+        { rect: [-1, 8, 6, 4] },
+        { rect: [2, 12, 3, 1] },
+        { rect: [-5, 8, 4, 3], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.6
+    },
+    // Joseph Mansfield's secret
+    {
+      offset: [107, 55],
+      areas: [
+        { rect: [0, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 5, 4] },
+        { rect: [0, 5, 5, 1], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.6
+    },
+    // Joseph Mansfield's secret #2
+    {
+      offset: [107, 61],
+      areas: [
+        { rect: [1, 0, 3, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 2, 5, 3] },
+        { rect: [0, 5, 5, 1], secondary: true }
+      ],
+      zoom: 0.6
+    },
+    // (Joseph Mansfield)
+    {
+      offset: [98, 51],
+      areas: [
+        { rect: [3, 0, 3, 3], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 3, 9, 13] },
+        { rect: [3, 16, 3, 2], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.6
+    },
+    // Main path branch
+    {
+      offset: [99, 69],
+      areas: [
+        { rect: [0, 0, 5, 5] },
+        { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.6
+    },
+    // (Joel)
+    {
+      offset: [105, 68],
+      areas: [
+        { rect: [0, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 1, 7] },
+        { rect: [2, 0, 4, 9] },
+        { rect: [6, 0, 3, 8] },
+        { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.6
+    },
+    // Corridor
+    {
+      offset: [115, 68],
+      areas: [
+        { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 5, 5] },
+        { rect: [6, 1, 2, 3] },
+        { rect: [8, -1, 4, 6] }
+      ],
+      zoom: 0.6
+    },
+    // Corridor secret
+    {
+      offset: [124, 63],
+      areas: [
+        { rect: [0, 1, 3, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [3, 0, 4, 10] }
+      ],
+      zoom: 0.6
+    },
+    // (Notan)
+    {
+      offset: [115, 57],
+      areas: [
+        { rect: [0, 0, 11, 5] },
+        { rect: [0, 5, 9, 5] },
+        { rect: [2, 10, 7, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [5, -2, 5, 2], secondary: true, camera: 'pull-vertical' },
+      ],
+      zoom: 0.6
+    },
+    // (Zach)
+    {
+      offset: [113, 40],
+      areas: [
+        { rect: [11, 0, 6, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [11, 1, 6, 1] },
+        { rect: [2, 2, 15, 5] },
+        { rect: [0, 7, 18, 5] },
+        { rect: [7, 12, 5, 3], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.6
+    },
+    // (Zach) secret
+    {
+      offset: [125, 52],
+      areas: [
+        { rect: [1, 0, 3, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 5, 5] }
+      ],
+      zoom: 0.6
+    },
+    // Return corridor
+    {
+      offset: [111, 39],
+      areas: [
+        { rect: [0, 0, 8, 3], camera: 'follow-player' },
+      ],
+      zoom: 0.6
+    },
+    // (Joseph Mansfield) Vat introduction
+    {
+      offset: [122, 29],
+      areas: [
+        { rect: [0, 0, 1, 10], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 7, 9] },
+        { rect: [1, 9, 7, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [4, 10, 3, 1], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.6
+    },
+    // (Shark)
+    {
+      offset: [100, 25],
+      areas: [
+        { rect: [0, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 8, 8] },
+        { rect: [9, 0, 3, 9] },
+        { rect: [12, 0, 9, 11] },
+        { rect: [21, 2, 1, 9], secondary: true, camera: 'pull-horizontal' },
+      ],
+      zoom: 0.6
+    },
+    // (twak)
+    {
+      offset: [82, 17],
+      areas: [
+        { rect: [0, 0, 8, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 7, 10] },
+        { rect: [5, 11, 2, 1] },
+        { rect: [7, 1, 1, 11], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.6
+    },
+    //////////////
+    // MERGE
+    //////////////
+    // (Jack Lance)
+    {
+      offset: [77, -6],
+      areas: [
+        { rect: [1, 0, 12, 11] },
+        { rect: [-3, -1, 7, 1], secondary: true },
+        { rect: [-3, 0, 4, 5], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.6
+    },
+    // (Ethan Clark)
+    {
+      offset: [59, -2],
+      areas: [
+        { rect: [7, 0, 5, 1] },
+        { rect: [0, 1, 12, 1] },
+        { rect: [0, 2, 15, 2] },
+        { rect: [1, 4, 13, 3] },
+        { rect: [5, 7, 5, 1] },
+        { rect: [14, 3, 5, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.6
+    },
   ]
-  // [
-  //   {
-  //     offset: [0, 0],
-  //     areas: [
-  //       { rect: [2, 0, 8, 8] },
-  //       { rect: [0, -1, 2, 4], secondary: true, camera: 'pull-horizontal' },
-  //       { rect: [10, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
-  //       { rect: [2, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
-  //       { rect: [1, 3, 1, 5], secondary: true },
-  //       { rect: [4, -4, 3, 3], secondary: true, camera: 'follow-player' },
-  //       { rect: [4, -7, 9, 3], secondary: true, camera: 'follow-player' }
-  //     ]
-  //   },
-  //   {
-  //     offset: [11, 1],
-  //     areas: [
-  //       { rect: [1, -1, 7, 9] },
-  //       { rect: [0, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
-  //       { rect: [8, -1, 1, 9], secondary: true, camera: 'pull-horizontal' }
-  //     ]
-  //   },
-  //   {
-  //     offset: [21, 1],
-  //     areas: [
-  //       { rect: [0, 0, 8, 8] },
-  //       { rect: [-1, -1, 1, 9], secondary: true, camera: 'pull-horizontal' },
-  //       { rect: [0, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
-  //     ]
-  //   },
-  //   {
-  //     offset: [26, -8],
-  //     areas: [
-  //       { rect: [-1, 0, 8, 7] },
-  //       { rect: [-1, -1, 8, 1], secondary: true, camera: 'pull-vertical' },
-  //       { rect: [-1, 7, 8, 1], secondary: true, camera: 'pull-vertical' }
-  //     ]
-  //   }
-  // ]
 ];
 
 var regionMap = [];
