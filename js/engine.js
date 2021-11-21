@@ -448,11 +448,11 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 
 		firstTurn = true;
 
-	    var playerPositions = getPlayerPositions();
-		playerPosition = {
-		    x: (playerPositions[0]/(level.height))|0,
-		    y: (playerPositions[0]%level.height)|0
-		};
+	 //    var playerPositions = getPlayerPositions();
+		// playerPosition = {
+		//     x: (playerPositions[0]/(level.height))|0,
+		//     y: (playerPositions[0]%level.height)|0
+		// };
 
         if (isOpenWorldLevel()) {
           initOpenWorld();
@@ -1126,6 +1126,7 @@ function getPlayerPositions() {
         level.getCellInto(i,_o11);
         if (playerMask.anyBitsInCommon(_o11)) {
             result.push(i);
+            return result; // We only ever expect one player, let's exit early
         }
     }
     return result;
@@ -2598,22 +2599,22 @@ function calculateRowColMasks() {
 		level.mapCellContents_Movements[i]=0;	
 	}
 
+	var rowsCleared = false;
+
 	for (var i=0;i<level.width;i++) {
 		var ccc = level.colCellContents[i];
 		ccc.setZero();
 		var ccc_Movements = level.colCellContents_Movements[i];
 		ccc_Movements.setZero();
-	}
 
-	for (var i=0;i<level.height;i++) {
-		var rcc = level.rowCellContents[i];
-		rcc.setZero();
-		var rcc_Movements = level.rowCellContents_Movements[i];
-		rcc_Movements.setZero();
-	}
-
-	for (var i=0;i<level.width;i++) {
 		for (var j=0;j<level.height;j++) {
+			if (!rowsCleared) {
+				var rcc = level.rowCellContents[i];
+				rcc.setZero();
+				var rcc_Movements = level.rowCellContents_Movements[i];
+				rcc_Movements.setZero();
+			}
+
 			var index = j+i*level.height;
 			var cellContents=level.getCellInto(index,_o9);
 			level.mapCellContents.ior(cellContents);
@@ -2626,6 +2627,8 @@ function calculateRowColMasks() {
 			level.rowCellContents_Movements[j].ior(mapCellContents_Movements);
 			level.colCellContents_Movements[i].ior(mapCellContents_Movements);
 		}
+
+		rowsCleared = true;
 	}
 }
 
@@ -2704,14 +2707,14 @@ function processInput(dir,dontDoWin,dontModify) {
         level.commandQueueSourceRules=[];
         var startRuleGroupIndex=0;
         var rigidloop=false;
-		const startState = {
-			objects: new Int32Array(level.objects),
-			movements: new Int32Array(level.movements),
-			rigidGroupIndexMask: level.rigidGroupIndexMask.concat([]),
-			rigidMovementAppliedMask: level.rigidMovementAppliedMask.concat([]),
-			commandQueue: [],
-			commandQueueSourceRules: []
-		}
+		// const startState = {
+		// 	objects: new Int32Array(level.objects),
+		// 	movements: new Int32Array(level.movements),
+		// 	rigidGroupIndexMask: level.rigidGroupIndexMask.concat([]),
+		// 	rigidMovementAppliedMask: level.rigidMovementAppliedMask.concat([]),
+		// 	commandQueue: [],
+		// 	commandQueueSourceRules: []
+		// }
 	    sfxCreateMask.setZero();
 	    sfxDestroyMask.setZero();
 
@@ -2775,6 +2778,7 @@ function processInput(dir,dontDoWin,dontModify) {
 				// 		consolePrint('Applying late rules');
 				// 	}
 				// }
+
 				if (!dontModify) {
         			applyRules(state.lateRules, state.lateLoopPoint, 0, undefined, dontModify);
         			startRuleGroupIndex=0;
@@ -2941,7 +2945,7 @@ function processInput(dir,dontDoWin,dontModify) {
 			if (dontDoWin===undefined){
 				dontDoWin = false;
 			}
-	    	checkWin( dontDoWin );
+	    	// checkWin( dontDoWin );
 	    }
 
 	    if (!winning) {

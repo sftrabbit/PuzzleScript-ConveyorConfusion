@@ -3,17 +3,19 @@ var cameraTransition = null;
 var cameraZoomTransition = null;
 
 function transitionCameraToRegion(activeRegion) {
-  if (cameraTransition && cameraTransition.to.position[0] === activeRegion.cameraAnchor[0] && cameraTransition.to.position[1] === (activeRegion.cameraAnchor[1] - 0.8)) {
+  var targetPosition = clampCameraPosition(activeRegion, [
+    activeRegion.cameraAnchor[0],
+    activeRegion.cameraAnchor[1] - 0.8
+  ]);
+
+  if (cameraTransition && cameraTransition.to.position[0] === targetPosition[0] && cameraTransition.to.position[1] === targetPosition[1]) {
     return;
   }
 
   cameraTransition = {
     start: (new Date()).getTime(),
     to: {
-      position: clampCameraPosition(activeRegion, [
-        activeRegion.cameraAnchor[0],
-        activeRegion.cameraAnchor[1] - 0.8
-      ]),
+      position: targetPosition,
       zoom: activeRegion.zoom || 1
     }
   };
