@@ -1,6 +1,4 @@
 - Fix pushing belt down path that leaves local area
-- Fix local area being visible when zoomed out a lot
-- Fix graphical details vanishing after reset
 - Tracking for merging and explosions and stuff
 - Cool credits
 - Menu screen
@@ -14,3 +12,4 @@
 - Don't store undo if player only looked a different direction
 - Show dirty state?
 - Hitches when moving during camera transition
+- Reset is using saved state

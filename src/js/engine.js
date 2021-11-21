@@ -1965,7 +1965,7 @@ function DoesCellRowMatch(direction,cellRow,i,k) {
     return false;
 }
 */
-function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_Movements,d,global) {	
+function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_Movements,d,global,noagaincheck) {	
 	var result=[];
 	
 	if ((!cellRowMask.bitsSetInArray(level.mapCellContents.data))||
@@ -1974,16 +1974,16 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 	}
 
 	var xmin, xmax, ymin, ymax;
-	if (global || !isOpenWorldLevel()) {
+	if (global || firstTurn || !isOpenWorldLevel()) {
 		xmin=0;
 		xmax=level.width;
 		ymin=0;
 		ymax=level.height;
 	} else {
-		xmin=Math.max(0, playerPosition.x - 20);
-		xmax=Math.min(level.width, playerPosition.x + 21);
-		ymin=Math.max(0, playerPosition.y - 12);
-		ymax=Math.min(level.height, playerPosition.y + 13);
+		xmin=localBoundary.xmin;
+		xmax=localBoundary.xmax;
+		ymin=localBoundary.ymin + (!runningLateRules && noagaincheck ? 1 : 0);
+		ymax=localBoundary.ymax + (!runningLateRules && noagaincheck ? -2 : 0);
 	}
 
     var len=cellRow.length;
@@ -2185,7 +2185,7 @@ Rule.prototype.findMatches = function() {
         // if (this.isEllipsis[cellRowIndex]) {//if ellipsis     
         // 	var match = matchCellRowWildCard(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d);  
         // } else {
-        	var match = matchCellRow(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d,this.global);               	
+        	var match = matchCellRow(this.direction,matchFunction,cellRow,cellRowMasks[cellRowIndex],cellRowMasks_Movements[cellRowIndex],d,this.global,this.noagaincheck);               	
         // }
         if (match.length===0) {
             return [];
@@ -2632,6 +2632,15 @@ function calculateRowColMasks() {
 	}
 }
 
+var localBoundary = {
+	xmin: null,
+	xmax: null,
+	ymin: null,
+	ymax: null
+};
+
+var runningLateRules = false;
+
 /* returns a bool indicating if anything changed */
 function processInput(dir,dontDoWin,dontModify) {
 	againing = false;
@@ -2646,6 +2655,11 @@ function processInput(dir,dontDoWin,dontModify) {
 		    y: (playerPositions[0]%level.height)|0
 		};
 	}
+
+	localBoundary.xmin=Math.max(0, playerPosition.x - 15);
+	localBoundary.xmax=Math.min(level.width, playerPosition.x + 16);
+	localBoundary.ymin=Math.max(0, playerPosition.y - 10);
+	localBoundary.ymax=Math.min(level.height, playerPosition.y + 11);
 
     if (dir<=4) {//when is dir>4???
 
@@ -2780,7 +2794,9 @@ function processInput(dir,dontDoWin,dontModify) {
 				// }
 
 				if (!dontModify) {
+					runningLateRules = true;
         			applyRules(state.lateRules, state.lateLoopPoint, 0, undefined, dontModify);
+        			runningLateRules = false;
         			startRuleGroupIndex=0;
         		}
         	// }
@@ -2887,11 +2903,14 @@ function processInput(dir,dontDoWin,dontModify) {
 						var index = Math.floor(i / STRIDE_OBJ);
 						var colIndex=(index/level.height)|0;
 						var rowIndex=(index%level.height);
-						if (colIndex !== playerPosition.x || rowIndex !== playerPosition.y) {
-	    					addUndoState(bak);
-	    					modified = true;
-	    					break;
-	    				}
+
+						if (colIndex )
+
+						// if (colIndex !== playerPosition.x || rowIndex !== playerPosition.y) {
+    					addUndoState(bak);
+    					modified = true;
+    					break;
+	    				// }
 	    			} else {
 	    				modified=true;
 	    			}

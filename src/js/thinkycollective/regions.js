@@ -25,7 +25,8 @@ var regions = [
         { rect: [15, -39, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -39, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     {
       offset: [64, 70],
@@ -98,8 +99,7 @@ var regions = [
         { rect: [0, 0, 14, 10] },
         { rect: [3, -2, 8, 2] }
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     //////////////
     // BRANCH A
