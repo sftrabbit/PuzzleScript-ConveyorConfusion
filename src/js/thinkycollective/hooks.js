@@ -21,7 +21,9 @@ function onStateUpdate(againing, action) {
     return;
   }
 
-  if (previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex) {
+  var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
+
+  if (changedRegion) {
     saveLevelState();
   }
 

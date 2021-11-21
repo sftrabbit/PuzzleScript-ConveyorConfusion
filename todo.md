@@ -12,3 +12,5 @@
 - Vat falling behaviour
 - Ladders on door behaviour
 - Don't store undo if player only looked a different direction
+- Show dirty state?
+- Hitches when moving during camera transition
