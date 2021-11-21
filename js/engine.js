@@ -1982,10 +1982,17 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 		ymin=0;
 		ymax=level.height;
 	} else {
-		xmin=localBoundary.xmin;
-		xmax=localBoundary.xmax;
-		ymin=localBoundary.ymin + (!runningLateRules && noagaincheck ? 1 : 0);
-		ymax=localBoundary.ymax + (!runningLateRules && noagaincheck ? -2 : 0);
+		if (activeRegion.simulateAll) {
+			xmin=Math.max(0, activeRegion.fullBounds.minX - 3);
+			xmax=Math.min(level.width, activeRegion.fullBounds.maxX + 3);
+			ymin=Math.max(0, activeRegion.fullBounds.minY - 3 + (!runningLateRules && noagaincheck ? 1 : 0));
+			ymax=Math.min(level.height, activeRegion.fullBounds.maxY + 3 + (!runningLateRules && noagaincheck ? -2 : 0));
+		} else {
+			xmin=Math.max(0, localBoundary.xmin);
+			xmax=Math.min(level.width, localBoundary.xmax);
+			ymin=Math.max(0, localBoundary.ymin + (!runningLateRules && noagaincheck ? 1 : 0));
+			ymax=Math.min(level.height, localBoundary.ymax + (!runningLateRules && noagaincheck ? -2 : 0));
+		}
 	}
 
     var len=cellRow.length;
@@ -2641,6 +2648,8 @@ var localBoundary = {
 	ymax: null
 };
 
+var activeRegion = null;
+
 var runningLateRules = false;
 
 /* returns a bool indicating if anything changed */
@@ -2658,10 +2667,12 @@ function processInput(dir,dontDoWin,dontModify) {
 		};
 	}
 
-	localBoundary.xmin=Math.max(0, playerPosition.x - 15);
-	localBoundary.xmax=Math.min(level.width, playerPosition.x + 16);
-	localBoundary.ymin=Math.max(0, playerPosition.y - 10);
-	localBoundary.ymax=Math.min(level.height, playerPosition.y + 11);
+	localBoundary.xmin=playerPosition.x - 15;
+	localBoundary.xmax=playerPosition.x + 16;
+	localBoundary.ymin=playerPosition.y - 10;
+	localBoundary.ymax=playerPosition.y + 11;
+
+	activeRegion = getActiveRegion();
 
     if (dir<=4) {//when is dir>4???
 
