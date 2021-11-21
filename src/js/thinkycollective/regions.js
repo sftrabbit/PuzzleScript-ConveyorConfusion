@@ -10,30 +10,52 @@ var regions = [
       areas: [
         { rect: [0, 0, 15, 10], camera: 'follow-player-anchored-x' },
         { rect: [5, -34, 5, 34], secondary: true, camera: 'follow-player-anchored-x' },
-        // Bottom left arm
-        { rect: [-14, -6, 19, 4], secondary: true, camera: 'follow-player' },
-        { rect: [-14, -2, 4, 9], secondary: true, camera: 'follow-player' },
-        { rect: [-31, 3, 17, 4], secondary: true, camera: 'follow-player' },
-        { rect: [-29, 2, 3, 1], secondary: true, camera: 'follow-player' },
-        // Bottom right arm
-        { rect: [10, -6, 25, 4], secondary: true, camera: 'follow-player' },
-        // Top left arm
-        { rect: [-4, -30, 9, 4], secondary: true, camera: 'follow-player' },
-        // Top right arm
-        { rect: [10, -30, 1, 4], secondary: true, camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      start: true,
+      simulateAll: true
+    },
+    // Intro - bottom left arm
+    {
+      offset: [64, 70],
+      areas: [
+        { rect: [-14, -6, 19, 4], camera: 'follow-player' },
+        { rect: [-14, -2, 4, 9], camera: 'follow-player' },
+        { rect: [-31, 3, 17, 4], camera: 'follow-player' },
+        { rect: [-29, 2, 3, 1], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      simulateAll: true
+    },
+    // Intro - bottom right arm
+    {
+      offset: [64, 70],
+      areas: [
+        { rect: [10, -6, 25, 4], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      simulateAll: true
+    },
+    // Intro - top left arm
+    {
+      offset: [64, 70],
+      areas: [
+        { rect: [-4, -30, 9, 4], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      simulateAll: true
+    },
+    // Intro - top right arm
+    {
+      offset: [64, 70],
+      areas: [
+        { rect: [10, -30, 1, 4] },
         { rect: [11, -35, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [15, -39, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -39, 3, 4], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
-      start: true
-    },
-    {
-      offset: [64, 70],
-      areas: [
-        { rect: [-11, 0, 10, 9] },
-      ],
-      zoom: 0.7
+      simulateAll: true
     },
     // Block push intro (Jumble)
     {
@@ -904,8 +926,14 @@ function initRegions() {
     region.cameraAnchor = [cameraAnchorX, cameraAnchorY];
     region.bounds = regionBounds;
 
+    region.fullBounds = getRegionBounds(region, true);
+
     region.outlinePolygon = calculateOutlinePolygon(region);
     region.index = i;
+
+    if (!region.simulateAll) {
+      region.simulateAll = false;
+    }
   }
 }
 

@@ -1,4 +1,3 @@
-- Fix pushing belt down path that leaves local area
 - Tracking for merging and explosions and stuff
 - Cool credits
 - Menu screen
@@ -11,4 +10,4 @@
 - Ladders on door behaviour
 - Don't store undo if player only looked a different direction
 - Show dirty state?
-- Hitches when moving during camera transition
+- Camera after reset
