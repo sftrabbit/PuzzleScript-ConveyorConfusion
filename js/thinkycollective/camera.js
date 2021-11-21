@@ -5,7 +5,7 @@ var cameraZoomTransition = null;
 function transitionCameraToRegion(activeRegion) {
   var targetPosition = clampCameraPosition(activeRegion, [
     activeRegion.cameraAnchor[0],
-    activeRegion.cameraAnchor[1] - 0.8
+    activeRegion.cameraAnchor[1] - 0.4
   ]);
 
   if (cameraTransition && cameraTransition.to.position[0] === targetPosition[0] && cameraTransition.to.position[1] === targetPosition[1]) {
@@ -37,12 +37,12 @@ function transitionCameraPulledByPlayer(activeRegion, horizontal) {
 
     targetPosition = [
       activeRegion.cameraAnchor[0] + (playerOffset * direction),
-      activeRegion.cameraAnchor[1] - 0.8
+      activeRegion.cameraAnchor[1] - 0.4
     ];
   } else {
     targetPosition = [
       activeRegion.cameraAnchor[0],
-      activeRegion.cameraAnchor[1] - 0.8 + (playerPosition.y - activeRegion.cameraAnchor[1] - 0.8) * 0.4
+      activeRegion.cameraAnchor[1] - 0.4 + (playerPosition.y - activeRegion.cameraAnchor[1] - 0.4) * 0.4
     ];
   }
 
@@ -71,7 +71,7 @@ function transitionCameraToPlayerAnchored(activeRegion, horizontal) {
   if (horizontal) {
     targetPosition = [activeRegion.cameraAnchor[0], playerPosition.y]
   } else {
-    targetPosition = [playerPosition.x, activeRegion.cameraAnchor[1] - 0.8]
+    targetPosition = [playerPosition.x, activeRegion.cameraAnchor[1] - 0.4]
   }
 
   cameraTransition = {
@@ -94,7 +94,7 @@ function initSmoothCamera() {
     };
   } else {
     camera = {
-      position: clampCameraPosition(region, [region.cameraAnchor[0], region.cameraAnchor[1] - 0.8]),
+      position: clampCameraPosition(region, [region.cameraAnchor[0], region.cameraAnchor[1] - 0.4]),
       zoom: region.zoom || 1
     };
   }
@@ -120,7 +120,7 @@ function clampCameraPosition(activeRegion, position) {
     ),
     Math.min(
       Math.max(
-        position[1] - 0.8,
+        position[1] - 0.4,
         cameraMarginY
       ),
       level.height - cameraMarginY
