@@ -398,6 +398,7 @@ function drawMessageScreen() {
 
 var loadedLevelSeed=0;
 var firstTurn = true;
+var originallevel = null;
 
 function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {	
 	if (randomseed==null) {
@@ -443,7 +444,8 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
         }
 
 	    backups=[]
-	    restartTarget=backupLevel();
+	    originalLevel=backupLevel();
+	    restartTarget=originalLevel;
 		keybuffer=[];
 
 		firstTurn = true;

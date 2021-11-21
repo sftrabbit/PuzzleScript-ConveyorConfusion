@@ -2,8 +2,6 @@ var objectTrackers = null;
 var initialObjectTrackers = null;
 
 function restoreActiveRegion(lev) {
-  oldflickscreendat=lev.oldflickscreendat.concat([]);
-
   var playerPosition = getPlayerPositions()[0];
   var playerX = (playerPosition / level.height) | 0;
   var playerY = playerPosition % level.height;
@@ -90,7 +88,7 @@ function restoreActiveRegion(lev) {
         }
 
         for (var i = 0; i < STRIDE_OBJ; i++) {
-          level.objects[positionIndex * STRIDE_OBJ + i] = lev.dat[positionIndex * STRIDE_OBJ + i];
+          level.objects[positionIndex * STRIDE_OBJ + i] = originalLevel.dat[positionIndex * STRIDE_OBJ + i];
         }
       }
     }
