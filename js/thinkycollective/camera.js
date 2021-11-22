@@ -13,7 +13,6 @@ function transitionCameraToRegion(activeRegion) {
   }
 
   cameraTransition = {
-    start: (new Date()).getTime(),
     to: {
       position: targetPosition,
       zoom: activeRegion.zoom || 1
@@ -21,6 +20,7 @@ function transitionCameraToRegion(activeRegion) {
   };
 
   if (camera != null) {
+    cameraTransition.start = (new Date()).getTime()
     cameraTransition.from = {
       position: [camera.position[0], camera.position[1]],
       zoom: camera.zoom
@@ -84,8 +84,6 @@ function transitionCameraToPlayerAnchored(activeRegion, horizontal) {
 
 function initSmoothCamera() {
   var region = getActiveRegion();
-
-  cameraTransition = null;
 
   if (cameraTransition != null) {
     camera = {
