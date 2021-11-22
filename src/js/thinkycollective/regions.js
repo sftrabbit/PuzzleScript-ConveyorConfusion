@@ -1,4 +1,4 @@
-var regionsOffset = [0, 18];
+var regionsOffset = [0, 21];
 var regions = [
   [
     //////////////
@@ -12,7 +12,6 @@ var regions = [
         { rect: [5, -34, 5, 34], secondary: true, camera: 'follow-player-anchored-x' },
       ],
       zoom: 0.7,
-      start: true,
       simulateAll: true
     },
     // Intro - bottom left arm
@@ -858,9 +857,30 @@ var regions = [
         { rect: [1, 4, 13, 3] },
         { rect: [5, 7, 5, 1] },
         { rect: [14, 3, 5, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' }
+        { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' },
+        { rect: [0, -1, 3, 2], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.6
+      zoom: 0.7,
+      start: true
+    },
+    // (Ethan Clark) -> (domcamus)
+    {
+      offset: [22, -6],
+      areas: [
+        { rect: [0, 0, 24, 3], camera: 'follow-player' },
+        { rect: [21, 3, 16, 3], camera: 'follow-player' },
+        { rect: [0, 3, 3, 11], camera: 'follow-player' },
+        { rect: [1, 14, 2, 1], camera: 'follow-player' }
+      ],
+      zoom: 0.7
+    },
+    // (domcamus)
+    {
+      offset: [1, 5],
+      areas: [
+        { rect: [0, 0, 22, 18] }
+      ],
+      zoom: 0.50
     },
   ]
 ];

@@ -3,6 +3,8 @@ var previousActiveRegionIndex = null;
 
 var levelNeedsDraw = true;
 
+var pendingSave = false;
+
 function initOpenWorld() {
   initRegions();
   initLevelState();
@@ -16,15 +18,20 @@ function onStateUpdate(againing, action) {
   }
 
   var activeRegion = getActiveRegion();
-  if (activeRegion == null) {
-    transitionCameraToPlayer(activeRegion);
-    return;
-  }
 
   var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
 
   if (changedRegion) {
     saveLevelState();
+  }
+
+  transitionCamera(activeRegion);
+}
+
+function transitionCamera(activeRegion) {
+  if (activeRegion == null) {
+    transitionCameraToPlayer(activeRegion);
+    return;
   }
 
   var activeArea = getActiveArea();

@@ -11,3 +11,5 @@
 - Don't store undo if player only looked a different direction
 - Show dirty state?
 - Camera after reset
+- Sign posts?
+- Screen shake scaling

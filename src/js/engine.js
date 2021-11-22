@@ -520,6 +520,7 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
 		drawLevel();
 		redraw();
 	} else {
+		transitionCamera(activeRegion);
 		initSmoothCamera();
 	}
 }
@@ -1056,10 +1057,6 @@ function DoRestart(force) {
 	}
 	tryPlayRestartSound();
 
-    if (isOpenWorldLevel()) {
-        initSmoothCamera();
-    }
-
 	if ('run_rules_on_level_start' in state.metadata) {
 		firstTurn = true;
     	processInput(-1,true);
@@ -1067,6 +1064,10 @@ function DoRestart(force) {
 	} else {
         onStateUpdate(false, false);
     }
+
+    // if (isOpenWorldLevel()) {
+    //     initSmoothCamera();
+    // }
 
 	level.commandQueue=[];
 	level.commandQueueSourceRules=[];
