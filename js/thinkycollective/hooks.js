@@ -33,13 +33,26 @@ function onStateUpdate(againing, action) {
 }
 
 function updateSecretMarker(secret) {
+  for (var i = 0; i < secrets.length; i++) {
+    if (i !== 10) {
+      var secretX = secrets[i];
+      var markerCell = level.getCell(secretX.markerIndex);
+      markerCell.iclear(state.objectMasks['secret_off']);
+      markerCell.ior(state.objectMasks['secret_on']);
+      level.setCell(secretX.markerIndex, markerCell);
+    }
+  }
+
   var buttonCell = level.getCell(secret.buttonIndex);
   if (buttonCell.anyBitsInCommon(state.objectMasks['dynamic_below'])) {
     var markerCell = level.getCell(secret.markerIndex);
-    markerCell.ior(state.objectMasks['secret_on']);
-    level.setCell(secret.markerIndex, markerCell);
+    if (markerCell.anyBitsInCommon(state.objectMasks['secret_off'])) {
+      markerCell.iclear(state.objectMasks['secret_off']);
+      markerCell.ior(state.objectMasks['secret_on']);
+      level.setCell(secret.markerIndex, markerCell);
 
-    checkSecretMarkers();
+      checkSecretMarkers();
+    }
   }
 }
 
@@ -54,6 +67,9 @@ function checkSecretMarkers() {
     }
   }
 
+  if (secretsComplete) {
+    againing = true;
+  }
   console.log('Secrets complete?', secretsComplete);
 }
 
