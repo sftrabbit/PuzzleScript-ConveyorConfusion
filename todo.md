@@ -14,9 +14,9 @@
 - Undo doesn't work at start of stevenjmiller level (after walking there from domcamus level)
 - Belt noise in Jack Lance's level, also in my sticky intro level
 - Broken wire graphics in stevenjmiller's bonus level
-- Theme1/Theme2
 - Ask Notan about change to level
 - Fix LeSlo's level secret
 - Slow reset
 - Do the overhead walls need a tutorial?
 - Should I change the secrets to be in-PuzzleScript?
+- Split up intro region?

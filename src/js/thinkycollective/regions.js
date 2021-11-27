@@ -6,10 +6,12 @@ var regions = [
     //////////////
     // Intro
     {
-      offset: [64, 70],
+      offset: [63, 70],
       areas: [
-        { rect: [0, 0, 15, 10], camera: 'follow-player-anchored-x' },
-        { rect: [5, -34, 5, 34], secondary: true, camera: 'follow-player-anchored-x' },
+        { rect: [0, 0, 16, 9], camera: 'follow-player-anchored-x' },
+        { rect: [5, -34, 6, 34], secondary: true, camera: 'follow-player-anchored-x' },
+        { rect: [-7, 4, 7, 3], secondary: true, camera: 'follow-player' },
+        { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player' },
       ],
       zoom: 0.7,
       simulateAll: true
@@ -18,7 +20,7 @@ var regions = [
     {
       offset: [64, 67],
       areas: [
-        { rect: [-14, -6, 19, 4], camera: 'follow-player' },
+        { rect: [-14, -6, 18, 4], camera: 'follow-player' },
         { rect: [-14, -2, 4, 9], camera: 'follow-player' },
         { rect: [-31, 3, 17, 4], camera: 'follow-player' },
         { rect: [-29, 2, 3, 1], camera: 'follow-player' },
@@ -39,7 +41,7 @@ var regions = [
     {
       offset: [64, 70],
       areas: [
-        { rect: [-4, -30, 9, 4], camera: 'follow-player' },
+        { rect: [-4, -30, 8, 4], camera: 'follow-player' },
       ],
       zoom: 0.7,
       simulateAll: true
@@ -567,8 +569,8 @@ var regions = [
     {
       offset: [89, -8],
       areas: [
-        { rect: [0, 0, 19, 11] },
-        { rect: [0, 11, 17, 1] },
+        { rect: [1, 0, 17, 11] },
+        { rect: [1, 11, 16, 1] },
         { rect: [1, 12, 16, 4] },
       ],
       zoom: 0.56,
@@ -635,8 +637,7 @@ var regions = [
         { rect: [0, 1, 14, 9] }
       ],
       zoom: 0.7,
-      secret: true,
-      start: true
+      secret: true
     },
     // (Justas)
     {
@@ -1023,18 +1024,19 @@ var regions = [
     },
     // (D5R)
     {
-      offset: [2, -19],
+      offset: [1, -19],
       areas: [
         { rect: [0, 0, 11, 11] },
         { rect: [11, 0, 2, 11], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     // (jackk)
     {
       offset: [15, -22],
       areas: [
-        { rect: [0, 5, 2, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-1, 5, 3, 9], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 3, 5, 11] },
         { rect: [7, 0, 26, 14] },
         { rect: [33, 0, 1, 14], secondary: true, camera: 'pull-horizontal' }
@@ -1063,6 +1065,17 @@ var regions = [
   ]
 ];
 
+var theme2Areas = [
+  [115, -21, Infinity, Infinity],
+  [77, -8, Infinity, 13],
+  [80, 5, Infinity, 13],
+  [82, 18, Infinity, Infinity],
+  [79, 31, Infinity, Infinity],
+  [71, 33, Infinity, Infinity],
+  [0, 5, 25, 18],
+  [1, -19, 13, 11],
+];
+
 var regionMap = [];
 var secrets = [];
 
@@ -1084,6 +1097,19 @@ function initRegions() {
       var cell = level.getCell(positionIndex);
       if (cell.anyBitsInCommon(state.objectMasks['secret_off'])) {
         secretMarkerIndexes.push(positionIndex);
+      }
+
+      for (var i = 0; i < theme2Areas.length; i++) {
+        var theme2Area = theme2Areas[i];
+        var minX = regionsOffset[0] + theme2Area[0];
+        var maxX = minX + theme2Area[2];
+        var minY = regionsOffset[1] + theme2Area[1];
+        var maxY = minY + theme2Area[3];
+        if (x >= minX && x < maxX && y >= minY && y < maxY) {
+          cell.ior(state.objectMasks['theme2']);
+          level.setCell(positionIndex, cell);
+          break;
+        }
       }
     }
     regionMap.push(regionMapColumn);

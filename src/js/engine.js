@@ -444,8 +444,6 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
         }
 
 	    backups=[]
-	    originalLevel=backupLevel();
-	    restartTarget=originalLevel;
 		keybuffer=[];
 
 		firstTurn = true;
@@ -461,6 +459,8 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
         } else {
           clearOpenWorldState();
         }
+	    originalLevel=backupLevel();
+	    restartTarget=originalLevel;
 
 	    if ('run_rules_on_level_start' in state.metadata) {
 			runrulesonlevelstart_phase=true;
