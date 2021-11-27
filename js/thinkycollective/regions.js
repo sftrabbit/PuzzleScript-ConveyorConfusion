@@ -1,4 +1,4 @@
-var regionsOffset = [0, 21];
+var regionsOffset = [0, 29];
 var regions = [
   [
     //////////////
@@ -16,7 +16,7 @@ var regions = [
     },
     // Intro - bottom left arm
     {
-      offset: [64, 70],
+      offset: [64, 67],
       areas: [
         { rect: [-14, -6, 19, 4], camera: 'follow-player' },
         { rect: [-14, -2, 4, 9], camera: 'follow-player' },
@@ -28,7 +28,7 @@ var regions = [
     },
     // Intro - bottom right arm
     {
-      offset: [64, 70],
+      offset: [64, 67],
       areas: [
         { rect: [10, -6, 25, 4], camera: 'follow-player' },
       ],
@@ -56,6 +56,45 @@ var regions = [
       zoom: 0.7,
       simulateAll: true
     },
+    // Intro bonus puzzle
+    {
+      offset: [79, 66],
+      areas: [
+        { rect: [0, 3, 1, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 0, 3, 8] },
+        { rect: [5, 0, 8, 10] }
+      ],
+      zoom: 0.7
+    },
+    // Intro bonus puzzle secret
+    {
+      offset: [74, 65],
+      areas: [
+        { rect: [0, 0, 5, 5] },
+        { rect: [5, 1, 1, 3], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.7,
+      secret: true
+    },
+    // Intro top left arm secret corridor
+    {
+      offset: [64, 70],
+      areas: [
+        { rect: [-3, -26, 5, 11], camera: 'follow-player' },
+      ],
+      zoom: 0.7
+    },
+    // Intro top left arm secret
+    {
+      offset: [64, 70],
+      areas: [
+        { rect: [-2, -15, 3, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [-3, -14, 5, 5] }
+      ],
+      zoom: 0.7,
+      secret: true
+    },
     // Block push intro (Jumble)
     {
       offset: [60, 33],
@@ -73,7 +112,8 @@ var regions = [
         { rect: [0, 0, 4, 5] },
         { rect: [4, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secret: true
     },
     // Two level intro (Patrick)
     {
@@ -111,7 +151,8 @@ var regions = [
         { rect: [-4, 0, 12, 3], camera: 'follow-player-anchored-y' },
         { rect: [-9, -1, 5, 5], camera: 'follow-player-anchored-y' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secret: true
     },
     // Hub
     {
@@ -120,7 +161,8 @@ var regions = [
         { rect: [0, 0, 14, 10] },
         { rect: [3, -2, 8, 2] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      start: true
     },
     //////////////
     // BRANCH A
@@ -157,7 +199,8 @@ var regions = [
         { rect: [-2, 9, 3, 4], secondary: true, camera: 'follow-player' },
         { rect: [-1, 13, 2, 3], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      secret: true
     },
     // Branch A exit corridor
     {
@@ -216,7 +259,8 @@ var regions = [
         { rect: [12, 21, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [6, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.4
+      zoom: 0.4,
+      secret: true
     },
     // Clock shortcut surround
     {
@@ -342,7 +386,8 @@ var regions = [
         { rect: [3, 5, 2, 2], secondary: true, camera: 'follow-player' },
         { rect: [5, 4, 11, 3], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secret: true
     },
     // 7:00 #4 (Norgg)
     {
@@ -379,7 +424,8 @@ var regions = [
         { rect: [1, 0, 3, 8] },
         { rect: [4, 0, 1, 8], secondary: true }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secret: true
     },
     // 7:00 #6 (Le Slo)
     {
@@ -436,7 +482,8 @@ var regions = [
         { rect: [0, 0, 5, 4] },
         { rect: [0, 4, 5, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secret: true
     },
     // 9:00 clementsparrow secret 2
     {
@@ -448,7 +495,8 @@ var regions = [
         { rect: [9, 0, 3, 7], secondary: true, camera: 'follow-player' },
         { rect: [6, 1, 3, 4] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secret: true
     },
     // 9:00 #3 (Deusovi)
     {
@@ -501,7 +549,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 19, 15] },
       ],
-      zoom: 0.58
+      zoom: 0.58,
+      simulateAll: true
     },
     //////////////
     // BRANCH B
@@ -510,9 +559,21 @@ var regions = [
     {
       offset: [87, 8],
       areas: [
-        { rect: [0, 0, 3, 9] }
+        { rect: [0, 0, 3, 9], camera: 'follow-player' },
+        { rect: [-4, -4, 7, 4], camera: 'follow-player' },
       ],
       zoom: 0.6
+    },
+    // Branch B finish
+    {
+      offset: [89, -8],
+      areas: [
+        { rect: [0, 0, 19, 11] },
+        { rect: [0, 11, 17, 1] },
+        { rect: [1, 12, 16, 4] },
+      ],
+      zoom: 0.56,
+      simulateAll: true
     },
     // (Pichusuperlover)
     {
@@ -552,12 +613,29 @@ var regions = [
       offset: [116, 2],
       areas: [
         { rect: [3, 2, 4, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [7, 0, 7, 3], secondary: true, camera: 'pull-vertical' },
+        { rect: [7, 0, 8, 3], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 3, 12, 5] },
         { rect: [0, 8, 5, 2] },
-        { rect: [12, 3, 2, 5], secondary: true, camera: 'follow-player' }
+        { rect: [12, 3, 3, 5], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7
+    },
+    // (Second ending gate)
+    {
+      offset: [122, -6],
+      areas: [
+        { rect: [0, 0, 9, 8] }
+      ],
+      zoom: 0.7
+    },
+    // (Second ending secret room)
+    {
+      offset: [117, -16],
+      areas: [
+        { rect: [0, 0, 14, 10] }
+      ],
+      zoom: 0.7,
+      secret: true
     },
     // (Justas)
     {
@@ -675,7 +753,7 @@ var regions = [
       ],
       zoom: 0.6
     },
-    // stevenjmiller's bomb secret
+    // stevenjmiller's bomb secret corridor
     {
       offset: [109, 43],
       areas: [
@@ -687,6 +765,16 @@ var regions = [
         { rect: [-5, 8, 4, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6
+    },
+    // stevenjmiller's bomb secret
+    {
+      offset: [114, 52],
+      areas: [
+        { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 5, 5] }
+      ],
+      zoom: 0.6,
+      secret: true
     },
     // Joseph Mansfield's secret
     {
@@ -707,7 +795,8 @@ var regions = [
         { rect: [0, 2, 5, 3] },
         { rect: [0, 5, 5, 1], secondary: true }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      secret: true
     },
     // (Joseph Mansfield)
     {
@@ -745,20 +834,31 @@ var regions = [
       offset: [115, 68],
       areas: [
         { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 5, 5] },
-        { rect: [6, 1, 2, 3] },
+        { rect: [1, 0, 5, 10] },
+        { rect: [6, 1, 2, 9] },
         { rect: [8, -1, 4, 6] }
       ],
       zoom: 0.6
     },
-    // Corridor secret
+    // Corridor secret #1
     {
       offset: [124, 63],
       areas: [
         { rect: [0, 1, 3, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [3, 0, 4, 10] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      secret: true
+    },
+    // Corridor secret #2
+    {
+      offset: [123, 73],
+      areas: [
+        { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 5, 5] }
+      ],
+      zoom: 0.6,
+      secret: true
     },
     // (Notan)
     {
@@ -790,7 +890,8 @@ var regions = [
         { rect: [1, 0, 3, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 5, 5] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      secret: true
     },
     // Return corridor
     {
@@ -802,12 +903,12 @@ var regions = [
     },
     // (Joseph Mansfield) Vat introduction
     {
-      offset: [122, 29],
+      offset: [123, 29],
       areas: [
         { rect: [0, 0, 1, 10], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 7, 9] },
         { rect: [1, 9, 7, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [4, 10, 3, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [3, 10, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.6
     },
@@ -819,9 +920,19 @@ var regions = [
         { rect: [1, 0, 8, 8] },
         { rect: [9, 0, 3, 9] },
         { rect: [12, 0, 9, 11] },
-        { rect: [21, 2, 1, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [21, 1, 2, 10], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.6
+    },
+    // (Shark) secret
+    {
+      offset: [120, 20],
+      areas: [
+        { rect: [0, 0, 5, 5] },
+        { rect: [1, 5, 3, 1], secondary: true, camera: 'pull-vertical' },
+      ],
+      zoom: 0.7,
+      secret: true
     },
     // (twak)
     {
@@ -860,8 +971,25 @@ var regions = [
         { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, -1, 3, 2], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
+    },
+    // Bonus level #1 (stevenjmiller)
+    {
+      offset: [48, -15],
+      areas: [
+        { rect: [0, 0, 17, 12] }
+      ],
+      zoom: 0.6
+    },
+    // Bonus level #1 secret
+    {
+      offset: [65, -7],
+      areas: [
+        { rect: [0, 1, 2, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 0, 5, 5] }
+      ],
+      zoom: 0.6,
+      secret: true
     },
     // (Ethan Clark) -> (domcamus)
     {
@@ -878,14 +1006,64 @@ var regions = [
     {
       offset: [1, 5],
       areas: [
-        { rect: [0, 0, 22, 18] }
+        { rect: [0, 0, 2, 7], secondary: true, camera: 'follow-player' },
+        { rect: [0, 7, 2, 11] },
+        { rect: [2, 0, 20, 18] }
       ],
       zoom: 0.50
+    },
+    // (stevenjmiller)
+    {
+      offset: [1, -8],
+      areas: [
+        { rect: [0, 0, 21, 13] }
+      ],
+      zoom: 0.58
+    },
+    // (D5R)
+    {
+      offset: [2, -19],
+      areas: [
+        { rect: [0, 0, 11, 11] },
+        { rect: [11, 0, 2, 11], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.7
+    },
+    // (jackk)
+    {
+      offset: [15, -22],
+      areas: [
+        { rect: [0, 5, 2, 9], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 3, 5, 11] },
+        { rect: [7, 0, 26, 14] },
+        { rect: [33, 0, 1, 14], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.48
+    },
+    // (jackk -> ending)
+    {
+      offset: [49, -22],
+      areas: [
+        { rect: [0, 0, 3, 4], camera: 'follow-player' },
+        { rect: [0, 4, 20, 3], camera: 'follow-player' },
+        { rect: [17, 7, 4, 1], camera: 'follow-player' },
+        { rect: [20, 5, 1, 2], camera: 'follow-player' },
+      ],
+      zoom: 0.6
+    },
+    // (jackk -> ending)
+    {
+      offset: [70, -22],
+      areas: [
+        { rect: [0, 0, 13, 13] }
+      ],
+      zoom: 0.6
     },
   ]
 ];
 
 var regionMap = [];
+var secrets = [];
 
 function initRegions() {
   regionMap = [];
@@ -894,13 +1072,23 @@ function initRegions() {
 
   var haveStartRegion = false;
 
+  var secretMarkerIndexes = [];
+
   for (var x = 0; x < level.width; x++) {
     var regionMapColumn = [];
     for (var y = 0; y < level.height; y++) {
       regionMapColumn.push(null)
+
+      var positionIndex = y + x * level.height;
+      var cell = level.getCell(positionIndex);
+      if (cell.anyBitsInCommon(state.objectMasks['secret_off'])) {
+        secretMarkerIndexes.push(positionIndex);
+      }
     }
     regionMap.push(regionMapColumn);
   }
+
+  var secretCount = 0;
 
   for (var i = 0; i < levelRegions.length; i++) {
     var region = levelRegions[i];
@@ -950,9 +1138,26 @@ function initRegions() {
 
     region.outlinePolygon = calculateOutlinePolygon(region);
     region.index = i;
+    region.secret = !!region.secret;
+    region.simulateAll = !!region.simulateAll;
 
-    if (!region.simulateAll) {
-      region.simulateAll = false;
+    if (region.secret) {
+      for (var x = regionBounds.minX; x < regionBounds.maxX; x++) {
+        for (var y = regionBounds.minY; y < regionBounds.maxY; y++) {
+          var positionIndex = y + x * level.height;
+          var cell = level.getCell(positionIndex);
+          if (cell.anyBitsInCommon(state.objectMasks['button_below'])) {
+            var secret = {
+              buttonIndex: positionIndex,
+              region: region,
+              markerIndex: secretMarkerIndexes[secretCount]
+            };
+            secrets.push(secret);
+            region.secret = secret;
+            secretCount++;
+          }
+        }
+      }
     }
   }
 }
