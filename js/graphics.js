@@ -518,7 +518,7 @@ function redraw() {
 
         ctx.drawImage(
             levelCanvas,
-            cameraShakeOffset.x * 8 * camera.zoom, cameraShakeOffset.y * 8 * camera.zoom,
+            cameraShakeOffset.x * 4 * camera.zoom * (cellwidth / 40), cameraShakeOffset.y * 4 * camera.zoom * (cellwidth / 40),
             levelCanvas.width, levelCanvas.height,
             (canvas.width / 2) - ((levelCanvasSize.width * cellwidth / 2) + levelCanvasOffsetX) * camera.zoom,
             (canvas.height / 2) - ((levelCanvasSize.height * cellheight / 2) + levelCanvasOffsetY) * camera.zoom,
