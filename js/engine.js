@@ -874,6 +874,7 @@ function RebuildLevelArrays() {
 	_o10 = new BitVec(STRIDE_OBJ);
 	_o11 = new BitVec(STRIDE_OBJ);
 	_o12 = new BitVec(STRIDE_OBJ);
+	_o13 = new BitVec(STRIDE_OBJ);
 	_m1 = new BitVec(STRIDE_MOV);
 	_m2 = new BitVec(STRIDE_MOV);
 	_m3 = new BitVec(STRIDE_MOV);
@@ -1717,7 +1718,7 @@ CellPattern.prototype.toJSON = function() {
 	];
 };
 
-var _o1,_o2,_o2_5,_o3,_o4,_o5,_o6,_o7,_o8,_o9,_o10,_o11,_o12;
+var _o1,_o2,_o2_5,_o3,_o4,_o5,_o6,_o7,_o8,_o9,_o10,_o11,_o12,_o13;
 var _m1,_m2,_m3;
 
 CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
@@ -2918,11 +2919,18 @@ function processInput(dir,dontDoWin,dontModify) {
 						var colIndex=(index/level.height)|0;
 						var rowIndex=(index%level.height);
 
-						if (colIndex )
-
-						// if (colIndex !== playerPosition.x || rowIndex !== playerPosition.y) {
-    					addUndoState(bak);
-    					modified = true;
+						if (colIndex === playerPosition.x && (rowIndex === playerPosition.y || rowIndex === (playerPosition.y - 1))) {
+    						// Don't add undo state if only player sprite has changed
+    						var strideOffset = i % STRIDE_OBJ;
+    						var mask = ~(state.objectMasks['noundobackup'].data[strideOffset]);
+    						if ((level.objects[i] & mask) !== (bak.dat[i] & mask)) {
+	    						addUndoState(bak);
+	    						modified = true;
+    						}
+    					} else {
+    						addUndoState(bak);
+    						modified = true;
+    					}
     					break;
 	    				// }
 	    			} else {
