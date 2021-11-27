@@ -5,7 +5,6 @@
 - Secret end
 - Vat falling behaviour
 - Ladders on door behaviour
-- Don't store undo if player only looked a different direction
 - Show dirty state?
 - Sign posts? At the very least, bomb detonation message
 - Screen shake scaling

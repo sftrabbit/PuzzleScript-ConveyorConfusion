@@ -2,6 +2,7 @@ title Getting Slide-Tracked
 author Thinky Collective
 homepage http://thinkycollective.itch.io/
 again_interval 0.06
+key_repeat_interval 0.1
 background_color #201c1c
 run_rules_on_level_start
 
@@ -2744,6 +2745,28 @@ SigilB_On
 .....
 .....
 
+SigilC_Off_Top
+#444
+.....
+.....
+.000.
+.0.0.
+.000.
+
+SigilC_Off
+transparent
+
+SigilC_On_Top
+#b3303a
+.....
+.....
+.000.
+.0.0.
+.000.
+
+SigilC_On
+transparent
+
 
 =======
 LEGEND
@@ -2851,6 +2874,7 @@ t = DoorBase
 
 ! = SigilA_Off and Wall1
 ¬ = SigilB_Off and Wall2
+% = SigilC_Off and Wall2
 
 Wall = Wall1 or Wall2
 Wall_Front = Wall1_Front or Wall2_Front
@@ -2884,10 +2908,9 @@ Player = Player_Above or Player_Below
 
 Secret = Secret_Off or Secret_On
 
-SigilA = SigilA_Off_Top or SigilA_Off or SigilA_On_Top or SigilA_On
-SigilB = SigilB_Off_Top or SigilB_Off or SigilB_On_Top or SigilB_On
-Sigil = SigilA or SigilB
-Sigil_On = SigilA_On or SigilB_On
+Sigil = SigilA_Off or SigilA_On or SigilB_Off or SigilB_On or SigilC_Off or SigilC_On
+Sigil_Top = SigilA_Off_Top or SigilA_On_Top or SigilB_Off_Top or SigilB_On_Top or SigilC_Off_Top or SigilC_On_Top
+Sigil_On = SigilA_On or SigilB_On or SigilC_On
 
 BeltURDL_Above = BeltU_Above or BeltR_Above or BeltD_Above or BeltL_Above
 BeltURDL_Below = BeltU_Below or BeltR_Below or BeltD_Below or BeltL_Below
@@ -3041,6 +3064,8 @@ Stickyable_Below = Belt_Below or Explosive_below
 (Objects that another object can be on top of)
 Upstairs = Platform or Belt_Below or DoorExtended or Inflated or Explosive_Below or SlimeVat_Broken_Below or FuseIntention
 
+NoUndoBackup = Render_Player_Below_Cover or Render_Player_Above_Top_Cover
+
 =======
 SOUNDS
 =======
@@ -3153,7 +3178,7 @@ Render_Above_Top Wall_Top Wall_above_top Anim_FusionAbove_Top SlimeVat_Above_Top
 Wire_AboveWall_U_Top Render_Player_Above_Top_Cover Render_ExplosivePrimed_Above_Top
 Wire_AboveWall_R_Top
 Wire_AboveWall_D_Top
-Wire_AboveWall_L_Top Inflatable_Top SigilA_Off_Top SigilA_On_Top SigilB_Off_Top SigilB_On_Top
+Wire_AboveWall_L_Top Inflatable_Top Sigil_Top
 Render_WireOn_AboveWall_U_Top
 Render_WireOn_AboveWall_R_Top
 Render_WireOn_AboveWall_D_Top
@@ -3161,7 +3186,7 @@ Render_WireOn_AboveWall_L_Top
 vWallBorderL_Top
 vWallBorderU_Top
 vWallBorderR_Top
-Inflatable SigilA_Off SigilA_On SigilB_Off SigilB_On
+Inflatable Sigil
 
 Render_Above_Top2 Anim_FusionAbove_Top2 SlimeVat_Above_Top2
 Exploded_above
@@ -3309,6 +3334,7 @@ GLOBAL up INIT [ Walls | no Walls no vWallBorderU_Top ] -> [ Walls | vWallBorder
 
 GLOBAL UP INIT [ SigilA_Off | ] -> [ SigilA_Off | SigilA_Off_Top ]
 GLOBAL UP INIT [ SigilB_Off | ] -> [ SigilB_Off | SigilB_Off_Top ]
+GLOBAL UP INIT [ SigilC_Off | ] -> [ SigilC_Off | SigilC_Off_Top ]
 
 
 NOAGAINCHECK [ ClearOnTurnStart ] -> [ ]
@@ -3342,10 +3368,12 @@ UP [ SlimeVat_Broken_Above NO Upstairs | SlimeVat_Broken_Above_Top ] -> [ SlimeV
 [ Sticky_Above NO Dynamic_Above Dynamic_Below ] -> [ Sticky_Below Dynamic_Below ]
 
 (Calculate sparks)
+GLOBAL [ SigilC_Off ] [ Secret_Off ] -> [ ACTION SigilC_Off ] [ Secret_Off ]
+GLOBAL UP [ STATIONARY SigilC_Off | SigilC_Off_Top ] -> [ SigilC_On | SigilC_On_Top ]
 GLOBAL [ Spark ] -> []
 GLOBAL [ Weighted_Above Button_Above ] -> [ Weighted_Above Button_Above Spark ]
 GLOBAL [ Weighted_Below Button_Below ] -> [ Weighted_Below Button_Below Spark ]
-GLOBAL RIGHT [ Sigil_On | Wire ] -> [ Sigil_On Spark | Wire ]
+GLOBAL HORIZONTAL [ Sigil_On | Wire ] -> [ Sigil_On Spark | Wire ]
 GLOBAL [ Spark NO SparkStopper | Sparkable ] -> [ Spark | Sparkable Spark ]
 (Activate/deactivate doors)
 GLOBAL [ Spark DoorBase NO Dynamic_Above NO DoorExtended ] -> [ Spark DoorBase DoorExtended ] again sfx3
@@ -4105,9 +4133,9 @@ LEVELS
 ###########################.`...~~.?.6~~qpcpp.┐ŝ###.....p.....####....~Ň~#...........pppr...########################################
 ########################`#..qppqq~~q#`~.p.+.p~.ŝ###...ŵ.+.ă...####....~~~#...........p......########################################
 #######################`~~.đ+r..+~`q~#~.+~~~p8..####......8..#####.....8.##.đ.ă..+.ă.+#...""########################################
-#########c+#########.##~~``~~pp..#.p`~#..~`tp...###┐#.......#┌####~......##.đ.ă..c..........£~######################################
-#######.#p.~#######...#~`~....p#."#ppppt.`~~p..#####┐#.....#┌#####~......##.đ.ă..p..........Ň~######################################
-####~$~."ppp+####`#.đ...ŝ....ŵp+."......~~+qp..###################~......##......pppr...+...Ň~######################################
+#########c+#########.##~~``~~pp..#.p`~#..~`tp...###┐#.......#┌####~......##.đ.ă..c..........£~##############################~~######
+#######.#p.~#######...#~`~....p#."#ppppt.`~~p..#####┐#.....#┌#####~......##.đ.ă..p..........Ň~##############################qqc%####
+####~$~."ppp+####`#.đ...ŝ....ŵp+."......~~+qp..###################~......##......pppr...+...Ň~##############################tt######
 ###......r..##~~~~4.........`~~~~`.`..~``~.q~""###################~......##.....#....r..p...Ł~##############################~~######
 ###..6ŵŝŵp..##~##``##`#.....~~~`~``~6~~~zqpp#..##~đ...........ă~###########..$..└....p..p..4~~############################..88....##
 ###...pppp.~~.~##££~~~....."~~~~~~``#~`~~~..~`###ŝ.............ŝ###########..£.#~####cž#c#############################~q~#.&&&&&&.##
