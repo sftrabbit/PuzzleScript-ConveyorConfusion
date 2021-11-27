@@ -5,9 +5,7 @@
 - Secret end
 - Vat falling behaviour
 - Ladders on door behaviour
-- Show dirty state?
 - Sign posts? At the very least, bomb detonation message
-- Screen shake scaling
 - Prevent reset in certain regions
 - Don't save until we've stopped againing
 - Why is it slower after continue?
