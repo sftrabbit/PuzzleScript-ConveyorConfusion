@@ -1,15 +1,23 @@
-- Tracking for merging and explosions and stuff
+- Tracking for merging and explosions and stuff (do we even need it?)
 - Cool credits
 - Menu screen
-- End cutscene
+- End cutscenes
 - Wire up secrets
 - Secret end
-- Fit merge levels in
-- Fit my and stevenjmiller's levels in
 - Vat falling behaviour
 - Ladders on door behaviour
 - Don't store undo if player only looked a different direction
 - Show dirty state?
-- Camera after reset
-- Sign posts?
+- Sign posts? At the very least, bomb detonation message
 - Screen shake scaling
+- Prevent reset in certain regions
+- Don't save until we've stopped againing
+- Why is it slower after continue?
+- Undo doesn't work at start of stevenjmiller level (after walking there from domcamus level)
+- Belt noise in Jack Lance's level, also in my sticky intro level
+- Broken wire graphics in stevenjmiller's bonus level
+- Theme1/Theme2
+- Ask Notan about change to level
+- Fix LeSlo's level secret
+- Slow reset
+- Do the overhead walls need a tutorial?

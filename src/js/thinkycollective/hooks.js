@@ -19,6 +19,10 @@ function onStateUpdate(againing, action) {
 
   var activeRegion = getActiveRegion();
 
+  if (activeRegion.secret) {
+    updateSecretMarker(activeRegion.secret);
+  }
+
   var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
 
   if (changedRegion) {
@@ -26,6 +30,31 @@ function onStateUpdate(againing, action) {
   }
 
   transitionCamera(activeRegion);
+}
+
+function updateSecretMarker(secret) {
+  var buttonCell = level.getCell(secret.buttonIndex);
+  if (buttonCell.anyBitsInCommon(state.objectMasks['dynamic_below'])) {
+    var markerCell = level.getCell(secret.markerIndex);
+    markerCell.ior(state.objectMasks['secret_on']);
+    level.setCell(secret.markerIndex, markerCell);
+
+    checkSecretMarkers();
+  }
+}
+
+function checkSecretMarkers() {
+  var secretsComplete = true;
+  for (var i = 0; i < secrets.length; i++) {
+    var secret = secrets[i];
+    var markerCell = level.getCell(secret.markerIndex);
+    if (!markerCell.anyBitsInCommon(state.objectMasks['secret_on'])) {
+      secretsComplete = false;
+      break;
+    }
+  }
+
+  console.log('Secrets complete?', secretsComplete);
 }
 
 function transitionCamera(activeRegion) {
