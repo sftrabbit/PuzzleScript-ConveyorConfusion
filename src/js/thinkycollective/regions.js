@@ -161,8 +161,7 @@ var regions = [
         { rect: [0, 0, 14, 10] },
         { rect: [3, -2, 8, 2] }
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     //////////////
     // BRANCH A
@@ -632,10 +631,12 @@ var regions = [
     {
       offset: [117, -16],
       areas: [
-        { rect: [0, 0, 14, 10] }
+        { rect: [5, -2, 8, 3] },
+        { rect: [0, 1, 14, 9] }
       ],
       zoom: 0.7,
-      secret: true
+      secret: true,
+      start: true
     },
     // (Justas)
     {

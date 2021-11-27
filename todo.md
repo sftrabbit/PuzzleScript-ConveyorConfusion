@@ -2,7 +2,6 @@
 - Cool credits
 - Menu screen
 - End cutscenes
-- Wire up secrets
 - Secret end
 - Vat falling behaviour
 - Ladders on door behaviour
@@ -21,3 +20,4 @@
 - Fix LeSlo's level secret
 - Slow reset
 - Do the overhead walls need a tutorial?
+- Should I change the secrets to be in-PuzzleScript?
