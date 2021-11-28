@@ -8,7 +8,6 @@
 - Why is it slower after continue?
 - Undo doesn't work at start of stevenjmiller level (after walking there from domcamus level)
 - Belt noise in Jack Lance's level, also in my sticky intro level
-- Broken wire graphics in stevenjmiller's bonus level
 - Ask Notan about change to level
 - Fix LeSlo's level secret
 - Slow reset
