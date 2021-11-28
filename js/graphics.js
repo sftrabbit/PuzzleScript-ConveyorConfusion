@@ -365,15 +365,32 @@ function redraw() {
         ctx.fillStyle = state.bgcolor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+        if (quittingTitleScreen && timer) {
+            ctx.globalAlpha = Math.max(1 - (Math.max(0, Math.min(timer / 1000, 1)) * 1.1), 0);
+        }
+
         for (var i = 0; i < titleWidth; i++) {
             for (var j = 0; j < titleHeight; j++) {
                 var ch = titleImage[j].charAt(i);
                 if (ch in textImages) {
                     var sprite = textImages[ch];
-                    ctx.drawImage(sprite, xoffset + i * cellwidth, yoffset + j * cellheight);                   
+                    if (state.levels.length !== 0 && titleMode <= 1) {
+                        if (j === 1 || j === 2) {
+                            ctx.imageSmoothingEnabled = false;
+                            ctx.drawImage(sprite, xoffset + (i - 2) * cellwidth * 2, yoffset + (j - 0.7) * cellheight * 2, cellwidth * 2, cellheight * 2);
+                            ctx.imageSmoothingEnabled = true;
+                        } else if (j === 0 || j === 3 || j === 4) {
+                        } else {
+                        ctx.drawImage(sprite, xoffset + i * cellwidth, yoffset + j * cellheight);
+                        }
+                    } else {
+                        ctx.drawImage(sprite, xoffset + i * cellwidth, yoffset + j * cellheight);
+                    }
                 }
             }
         }
+
+        ctx.globalAlpha = 1;
         return;
     } else {
         var curlevel = level;

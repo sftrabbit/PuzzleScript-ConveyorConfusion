@@ -6,7 +6,7 @@
 ..................................
 .............continue.............
 ..................................
-arrow keys to move................
+..................................
 x to action.......................
 z to undo, r to restart...........
 */
@@ -53,10 +53,10 @@ var titletemplate_firstgo = [
 	"..................................",
 	"..................................",
 	"..................................",
+	"..................................",
+	"..................................",
 	"..........#.start game.#..........",
 	"..................................",
-	"..................................",
-	".arrow keys to move...............",
 	".X to action......................",
 	".Z to undo, R to restart..........",
 	".................................."];
@@ -67,11 +67,11 @@ var titletemplate_select0 = [
 	"..................................",
 	"..................................",
 	"..................................",
-	"...........#.new game.#...........",
 	"..................................",
+	"..................................",
+	"...........#.new game.#...........",
 	".............continue.............",
 	"..................................",
-	".arrow keys to move...............",
 	".X to action......................",
 	".Z to undo, R to restart..........",
 	".................................."];
@@ -82,11 +82,11 @@ var titletemplate_select1 = [
 	"..................................",
 	"..................................",
 	"..................................",
-	".............new game.............",
 	"..................................",
+	"..................................",
+	".............new game.............",
 	"...........#.continue.#...........",
 	"..................................",
-	".arrow keys to move...............",
 	".X to action......................",
 	".Z to undo, R to restart..........",
 	".................................."];
@@ -99,10 +99,10 @@ var titletemplate_firstgo_selected = [
 	"..................................",
 	"..................................",
 	"..................................",
+	"..................................",
+	"..................................",
 	"###########.start game.###########",
 	"..................................",
-	"..................................",
-	".arrow keys to move...............",
 	".X to action......................",
 	".Z to undo, R to restart..........",
 	".................................."];
@@ -113,11 +113,11 @@ var titletemplate_select0_selected = [
 	"..................................",
 	"..................................",
 	"..................................",
-	"############.new game.############",
 	"..................................",
+	"..................................",
+	"############.new game.############",
 	".............continue.............",
 	"..................................",
-	".arrow keys to move...............",
 	".X to action......................",
 	".Z to undo, R to restart..........",
 	".................................."];
@@ -128,11 +128,11 @@ var titletemplate_select1_selected = [
 	"..................................",
 	"..................................",
 	"..................................",
-	".............new game.............",
 	"..................................",
+	"..................................",
+	".............new game.............",
 	"############.continue.############",
 	"..................................",
-	".arrow keys to move...............",
 	".X to action......................",
 	".Z to undo, R to restart..........",
 	"................................."];
@@ -205,9 +205,9 @@ function generateTitleScreen()
 	} else if (noRestart) {
 		titleImage[11]=".Z to undo.....................";
 	}
-	if (noAction) {
-		titleImage[10]=".......X to select............................";
-	}
+	titleImage[10]=".arrows to move, X to select...................";
+	titleImage[1]=".....Conveyor..................................";
+	titleImage[2]="......Con-fusion...............................";
 	for (var i=0;i<titleImage.length;i++)
 	{
 		titleImage[i]=titleImage[i].replace(/\./g, ' ');
@@ -215,26 +215,26 @@ function generateTitleScreen()
 
 	var width = titleImage[0].length;
 	var titlelines=wordwrap(title,titleImage[0].length);
-	if (state.metadata.author!==undefined){
-		if ( titlelines.length>3){
-			titlelines.splice(3);
-			logWarning("Game title is too long to fit on screen, truncating to three lines.",undefined,true);
-		}
-	} else {
-		if ( titlelines.length>5){
-			titlelines.splice(5);
-			logWarning("Game title is too long to fit on screen, truncating to five lines.",undefined,true);
-		}
+	// if (state.metadata.author!==undefined){
+	// 	if ( titlelines.length>3){
+	// 		titlelines.splice(3);
+	// 		logWarning("Game title is too long to fit on screen, truncating to three lines.",undefined,true);
+	// 	}
+	// } else {
+	// 	if ( titlelines.length>5){
+	// 		titlelines.splice(5);
+	// 		logWarning("Game title is too long to fit on screen, truncating to five lines.",undefined,true);
+	// 	}
 
-	}
-	for (var i=0;i<titlelines.length;i++) {
-		var titleline=titlelines[i];
-		var titleLength=titleline.length;
-		var lmargin = ((width-titleLength)/2)|0;
-		var rmargin = width-titleLength-lmargin;
-		var row = titleImage[1+i];
-		titleImage[1+i]=row.slice(0,lmargin)+titleline+row.slice(lmargin+titleline.length);
-	}
+	// }
+	// for (var i=0;i<titlelines.length;i++) {
+	// 	var titleline=titlelines[i];
+	// 	var titleLength=titleline.length;
+	// 	var lmargin = ((width-titleLength)/2)|0;
+	// 	var rmargin = width-titleLength-lmargin;
+	// 	var row = titleImage[1+i];
+	// 	titleImage[1+i]=row.slice(0,lmargin)+titleline+row.slice(lmargin+titleline.length);
+	// }
 	if (state.metadata.author!==undefined) {
 		var attribution="by "+state.metadata.author;
 		var attributionsplit = wordwrap(attribution,titleImage[0].length);
@@ -251,10 +251,9 @@ function generateTitleScreen()
 				line=line.slice(0,width);
 			}
 			var row = titleImage[3+i];
-			titleImage[3+i]=row.slice(0,width-line.length)+line;
+			titleImage[5+i]=row.slice(0,width-line.length)+line;
 		}
 	}
-
 }
 
 var introstate = {
@@ -759,6 +758,7 @@ function setGameState(_state, command, randomseed) {
 		    	titleMode=1;
 		    }
 		    generateTitleScreen();
+			startMusic();
 		    break;
 		}
 		case "rebuild":
@@ -3257,6 +3257,8 @@ function goToTitleScreen(){
 	doSetupTitleScreenLevelContinue();
 	titleSelection=showContinueOptionOnTitleScreen()?1:0;
 	generateTitleScreen();
+	timer = 0;
+	startMusic();
 	if (canvas!==null){//otherwise triggers error in cat bastard test
 		regenSpriteImages();
 	}
