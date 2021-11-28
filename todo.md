@@ -6,7 +6,6 @@
 - Sign posts? At the very least, bomb detonation message
 - Don't save until we've stopped againing
 - Why is it slower after continue?
-- Undo doesn't work at start of stevenjmiller level (after walking there from domcamus level)
 - Belt noise in Jack Lance's level, also in my sticky intro level
 - Ask Notan about change to level
 - Fix LeSlo's level secret
@@ -15,3 +14,5 @@
 - Should I change the secrets to be in-PuzzleScript?
 - Split up intro region?
 - Ensure D5R's comments are included
+- Restart is broken (after continue? is originalLevel corrupted?)
+- Camera in wrong positions on load
