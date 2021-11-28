@@ -15,4 +15,3 @@
 - Split up intro region?
 - Ensure D5R's comments are included
 - Restart is broken (after continue? is originalLevel corrupted?)
-- Camera in wrong positions on load
