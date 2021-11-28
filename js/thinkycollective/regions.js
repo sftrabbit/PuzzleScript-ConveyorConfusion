@@ -973,8 +973,7 @@ var regions = [
         { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, -1, 3, 2], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     // Bonus level #1 (stevenjmiller)
     {
@@ -1014,7 +1013,8 @@ var regions = [
         { rect: [0, 7, 2, 11] },
         { rect: [2, 0, 20, 18] }
       ],
-      zoom: 0.50
+      zoom: 0.50,
+      start: true
     },
     // (stevenjmiller)
     {
