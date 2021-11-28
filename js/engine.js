@@ -461,6 +461,8 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    originalLevel=backupLevel();
 	    restartTarget=originalLevel;
 
+	    canvasResize();
+
 	    if ('run_rules_on_level_start' in state.metadata) {
 			runrulesonlevelstart_phase=true;
 			processInput(-1,true);
@@ -470,8 +472,6 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 	    }
 
 	    firstTurn = false;
-
-	    canvasResize();
 
 	    if (!isOpenWorldLevel()) {
 		    drawLevel();

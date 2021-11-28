@@ -10,11 +10,12 @@ var regions = [
       areas: [
         { rect: [0, 0, 16, 9], camera: 'follow-player-anchored-x' },
         { rect: [5, -34, 6, 34], secondary: true, camera: 'follow-player-anchored-x' },
-        { rect: [-7, 4, 7, 3], secondary: true, camera: 'follow-player' },
-        { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player' },
+        { rect: [-7, 4, 7, 3], secondary: true, camera: 'follow-player-anchored-x' },
+        { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
       ],
       zoom: 0.7,
-      simulateAll: true
+      simulateAll: true,
+      start: true
     },
     // Intro - bottom left arm
     {
@@ -1013,8 +1014,7 @@ var regions = [
         { rect: [0, 7, 2, 11] },
         { rect: [2, 0, 20, 18] }
       ],
-      zoom: 0.50,
-      start: true
+      zoom: 0.50
     },
     // (stevenjmiller)
     {

@@ -3,10 +3,12 @@ var cameraTransition = null;
 var cameraZoomTransition = null;
 
 function transitionCameraToRegion(activeRegion) {
+  console.log('activeRegion', activeRegion.cameraAnchor[0], activeRegion.cameraAnchor[1] - 0.4)
   var targetPosition = clampCameraPosition(activeRegion, [
     activeRegion.cameraAnchor[0],
     activeRegion.cameraAnchor[1] - 0.4
   ]);
+  console.log('targetPosition', targetPosition[0], targetPosition[1])
 
   if (cameraTransition && cameraTransition.to.position[0] === targetPosition[0] && cameraTransition.to.position[1] === targetPosition[1]) {
     return;
@@ -26,6 +28,8 @@ function transitionCameraToRegion(activeRegion) {
       zoom: camera.zoom
     };
   }
+
+  console.log('cameraTransition', cameraTransition.to.position[0], cameraTransition.to.position[1])
 }
 
 function transitionCameraPulledByPlayer(activeRegion, horizontal) {
@@ -90,12 +94,15 @@ function initSmoothCamera() {
       position: cameraTransition.to.position,
       zoom: cameraTransition.to.zoom
     };
+    cameraTransition = null;
   } else {
     camera = {
       position: clampCameraPosition(region, [region.cameraAnchor[0], region.cameraAnchor[1] - 0.4]),
       zoom: region.zoom || 1
     };
   }
+
+  console.log('camera init to', camera.position[0], camera.position[1])
 }
 
 function easeOutQuad(x) {
@@ -104,6 +111,7 @@ function easeOutQuad(x) {
 
 function clampCameraPosition(activeRegion, position) {
   var zoom = activeRegion ? activeRegion.zoom : camera.zoom;
+  console.log('zoom', zoom, screenwidth, screenheight)
 
   var cameraMarginX = (screenwidth / 2) / zoom;
   var cameraMarginY = (screenheight / 2) / zoom;
