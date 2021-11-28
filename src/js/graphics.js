@@ -1,6 +1,6 @@
 function createSprite(name,spritegrid, colors, padding) {
 	if (colors === undefined) {
-		colors = [state.bgcolor, state.fgcolor];
+		colors = ['#00000000', state.fgcolor];
 	}
 
 	var sprite = makeSpriteCanvas(name);
@@ -375,9 +375,13 @@ function redraw() {
                 if (ch in textImages) {
                     var sprite = textImages[ch];
                     if (state.levels.length !== 0 && titleMode <= 1) {
-                        if (j === 1 || j === 2) {
+                        if (j === 1) {
                             ctx.imageSmoothingEnabled = false;
-                            ctx.drawImage(sprite, xoffset + (i - 2) * cellwidth * 2, yoffset + (j - 0.7) * cellheight * 2, cellwidth * 2, cellheight * 2);
+                            ctx.drawImage(sprite, xoffset + (i - 2.5) * cellwidth * 2, yoffset + (j - 0.7) * cellheight * 2, cellwidth * 2, cellheight * 2);
+                            ctx.imageSmoothingEnabled = true;
+                        } else if (j === 2) {
+                            ctx.imageSmoothingEnabled = false;
+                            ctx.drawImage(sprite, xoffset + (i - 1.5) * cellwidth * 2, yoffset + (j - 0.9) * cellheight * 2, cellwidth * 2, cellheight * 2);
                             ctx.imageSmoothingEnabled = true;
                         } else if (j === 0 || j === 3 || j === 4) {
                         } else {
