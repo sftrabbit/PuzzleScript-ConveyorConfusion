@@ -3375,7 +3375,8 @@ GLOBAL [ Weighted_Below Button_Below ] -> [ Weighted_Below Button_Below Spark ]
 GLOBAL HORIZONTAL [ Sigil_On | Wire ] -> [ Sigil_On Spark | Wire ]
 GLOBAL [ Spark NO SparkStopper | Sparkable ] -> [ Spark | Sparkable Spark ]
 (Activate/deactivate doors)
-GLOBAL [ Spark DoorBase NO Dynamic_Above NO DoorExtended ] -> [ Spark DoorBase DoorExtended ] again sfx3
+[ Ladder | Spark DoorBase ] -> [ Ladder | Spark ACTION DoorBase ]
+GLOBAL [ Spark STATIONARY DoorBase NO Dynamic_Above NO DoorExtended ] -> [ Spark DoorBase DoorExtended ] again sfx3
 [ Anim_DoorBlocked ] -> [ ]
 GLOBAL [ Spark DoorBase NO DoorExtended NO Wire_Below_U ] -> [ Spark DoorBase NO DoorExtended Wire_Below_U Anim_DoorBlocked ] again sfx8
 GLOBAL [ DoorExtended NO Spark ] -> [ ] again sfx4
@@ -4133,8 +4134,8 @@ LEVELS
 ########################`#..qppqq~~q#`~.p.+.p~.ŝ###...ŵ.+.ă...####....~~~#...........p......########################################
 #######################`~~.đ+r..+~`q~#~.+~~~p8..####......8..#####.....8.##.đ.ă..+.ă.+#...""########################################
 ########c+##########.##~~``~~pp..#.p`~#..~`tp...###┐#.......#┌####~......##.đ.ă..c..........£~##############################~~######
-######.#p.~########...#~`~....p#."#ppppt.`~~p..#####┐#.....#┌#####~......##.đ.ă..p..........Ň~##############################qqc%####
-###~$~."ppp+#####`#.đ...ŝ....ŵp+."......~~+qp..###################~......##......pppr...+...Ň~##############################tt######
+#######.p.~########...#~`~....p#."#ppppt.`~~p..#####┐#.....#┌#####~......##.đ.ă..p..........Ň~##############################qqc%####
+###~$~#"ppp+#####`#.đ...ŝ....ŵp+."......~~+qp..###################~......##......pppr...+...Ň~##############################tt######
 ##......r..###~~~~4.........`~~~~`.`..~``~.q~""###################~......##.....#....r..p...Ł~##############################~~######
 ##..6ŵŝŵp..###~##``##`#.....~~~`~``~6~~~zqpp#..##~đ...........ă~###########..$..└....p..p..4~~############################..88....##
 ##...pppp.~~.~~##££~~~....."~~~~~~``#~`~~~..~`###ŝ.............ŝ###########..£.#~####cž#c#############################~q~#.&&&&&&.##

@@ -14,7 +14,8 @@ var regions = [
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAll: true
+      simulateAll: true,
+      start: true
     },
     // Intro - bottom left arm
     {
@@ -1029,8 +1030,7 @@ var regions = [
         { rect: [0, 0, 11, 11] },
         { rect: [11, 0, 2, 11], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     // (jackk)
     {

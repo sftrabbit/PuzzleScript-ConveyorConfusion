@@ -1,10 +1,8 @@
 - Tracking for merging and explosions and stuff (do we even need it?)
 - Cool credits
-- Menu screen
 - End cutscenes
 - Secret end
 - Vat falling behaviour
-- Ladders on door behaviour
 - Sign posts? At the very least, bomb detonation message
 - Prevent reset in certain regions
 - Don't save until we've stopped againing
@@ -18,3 +16,4 @@
 - Do the overhead walls need a tutorial?
 - Should I change the secrets to be in-PuzzleScript?
 - Split up intro region?
+- Ensure D5R's comments are included
