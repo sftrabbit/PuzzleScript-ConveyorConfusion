@@ -4,7 +4,6 @@
 - Secret end
 - Vat falling behaviour
 - Sign posts? At the very least, bomb detonation message
-- Prevent reset in certain regions
 - Don't save until we've stopped againing
 - Why is it slower after continue?
 - Undo doesn't work at start of stevenjmiller level (after walking there from domcamus level)

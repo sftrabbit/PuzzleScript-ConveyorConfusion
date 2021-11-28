@@ -14,8 +14,7 @@ var regions = [
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAll: true,
-      start: true
+      simulateAll: true
     },
     // Intro - bottom left arm
     {
@@ -974,7 +973,8 @@ var regions = [
         { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, -1, 3, 2], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     // Bonus level #1 (stevenjmiller)
     {
@@ -1003,7 +1003,8 @@ var regions = [
         { rect: [0, 3, 3, 11], camera: 'follow-player' },
         { rect: [1, 14, 2, 1], camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      allowReset: false
     },
     // (domcamus)
     {
@@ -1167,6 +1168,10 @@ function initRegions() {
     region.index = i;
     region.secret = !!region.secret;
     region.simulateAll = !!region.simulateAll;
+
+    if (region.allowReset == null) {
+      region.allowReset = true;
+    }
 
     if (region.secret) {
       for (var x = regionBounds.minX; x < regionBounds.maxX; x++) {
