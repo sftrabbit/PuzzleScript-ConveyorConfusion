@@ -1041,6 +1041,11 @@ function DoRestart(force) {
 	if (force!==true && ('norestart' in state.metadata)) {
 		return;
 	}
+	var activeRegion = getActiveRegion();
+	if (!activeRegion.allowReset) {
+		return;
+	}
+
 	restarting=true;
 	if (force!==true) {
 		addUndoState(backupLevel());
