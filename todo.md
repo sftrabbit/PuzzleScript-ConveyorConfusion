@@ -14,4 +14,3 @@
 - Should I change the secrets to be in-PuzzleScript?
 - Split up intro region?
 - Ensure D5R's comments are included
-- Restart is broken (after continue? is originalLevel corrupted?)
