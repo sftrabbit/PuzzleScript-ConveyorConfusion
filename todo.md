@@ -6,7 +6,6 @@
 - Don't save until we've stopped againing
 - Why is it slower after continue?
 - Belt noise in Jack Lance's level, also in my sticky intro level
-- Ask Notan about change to level
 - Fix LeSlo's level secret
 - Slow reset
 - Do the overhead walls need a tutorial?
