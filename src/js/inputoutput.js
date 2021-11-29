@@ -851,10 +851,10 @@ function update() {
         }
     }
     if (winning) {
-        if (timer/1000>0.5) {
-            winning=false;
-            nextLevel();
-        }
+        // if (timer/1000>0.5) {
+        //     winning=false;
+        //     nextLevel();
+        // }
     }
     if (keybuffer.length>0) {
 	    keyRepeatTimer+=deltatime;

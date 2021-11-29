@@ -6,11 +6,11 @@ function startMusic () {
   }
   music.loop = true;
   music.currentTime = 0;
-  music.volume = 0.2;
+  music.volume = 0.7;
   music.play();
 }
 
 function setMusicVolume (volume) {
-  music.volume = Math.max(0.2 * volume, 0);
+  music.volume = Math.max(0.3 * volume, 0);
 }
 

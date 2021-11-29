@@ -106,7 +106,8 @@ var regions = [
         { rect: [9, 0, 5, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [-5, 0, 4, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "JumbleTheCircle"
     },
     // Block push intro secret
     {
@@ -126,7 +127,8 @@ var regions = [
         { rect: [0, 8, 11, 3] },
         { rect: [3, 11, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      credit: "Patrick"
     },
     // Seed level (Joseph Mansfield)
     {
@@ -137,7 +139,8 @@ var regions = [
         { rect: [4, 0, 7, 9] },
         { rect: [11, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Joseph Mansfield"
     },
     // Infinite loop intro (Blookerstein)
     {
@@ -145,7 +148,8 @@ var regions = [
       areas: [
         { rect: [1, -1, 6, 11] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Blookerstein"
     },
     // Seed level secret
     {
@@ -177,7 +181,8 @@ var regions = [
         { rect: [1, 0, 7, 9] },
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      credit: "marcosd"
     },
     // (knexator)
     {
@@ -187,7 +192,8 @@ var regions = [
         { rect: [1, 0, 7, 9] },
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      credit: "knexator"
     },
     // (knexator) - secret
     {
@@ -224,7 +230,8 @@ var regions = [
         { rect: [10, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [11, 4, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      credit: "Corey Hardt"
     },
     // (Auroriax)
     {
@@ -238,7 +245,8 @@ var regions = [
         { rect: [2, 13, 5, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [3, 14, 3, 2], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.55
+      zoom: 0.55,
+      credit: "Auroriax"
     },
     // (Kristian Hedeholm)
     {
@@ -249,7 +257,8 @@ var regions = [
         { rect: [0, 3, 11, 8] },
         { rect: [0, 11, 7, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.75
+      zoom: 0.75,
+      credit: "Kristian Hedeholm"
     },
     // The clock (Zomulgustar)
     {
@@ -262,7 +271,8 @@ var regions = [
         { rect: [6, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.4,
-      secret: true
+      secret: true,
+      credit: "Zomulgustar"
     },
     // Clock shortcut surround
     {
@@ -291,7 +301,8 @@ var regions = [
         { rect: [2, 0, 7, 11] },
         { rect: [9, 0, 1, 11], secondary: true }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "CHz"
     },
     // 1:00 Main path lock
     {
@@ -310,7 +321,8 @@ var regions = [
         { rect: [1, 0, 8, 9] },
         { rect: [9, 0, 1, 9], secondary: true }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Menderbug"
     },
     // 5:00 #1 (Draknek)
     {
@@ -322,7 +334,8 @@ var regions = [
         { rect: [10, 1, 1, 10], secondary: true },
         { rect: [1, 10, 9, 1], secondary: true }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Draknek"
     },
     // 5:00 #2 (Aspeon)
     {
@@ -334,7 +347,8 @@ var regions = [
         { rect: [0, 8, 6, 1], secondary: true },
         { rect: [5, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Aspeon"
     },
     // 7:00 #1 (KirraLuan)
     {
@@ -345,7 +359,8 @@ var regions = [
         { rect: [0, 4, 9, 6] },
         { rect: [9, 4, 2, 6], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "KirraLuan"
     },
     // 7:00 #2 (Clickmazes)
     {
@@ -356,7 +371,8 @@ var regions = [
         { rect: [0, 2, 8, 7] },
         { rect: [0, 9, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Clickmazes"
     },
     // 7:00 #3 (pancelor)
     {
@@ -368,7 +384,8 @@ var regions = [
         { rect: [2, 1, 9, 8] },
         { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "pancelor"
     },
     // 7:00 Main path lock
     {
@@ -402,7 +419,8 @@ var regions = [
         { rect: [1, 6, 7, 1], secondary: true },
         { rect: [1, 1, 7, 5] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Norgg"
     },
     // 7:00 #5 Post-Norgg
     {
@@ -439,7 +457,8 @@ var regions = [
         { rect: [0, 8, 6, 1], secondary: true },
         { rect: [7, 8, 1, 1], secondary: true }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Le Slo"
     },
     // 7:00 Return to clock
     {
@@ -474,7 +493,8 @@ var regions = [
         { rect: [2, 8, 4, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [8, 3, 2, 5], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "clementsparrow"
     },
     // 9:00 clementsparrow secret 1
     {
@@ -509,7 +529,8 @@ var regions = [
         { rect: [6, 10, 7, 1], secondary: true },
         { rect: [13, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      credit: "Deusovi"
     },
     // 9:00 #4 (crychair)
     {
@@ -520,7 +541,8 @@ var regions = [
         { rect: [8, 2, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [9, 7, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "crychair"
     },
     // Fusion intro
     {
@@ -543,7 +565,8 @@ var regions = [
         { rect: [0, 3, 13, 7] },
         { rect: [0, 10, 13, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "PedroPSI"
     },
     // Branch A finish
     {
@@ -586,7 +609,8 @@ var regions = [
         { rect: [13, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
         { rect: [3, 6, 8, 2] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Pichusuperlover"
     },
     // (Mischka Kamener)
     {
@@ -598,7 +622,8 @@ var regions = [
         { rect: [8, 3, 4, 4] },
         { rect: [8, 2, 4, 1], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      credit: "Mischka Kamener"
     },
     // (Joseph Mansfield #1)
     {
@@ -646,7 +671,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 9, 8] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Justas"
     },
     // (That Scar)
     {
@@ -656,7 +682,8 @@ var regions = [
         { rect: [1, 0, 10, 7] },
         { rect: [-2, 1, 3, 5], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "That Scar"
     },
     // (winterbeak)
     {
@@ -669,7 +696,8 @@ var regions = [
         { rect: [0, 10, 17, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [2, 11, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      credit: "winterbeak"
     },
     // Corridor
     {
@@ -687,7 +715,8 @@ var regions = [
         { rect: [0, 1, 11, 7] },
         { rect: [1, 8, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Dan Williams"
     },
     // Main path lock
     {
@@ -708,7 +737,8 @@ var regions = [
         { rect: [13, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [-4, 4, 4, 5], secondary: true, camera: 'pull-horizontal' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Guilherme Tows (zaratustra)"
     },
     // (Muftwin)
     {
@@ -720,7 +750,8 @@ var regions = [
         { rect: [0, 11, 11, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [4, 12, 7, 2], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "Muftwin"
     },
     // (Colin)
     {
@@ -732,7 +763,8 @@ var regions = [
         { rect: [-1, 4, 7, 5] },
         { rect: [0, 9, 5, 2], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "Colin"
     },
     // Explosive intro
     {
@@ -754,7 +786,8 @@ var regions = [
         { rect: [1, 6, 10, 6] },
         { rect: [0, 6, 1, 6], secondary: true, camera: 'pull-horizontal' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "Toombler"
     },
     // stevenjmiller's bomb secret corridor
     {
@@ -830,7 +863,8 @@ var regions = [
         { rect: [6, 0, 3, 8] },
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "Joel"
     },
     // Corridor
     {
@@ -872,7 +906,8 @@ var regions = [
         { rect: [2, 10, 7, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [5, -2, 5, 2], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "Notan"
     },
     // (Zach)
     {
@@ -884,7 +919,8 @@ var regions = [
         { rect: [0, 7, 18, 5] },
         { rect: [7, 12, 5, 3], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "Zach"
     },
     // (Zach) secret
     {
@@ -925,7 +961,8 @@ var regions = [
         { rect: [12, 0, 9, 11] },
         { rect: [21, 1, 2, 10], secondary: true, camera: 'pull-horizontal' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "shark"
     },
     // (Shark) secret
     {
@@ -946,7 +983,8 @@ var regions = [
         { rect: [5, 11, 2, 1] },
         { rect: [7, 1, 1, 11], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "twak"
     },
     //////////////
     // MERGE
@@ -959,7 +997,8 @@ var regions = [
         { rect: [-3, -1, 7, 1], secondary: true },
         { rect: [-3, 0, 4, 5], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      credit: "Jack Lance"
     },
     // (Ethan Clark)
     {
@@ -974,7 +1013,8 @@ var regions = [
         { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, -1, 3, 2], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "Ethan Clark"
     },
     // Bonus level #1 (stevenjmiller)
     {
@@ -1014,7 +1054,8 @@ var regions = [
         { rect: [0, 7, 2, 11] },
         { rect: [2, 0, 20, 18] }
       ],
-      zoom: 0.50
+      zoom: 0.50,
+      credit: "domcamus"
     },
     // (stevenjmiller)
     {
@@ -1022,7 +1063,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 21, 13] }
       ],
-      zoom: 0.58
+      zoom: 0.58,
+      credit: "stevenjmiller"
     },
     // (D5R)
     {
@@ -1031,7 +1073,8 @@ var regions = [
         { rect: [0, 0, 11, 11] },
         { rect: [11, 0, 2, 11], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      credit: "D5R"
     },
     // (jackk)
     {
@@ -1042,7 +1085,8 @@ var regions = [
         { rect: [7, 0, 26, 14] },
         { rect: [33, 0, 1, 14], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.48
+      zoom: 0.48,
+      credit: "jackk"
     },
     // (jackk -> ending)
     {
@@ -1075,6 +1119,10 @@ var theme2Areas = [
   [71, 33, Infinity, Infinity],
   [0, 5, 25, 18],
   [1, -19, 13, 11],
+  [52, 21, 12, 8],
+  [52, 29, 11, 3],
+  [55, 32, 4, 1 ],
+  [76, 18, 6, 11 ]
 ];
 
 var regionMap = [];

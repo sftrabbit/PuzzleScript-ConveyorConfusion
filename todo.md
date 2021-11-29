@@ -1,5 +1,4 @@
 - Tracking for merging and explosions and stuff (do we even need it?)
-- Cool credits
 - End cutscenes
 - Secret end
 - Vat falling behaviour
@@ -14,3 +13,4 @@
 - Should I change the secrets to be in-PuzzleScript?
 - Split up intro region?
 - Ensure D5R's comments are included
+- Camera wrong position after continue

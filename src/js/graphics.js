@@ -33,17 +33,11 @@ function createSprite(name,spritegrid, colors, padding) {
 }
 
 function regenText(spritecanvas,spritectx) {
-	textImages={};
-
-	for (var rowidx in titleImage) {
-        var row=titleImage[rowidx];
-        for (var nidx in row) {
-            var n = row[nidx];
-            if (font.hasOwnProperty(n) && !textImages.hasOwnProperty(n)) {
-                fontstr = font[n].split('\n').map(a=>a.trim().split('').map(t=>parseInt(t)));
-                fontstr.shift();
-                textImages[n] = createSprite('char'+n,fontstr, undefined, 1);
-            }
+    for (var n in font) {
+        if (font.hasOwnProperty(n) && !textImages.hasOwnProperty(n)) {
+            fontstr = font[n].split('\n').map(a=>a.trim().split('').map(t=>parseInt(t)));
+            fontstr.shift();
+            textImages[n] = createSprite('char'+n,fontstr, undefined, 1);
         }
     }
 }
@@ -59,7 +53,8 @@ function regenSpriteImages() {
 	} 
     
     if (IDE===true) {
-        textImages['editor_s'] = createSprite('chars',editor_s_grille,undefined);
+        // console.log('foo')
+        // textImages['editor_s'] = createSprite('chars',editor_s_grille,undefined);
     }
     
     if (state.levels.length===0) {
@@ -324,7 +319,7 @@ function drawLevel(cameraOrigin) {
         }
     }
 
-    var activeRegion = getActiveRegion();
+    var activeRegion = creditsState.creditsRegionIndex == null ? getActiveRegion() : regions[curlevel][creditsState.creditsRegionIndex];
     if (activeRegion != null) {
         var outlinePolygon = activeRegion.outlinePolygon;
 
@@ -490,24 +485,25 @@ function redraw() {
                     }
                 } else {
                     var transitionHappening = false;
+                    var transitionSpeed = (creditsState.creditsRegionIndex == null ? 0.05 : 0.01);
 
                     var deltaX = cameraTransition.to.position[0] - camera.position[0];
                     if (Math.abs(deltaX) >= 0.005) {
-                        camera.position[0] += deltaX * 0.05;
+                        camera.position[0] += deltaX * transitionSpeed;
                         transitionHappening = true;
                     } else {
                         camera.position[0] = cameraTransition.to.position[0];
                     }
                     var deltaY = cameraTransition.to.position[1] - camera.position[1];
                     if (Math.abs(deltaY) >= 0.005) {
-                        camera.position[1] += deltaY * 0.05;
+                        camera.position[1] += deltaY * transitionSpeed;
                         transitionHappening = true;
                     } else {
                         camera.position[1] = cameraTransition.to.position[1];
                     }
                     var deltaZoom = cameraTransition.to.zoom - camera.zoom;
                     if (Math.abs(deltaZoom) >= 0.0001) {
-                        camera.zoom += deltaZoom * 0.05;
+                        camera.zoom += deltaZoom * transitionSpeed;
                         transitionHappening = true;
                     } else {
                         camera.zoom = cameraTransition.to.zoom;
@@ -545,6 +541,95 @@ function redraw() {
             (canvas.height / 2) - ((levelCanvasSize.height * cellheight / 2) + levelCanvasOffsetY) * camera.zoom,
             levelCanvas.width * camera.zoom, levelCanvas.height * camera.zoom
         );
+
+        if (creditsState.stage != null) {
+            if (creditsState.stage === 'levels') {
+                var creditsRegion = regions[0][creditsState.creditsRegionIndex];
+                var creditText = creditsRegion.credit
+
+                var textSize = Math.max(~~(cellwidth / 12),1);
+                var textCellwidth = 6 * textSize;
+                var textCellheight = 13 * textSize;
+
+                var creditOffset = Math.floor(((screenwidth * cellwidth) / 2) - ((textCellwidth * creditText.length) / 2));
+
+                ctx.fillStyle = '#000';
+                ctx.fillRect(xoffset, yoffset + (screenheight * cellheight) - textCellheight, screenwidth * cellwidth, textCellheight);
+                for (var i = 0; i < creditText.length; i++) {
+                    ctx.imageSmoothingEnabled = false;
+                    ctx.drawImage(textImages[creditText.charAt(i)], xoffset + creditOffset + textCellwidth * i, yoffset + (screenheight * cellheight) - textCellheight, textCellwidth, textCellheight);
+                    ctx.imageSmoothingEnabled = true;
+                }
+            } else if (creditsState.stage === 'list') { 
+                ctx.fillStyle = '#000';
+                ctx.globalAlpha = Math.min(creditsState.listScrollProgress / 180, 1);
+                ctx.fillRect(xoffset, yoffset, screenwidth * cellwidth, screenheight * cellheight);
+                ctx.globalAlpha = 1;
+
+                var textSize = Math.max(~~(cellwidth / 18),1);
+                var textCellwidth = 6 * textSize;
+                var textCellheight = 13 * textSize;
+
+                var doneScrolling = false;
+
+                ctx.imageSmoothingEnabled = false;
+                var listCreditsOffset = ((screenheight - (creditsState.listScrollProgress / 60)) * cellheight);
+                for (var i = 0; i < listCredits.length; i++) {
+                    var creditLine = listCredits[i];
+
+                    if (Array.isArray(creditLine)) {
+                        var lineOffsetA = Math.floor(((screenwidth * cellwidth) * (3/10)) - ((textCellwidth * creditLine[0].length) / 2));
+                        var lineOffsetB = Math.floor(((screenwidth * cellwidth) * (7/10)) - ((textCellwidth * creditLine[1].length) / 2));
+                        for (var j = 0; j < creditLine[0].length; j++) {
+                            ctx.drawImage(textImages[creditLine[0].charAt(j)], xoffset + lineOffsetA + textCellwidth * j, yoffset + listCreditsOffset + i * textCellheight, textCellwidth, textCellheight);
+                        }
+                        for (var j = 0; j < creditLine[1].length; j++) {
+                            ctx.drawImage(textImages[creditLine[1].charAt(j)], xoffset + lineOffsetB + textCellwidth * j, yoffset + listCreditsOffset + i * textCellheight, textCellwidth, textCellheight);
+                        }
+                    } else {
+                        var lineOffset = Math.floor(((screenwidth * cellwidth) / 2) - ((textCellwidth * creditLine.length) / 2));
+                        for (var j = 0; j < creditLine.length; j++) {
+                            ctx.drawImage(textImages[creditLine.charAt(j)], xoffset + lineOffset + textCellwidth * j, yoffset + listCreditsOffset + i * textCellheight, textCellwidth, textCellheight);
+                        }
+
+                        if (i === (listCredits.length - 1) && (yoffset + listCreditsOffset + i * textCellheight) < -textCellheight) {
+                            doneScrolling = true;
+                        }
+                    }
+                }
+                ctx.imageSmoothingEnabled = true;
+
+                if (doneScrolling) {
+                    creditsState.stage = 'thanks';
+                    creditsState.listScrollProgress = 0;
+                } else {
+                    creditsState.listScrollProgress++;
+                }
+            } else if (creditsState.stage === 'thanks') {
+                ctx.fillStyle = '#000';
+                ctx.fillRect(xoffset, yoffset, screenwidth * cellwidth, screenheight * cellheight);
+                ctx.globalAlpha = 1;
+
+                var textSize = Math.max(~~(cellwidth / 18),1);
+                var textCellwidth = 6 * textSize;
+                var textCellheight = 13 * textSize;
+
+                ctx.globalAlpha = Math.min(creditsState.listScrollProgress / 180, 1);
+                var thanksText = 'Thank you for playing!';
+
+                ctx.imageSmoothingEnabled = false;
+                var lineOffsetX = Math.floor(((screenwidth * cellwidth) / 2) - ((textCellwidth * thanksText.length) / 2));
+                var lineOffsetY = Math.floor(((screenheight * cellheight) / 2) - (textCellheight / 2));
+                for (var j = 0; j < thanksText.length; j++) {
+                    ctx.drawImage(textImages[thanksText.charAt(j)], xoffset + lineOffsetX + textCellwidth * j, yoffset + lineOffsetY, textCellwidth, textCellheight);
+                }
+                ctx.imageSmoothingEnabled = true;
+
+                ctx.globalAlpha = 1;
+
+                creditsState.listScrollProgress++;
+            }
+        }
 
         ctx.restore()
 
