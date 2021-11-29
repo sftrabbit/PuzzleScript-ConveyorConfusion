@@ -12,5 +12,4 @@
 - Do the overhead walls need a tutorial?
 - Should I change the secrets to be in-PuzzleScript?
 - Split up intro region?
-- Ensure D5R's comments are included
 - Camera wrong position after continue
