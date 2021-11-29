@@ -2,13 +2,11 @@ var camera = null;
 var cameraTransition = null;
 var cameraZoomTransition = null;
 
-function transitionCameraToRegion(activeRegion) {
-  console.log('activeRegion', activeRegion.cameraAnchor[0], activeRegion.cameraAnchor[1] - 0.4)
+function transitionCameraToRegion(activeRegion, creditsOffset = false) {
   var targetPosition = clampCameraPosition(activeRegion, [
     activeRegion.cameraAnchor[0],
-    activeRegion.cameraAnchor[1] - 0.4
+    creditsOffset ? (activeRegion.cameraAnchor[1] + 0.6) : (activeRegion.cameraAnchor[1] - 0.4)
   ]);
-  console.log('targetPosition', targetPosition[0], targetPosition[1])
 
   if (cameraTransition && cameraTransition.to.position[0] === targetPosition[0] && cameraTransition.to.position[1] === targetPosition[1]) {
     return;
@@ -17,7 +15,7 @@ function transitionCameraToRegion(activeRegion) {
   cameraTransition = {
     to: {
       position: targetPosition,
-      zoom: activeRegion.zoom || 1
+      zoom: (creditsOffset ? (activeRegion.zoom * 0.9) : activeRegion.zoom) || 1
     }
   };
 
@@ -28,8 +26,6 @@ function transitionCameraToRegion(activeRegion) {
       zoom: camera.zoom
     };
   }
-
-  console.log('cameraTransition', cameraTransition.to.position[0], cameraTransition.to.position[1])
 }
 
 function transitionCameraPulledByPlayer(activeRegion, horizontal) {
@@ -101,8 +97,6 @@ function initSmoothCamera() {
       zoom: region.zoom || 1
     };
   }
-
-  console.log('camera init to', camera.position[0], camera.position[1])
 }
 
 function easeOutQuad(x) {
@@ -111,7 +105,6 @@ function easeOutQuad(x) {
 
 function clampCameraPosition(activeRegion, position) {
   var zoom = activeRegion ? activeRegion.zoom : camera.zoom;
-  console.log('zoom', zoom, screenwidth, screenheight)
 
   var cameraMarginX = (screenwidth / 2) / zoom;
   var cameraMarginY = (screenheight / 2) / zoom;
@@ -133,3 +126,76 @@ function clampCameraPosition(activeRegion, position) {
     )
   ];
 }
+
+var creditsState = {
+  stage: null,
+  creditsRegionIndex: null,
+  listScrollProgress: null
+};
+
+function startCredits () {
+  winning = true;
+
+  creditsState.stage = 'levels';
+  creditsState.creditsRegionIndex = 0;
+
+  startMusic();
+  showNextCredit();
+}
+
+function showNextCredit () {
+  while (!regions[curlevel][creditsState.creditsRegionIndex].credit) {
+    creditsState.creditsRegionIndex++;
+
+    if (creditsState.creditsRegionIndex >= regions[curlevel].length) {
+      creditsState.stage = 'list';
+      creditsState.listScrollProgress = 0;
+      return;
+    }
+  }
+
+  transitionCameraToRegion(regions[curlevel][creditsState.creditsRegionIndex], true);
+
+  setTimeout(function() {
+    creditsState.creditsRegionIndex++;
+    showNextCredit();
+  }, 2700);
+}
+
+var listCredits = [
+  'Made collaboratively',
+  'by members of the',
+  'Thinky Puzzle Games',
+  'Discord server',
+  '',
+  '',
+  ['Aspeon', 'Auroriax'],
+  ['Blookerstein', 'CHz'],
+  ['clementsparrow', 'clickmazes'],
+  ['Colin', 'Corey Hardt'],
+  ['crychair', 'D5R'],
+  ['Dan Williams', 'Deusovi'],
+  ['domcamus', 'Draknek'],
+  ['Ethan Clark', 'Harry Damm'],
+  ['Jack Lance', 'jackk'],
+  ['Joel', 'Joseph Mansfield'],
+  ['JumbleTheCircle', 'Justas'],
+  ['KirraLuan', '~kjeann'],
+  ['knexator', 'Kristian Hedeholm'],
+  ['Le Slo', 'marcosd'],
+  ['Menderbug', 'Mischka Kamener'],
+  ['Muftwin', 'Norgg'],
+  ['Notan', 'pancelor'],
+  ['Patrick', 'Pedro PSI'],
+  ['Pichusuperlover', 'shark'],
+  ['winterbeak', 'stevenjmiller'],
+  ['That Scar', 'Zach'],
+  ['Toombler', 'twak'],
+  ['zaratustra', 'Zomulgustar'],
+  '',
+  '',
+  'Blippy Trance by Kevin MacLeod',
+  'Link: https://incompetech.filmmusic.io',
+  '       /song/5659-blippy-trance',
+  'License: https://filmmusic.io/standard-license'
+];

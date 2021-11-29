@@ -452,15 +452,16 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 		//     x: (playerPositions[0]/(level.height))|0,
 		//     y: (playerPositions[0]%level.height)|0
 		// };
-
-	    originalLevel=backupLevel();
-	    restartTarget=originalLevel;
-
         if (isOpenWorldLevel()) {
           initOpenWorld();
         } else {
           clearOpenWorldState();
         }
+
+	    originalLevel=backupLevel();
+	    restartTarget=originalLevel;
+
+  		initLevelState();
 
 	    canvasResize();
 

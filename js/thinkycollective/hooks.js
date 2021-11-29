@@ -7,7 +7,6 @@ var pendingSave = false;
 
 function initOpenWorld() {
   initRegions();
-  initLevelState();
   initObjectTrackers();
 }
 
@@ -74,14 +73,12 @@ function checkSecretMarkers() {
 }
 
 function transitionCamera(activeRegion) {
-  console.log('transitionCamera')
   if (activeRegion == null) {
     transitionCameraToPlayer(activeRegion);
     return;
   }
 
   var activeArea = getActiveArea();
-  console.log('camera type', activeArea.camera)
   if (activeArea.camera === 'region-center') {
     transitionCameraToRegion(activeRegion);
   } else if (activeArea.camera === 'pull-horizontal') {
