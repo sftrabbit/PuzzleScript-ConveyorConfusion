@@ -369,7 +369,7 @@ function redraw() {
                 var ch = titleImage[j].charAt(i);
                 if (ch in textImages) {
                     var sprite = textImages[ch];
-                    if (state.levels.length !== 0 && titleMode <= 1) {
+                    if (state.levels.length !== 0 && titleMode <= 1 && titleScreen) {
                         if (j === 1) {
                             ctx.imageSmoothingEnabled = false;
                             ctx.drawImage(sprite, xoffset + (i - 2.5) * cellwidth * 2, yoffset + (j - 0.7) * cellheight * 2, cellwidth * 2, cellheight * 2);

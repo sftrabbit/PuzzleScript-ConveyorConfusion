@@ -14,8 +14,7 @@ var regions = [
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
       ],
       zoom: 0.7,
-      simulateAll: true,
-      start: true
+      simulateAll: true
     },
     // Intro - bottom left arm
     {
@@ -166,9 +165,11 @@ var regions = [
       offset: [73, 7],
       areas: [
         { rect: [0, 0, 14, 10] },
-        { rect: [3, -2, 8, 2] }
+        { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      start: true
     },
     //////////////
     // BRANCH A
@@ -736,44 +737,42 @@ var regions = [
         { rect: [12, 3, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [13, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [-4, 4, 4, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [4, 11, 3, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
       credit: "Guilherme Tows (zaratustra)"
     },
     // (Muftwin)
     {
-      offset: [75, 44],
+      offset: [75, 46],
       areas: [
-        { rect: [3, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [3, -2, 5, 3], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 11, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 2, 11, 9] },
         { rect: [0, 11, 11, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [4, 12, 7, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [4, 12, 4, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
       credit: "Muftwin"
     },
     // (Colin)
     {
-      offset: [86, 47],
+      offset: [83, 52],
       areas: [
-        { rect: [1, 0, 3, 2], secondary: true, camera: 'pull-vertical' },
-        { rect: [0, 2, 5, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [0, 3, 5, 1] },
-        { rect: [-1, 4, 7, 5] },
-        { rect: [0, 9, 5, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 6, 3, 1], secondary: true },
+        { rect: [0, 7, 8, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [3, 0, 7, 7] },
+        { rect: [3, -2, 7, 2], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
       credit: "Colin"
     },
     // Explosive intro
     {
-      offset: [90, 46],
+      offset: [93, 46],
       areas: [
-        { rect: [0, 0, 1, 5], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 1, 5] },
-        { rect: [2, 0, 5, 6] },
-        { rect: [7, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
+        { rect: [0, 0, 5, 8] },
+        { rect: [-4, 0, 4, 3], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.6
     },
