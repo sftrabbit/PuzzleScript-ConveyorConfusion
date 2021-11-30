@@ -846,7 +846,7 @@ function update() {
 				ignoreNotJustPressedAction=true;
 				titleSelection=0;
     			canvasResize();  
-    			checkWin();          	
+    			startRealtimeRenderer();
             }
         }
     }

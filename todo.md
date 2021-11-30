@@ -2,7 +2,6 @@
 - End cutscenes
 - Secret end
 - Vat falling behaviour
-- Sign posts? At the very least, bomb detonation message
 - Don't save until we've stopped againing
 - Why is it slower after continue?
 - Belt noise in Jack Lance's level, also in my sticky intro level
@@ -12,3 +11,4 @@
 - Should I change the secrets to be in-PuzzleScript?
 - Split up intro region?
 - Camera wrong position after continue
+- Blocks leave mark where they started?

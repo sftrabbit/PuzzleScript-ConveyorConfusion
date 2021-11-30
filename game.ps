@@ -78,6 +78,10 @@ Renamed LadderUpleaseReadTheGuidelines to LadderU for obvious reasons.)
 #3: stevenjmiller: Tested interactions and added a level (plus a bonus one).
 #4: Ethan Clark: Added a level, fixed a bug. (Also, added a symbol or two to the LEGEND to allow for certain combinations of objects that were impossible before)
 #5: Jack Lance: Changed title, and added a level.
+#6: D5R: Added a level which contains a litte bit of everything. Also added functionality for slime vats to stickify objects on the top floor as well.
+#6B: D5R: Edited the level to something slightly different but still contains a litte bit of everything. 
+Also reverted the functionality for slime vats to the original and added a quick and dirty functionality which prevents laddered blocks
+from getting lifted by the doors (See Bug #9 on Group B for more info).
 
 
 ## BUGS / FEATURES (GROUP A)
@@ -130,6 +134,8 @@ I (ClementSparrow) suggest that all belts should fuse into a BeltX whatever thei
 (#6 bug (fixed): Climbing a ladder underneath a wallAbove deletes the wallAbove.)
 (#7 bug (avoidable): Pushing a chain of dynamic objects with a ladder towards the edge of level doesn't move the blocks but moves the ladder. Can be avoided if walls surround the level.)
 (#8 bug (avoidable): Pushing a block with a west ladder into the west edge doesn't move the ladder, which can reattach to another block afterwards. See unit test below. Can be avoided if walls surround the level.)
+(#9 bug (FIXED, kinda): Elevating a block with a ladder attached to it converts it back to a regular block (currently possible on @D5R's level but not part of the solution))
+(NOTE on bug #9: added a quick and dirty fix which makes it so that a laddered block on a lifter will just not lift at all when the button is pressed. Please note that this functionality only works properly on @D5R's level and not all possible block-ladder combinations have been taken into consideration or tested. Check line 3246 for the fix.)
 (#X Example bug: Doing the thingy breaks the thingy)
 
 
@@ -262,7 +268,9 @@ Twak: I tried making a puzzle involving standing in specific spots to set off sp
 domcamus: Haven't thought very much about interconnections; level is mostly standalone. Seems like there's a lot of scope for doing stuff with stickiness, which I didn't explore at all because sticky goo requires a lot of bombs and bombs mess up puzzles! :-D
 
 stevenjmiller: The level design on display here is phenomenal. I really hope ladder fusion makes it into the game. As an example, you might want to create a diagonal, but in doing so, the resulting belt gets a ladder that makes it difficult to maneuver around the level. I also noticed that fusion involving BeltX's hasn't been explored very heavily, presumably because it doesn't normally have an impact on the resulting belt. Ladder and sticky fusion change that, and I think it opens up some interesting possibilities.
-)
+
+D5R: Looks like I'm the last person in the chain before all the levels are patched together! As such, I wanted to make a level that combines everything while keeping it compact as a possible candidate for a final level. I also added a variation on my level which has two exits: the intended original exit and a "bonus" exit only accessible if you manage to smuggle a block in. An example of how this can be used would be to have some of the very large puzzles to be optional 'challenge' puzzles and solving all the challenge puzzles give the player access to an extra belt for the level to get to the secret ending. Of course, this is just a suggestion and you're free to place this level where you think it fits best. Good luck and have fun stitching all these puzzles together!)
+
 
 
 ========
@@ -2767,6 +2775,67 @@ SigilC_On_Top
 SigilC_On
 transparent
 
+Render_Sign_Below_Top
+#925f3e #6e452a #5d3820
+.....
+.....
+.....
+.....
+00000
+
+Sign_Below
+#925f3e #6e452a #5d3820
+11111
+11111
+11111
+..2..
+.....
+
+Render_Sign_Above_Top
+#925f3e #6e452a #5d3820
+.....
+00000
+11111
+11111
+11111
+
+Sign_Above_1
+#925f3e #6e452a #5d3820
+..2..
+.....
+.....
+.....
+.....
+
+Sign_Above_2
+#925f3e #6e452a #5d3820
+..2..
+.....
+.....
+.....
+.....
+
+Sign_Above_3
+#925f3e #6e452a #5d3820
+..2..
+.....
+.....
+.....
+.....
+
+Sign_Above_4
+#925f3e #6e452a #5d3820
+..2..
+.....
+.....
+.....
+.....
+
+SignRead
+transparent
+
+SignToRead
+transparent
 
 =======
 LEGEND
@@ -2880,6 +2949,14 @@ t = DoorBase
 
 / = Wire and Init2
 
+\ = Sign_Below
+G = Sign_Above_1 and Platform1
+H = Sign_Above_2 and Platform1
+1 = Sign_Above_3 and Platform1
+7 = Sign_Above_4 and Platform1
+
+Sign_Above = Sign_Above_1 or Sign_Above_2 or Sign_Above_3 or Sign_Above_4
+
 Wall = Wall1 or Wall2
 Wall_Front = Wall1_Front or Wall2_Front
 Wall_Top = Wall1_Top or Wall2_Top
@@ -2909,6 +2986,8 @@ Player_Above = Player_Above1
 Player_Below = Player_Below1
 
 Player = Player_Above or Player_Below
+
+Sign = Sign_Below or Sign_Above
 
 Secret = Secret_Off or Secret_On
 
@@ -2942,8 +3021,8 @@ Exploded = Exploded_above or Exploded_below
 
 vDangerStripe = vDangerStripeR or vDangerStripeD or vDangerStripeL or vDangerStripeRD or vDangerStripeDL
 
-Destructible_below = Belt_Below or Player_Below or Platform or Sticky_Below or DoorExtended or Button_Below or SlimeVat_Broken_Below or vDangerStripe or Platform_Front or SlimeVat_Mess_Above or Explosive_below
-Destructible_above = Belt_Above or Player_Above or Sticky_Above or Button_Above or Explosive_above
+Destructible_below = Belt_Below or Player_Below or Platform or Sticky_Below or DoorExtended or Button_Below or SlimeVat_Broken_Below or vDangerStripe or Platform_Front or SlimeVat_Mess_Above or Explosive_below or Sign_Below
+Destructible_above = Belt_Above or Player_Above or Sticky_Above or Button_Above or Explosive_above or Sign_Above
 
 Inflated = InflatedU or InflatedR or InflatedD or InflatedL
 
@@ -2973,8 +3052,8 @@ Dynamic_Below = Player_Below or Belt_Below or Explosive_Below
 Dynamic = Dynamic_Above or Dynamic_Below
 
 (Objects that stop movement)
-Static_Above = Wall or SlimeVat_Above or SlimeVat_Broken_Above or Wall_Above
-Static_Below = Wall or Platform or DoorExtended or Inflated or SlimeVat_Broken_Below
+Static_Above = Wall or SlimeVat_Above or SlimeVat_Broken_Above or Wall_Above or Sign_Above
+Static_Below = Wall or Platform or DoorExtended or Inflated or SlimeVat_Broken_Below or Sign_Below
 Static = Static_Above or Static_Below
 
 
@@ -3029,10 +3108,10 @@ Render_Inflated_Top = Render_InflatedU_Top or Render_InflatedR_Top or Render_Inf
 Render_WireOn = Render_WireOn_Above_U_Top or Render_WireOn_Above_D or Render_WireOn_Above_R_Top or Render_WireOn_Above_D_Top or Render_WireOn_Above_L_Top or Render_WireOn_Below_U or Render_WireOn_Below_R or Render_WireOn_Below_D or Render_WireOn_Below_L or Render_WireOn_AboveWall_U_Top or Render_WireOn_AboveWall_D or Render_WireOn_AboveWall_R_Top or Render_WireOn_AboveWall_D_Top or Render_WireOn_AboveWall_L_Top 
 
 Render_Above = Render_Sticky_BeltX_Above or Render_Sticky_BeltU_Above or Render_Sticky_BeltR_Above or Render_Sticky_BeltD_Above or Render_Sticky_BeltL_Above or Render_Sticky_BeltUR_Above or Render_Sticky_BeltRD_Above or Render_Sticky_BeltDL_Above or Render_Sticky_BeltLU_Above
-Render_Above_Top = Render_Player_Above1_Top or Belt_Above_Top or Render_Explosive_Above_Top or Render_Sticky_BeltX_Above_Top or Render_Sticky_BeltU_Above_Top or Render_Sticky_BeltR_Above_Top or Render_Sticky_BeltD_Above_Top or Render_Sticky_BeltL_Above_Top or Render_Sticky_BeltUR_Above_Top or Render_Sticky_BeltRD_Above_Top or Render_Sticky_BeltDL_Above_Top or Render_Sticky_BeltLU_Above_Top or Render_Sticky_Explosive_above_top
+Render_Above_Top = Render_Player_Above1_Top or Belt_Above_Top or Render_Explosive_Above_Top or Render_Sticky_BeltX_Above_Top or Render_Sticky_BeltU_Above_Top or Render_Sticky_BeltR_Above_Top or Render_Sticky_BeltD_Above_Top or Render_Sticky_BeltL_Above_Top or Render_Sticky_BeltUR_Above_Top or Render_Sticky_BeltRD_Above_Top or Render_Sticky_BeltDL_Above_Top or Render_Sticky_BeltLU_Above_Top or Render_Sticky_Explosive_above_top or Render_Sign_Above_Top
 Render_Above_Top2 = Belt_Above_Top2 or Render_Sticky_BeltX_Above_Top2 or Render_Sticky_BeltU_Above_Top2 or Render_Sticky_BeltR_Above_Top2 or Render_Sticky_BeltD_Above_Top2 or Render_Sticky_BeltL_Above_Top2 or Render_Sticky_BeltUR_Above_Top2 or Render_Sticky_BeltRD_Above_Top2 or Render_Sticky_BeltDL_Above_Top2 or Render_Sticky_BeltLU_Above_Top2
 Render_Below = Render_Sticky_BeltX_Below or Render_Sticky_BeltU_Below or Render_Sticky_BeltR_Below or Render_Sticky_BeltD_Below or Render_Sticky_BeltL_Below or Render_Sticky_BeltUR_Below or Render_Sticky_BeltRD_Below or Render_Sticky_BeltDL_Below or Render_Sticky_BeltLU_Below or Render_Sticky_Explosive_below or Render_Player_Below_Cover
-Render_Below_Top = Render_Player_Below1_Top or Belt_Below_Top or Render_DoorExtended_Top or Render_Inflated_Top or Render_Explosive_Below_Top or Render_Sticky_BeltX_Below_Top or Render_Sticky_BeltU_Below_Top or Render_Sticky_BeltL_Below_Top or Render_Sticky_BeltR_Below_Top or Render_Sticky_BeltD_Below_Top or Render_Sticky_BeltUR_Below_Top or Render_Sticky_BeltLU_Below_Top or Render_Sticky_BeltRD_Below_Top or Render_Sticky_BeltDL_Below_Top or Render_Sticky_Explosive_below_top
+Render_Below_Top = Render_Player_Below1_Top or Belt_Below_Top or Render_DoorExtended_Top or Render_Inflated_Top or Render_Explosive_Below_Top or Render_Sticky_BeltX_Below_Top or Render_Sticky_BeltU_Below_Top or Render_Sticky_BeltL_Below_Top or Render_Sticky_BeltR_Below_Top or Render_Sticky_BeltD_Below_Top or Render_Sticky_BeltUR_Below_Top or Render_Sticky_BeltLU_Below_Top or Render_Sticky_BeltRD_Below_Top or Render_Sticky_BeltDL_Below_Top or Render_Sticky_Explosive_below_top or Render_Sign_Below_Top
 Render = Render_Above or Render_Above_Top or Render_Above_Top2 or Render_Below or Render_Below_Top or Render_LadderTop or Render_Ladder_Overhang or Render_ladder_Overhang_Top or Render_WireOn or Render_Player_Above_Top_Cover or Render_SlimeVat_Mess_Above_Top or Render_ExplosivePrimed_Above_Top or Render_ExplosivePrimed_Below
 
 Sticky = Sticky_Above or Sticky_Below
@@ -3066,7 +3145,7 @@ FloorDestructible = DoorBase or Wire
 Stickyable_Below = Belt_Below or Explosive_below
 
 (Objects that another object can be on top of)
-Upstairs = Platform or Belt_Below or DoorExtended or Inflated or Explosive_Below or SlimeVat_Broken_Below or FuseIntention
+Upstairs = Platform or Belt_Below or DoorExtended or Inflated or Explosive_Below or SlimeVat_Broken_Below or FuseIntention or Sign_Below
 
 NoUndoBackup = Render_Player_Below_Cover or Render_Player_Above_Top_Cover
 
@@ -3125,7 +3204,7 @@ LadderR
 Wall, Platform, DoorExtended
 Platform_Front Wall_Front
 SlimeVat_Mess_Below End_Below
-Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Broken_Below
+Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Broken_Below, Sign_Below
 Render_Below
 
 Distances
@@ -3171,7 +3250,7 @@ Render_WireOn_Above_L_Top
 
 (Objects on upper level)
 SlimeVat_Mess_Above
-Belt_Above, Player_Above, Explosive_above, Wall_above, SlimeVat_Above, SlimeVat_Broken_Above, Anim_FusionAbove
+Belt_Above, Player_Above, Explosive_above, Wall_above, SlimeVat_Above, SlimeVat_Broken_Above, Anim_FusionAbove, Sign_Above
 Render_Above
 Wire_AboveWall_D
 Render_WireOn_AboveWall_D
@@ -3248,7 +3327,7 @@ FuseIntention_BeltRD_Below
 FuseIntention_BeltDL_Below
 FuseIntention_BeltLU_Below
 
-Init2 Moved
+Init2 Moved SignRead SignToRead
 Theme2
 
 ======
@@ -3972,6 +4051,11 @@ LEFT  [ LadderL | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
 [ BeltX_Below NO Weighted_Above DoorExtended ] -> [ BeltX_Above DoorExtended ]
 [ Explosive_Below NO Weighted_Above DoorExtended ] -> [ Explosive_Above DoorExtended ]
 
+UP [ Player_Below | Sign_Below SignToRead ] -> [ Player_Below | Sign_Below SignRead ] message KEEP OUT\nThese explosives are\nhighly explosive!\n(So don't press X near them)
+UP [ Player_Above | Sign_Above_1 SignToRead ] -> [ Player_Above | Sign_Above_1 SignRead ] message "    Welcome to m\n   It's supposed\n    though, so p\n\nNote to self: Mus"
+UP [ Player_Above | Sign_Above_2 SignToRead ] -> [ Player_Above | Sign_Above_2 SignRead ] message "y secret lab!      \nto be a secret     \nlease leave.       \nt buy bigger signs."
+UP [ Player_Above | Sign_Above_3 SignToRead ] -> [ Player_Above | Sign_Above_3 SignRead ] message "    Theory A o\nBoth such brill\ndo say so mysel\n      the path"
+UP [ Player_Above | Sign_Above_4 SignToRead ] -> [ Player_Above | Sign_Above_4 SignRead ] message "r theory B?    \niant ideas, if I\nf, but which is\nforward?       "
 
 (GRAPHICAL DETAILS)
 (Player directions)
@@ -3984,9 +4068,9 @@ NOAGAINCHECK LATE UP [ Player_Above1 MovedR | ] -> [ Player_Above1 MovedR | Rend
 NOAGAINCHECK LATE UP [ Player_Above1 MovedL | ] -> [ Player_Above1 MovedL | Render_Player_Above_Top_L ]
 
 (adding ambiant occlusion)
-NOAGAINCHECK late up    [ no Static_Below no vAmbiantOcclusionU no DoorBase no Theme2 | Static_Below ] -> [ vAmbiantOcclusionU | Static_Below ]
-NOAGAINCHECK late right [ no Static_Below no vAmbiantOcclusionR no DoorBase no Theme2 | Static_Below ] -> [ vAmbiantOcclusionR | Static_Below ]
-NOAGAINCHECK late left  [ no Static_Below no vAmbiantOcclusionL no DoorBase no Theme2 | Static_Below ] -> [ vAmbiantOcclusionL | Static_Below ]
+NOAGAINCHECK late up    [ no Static_Below no vAmbiantOcclusionU no DoorBase no Theme2 | Static_Below NO Sign_Below ] -> [ vAmbiantOcclusionU | Static_Below ]
+NOAGAINCHECK late right [ no Static_Below no vAmbiantOcclusionR no DoorBase no Theme2 | Static_Below NO Sign_Below ] -> [ vAmbiantOcclusionR | Static_Below ]
+NOAGAINCHECK late left  [ no Static_Below no vAmbiantOcclusionL no DoorBase no Theme2 | Static_Below NO Sign_Below ] -> [ vAmbiantOcclusionL | Static_Below ]
 NOAGAINCHECK late up    [ no Static_Below no vDoor_AO_U DoorBase no Theme2 | Static_Below ] -> [ vDoor_AO_U DoorBase | Static_Below ]
 NOAGAINCHECK late right [ no Static_Below no vDoor_AO_R DoorBase no Theme2 | Static_Below ] -> [ vDoor_AO_R DoorBase | Static_Below ]
 NOAGAINCHECK late down  [ no Static_Below no vDoor_AO_D DoorBase no Theme2 | Static_Below ] -> [ vDoor_AO_D DoorBase | Static_Below ]
@@ -4090,6 +4174,9 @@ NOAGAINCHECK LATE UP [ Explosive_below Sticky_Below | ] -> [ Explosive_below Sti
 
 NOAGAINCHECK LATE UP [ SlimeVat_Mess_Above | ] -> [ SlimeVat_Mess_Above | Render_SlimeVat_Mess_Above_Top ]
 
+NOAGAINCHECK LATE UP [ Sign_Above | ] -> [ Sign_Above | Render_Sign_Above_Top ]
+NOAGAINCHECK LATE UP [ Sign_Below | ] -> [ Sign_Below | Render_Sign_Below_Top ]
+
 (Wires on)
 NOAGAINCHECK LATE UP [ Wire_Below_U Spark ] -> [ Wire_Below_U Spark Render_WireOn_Below_U ]
 NOAGAINCHECK LATE UP [ Wire_Below_R Spark ] -> [ Wire_Below_R Spark Render_WireOn_Below_R ]
@@ -4115,6 +4202,11 @@ NOAGAINCHECK LATE [Distance2 | no Distances] -> [Distance2 | Distance3]
 (Show which explosives are within detonation range)
 NOAGAINCHECK LATE UP [ Explosive_below Distances ] -> [ Explosive_below Distances Render_ExplosivePrimed_Below ]
 NOAGAINCHECK LATE UP [ Explosive_above Distances | ] -> [ Explosive_above Distances | Render_ExplosivePrimed_Above_Top ]
+
+LATE UP [ NO Player_Below | Sign_Below SignRead ] -> [ | Sign_Below ]
+LATE UP [ NO Player_Above | Sign_Above SignRead ] -> [ | Sign_Above ]
+LATE UP [ Player_Below | NO SignToRead NO SignRead Sign_Below ] -> [ Player_Below | Sign_Below SignToRead ] again
+LATE UP [ Player_Above | NO SignToRead NO SignRead Sign_Above ] -> [ Player_Above | Sign_Above SignToRead ] again
 
 ==============
 WINCONDITIONS
@@ -4162,9 +4254,9 @@ LEVELS
 #ŵ##################~~ŝŵ###c#c#đŵ#ŵă#c#c######.ŝ.6~..############...#######ŝ###:~############ă####~#######~ň~#####.#####~###.####~##
 #ŵ####################ŝŵ###c#+ŵĈ.#.Ĉŵ+#c######....~..##################đđđđŝ###~~###ŝăăăăăăăă.ăăă~:~######.........#####~##~~~###~##
 #ŵ######ccccccccc#####ŝŵ###c#ccccccccc#c####~~~~.Ł~46~~:~~#############ŵ###ŝ###~~###ŝ###đđđđđđđđđđŵ#######..6ž4ž...##~~~Ň~#~~~~##~##
-#ŵ####.#p....++++....#ŝŵ#########c#####+####~#.......####~#############ŵ###ŝ#~~~~~~#ŝ###ŵ#################.2......###.8.ž...8.~##~##
-#ŵ####..pr..........:ăăŵ########~z~####đ####~############~#############ŵ##....~~~~....##ŵ##################~#########~~~~~~~~~~##~##
-#ŵ######~~~#~~~~~...6đđŵ########~:~đđđđ.đđđŁ~.đđđđđđđđđđŁ~.đđđđđđđđđđđđŵ##.....88.....##ŵ########~~~######.....######~M~#########~##
+#ŵ####.#p....++++....#ŝŵ#########c#####+####~#.......####~#############ŵ###ŝ#.~~~~.#ŝ###ŵ#################.2......###.8.ž...8.~##~##
+#ŵ####..pr...........ăăŵ########~z~####đ####~############~#############ŵ##~~~.~~~~.~~~##ŵ##################~#########~~~~~~~~~~##~##
+#ŵ######~~~#~~~~~...6đđŵ########~:~đđđđ.đđđŁ~.đđđđđđđđđđŁ~.đđđđđđđđđđđđŵ##~1~..88..~7~##ŵ########~~~######.....######~M~#########~##
 #ŵ#....~~#~~~~£~~...#############ŵ##########~############:################~~~......~~~##~##~~~~~#~~~~~~##...6ž#######~~~#########:##
 #ŵ#..ŵ##~~~~z~~~~...#############ŵ##########:###########~....~~##......6:~~~~......~~~~:~~:Ň~~~~##~~~~~~:~4..8##############..~~~~##
 #ŵ#.žž##tcc.p..~....############~~~#########~###########~#...Ķ~##..~~~..##~~~......~~~##Ī##.8ŵ8....8ŝ8.###....#############...m~m~##
@@ -4173,7 +4265,7 @@ LEVELS
 #ŵ##.....#....pt...#########~~~ŵ~~~ŵ~~~##~Ķ~#~Ķ~##~q~###~Ī~~4..##.~~Ķ~~.##.....22.....##ŵ#############~~~~:ăăă~#........###.s.....##
 #ŵ####2#2cppppp~~~..########~Ł~ŵŁĴŁŵ~Ĵ~##~Ł~#~Ĵ~###ŝ####~~Ň~.~~##..~~~..#######:~#######ŵ#############~~~~~###.~..x4x6xxM:~6~.....##
 #ŵ####~~~c....p~....########888.888.888##~~~#~~~###ŝ####....6~~:~.......#######~~#######ŵ###~~~4.6s~~#~M~M~đđđ~#........############
-#~~đ.####c....p8...+cc######...#...#...###.....####ŝ##########ŵ################~~##...~.~###~."....a.#~~~~~#####ž.žžžž.ž############
+#~:đ.####c....p8...+cc######...#...#...###.....####ŝ##########ŵ################~~##...~.~###~."....a.#~~~~~#####ž.žžžž.ž############
 ##ŝ......c+đžđ+....+cc######.ŵŵă...đŝŝ.###.....##đđđđđđđđđđđđđŵ################~.##...######.."...####~~~~~#########################
 ##.~....rp....#...##ĕc######.....2.....####~#~###ŵ#############################đă##......###.."#.......""#8#########################
 ##.8.....#...6~....žrc###########:#########~Ň~###ŵ#################~~~~~..###~~~4##...ž..###.."............##############~q~########
@@ -4189,7 +4281,7 @@ LEVELS
 #######~~.ppppppă.~##c+žŝ.+p#####~######.....8...#######~:######~q~###################~~~##.......###..#######~~#...~.~ň~###...~~###
 #######~~pptt...ŝ.~##c+...+p#####~c+####ăă~~...~.#######~~######################đđđđđđŇ#~#.6L.K.J4.###########~ň~...~~~~~###...~~###
 #######~~tt.~~~.đ.~##c+ŝŝ.+p#####~că####...~..~Ň~##~q~##~~######################ŵŝăăăă.~:4...."....##############......8.###.ž.$£###
-#######~~4..~~~...~##q.....p#####~zđ~~~#~~....~~~##qrq:~~~ăăă##q~ŇŇŇ~:~~~#######ŵŝ#########.J"#"M.###############........###...~~###
+#######~~4..~~~...~##q.....p#####~zđ~~~#~~....~~~##qrq:~~~ăăă##q~ŇŇŇ~:~~~#######ŵŝ########".J"#"M."##############........###...~~###
 #######:#####~~~~~~##q.....q~~####:.~~~#~~.~~######~q~######~~####~##ŵ##ŝ#######ŵŝ#########.......##########################..6~~###
 #######~~~~~#########ccccccc#~####~###~#~###################~Ň~###~##ŵ##ŝ###đđđđŵŝ#~~4..###..#~#..##########################...~Ň~##
 ###########~#################~###~~~#~~~:##################~~~Ň###~##ŵ##ŝ###ŵŝăăăă#~Mx..######~#############################...~~~##
@@ -4200,21 +4292,21 @@ LEVELS
 #qrq~Ň~...+.6~~#cqpr.rpqc####Ķ~~....ŵ....~~~####.6~Ł~4.##~#Ňăăăăăăă:~~~~~~~ăăă#ŝ#ŵ#......"....#######.~...e##########~#######.~..###
 #~q~~##...r.#~~~c~.....~c####.~...~~~~~...~.####..6~4..##~~~###~#####ŵ##ŝ######ŝ#ŵ#.d...."..."#####...~~..e#########~~~~~~~~~~~..###
 ####ŝ####..##ŵ#~+......ă+:~~~~...~~...~~...Ī~~#####~###########:#####ŵ##ŝ######ŝ#ŵ####...dw#..#####....~..e###...###~~#########~~###
-####ŝ#####~##ŵ#~.~....6~~~#~~~..~~.....~~..~Ķ~~~~~~..#########~~~####ŵ##ŝ######:~~#################.ĕ..~4..~~;...###~~#~~~~~~ă~~~###
-####ŝ#####Ň##ŵ##.........##~~Ķ..~..~q~..~..~~~#####..#########ŝ#ŵ####ŵ##ŝ###~~~~m~~~~##############...~~...###...###~~~Ĵ~~~~ŵ#~Ł~###
-####ŝ####~q~#ŵ###############.Ĵă~..qrq..~đŁ.##################ŝ#ŵ####ŵ##ŝ###~~4...6~~######ŝă~~.~4;...~~...####£####~~~~~~~#.~~Ī~###
-####ŝ####qrq#ŵ#############~~~..~..~q~..~..Ī~~################ŝ#ŵ####ŵ##ŝ###~8aasdd8~###~~:~#8...##############ĕ##~..........~~~~###
-####ŝ####~q~#ŵ#đđđđđđđđđđđđ~Ī~..~~.....~~..~~~~:6~......######ŝ#ŵ####ŵ##ŝ###~.aswsd.~###~##đđ.ĕ..##############~##~............6~.##
-####đđđđđđđđđŵ#ŵ###########~~Ķ...~~...~~...~~~##~Ĵ......######ŝ#ŵ####ŵ##ŝ###~.aasdd.~##.~.###~~..############...##~......;.2...~..##
-###############ŵ#############.~...~~~~~...~.####~~~4.6~~######ŝ#ŵ####ŵ##ŝ###~.aswsd.~##...###################...#########ŵ#ŝ###~####
-###############ŵ##~4..t~~~###~~~....ŝ....~~Ī######..ž.Ķ~######ŝ#ŵ####ŵ##ŝ###~2aasdd2~#""x""###########.;........~########ŵ#ŝ###:####
-###############ŵ##~~Ĵ.p.Ķ~##~~~~~...~...~~Ķ~~###~~~4.6~~######ŝ#ŵ####ŵ##ŝ###~~4...6~~#6xxx4###########.######.##.###~q~##ŵ#ŝ###Ň####
-###############ŵ#~~~~.p.~###~~~Ł.~~Ł.~~Ł.~~~~~##~~......######~~~####ŵ##ŝ###~~~#s#~~~##"8"############.######.##6~:Ňqrq##ŵ#ŝ##~q~###
-#########~~~4##ŵ#Ķ~~~.p.ŝ####~~##~Ĵ~#~~~##~~#~~~6~......#######:#####ŵ##ŝ#######s#######2##########~~#.#~~###;######~q~##ŵ#ŝ##qrq###
-#######~~~~~ž.#ŵ#~.ŵ..p.~:~~~~###~~~#~~~#######################Ň#####ŵ##ŝ#######d.~~~~:~~##########~£~.~~~##..2##########~~~##~q~###
-#######.#~~~ŝ.#ŵ#~..~#p.~##########~###~~~~~~#################~q~####ŵ##ŝ##########################~J~.~L~##~.~###########.#########
-######.r.žt...#ŵ#~~~Ī#p6~##########~########8#################qrq####ŵ##ŝ##########################~Ķ~↔~Ķ~##~..#####~~~.##~~~#######
-#######p.tpž..#ŵ#z~~~#q~.~~~~#####~~~~######;#################~q~####ŵ##ŝ##########################~~~.~~~##~~~#####~.~6~~.Ň~#######
+####ŝ#####~##ŵ#~.~....6~~~#~~~..~~.....~~..~Ķ~~~~~~..#########~~~####ŵ##ŝ######ŝ#ŵ#####2###########.ĕ..~4..~~;...###~~#~~~~~~ă~~~###
+####ŝ#####Ň##ŵ##.........##~~Ķ..~..~q~..~..~~~#####..#########ŝ#ŵ####ŵ##ŝ######ŝ#ŵ#####~###########...~~...###...###~~~Ĵ~~~~ŵ#~Ł~###
+####ŝ####~q~#ŵ###############.Ĵă~..qrq..~đŁ.##################ŝ#ŵ####ŵ##ŝ######:~~#####~~.Ň~~4ĕĕĕ.....~~...####£####~~~~~~~#.~~Ī~###
+####ŝ####qrq#ŵ#############~~~..~..~q~..~..Ī~~################ŝ#ŵ####ŵ##ŝ###~~~~m~~~~#########ĕĕĕ##############ĕ##~..........~~~~###
+####ŝ####~q~#ŵ#đđđđđđđđđđđđ~Ī~..~~.....~~..~~~~:6~......######ŝ#ŵ####ŵ##ŝ###~~4...6~~##########ĕ###############~##~............6~.##
+####đđđđđđđđđŵ#ŵ###########~~Ķ...~~...~~...~~~##~Ĵ......######ŝ#ŵ####ŵ##ŝ###~8aasdd8~#########.\.############...##~......;.2...~..##
+###############ŵ#############.~...~~~~~...~.####~~~4.6~~######ŝ#ŵ####ŵ##ŝ###~.aswsd.~####đđđŝ#...############...#########ŵ#ŝ###~####
+###############ŵ##~4..t~~~###~~~....ŝ....~~Ī######..ž.Ķ~######ŝ#ŵ####ŵ##ŝ###~.aasdd.~####~##đđ...#####.;........~########ŵ#ŝ###:####
+###############ŵ##~~Ĵ.p.Ķ~##~~~~~...~...~~Ķ~~###~~~4.6~~######ŝ#ŵ####ŵ##ŝ###~.aswsd.~###.~.###########.######.##.###~q~##ŵ#ŝ###Ň####
+###############ŵ#~~~~.p.~###~~~Ł.~~Ł.~~Ł.~~~~~##~~......######~~~####ŵ##ŝ###~2aasdd2~###...###########.######.##6~:Ňqrq##ŵ#ŝ##~q~###
+#########~~~4##ŵ#Ķ~~~.p.ŝ####~~##~Ĵ~#~~~##~~#~~~6~......#######:#####ŵ##ŝ###~~4...6~~##""x""#######~~#.#~~###;######~q~##ŵ#ŝ##qrq###
+#######~~~~~ž.#ŵ#~.ŵ..p.~:~~~~###~~~#~~~#######################Ň#####ŵ##ŝ###~~~#s#~~~##6xxx4#######~£~.~~~##..2##########~~~##~q~###
+#######.#~~~ŝ.#ŵ#~..~#p.~##########~###~~~~~~#################~q~####ŵ##ŝ#######s#######"8"########~J~.~L~##~.~###########.#########
+######.r.žt...#ŵ#~~~Ī#p6~##########~########8#################qrq####ŵ##ŝ#######s########2#########~Ķ~↔~Ķ~##~..#####~~~.##~~~#######
+#######p.tpž..#ŵ#z~~~#q~.~~~~#####~~~~######;#################~q~####ŵ##ŝ#######d.~~~~~~~:#########~~~.~~~##~~~#####~.~6~~.Ň~#######
 #######pcppđ.~~ŵ#cccccc#####8#####.rt.##.........####################ŵ##ŝ##########################...#...###~######~£~.Ķ#..~#######
 #######...;2##############..;...##....##.~~~.~~~.####################ŵ##ŝ##########################...#...###:######..ĕ.~###########
 ###########~####~~~.#~~~##..tr..##..ž.##.~~~t~~~.##ŝăăăăăăăăăăăăăăă:~~~~~~:đđđđđđđđđđđđđđđđđđđđŝ###...#...###Ň######~đ~.~###########
@@ -4227,7 +4319,7 @@ LEVELS
 #################~##########:######~q~#############ŝŵ################ŵ##ŝ#############~#######ŵŝ######:###~~~~~..####~~~####~~##~###
 ###########.tĪ~~~~:~#....~.~~~~:~###Ň##############ŝŵ################ŵ##ŝ#######~~~~Ī~t....###ŵŝ###~~~~~~:~~~~~ĕŝ~~:~~Ĵ~~~~~~~##~###
 ###########.p..8~~#~#~~4.~tŁ~~##~###:đđđđđđđđđđđđđđŝŵ###########~~~~~~~~~~~~~~##~#8...p.ŵŝ.###ŵđđđđŇ###~##~~~~~~e####~~~#####..:~###
-###########.r.....#~#~Ł..~p8r.##~###8##############ŝŵ###########~~~~~~~~~~~~~~.:~####.r.ăŝ.###ŵăăăă.ă£4"##.8.....#####~#############
+###########.r.....#~#~Ł..~p8r.##~###8##############ŝŵ###########~~~~~G~~H~~~~~.:~####.r.ăŝ.###ŵăăăă.ă£4"##.8.....#####~#############
 ###########.ŵ.Ł.ŵ.#8#~~qt~q.p.##~""""##############ŝŵ###########..~~~~~~~~~~..#######....ž.###############...ĴŁ.ĕ.####~ăăă##########
 ###########...~4..#.#ppr.qqqq~##Ňăăăăăăăăăăăăăăăăăăăŵ###########...~~~~~~~~...#######......#################~~~...###..##~###~q~####
 ###################..t..6q~~Ī~##.đđđđđđđđđđđđđđđđđđđŵ####đđđđđđđ.....8..8.....##############################~~#######~###~~~Ňqrq####
@@ -5292,6 +5384,38 @@ _0###########
 )
 (SOLUTION: https://youtu.be/x34txYpBebs)
 (CONNECT: This should probably stand on its own.)
+
+
+
+(D5R: A puzzle which combines all in-game mechanics into a small-ish medium sized level. Has a few surprises here and there. Can be placed as a final level and the previous larger levels can be optional secret puzzles if they're more difficult than this puzzle.)
+(SOLUTION: https://i.imgur.com/M6Trgah.gif)
+@############
+#######c+####
+#####..p.~###
+##~$~."ppp+##
+#......r..###
+#..6ŵŝŵp..###
+#...pppp.~~.0
+#...p...ĕ.###
+###qt~~...###
+###qz~~4..###
+#####:#######
+
+(CONNECT: MULTI-EXIT VARIANT)
+(Smuggle in pretty much anything and it should be possible to exit out of the topmost path instead of the middle one [Smuggling a bomb or something sticky in makes this and the original puzzle trivial so I would recommend against it]. If you smuggle a [RIGHT] conveyor in, a few shortcut tricks might become available in the level and it also becomes possible to fit a bomb on the upper right corner. Might be an interesting avenue to explore but will take some work to connect properly so I'll leave it up to you if you want to try or not. If this becomes the final level, it can be used as an alternative secret ending.)
+(SOLUTION: https://i.imgur.com/DIwkicH.gif)
+(RIGHT CONVEYOR BOMB TRICK THING: https://i.imgur.com/VIVMAlI.gif)
+(@############
+#######c+####
+#####..p.~~.#
+##~$~."ppp+.0
+#......r..###
+#..6ŵŝŵp..###
+#...pppp.~~.0
+#...p...ĕ.###
+###qt~~...###
+###qzŇ~4..###
+#####:#######)
 
 
 (For reference:)

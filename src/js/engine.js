@@ -356,10 +356,11 @@ function drawMessageScreen() {
 		var leveldat = state.levels[curlevel];
 		message = leveldat.message.trim();
 	} else {
-		message = messagetext;
+		message = messagetext.replaceAll('"', '');
 	}
 	
-	splitMessage = wordwrap(message,titleImage[0].length);
+	splitMessage = message.split('\\n')
+	// splitMessage = wordwrap(message,titleImage[0].length);
 
 
 	var offset = 5-((splitMessage.length/2)|0);
