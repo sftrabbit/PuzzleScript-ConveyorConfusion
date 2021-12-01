@@ -13,9 +13,7 @@ var regions = [
         { rect: [-7, 4, 7, 3], secondary: true, camera: 'follow-player-anchored-x' },
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
       ],
-      zoom: 0.7,
-      simulateAll: true,
-      start: true
+      zoom: 0.7
     },
     // Intro - bottom left arm
     {
@@ -26,8 +24,7 @@ var regions = [
         { rect: [-31, 3, 17, 4], camera: 'follow-player' },
         { rect: [-29, 2, 3, 1], camera: 'follow-player' },
       ],
-      zoom: 0.7,
-      simulateAll: true
+      zoom: 0.7
     },
     // Intro - bottom right arm
     {
@@ -35,8 +32,7 @@ var regions = [
       areas: [
         { rect: [10, -6, 25, 4], camera: 'follow-player' },
       ],
-      zoom: 0.7,
-      simulateAll: true
+      zoom: 0.7
     },
     // Intro - top left arm
     {
@@ -44,8 +40,7 @@ var regions = [
       areas: [
         { rect: [-4, -30, 8, 4], camera: 'follow-player' },
       ],
-      zoom: 0.7,
-      simulateAll: true
+      zoom: 0.7
     },
     // Intro - top right arm
     {
@@ -56,8 +51,7 @@ var regions = [
         { rect: [15, -39, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -39, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      simulateAll: true
+      zoom: 0.7
     },
     // Intro bonus puzzle
     {
@@ -273,7 +267,8 @@ var regions = [
       ],
       zoom: 0.4,
       secret: true,
-      credit: "Zomulgustar"
+      credit: "Zomulgustar",
+      simulateAll: false
     },
     // Clock shortcut surround
     {
@@ -581,8 +576,7 @@ var regions = [
       areas: [
         { rect: [0, 0, 19, 15] },
       ],
-      zoom: 0.58,
-      simulateAll: true
+      zoom: 0.58
     },
     //////////////
     // BRANCH B
@@ -604,8 +598,7 @@ var regions = [
         { rect: [1, 11, 16, 1] },
         { rect: [1, 12, 16, 4] },
       ],
-      zoom: 0.56,
-      simulateAll: true
+      zoom: 0.56
     },
     // (Pichusuperlover)
     {
@@ -640,7 +633,8 @@ var regions = [
         { rect: [0, 1, 9, 5] },
         { rect: [0, 6, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      start: true
     },
     // (Joseph Mansfield #2)
     {
@@ -1220,7 +1214,10 @@ function initRegions() {
     region.outlinePolygon = calculateOutlinePolygon(region);
     region.index = i;
     region.secret = !!region.secret;
-    region.simulateAll = !!region.simulateAll;
+
+    if (region.simulateAll == null) {
+      region.simulateAll = true;
+    }
 
     if (region.allowReset == null) {
       region.allowReset = true;

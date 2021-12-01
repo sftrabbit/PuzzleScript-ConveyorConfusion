@@ -448,21 +448,11 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 
 		firstTurn = true;
 
-	 //    var playerPositions = getPlayerPositions();
-		// playerPosition = {
-		//     x: (playerPositions[0]/(level.height))|0,
-		//     y: (playerPositions[0]%level.height)|0
-		// };
         if (isOpenWorldLevel()) {
           initOpenWorld();
         } else {
           clearOpenWorldState();
         }
-
-	    originalLevel=backupLevel();
-	    restartTarget=originalLevel;
-
-  		initLevelState();
 
 	    canvasResize();
 
@@ -474,12 +464,26 @@ function loadLevelFromLevelDat(state,leveldat,randomseed,clearinputhistory) {
 			onStateUpdate(false, false);
 	    }
 
+	    removePlayerDecorations();
+
+	    originalLevel=backupLevel();
+	    restartTarget=originalLevel;
+
+  		removePlayers();
+
+	    var playerPositions = getPlayerPositions();
+		playerPosition = {
+		    x: (playerPositions[0]/(level.height))|0,
+		    y: (playerPositions[0]%level.height)|0
+		};
+
 	    firstTurn = false;
 
 	    if (!isOpenWorldLevel()) {
 		    drawLevel();
 		    redraw();
 		} else {
+			transitionCamera(getActiveRegion());
 	        initSmoothCamera();
 	        startRealtimeRenderer();
 	    }
@@ -1037,6 +1041,8 @@ function addUndoState(state){
 	}
 }
 
+var forceSimulateAll = false;
+
 function DoRestart(force) {
 	if (restarting===true){
 		return;
@@ -1067,9 +1073,9 @@ function DoRestart(force) {
 	tryPlayRestartSound();
 
 	if ('run_rules_on_level_start' in state.metadata) {
-		firstTurn = true;
+		forceSimulateAll = true;
     	processInput(-1,true);
-    	firstTurn = false;
+    	forceSimulateAll = false;
 	} else {
         onStateUpdate(false, false);
     }
@@ -1992,7 +1998,7 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 		ymin=0;
 		ymax=level.height;
 	} else {
-		if (activeRegion.simulateAll) {
+		if (activeRegion.simulateAll || forceSimulateAll) {
 			xmin=Math.max(0, activeRegion.fullBounds.minX - 3);
 			xmax=Math.min(level.width, activeRegion.fullBounds.maxX + 3);
 			ymin=Math.max(0, activeRegion.fullBounds.minY - 3 + (!runningLateRules && noagaincheck ? 1 : 0));
@@ -2394,7 +2400,7 @@ function showTempMessage() {
 function processOutputCommands(commands) {
 	for (var i=0;i<commands.length;i++) {
 		var command = commands[i];
-		if (command.charAt(1)==='f')  {//identifies sfxN
+		if (command.charAt(1)==='f' && !firstTurn)  {//identifies sfxN
 			tryPlaySimpleSound(command);
 		}
 		if (unitTesting===false) {

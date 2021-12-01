@@ -114,7 +114,21 @@ function clearOpenWorldState() {
   objectTrackers = [];
 }
 
-function initLevelState() {
+function removePlayerDecorations() {
+  for (var y = 0; y < level.height; y++) {
+    for (var x = 0; x < level.width; x++) {
+      var index = x * level.height + y;
+      var cell = level.getCellInto(index, _o10);
+
+      if (cell.anyBitsInCommon(state.objectMasks['playerdecorations'])) {
+        cell.iclear(state.objectMasks['playerdecorations']);
+        level.setCell(index, _o10);
+      }
+    }
+  }
+}
+
+function removePlayers() {
   for (var y = 0; y < level.height; y++) {
     for (var x = 0; x < level.width; x++) {
       var index = x * level.height + y;
