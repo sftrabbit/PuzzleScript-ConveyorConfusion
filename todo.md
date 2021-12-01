@@ -1,6 +1,5 @@
 Pre-playtest:
 - Go through, make sure regions are all good. Check resets. Check backwards traversal. Split up intro region?
-- Text resizing problem in menus
 
 During-playtest:
 - Vat falling behaviour
