@@ -13,7 +13,8 @@ var regions = [
         { rect: [-7, 4, 7, 3], secondary: true, camera: 'follow-player-anchored-x' },
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     // Intro - bottom left arm
     {
@@ -1072,8 +1073,7 @@ var regions = [
         { rect: [11, 0, 2, 11], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "D5R",
-      start: true
+      credit: "D5R"
     },
     // (jackk)
     {
@@ -1433,6 +1433,10 @@ function calculateOutlinePolygon(region) {
         return -1;
       }
 
+      if (pointA[1] > pointB[1]) {
+        return 1;
+      }
+
       return 0;
     }
 
@@ -1447,6 +1451,10 @@ function calculateOutlinePolygon(region) {
     if (pointA[1] === pointB[1]) {
       if (pointA[0] < pointB[0]) {
         return -1;
+      }
+
+      if (pointA[0] > pointB[0]) {
+        return 1;
       }
 
       return 0;
