@@ -14,7 +14,8 @@ var regions = [
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
       ],
       zoom: 0.7,
-      simulateAll: true
+      simulateAll: true,
+      start: true
     },
     // Intro - bottom left arm
     {
@@ -168,8 +169,7 @@ var regions = [
         { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     //////////////
     // BRANCH A
