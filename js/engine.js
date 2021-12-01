@@ -522,7 +522,7 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
 		drawLevel();
 		redraw();
 	} else {
-		transitionCamera(activeRegion);
+		transitionCamera(getActiveRegion());
 		initSmoothCamera();
 	}
 }
