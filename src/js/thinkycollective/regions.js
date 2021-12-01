@@ -633,8 +633,7 @@ var regions = [
         { rect: [0, 1, 9, 5] },
         { rect: [0, 6, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.8,
-      start: true
+      zoom: 0.8
     },
     // (Joseph Mansfield #2)
     {
@@ -1073,7 +1072,8 @@ var regions = [
         { rect: [11, 0, 2, 11], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "D5R"
+      credit: "D5R",
+      start: true
     },
     // (jackk)
     {

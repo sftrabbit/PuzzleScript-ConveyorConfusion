@@ -3103,6 +3103,8 @@ FuseIntention = FuseIntention_Above or FuseIntention_Below
 Render_Player_Below_Cover = Render_Player_Below_U or Render_Player_Below_R or Render_Player_Below_L
 Render_Player_Above_Top_Cover = Render_Player_Above_Top_U or Render_Player_Above_Top_R or Render_Player_Above_Top_L
 
+PlayerDecorations = Render_Player_Below_Cover or Render_Player_Above_Top_Cover or Render_Player_Above1_Top or Render_Player_Below1_Top
+
 Render_Inflated_Top = Render_InflatedU_Top or Render_InflatedR_Top or Render_InflatedD_Top or Render_InflatedL_Top
 
 Render_WireOn = Render_WireOn_Above_U_Top or Render_WireOn_Above_D or Render_WireOn_Above_R_Top or Render_WireOn_Above_D_Top or Render_WireOn_Above_L_Top or Render_WireOn_Below_U or Render_WireOn_Below_R or Render_WireOn_Below_D or Render_WireOn_Below_L or Render_WireOn_AboveWall_U_Top or Render_WireOn_AboveWall_D or Render_WireOn_AboveWall_R_Top or Render_WireOn_AboveWall_D_Top or Render_WireOn_AboveWall_L_Top 
@@ -3458,7 +3460,10 @@ GLOBAL [ Weighted_Below Button_Below ] -> [ Weighted_Below Button_Below Spark ]
 GLOBAL HORIZONTAL [ Sigil_On | Wire ] -> [ Sigil_On Spark | Wire ]
 GLOBAL [ Spark NO SparkStopper | Sparkable ] -> [ Spark | Sparkable Spark ]
 (Activate/deactivate doors)
-[ Ladder | Spark DoorBase ] -> [ Ladder | Spark ACTION DoorBase ]
+UP [ LadderU | Spark DoorBase ] -> [ LadderU | Spark ACTION DoorBase ]
+RIGHT [ LadderR | Spark DoorBase ] -> [ LadderR | Spark ACTION DoorBase ]
+DOWN [ LadderD | Spark DoorBase ] -> [ LadderD | Spark ACTION DoorBase ]
+LEFT [ LadderL | Spark DoorBase ] -> [ LadderL | Spark ACTION DoorBase ]
 GLOBAL [ Spark STATIONARY DoorBase NO Dynamic_Above NO DoorExtended ] -> [ Spark DoorBase DoorExtended ] again sfx3
 [ Anim_DoorBlocked ] -> [ ]
 GLOBAL [ Spark DoorBase NO DoorExtended NO Wire_Below_U ] -> [ Spark DoorBase NO DoorExtended Wire_Below_U Anim_DoorBlocked ] again sfx8
@@ -4257,7 +4262,7 @@ LEVELS
 ##ŵ####.#p....++++....#ŝŵ#########c#####+####~#.......####~#############ŵ###ŝ#.~~~~.#ŝ###ŵ#################.2......###.8.ž...8.~##~##
 ##ŵ####..pr...........ăăŵ########~z~####đ####~############~#############ŵ##~~~.~~~~.~~~##ŵ##################~#########~~~~~~~~~~##~##
 ##ŵ######~~~#~~~~~...6đđŵ########~:~đđđđ.đđđŁ~.đđđđđđđđđđŁ~.đđđđđđđđđđđđŵ##~1~..88..~7~##ŵ########~~~######.....######~M~#########~##
-##ŵ#....~~#~~~~£~~...#############ŵ##########~############:################~~~......~~~##~##~~~~~#~~~~~~##...6ž#######~~~#########:##
+##ŵ#....~~#~~~~£~~...#############ŵ##########~############:################~~~......~~~##.##~~~~~#~~~~~~##...6ž#######~~~#########:##
 ##ŵ#..ŵ##~~~~z~~~~...#############ŵ##########:###########~....~~##......6:~~~~......~~~~:~~:Ň~~~~##~~~~~~:~4..8##############..~~~~##
 ##ŵ#.žž##tcc.p..~....############~~~#########~###########~#...Ķ~##..~~~..##~~~......~~~##Ī##.8ŵ8....8ŝ8.###....#############...m~m~##
 ##ŵ#.8ă#.tpcpp..~.£..############~~~######~~~~~~~##~q~###~..~.~~##.~~Ķ~~.##.8........8.##ŵ#####~~~~~~#######################...a...##

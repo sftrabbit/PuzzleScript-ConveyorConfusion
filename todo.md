@@ -1,7 +1,6 @@
 Pre-playtest:
 - Go through, make sure regions are all good. Check resets. Check backwards traversal. Split up intro region?
 - Check in Firefox/IE/Safari
-- Deusovi's level seems broken
 - Text resizing problem in menus
 
 During-playtest:
