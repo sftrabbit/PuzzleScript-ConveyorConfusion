@@ -6,6 +6,8 @@ function createSprite(name,spritegrid, colors, padding) {
 	var sprite = makeSpriteCanvas(name);
 	var spritectx = sprite.getContext('2d');
 
+    console.log(cellwidth, cellheight)
+
     spritectx.clearRect(0, 0, cellwidth, cellheight);
 
 	var w = spritegrid[0].length;
@@ -47,7 +49,7 @@ var editor_s_grille=[[0,1,1,1,0],[1,0,0,0,0],[0,1,1,1,0],[0,0,0,0,1],[0,1,1,1,0]
 var spriteimages;
 function regenSpriteImages() {
 	if (textMode) {
-        spriteimages = [];
+        textImages = [];
 		regenText();
 		return;
 	} 
