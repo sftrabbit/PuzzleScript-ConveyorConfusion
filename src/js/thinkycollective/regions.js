@@ -102,9 +102,9 @@ var regions = [
     {
       offset: [60, 33],
       areas: [
-        { rect: [-1, 0, 10, 7] },
-        { rect: [9, 0, 5, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [-5, 0, 4, 3], secondary: true, camera: 'pull-horizontal' }
+        { rect: [-2, 0, 10, 7] },
+        { rect: [8, 0, 6, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-5, 0, 3, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
       credit: "JumbleTheCircle"

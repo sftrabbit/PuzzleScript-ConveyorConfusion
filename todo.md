@@ -1,5 +1,4 @@
 Pre-playtest:
-- Camera wrong position after continue
 - Belt noise in Jack Lance's level, also in my sticky intro level
 - Why is it slower after continue? Is it?
 - Go through, make sure regions are all good. Check resets. Check backwards traversal. Split up intro region?
