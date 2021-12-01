@@ -1,10 +1,8 @@
 Pre-playtest:
-- Belt noise in Jack Lance's level, also in my sticky intro level
-- Why is it slower after continue? Is it?
 - Go through, make sure regions are all good. Check resets. Check backwards traversal. Split up intro region?
-- Slow reset
 - Check in Firefox/IE/Safari
 - Deusovi's level seems broken
+- Text resizing problem in menus
 
 During-playtest:
 - Vat falling behaviour
@@ -14,6 +12,7 @@ During-playtest:
 - Do the overhead walls need a tutorial?
 - Should I change the secrets to be in-PuzzleScript?
 - Blocks leave mark where they started?
+- Player directions
 
 Level ideas:
 - Infinite loop
