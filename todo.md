@@ -1,5 +1,4 @@
 Pre-playtest:
-- Don't save until we've stopped againing
 - Camera wrong position after continue
 - Belt noise in Jack Lance's level, also in my sticky intro level
 - Why is it slower after continue? Is it?

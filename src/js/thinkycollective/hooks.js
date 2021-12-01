@@ -25,7 +25,12 @@ function onStateUpdate(againing, action) {
   var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
 
   if (changedRegion) {
+    pendingSave = true;
+  }
+
+  if (!againing && pendingSave) {
     saveLevelState();
+    pendingSave = false;
   }
 
   transitionCamera(activeRegion);

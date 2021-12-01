@@ -3043,7 +3043,7 @@ function processInput(dir,dontDoWin,dontModify) {
 		// 	consolePrint(`Turn complete`);    
 		// }
 
-  onStateUpdate(againing, dir === 16);
+		onStateUpdate(againing, dir === 16);
 
 	    level.commandQueue=[];
 	    level.commandQueueSourceRules=[];

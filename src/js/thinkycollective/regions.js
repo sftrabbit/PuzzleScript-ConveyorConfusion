@@ -14,7 +14,8 @@ var regions = [
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
       ],
       zoom: 0.7,
-      simulateAll: true
+      simulateAll: true,
+      start: true
     },
     // Intro - bottom left arm
     {
@@ -476,8 +477,7 @@ var regions = [
         { rect: [9, 5, 1, 6], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     // 9:00 Block source
     {
