@@ -13,8 +13,7 @@ var regions = [
         { rect: [-7, 4, 7, 3], secondary: true, camera: 'follow-player-anchored-x' },
         { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     // Intro - bottom left arm
     {
@@ -269,7 +268,8 @@ var regions = [
       zoom: 0.4,
       secret: true,
       credit: "Zomulgustar",
-      simulateAll: false
+      simulateAll: false,
+      start: true
     },
     // Clock shortcut surround
     {
@@ -363,7 +363,7 @@ var regions = [
     {
       offset: [25, 59],
       areas: [
-        { rect: [2, 0, 3, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [2, -1, 3, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 2, 8, 7] },
         { rect: [0, 9, 8, 1], secondary: true, camera: 'pull-vertical' }

@@ -10,6 +10,9 @@ During-playtest:
 - Should I change the secrets to be in-PuzzleScript?
 - Blocks leave mark where they started?
 - Player directions
+- Rendering glitch when removing foreign object
+- Deusovi's level feels kinda slow
+- Wires around clementsparrows level not updating properly
 
 Level ideas:
 - Infinite loop
