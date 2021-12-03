@@ -1999,10 +1999,10 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 		ymax=level.height;
 	} else {
 		if (activeRegion.simulateAll || forceSimulateAll) {
-			xmin=Math.max(0, activeRegion.fullBounds.minX - 3);
-			xmax=Math.min(level.width, activeRegion.fullBounds.maxX + 3);
-			ymin=Math.max(0, activeRegion.fullBounds.minY - 3 + (!runningLateRules && noagaincheck ? 1 : 0));
-			ymax=Math.min(level.height, activeRegion.fullBounds.maxY + 3 + (!runningLateRules && noagaincheck ? -2 : 0));
+			xmin=Math.max(0, activeRegion.simulationBounds.minX);
+			xmax=Math.min(level.width, activeRegion.simulationBounds.maxX );
+			ymin=Math.max(0, activeRegion.simulationBounds.minY + (!runningLateRules && noagaincheck ? 1 : 0));
+			ymax=Math.min(level.height, activeRegion.simulationBounds.maxY  + (!runningLateRules && noagaincheck ? -2 : 0));
 		} else {
 			xmin=Math.max(0, localBoundary.xmin);
 			xmax=Math.min(level.width, localBoundary.xmax);
