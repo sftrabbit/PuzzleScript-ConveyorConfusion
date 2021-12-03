@@ -1,5 +1,7 @@
 Pre-playtest:
-- Go through, make sure regions are all good. Check resets. Check backwards traversal. Split up intro region?
+- Blocks leave mark where they started?
+- Update signs in hub
+- Go through, make sure regions are all good. Check resets. Check backwards traversal.
 
 During-playtest:
 - Vat falling behaviour
@@ -8,11 +10,11 @@ During-playtest:
 - Tracking for merging and explosions and stuff (do we even need it?)
 - Do the overhead walls need a tutorial?
 - Should I change the secrets to be in-PuzzleScript?
-- Blocks leave mark where they started?
 - Player directions
 - Rendering glitch when removing foreign object
-- Deusovi's level feels kinda slow
-- Wires around clementsparrows level not updating properly
+- Intro area feels kinda slow
+- Sigil wire needs to activate
+
 
 Level ideas:
 - Infinite loop

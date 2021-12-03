@@ -6,50 +6,24 @@ var regions = [
     //////////////
     // Intro
     {
-      offset: [63, 70],
-      areas: [
-        { rect: [0, 0, 16, 9], camera: 'follow-player-anchored-x' },
-        { rect: [5, -34, 6, 34], secondary: true, camera: 'follow-player-anchored-x' },
-        { rect: [-7, 4, 7, 3], secondary: true, camera: 'follow-player-anchored-x' },
-        { rect: [-7, 7, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
-      ],
-      zoom: 0.7
-    },
-    // Intro - bottom left arm
-    {
       offset: [64, 67],
       areas: [
-        { rect: [-14, -6, 18, 4], camera: 'follow-player' },
-        { rect: [-14, -2, 4, 9], camera: 'follow-player' },
-        { rect: [-31, 3, 17, 4], camera: 'follow-player' },
-        { rect: [-29, 2, 3, 1], camera: 'follow-player' },
-      ],
-      zoom: 0.7
-    },
-    // Intro - bottom right arm
-    {
-      offset: [64, 67],
-      areas: [
-        { rect: [10, -6, 25, 4], camera: 'follow-player' },
-      ],
-      zoom: 0.7
-    },
-    // Intro - top left arm
-    {
-      offset: [64, 70],
-      areas: [
-        { rect: [-4, -30, 8, 4], camera: 'follow-player' },
-      ],
-      zoom: 0.7
-    },
-    // Intro - top right arm
-    {
-      offset: [64, 70],
-      areas: [
-        { rect: [10, -30, 1, 4] },
-        { rect: [11, -35, 4, 9], secondary: true, camera: 'follow-player' },
-        { rect: [15, -39, 4, 8], secondary: true, camera: 'follow-player' },
-        { rect: [19, -39, 3, 4], secondary: true, camera: 'follow-player' }
+        { rect: [-1, 3, 16, 9], camera: 'follow-player-anchored-x' },
+        { rect: [4, -31, 6, 34], secondary: true, camera: 'follow-player-anchored-x' },
+        { rect: [-8, 7, 7, 3], secondary: true, camera: 'follow-player-anchored-x' },
+        { rect: [-8, 10, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
+        { rect: [-13, -6, 17, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-13, -2, 4, 8], secondary: true, camera: 'follow-player' },
+        { rect: [-31, 6, 22, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-29, 5, 3, 1], secondary: true, camera: 'follow-player' },
+        { rect: [10, -6, 23, 4], secondary: true, camera: 'follow-player' },
+        { rect: [29, -2, 4, 9], secondary: true, camera: 'follow-player' },
+        { rect: [33, 3, 2, 4], secondary: true, camera: 'follow-player' },
+        { rect: [-4, -27, 8, 4], secondary: true, camera: 'follow-player' },
+        { rect: [10, -27, 1, 4], secondary: true },
+        { rect: [11, -32, 4, 9], secondary: true, camera: 'follow-player' },
+        { rect: [15, -36, 4, 8], secondary: true, camera: 'follow-player' },
+        { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7
     },
@@ -184,7 +158,9 @@ var regions = [
       offset: [55, 10],
       areas: [
         { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 7, 9] },
+        { rect: [1, 0, 1, 1] },
+        { rect: [3, 0, 5, 1] },
+        { rect: [1, 1, 7, 8] },
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
@@ -209,9 +185,10 @@ var regions = [
     {
       offset: [43, 8],
       areas: [
-        { rect: [0, 0, 30, 3], camera: 'follow-player' },
+        { rect: [-1, 0, 31, 3], camera: 'follow-player' },
         { rect: [13, -3, 3, 3], camera: 'follow-player' },
-        { rect: [27, -4, 7, 4], camera: 'follow-player' }
+        { rect: [27, -4, 7, 3], camera: 'follow-player' },
+        { rect: [27, -1, 3, 1], camera: 'follow-player' }
       ],
       zoom: 0.8
     },
@@ -226,7 +203,8 @@ var regions = [
         { rect: [11, 4, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "Corey Hardt"
+      credit: "Corey Hardt",
+      start: true
     },
     // (Auroriax)
     {
@@ -263,31 +241,32 @@ var regions = [
         { rect: [0, 5, 21, 11] },
         { rect: [1, 16, 19, 5] },
         { rect: [12, 21, 8, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [6, -1, 8, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [1, -1, 13, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.4,
+      zoom: 0.38,
       secret: true,
       credit: "Zomulgustar",
-      simulateAll: false,
-      start: true
+      simulateAll: false
     },
     // Clock shortcut surround
     {
       offset: [32, 31],
       areas: [
         { rect: [0, 0, 3, 5] },
-        { rect: [3, 0, 1, 2] },
+        { rect: [3, 0, 1, 1] },
+        { rect: [3, 4, 1, 1] },
         { rect: [4, 0, 4, 5] }
       ],
       zoom: 0.4
     },
     // Clock shortcut
     {
-      offset: [32, 31],
+      offset: [32, 30],
       areas: [
         { rect: [3, 2, 1, 3] }
       ],
-      zoom: 0.4
+      zoom: 0.4,
+      allowReset: false
     },
     // 1:00 (CHz)
     {
@@ -513,7 +492,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 8, 3] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulateAlso: [-1, 1, -2]
     },
     // 9:00 clementsparrow secret 2
     {
@@ -573,9 +553,9 @@ var regions = [
     },
     // Branch A finish
     {
-      offset: [24, -4],
+      offset: [25, -3],
       areas: [
-        { rect: [0, 0, 19, 15] },
+        { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58
     },
@@ -841,7 +821,7 @@ var regions = [
         { rect: [0, 3, 9, 13] },
         { rect: [3, 16, 3, 2], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.56
     },
     // Main path branch
     {
@@ -1240,6 +1220,27 @@ function initRegions() {
           }
         }
       }
+    }
+  }
+
+  for (var i = 0; i < levelRegions.length; i++) {
+    var region = levelRegions[i];
+
+    region.simulationBounds = {
+      minX: region.fullBounds.minX - 3,
+      maxX: region.fullBounds.maxX + 2,
+      minY: region.fullBounds.minY - 3,
+      maxY: region.fullBounds.maxY + 2,
+    };
+
+    var simulateAlso = region.simulateAlso || [];
+
+    for (var j = 0; j < simulateAlso.length; j++) {
+      var alsoRegion = levelRegions[i + simulateAlso[j]];
+      region.simulationBounds.minX = Math.min(region.simulationBounds.minX, alsoRegion.fullBounds.minX);
+      region.simulationBounds.maxX = Math.max(region.simulationBounds.maxX, alsoRegion.fullBounds.maxX);
+      region.simulationBounds.minY = Math.min(region.simulationBounds.minY, alsoRegion.fullBounds.minY);
+      region.simulationBounds.maxY = Math.max(region.simulationBounds.maxY, alsoRegion.fullBounds.maxY);
     }
   }
 }
