@@ -203,8 +203,7 @@ var regions = [
         { rect: [11, 4, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "Corey Hardt",
-      start: true
+      credit: "Corey Hardt"
     },
     // (Auroriax)
     {
@@ -843,7 +842,8 @@ var regions = [
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Joel"
+      credit: "Joel",
+      start: true
     },
     // Corridor
     {
