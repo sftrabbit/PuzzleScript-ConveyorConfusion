@@ -20,12 +20,13 @@ var regions = [
         { rect: [29, -2, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [33, 3, 2, 4], secondary: true, camera: 'follow-player' },
         { rect: [-4, -27, 8, 4], secondary: true, camera: 'follow-player' },
-        { rect: [10, -27, 1, 4], secondary: true },
+        { rect: [10, -27, 1, 4], secondary: true, camera: 'follow-player' },
         { rect: [11, -32, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [15, -36, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     // Intro bonus puzzle
     {
@@ -664,8 +665,7 @@ var regions = [
         { rect: [0, 2, 10, 7] }
       ],
       zoom: 0.7,
-      credit: "Justas",
-      start: true
+      credit: "Justas"
     },
     // (That Scar)
     {
