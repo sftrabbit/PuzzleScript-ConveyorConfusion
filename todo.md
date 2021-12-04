@@ -7,7 +7,6 @@ During-playtest:
 - End cutscenes
 - Secret end
 - Tracking for merging and explosions and stuff (do we even need it?)
-- Do the overhead walls need a tutorial?
 - Should I change the secrets to be in-PuzzleScript?
 - Player directions
 - Rendering glitch when removing foreign object
