@@ -1,5 +1,4 @@
 Pre-playtest:
-- Blocks leave mark where they started?
 - Update signs in hub
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
 

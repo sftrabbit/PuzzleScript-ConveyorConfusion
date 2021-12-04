@@ -336,13 +336,112 @@ Platform2_Top
 00100
 01110
 
-BlockMark1_Below
-#adadad
+PlatformMark1_Below
+#adadad #b1b1b0
+00000
+00010
+01000
+00001
+00000
+
+PlatformMark2_Below
+#9e999a
+
+BeltMark1_Below
+#adadad #b1b1b0
+00000
+0...0
+0...0
+0...1
+00000
+
+BeltMark1_Above
+#dedede #dbdcdb #c5c5c5
+0...0
+10000
+.....
+.....
+.....
+
+BeltMark1_Above_Top
+#dedede #dbdcdb #c5c5c5
+.....
+.....
+00100
+0...0
+0...0
+
+BeltMark2_Above
+#D9D2D5 #E9DEE3
+0...0
+00000
+.....
+.....
+.....
+
+BeltMark2_Above_Top
+#D9D2D5 #E9DEE3
+.....
+.....
+00000
+0...0
+0...0
+
+BeltMark2_Below
+#9e999a
 00000
 0...0
 0...0
 0...0
 00000
+
+ExplosiveMark1_Below
+#adadad #b1b1b0
+.....
+.001.
+.100.
+.000.
+.....
+
+ExplosiveMark1_Above
+#dedede #dbdcdb #c5c5c5
+.000.
+.....
+.....
+.....
+.....
+
+ExplosiveMark1_Above_Top
+#dedede #dbdcdb #c5c5c5
+.....
+.....
+.....
+.001.
+.100.
+
+ExplosiveMark2_Above
+#D9D2D5 #E9DEE3
+.010.
+.....
+.....
+.....
+.....
+
+ExplosiveMark2_Above_Top
+#D9D2D5 #E9DEE3
+.....
+.....
+.....
+.010.
+.111.
+
+ExplosiveMark2_Below
+#9e999a
+.....
+.000.
+.000.
+.000.
+.....
 
 Wall1
 #201c1c
@@ -2860,41 +2959,41 @@ LEGEND
 ; = Player_Below1 and MovedR
 0 = End_Above and Platform1
 O = End_Below
-e = Explosive_below and Sticky_Below
-ĕ = Explosive_below
-3 = Explosive_above and Sticky_Above and Platform1
-£ = Explosive_above and Platform1
-5 = Explosive_above and Sticky_Above and Explosive_below and Sticky_Below
+e = Explosive_below and Sticky_Below and ExplosiveMark1_Below
+ĕ = Explosive_below and ExplosiveMark1_Below
+3 = Explosive_above and Sticky_Above and Platform1 and ExplosiveMark1_Above
+£ = Explosive_above and Platform1 and ExplosiveMark1_Above
+5 = Explosive_above and Sticky_Above and Explosive_below and Sticky_Below and ExplosiveMark1_Below
 (IJKL and M)
-I = BeltU_Above and Sticky_Above and Platform1
-J = BeltL_Above and Sticky_Above and Platform1
-K = BeltD_Above and Sticky_Above and Platform1
-L = BeltR_Above and Sticky_Above and Platform1
-M = BeltX_Above and Sticky_Above and Platform1
-N = BeltX_Below and Sticky_Above and BeltX_Above and BlockMark1_Below
-Ī = BeltU_Above and Platform1
-Ł = BeltR_Above and Platform1
-Ķ = BeltD_Above and Platform1
-Ĵ = BeltL_Above and Platform1
-Ň = BeltX_Above and Platform1
+I = BeltU_Above and Sticky_Above and Platform1 and BeltMark1_Above
+J = BeltL_Above and Sticky_Above and Platform1 and BeltMark1_Above
+K = BeltD_Above and Sticky_Above and Platform1 and BeltMark1_Above
+L = BeltR_Above and Sticky_Above and Platform1 and BeltMark1_Above
+M = BeltX_Above and Sticky_Above and Platform1 and BeltMark1_Above
+N = BeltX_Below and Sticky_Above and BeltX_Above and BeltMark1_Below
+Ī = BeltU_Above and Platform1 and BeltMark1_Above
+Ł = BeltR_Above and Platform1 and BeltMark1_Above
+Ķ = BeltD_Above and Platform1 and BeltMark1_Above
+Ĵ = BeltL_Above and Platform1 and BeltMark1_Above
+Ň = BeltX_Above and Platform1 and BeltMark1_Above
 (wasd and x - intentionally lowercase to distinguish from above belts)
-w = BeltU_Below and Sticky_Below and BlockMark1_Below
-a = BeltL_Below and Sticky_Below and BlockMark1_Below
-s = BeltD_Below and Sticky_Below and BlockMark1_Below
-d = BeltR_Below and Sticky_Below and BlockMark1_Below
-x = BeltX_Below and Sticky_Below and BlockMark1_Below
-y = BeltX_Below and Sticky_Below and Explosive_above and BlockMark1_Below
-ŵ = BeltU_Below and BlockMark1_Below
-đ = BeltR_Below and BlockMark1_Below
-ŝ = BeltD_Below and BlockMark1_Below
-ă = BeltL_Below and BlockMark1_Below
-ž = BeltX_Below and BlockMark1_Below
+w = BeltU_Below and Sticky_Below and BeltMark1_Below
+a = BeltL_Below and Sticky_Below and BeltMark1_Below
+s = BeltD_Below and Sticky_Below and BeltMark1_Below
+d = BeltR_Below and Sticky_Below and BeltMark1_Below
+x = BeltX_Below and Sticky_Below and BeltMark1_Below
+y = BeltX_Below and Sticky_Below and Explosive_above and BeltMark1_Below
+ŵ = BeltU_Below and BeltMark1_Below
+đ = BeltR_Below and BeltMark1_Below
+ŝ = BeltD_Below and BeltMark1_Below
+ă = BeltL_Below and BeltMark1_Below
+ž = BeltX_Below and BeltMark1_Below
 (diagonals)
-┓ = BeltUR_Above and Platform1
-┛ = BeltRD_Above and Platform1
-┗ = BeltDL_Above and Platform1
-┏ = BeltLU_Above and Platform1
-┐ = BeltUR_Below
+┓ = BeltUR_Above and Platform1 and BeltMark1_Above
+┛ = BeltRD_Above and Platform1 and BeltMark1_Above
+┗ = BeltDL_Above and Platform1 and BeltMark1_Above
+┏ = BeltLU_Above and Platform1 and BeltMark1_Above
+┐ = BeltUR_Below and BeltMark1_Above
 ┘ = BeltRD_Below
 └ = BeltDL_Below
 ┌ = BeltLU_Below
@@ -2911,9 +3010,9 @@ $ = SlimeVat_Above and Platform1
 @ = Wall1
 _ = Wall1 and Theme2
 
-Ř = BeltL_Below and Wire and BlockMark1_Below
+Ř = BeltL_Below and Wire and BeltMark1_Below
 
-ŧ = BeltU_Below and Player_Above1 and BlockMark1_Below
+ŧ = BeltU_Below and Player_Above1 and BeltMark1_Below
 
 (Belt on top of BeltX - needed for a unit test, but should probably be avoided for actual levels, because the player can't tell what's underneath the belt)
 Ľ = BeltR_Above and BeltX_Below
@@ -2929,11 +3028,11 @@ _ = Wall1 and Theme2
 Ḳ = BeltD_Below and BeltD_Above
 Ḵ = BeltR_Below and BeltD_Above
 
-ų = BeltU_Below and Wire and BlockMark1_Below
+ų = BeltU_Below and Wire and BeltMark1_Below
 
-Ħ = BeltR_Below and Sticky_Below and BeltX_Above and Sticky_Above and BlockMark1_Below
-Ĳ = BeltL_Below and Sticky_Below and BeltX_Above and Sticky_Above and BlockMark1_Below
-Ŋ = Explosive_below and Wall_above2
+Ħ = BeltR_Below and Sticky_Below and BeltX_Above and Sticky_Above and BeltMark1_Below
+Ĳ = BeltL_Below and Sticky_Below and BeltX_Above and Sticky_Above and BeltMark1_Below
+Ŋ = Explosive_below and Wall_above2 and ExplosiveMark1_Below
 
 q = Wire and Platform1
 z = Button_Above and Platform1
@@ -2947,7 +3046,7 @@ t = DoorBase
 
 Ġ = Platform1 and Button_Above and BeltX_Above
 
-Ĉ = BeltX_Below and BeltX_Above and BlockMark1_Below
+Ĉ = BeltX_Below and BeltX_Above and BeltMark1_Below
 
 & = Secret_Off
 
@@ -2963,7 +3062,9 @@ H = Sign_Above_2 and Platform1
 1 = Sign_Above_3 and Platform1
 7 = Sign_Above_4 and Platform1
 
-BlockMark_Below = BlockMark1_Below
+Mark_Below = BeltMark1_Below or BeltMark2_Below or PlatformMark1_Below or PlatformMark2_Below or ExplosiveMark1_Below or ExplosiveMark2_Below
+Mark_Above = BeltMark1_Above or BeltMark2_Above or ExplosiveMark1_Above or ExplosiveMark2_Above
+Mark_Above_Top = BeltMark1_Above_Top or BeltMark2_Above_Top or ExplosiveMark1_Above_Top or ExplosiveMark2_Above_Top
 
 Sign_Above = Sign_Above_1 or Sign_Above_2 or Sign_Above_3 or Sign_Above_4
 
@@ -3188,7 +3289,7 @@ Background
 vAmbiantOcclusionU
 vAmbiantOcclusionR
 vAmbiantOcclusionL
-DoorBase BlockMark1_Below
+DoorBase Mark_Below
 vDoor_AO_U
 vDoor_AO_R
 vDoor_AO_D
@@ -3214,6 +3315,7 @@ LadderL ToExplode_Above
 LadderD
 LadderR
 Wall, Platform, DoorExtended
+Mark_Above
 Platform_Front Wall_Front
 SlimeVat_Mess_Below End_Below
 Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Broken_Below, Sign_Below
@@ -3239,6 +3341,7 @@ Render_WireOn_Above_D
 Spark
 
 Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Broken_Below_Top
+Mark_Above_Top
 Render_ExplosivePrimed_Below
 vDangerStripeL_Top
 vDangerStripeR_Top
@@ -3381,7 +3484,18 @@ GLOBAL INIT [ Ladder1U Theme2 ] -> [ Ladder2U Theme2 ]
 GLOBAL INIT [ Ladder1R Theme2 ] -> [ Ladder2R Theme2 ]
 GLOBAL INIT [ Ladder1D Theme2 ] -> [ Ladder2D Theme2 ]
 GLOBAL INIT [ Ladder1L Theme2 ] -> [ Ladder2L Theme2 ]
+GLOBAL INIT [ BeltMark1_Below Theme2 ] -> [ BeltMark2_Below Theme2 ]
+GLOBAL INIT [ BeltMark1_Above Theme2 ] -> [ BeltMark2_Above Theme2 ]
+GLOBAL INIT [ ExplosiveMark1_Below Theme2 ] -> [ ExplosiveMark2_Below Theme2 ]
+GLOBAL INIT [ ExplosiveMark1_Above Theme2 ] -> [ ExplosiveMark2_Above Theme2 ]
 GLOBAL INIT UP [ NO Theme2 Platform | Theme2 Platform ] -> [ Platform | Theme2 Platform Platform1_Top ]
+
+GLOBAL UP INIT [ BeltMark1_Above | ] -> [ BeltMark1_Above | BeltMark1_Above_Top ]
+GLOBAL UP INIT [ BeltMark2_Above | ] -> [ BeltMark2_Above | BeltMark2_Above_Top ]
+GLOBAL UP INIT [ ExplosiveMark1_Above | ] -> [ ExplosiveMark1_Above | ExplosiveMark1_Above_Top ]
+GLOBAL UP INIT [ ExplosiveMark2_Above | ] -> [ ExplosiveMark2_Above | ExplosiveMark2_Above_Top ]
+GLOBAL INIT [ Platform1 ] -> [ Platform1 PlatformMark1_Below ]
+GLOBAL INIT [ Platform2 ] -> [ Platform2 PlatformMark2_Below ]
 
 (Danger stripes - only in Theme1 area)
 GLOBAL up    INIT [ Platform NO Theme2 | Background no Platform no Wall no vDangerStripeU_Top no PlayerMovement ] -> [ Platform | Background vDangerStripeU_Top ]
@@ -3554,6 +3668,7 @@ UP [Exploded_Below NO Platform | Platform2] -> [Exploded_Below | Platform2 Platf
 DOWN [Exploded_Below NO Platform | Platform1] -> [Exploded_Below Platform1_Top | Platform1]
 DOWN [Exploded_Below NO Platform | Platform2] -> [Exploded_Below Platform2_Top | Platform2]
 UP [Exploded_Below NO Platform | PlatformDecoration_Top] -> [Exploded_Below |]
+UP [Exploded_Below NO Platform Mark_Above | Mark_Above_Top] -> [Exploded_Below |]
 
 (We're done with explosions now)
 [Exploded_above] -> []
