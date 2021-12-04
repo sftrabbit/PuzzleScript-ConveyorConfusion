@@ -619,25 +619,25 @@ var regions = [
     {
       offset: [116, 2],
       areas: [
-        { rect: [3, 2, 4, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [7, 0, 8, 3], secondary: true, camera: 'pull-vertical' },
+        { rect: [3, 2, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 3, 12, 5] },
-        { rect: [0, 8, 5, 2] },
-        { rect: [12, 3, 3, 5], secondary: true, camera: 'follow-player' }
+        { rect: [0, 8, 5, 2] }
       ],
       zoom: 0.7
     },
     // (Second ending gate)
     {
-      offset: [122, -6],
+      offset: [122, -4],
       areas: [
-        { rect: [0, 0, 9, 8] }
+        { rect: [0, 0, 10, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 10, 6] },
+        { rect: [0, 7, 10, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7
     },
     // (Second ending secret room)
     {
-      offset: [117, -16],
+      offset: [117, -12],
       areas: [
         { rect: [5, -2, 8, 3] },
         { rect: [0, 1, 14, 9] }
@@ -645,34 +645,57 @@ var regions = [
       zoom: 0.7,
       secret: true
     },
-    // (Justas)
+    // Corridor to Justas
     {
-      offset: [122, 10],
+      offset: [128, 4],
       areas: [
-        { rect: [0, 0, 9, 8] }
+        { rect: [0, 0, 4, 10], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      credit: "Justas"
+      secret: true,
+      allowReset: false
+    },
+    // (Justas)
+    {
+      offset: [122, 14],
+      areas: [
+        { rect: [6, 0, 4, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [1, 1, 9, 1] },
+        { rect: [0, 2, 10, 7] }
+      ],
+      zoom: 0.7,
+      credit: "Justas",
+      start: true
     },
     // (That Scar)
     {
-      offset: [110, 13],
+      offset: [110, 18],
       areas: [
         { rect: [11, 2, 1, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 10, 7] },
-        { rect: [-2, 1, 3, 5], secondary: true, camera: 'pull-horizontal' }
+        { rect: [-1, 0, 2, 5], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
       credit: "That Scar"
+    },
+    // Wall_Above intro
+    {
+      offset: [109, 12],
+      areas: [
+        { rect: [0, 2, 2, 4], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 0, 11, 6] },
+        { rect: [13, 0, 1, 4] }
+      ],
+      zoom: 0.7
     },
     // (winterbeak)
     {
       offset: [91, 14],
       areas: [
-        { rect: [10, 0, 7, 1], secondary: true },
-        { rect: [16, 1, 1, 9], secondary: true, camera: 'pull-horizontal' },
-        { rect: [10, 1, 6, 1] },
-        { rect: [0, 2, 16, 8] },
+        { rect: [10, 0, 6, 2], secondary: true },
+        { rect: [16, 0, 2, 2], secondary: true, camera: 'pull-horizontal' },
+        { rect: [17, 2, 1, 1], secondary: true },
+        { rect: [0, 2, 17, 8] },
         { rect: [0, 10, 17, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [2, 11, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
@@ -843,7 +866,6 @@ var regions = [
       ],
       zoom: 0.6,
       credit: "Joel",
-      start: true
     },
     // Corridor
     {
@@ -947,7 +969,6 @@ var regions = [
     {
       offset: [120, 20],
       areas: [
-        { rect: [0, 0, 5, 5] },
         { rect: [1, 5, 3, 1], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
