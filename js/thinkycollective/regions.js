@@ -25,8 +25,7 @@ var regions = [
         { rect: [15, -36, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     // Intro bonus puzzle
     {
@@ -249,7 +248,10 @@ var regions = [
       zoom: 0.38,
       secret: true,
       credit: "Zomulgustar",
-      simulateAll: false
+      simulationBoundsAdjustment: {
+        minX: 3,
+        minY: 2
+      }
     },
     // Clock shortcut surround
     {
@@ -462,12 +464,13 @@ var regions = [
     },
     // 9:00 Block source
     {
-      offset: [13, 39],
+      offset: [13, 38],
       areas: [
-        { rect: [0, 0, 4, 5] },
-        { rect: [0, 5, 3, 3] }
+        { rect: [0, 0, 4, 6] },
+        { rect: [0, 6, 3, 3] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulateAlso: [1, 2, 3, 4]
     },
     // 9:00 #2 (clementsparrow)
     {
@@ -479,7 +482,11 @@ var regions = [
         { rect: [2, 8, 4, 3], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.60,
-      credit: "clementsparrow"
+      credit: "clementsparrow",
+      simulateAlso: [-2, -1, 1, 2, 3],
+      simulationBoundsAdjustment: {
+        maxX: 2
+      }
     },
     // 9:00 clementsparrow secret 1
     {
@@ -490,7 +497,8 @@ var regions = [
         { rect: [4, 6, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      secret: true
+      secret: true,
+      simulateAlso: [-3, -2, -1, 1, 2]
     },
     // 9:00 clementsparrow secret 2 release
     {
@@ -499,7 +507,10 @@ var regions = [
         { rect: [0, 0, 8, 3] }
       ],
       zoom: 0.7,
-      simulateAlso: [-1, 1, -2]
+      simulateAlso: [-4, -3, -2, -1, 1],
+      simulationBoundsAdjustment: {
+        maxX: -2
+      }
     },
     // 9:00 clementsparrow secret 2
     {
@@ -508,7 +519,8 @@ var regions = [
         { rect: [0, 0, 5, 5] },
         { rect: [5, 1, 3, 3] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulateAlso: [-5, -4, -3, -2, -1]
     },
     // 9:00 #3 (Deusovi)
     {
@@ -649,7 +661,7 @@ var regions = [
     },
     // (Second ending secret room)
     {
-      offset: [117, -12],
+      offset: [117, -14],
       areas: [
         { rect: [5, -2, 8, 3] },
         { rect: [0, 1, 14, 9] }
@@ -1033,7 +1045,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 17, 12] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minY: 2
+      }
     },
     // Bonus level #1 secret
     {
@@ -1089,7 +1104,7 @@ var regions = [
     },
     // (jackk)
     {
-      offset: [15, -22],
+      offset: [15, -23],
       areas: [
         { rect: [-1, 5, 3, 9], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 3, 5, 11] },
@@ -1097,7 +1112,8 @@ var regions = [
         { rect: [33, 0, 1, 14], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.48,
-      credit: "jackk"
+      credit: "jackk",
+      start: true
     },
     // (jackk -> ending)
     {
