@@ -4,7 +4,6 @@ Pre-playtest:
 During-playtest:
 - End cutscenes
 - Secret end
-- Should I change the secrets to be in-PuzzleScript?
 - Intro area and finish areas feel kinda slow
 
 

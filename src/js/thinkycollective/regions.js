@@ -25,7 +25,8 @@ var regions = [
         { rect: [15, -36, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     // Intro bonus puzzle
     {
@@ -137,8 +138,7 @@ var regions = [
         { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     //////////////
     // BRANCH A
