@@ -6,8 +6,6 @@ function createSprite(name,spritegrid, colors, padding) {
 	var sprite = makeSpriteCanvas(name);
 	var spritectx = sprite.getContext('2d');
 
-    console.log(cellwidth, cellheight)
-
     spritectx.clearRect(0, 0, cellwidth, cellheight);
 
 	var w = spritegrid[0].length;

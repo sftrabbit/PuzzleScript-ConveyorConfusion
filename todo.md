@@ -7,8 +7,7 @@ During-playtest:
 - Secret end
 - Tracking for merging and explosions and stuff (do we even need it?)
 - Should I change the secrets to be in-PuzzleScript?
-- Intro area feels kinda slow
-- Sigil wire needs to activate
+- Intro area and finish areas feel kinda slow
 
 
 Level ideas:
