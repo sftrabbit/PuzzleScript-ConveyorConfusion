@@ -137,7 +137,8 @@ var regions = [
         { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      start: true
     },
     //////////////
     // BRANCH A
@@ -563,8 +564,7 @@ var regions = [
         { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58,
-      simulateAlso: [7],
-      start: true
+      simulateAlso: [7]
     },
     //////////////
     // BRANCH B
