@@ -137,8 +137,7 @@ var regions = [
         { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     //////////////
     // BRANCH A
@@ -191,7 +190,10 @@ var regions = [
         { rect: [27, -4, 7, 3], camera: 'follow-player' },
         { rect: [27, -1, 3, 1], camera: 'follow-player' }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        minX: 2
+      }
     },
     // (Corey Hardt)
     {
@@ -560,7 +562,9 @@ var regions = [
       areas: [
         { rect: [0, 0, 17, 14] },
       ],
-      zoom: 0.58
+      zoom: 0.58,
+      simulateAlso: [7],
+      start: true
     },
     //////////////
     // BRANCH B
@@ -582,7 +586,8 @@ var regions = [
         { rect: [1, 11, 16, 1] },
         { rect: [1, 12, 16, 4] },
       ],
-      zoom: 0.56
+      zoom: 0.56,
+      simulateAlso: [5]
     },
     // (Pichusuperlover)
     {
@@ -607,7 +612,10 @@ var regions = [
         { rect: [8, 2, 4, 1], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.65,
-      credit: "Mischka Kamener"
+      credit: "Mischka Kamener",
+      simulationBoundsAdjustment: {
+        minX: 2
+      }
     },
     // (Joseph Mansfield #1)
     {
