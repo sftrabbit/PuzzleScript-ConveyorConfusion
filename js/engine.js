@@ -1042,6 +1042,7 @@ function addUndoState(state){
 }
 
 var forceSimulateAll = false;
+var foreignSimulationBounds = null;
 
 function DoRestart(force) {
 	if (restarting===true){
@@ -1064,18 +1065,36 @@ function DoRestart(force) {
 		consolePrint("--- restarting ---",true);
 	}
 
+	var foreignRegionIndexes = [];
+
 	// When restarting, we now only restart the "active region".
 	if (isOpenWorldLevel()) {
-		restoreActiveRegion(restartTarget);
+		foreignRegionIndexes = restoreActiveRegion(restartTarget);
 	} else {
 		restoreLevel(restartTarget);
 	}
 	tryPlayRestartSound();
 
 	if ('run_rules_on_level_start' in state.metadata) {
+		if (foreignRegionIndexes.length > 0) {
+			foreignSimulationBounds = {
+				minX: Infinity,
+				maxX: 0,
+				minY: Infinity,
+				maxY: 0
+			};
+			for (var i = 0; i < foreignRegionIndexes.length; i++) {
+				var foreignRegion = regions[curlevel][foreignRegionIndexes[i]];
+				foreignSimulationBounds.minX = Math.min(foreignSimulationBounds.minX, foreignRegion.simulationBounds.minX);
+				foreignSimulationBounds.maxX = Math.max(foreignSimulationBounds.maxX, foreignRegion.simulationBounds.maxX);
+				foreignSimulationBounds.minY = Math.min(foreignSimulationBounds.minY, foreignRegion.simulationBounds.minY);
+				foreignSimulationBounds.maxY = Math.max(foreignSimulationBounds.maxY, foreignRegion.simulationBounds.maxY);
+			}
+		}
 		forceSimulateAll = true;
     	processInput(-1,true);
     	forceSimulateAll = false;
+    	foreignSimulationBounds = null;
 	} else {
         onStateUpdate(false, false);
     }
@@ -1999,16 +2018,28 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 		ymax=level.height;
 	} else {
 		if (activeRegion.simulateAll || forceSimulateAll) {
-			xmin=Math.max(0, activeRegion.simulationBounds.minX);
-			xmax=Math.min(level.width, activeRegion.simulationBounds.maxX );
-			ymin=Math.max(0, activeRegion.simulationBounds.minY + (!runningLateRules && noagaincheck ? 1 : 0));
-			ymax=Math.min(level.height, activeRegion.simulationBounds.maxY  + (!runningLateRules && noagaincheck ? -2 : 0));
+			xmin=activeRegion.simulationBounds.minX;
+			xmax=activeRegion.simulationBounds.maxX;
+			ymin=activeRegion.simulationBounds.minY + (!runningLateRules && noagaincheck ? 1 : 0);
+			ymax=activeRegion.simulationBounds.maxY  + (!runningLateRules && noagaincheck ? -2 : 0);
 		} else {
-			xmin=Math.max(0, localBoundary.xmin);
-			xmax=Math.min(level.width, localBoundary.xmax);
-			ymin=Math.max(0, localBoundary.ymin + (!runningLateRules && noagaincheck ? 1 : 0));
-			ymax=Math.min(level.height, localBoundary.ymax + (!runningLateRules && noagaincheck ? -2 : 0));
+			xmin=localBoundary.xmin;
+			xmax=localBoundary.xmax;
+			ymin=localBoundary.ymin + (!runningLateRules && noagaincheck ? 1 : 0);
+			ymax=localBoundary.ymax + (!runningLateRules && noagaincheck ? -2 : 0);
 		}
+
+		if (foreignSimulationBounds != null) {
+			xmin=Math.min(xmin, foreignSimulationBounds.minX);
+			xmax=Math.max(xmax, foreignSimulationBounds.maxX);
+			ymin=Math.min(ymin, foreignSimulationBounds.minY);
+			ymax=Math.max(ymax, foreignSimulationBounds.maxY);
+		}
+
+		xmin = Math.max(0, xmin);
+		xmax = Math.min(level.width, xmax);
+		ymin = Math.max(0, ymin);
+		ymax = Math.min(level.height, ymax);
 	}
 
     var len=cellRow.length;

@@ -41,6 +41,8 @@ function restoreActiveRegion(lev) {
 
   var trackersToRemove = getObjectTrackersFromOrigin(activeRegionIndex);
 
+  var foreignRegionIndexes = [];
+
   for (var i = 0; i < trackersToRemove.length; i++) {
     var objectTracker = trackersToRemove[i];
     var x = objectTracker[1];
@@ -68,6 +70,11 @@ function restoreActiveRegion(lev) {
       var cellRight = level.getCell(positionIndex + level.height);
       cellRight.iclear(state.objectMasks['ladderl']);
       level.setCell(positionIndex + level.height, cellRight);
+    }
+
+    var foreignRegionIndex = getRegionIndex(x, y);
+    if (foreignRegionIndex !== activeRegionIndex) {
+      foreignRegionIndexes.push(foreignRegionIndex);
     }
   }
 
@@ -149,6 +156,8 @@ function restoreActiveRegion(lev) {
     againing=false;
     level.commandQueue=[];
     level.commandQueueSourceRules=[];
+
+    return foreignRegionIndexes;
 }
 
 function initObjectTrackers() {
