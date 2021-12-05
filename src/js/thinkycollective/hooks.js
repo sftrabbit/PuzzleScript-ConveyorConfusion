@@ -128,6 +128,7 @@ function removePlayers() {
         var region = getRegion({ x: x, y: y });
         if (!region.start) {
           cell.iclear(state.objectMasks['player']);
+          cell.iclear(state.objectMasks['moved']);
           level.setCell(index, _o10);
         }
       }
