@@ -25,8 +25,7 @@ var regions = [
         { rect: [15, -36, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     // Intro bonus puzzle
     {
@@ -395,7 +394,8 @@ var regions = [
         { rect: [1, 1, 7, 5] }
       ],
       zoom: 0.7,
-      credit: "Norgg"
+      credit: "Norgg",
+      start: true
     },
     // 7:00 #5 Post-Norgg
     {
@@ -407,7 +407,10 @@ var regions = [
         { rect: [-1, 7, 10, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [10, 0, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: -2
+      }
     },
     // 7:00 Le Slo Secret
     {
@@ -1248,10 +1251,10 @@ function initRegions() {
     var region = levelRegions[i];
 
     region.simulationBounds = {
-      minX: region.fullBounds.minX - 3,
-      maxX: region.fullBounds.maxX + 2,
-      minY: region.fullBounds.minY - 3,
-      maxY: region.fullBounds.maxY + 2,
+      minX: region.fullBounds.minX - 4,
+      maxX: region.fullBounds.maxX + 3,
+      minY: region.fullBounds.minY - 4,
+      maxY: region.fullBounds.maxY + 3,
     };
 
     var simulateAlso = region.simulateAlso || [];
@@ -1262,6 +1265,13 @@ function initRegions() {
       region.simulationBounds.maxX = Math.max(region.simulationBounds.maxX, alsoRegion.fullBounds.maxX);
       region.simulationBounds.minY = Math.min(region.simulationBounds.minY, alsoRegion.fullBounds.minY);
       region.simulationBounds.maxY = Math.max(region.simulationBounds.maxY, alsoRegion.fullBounds.maxY);
+    }
+
+    if (region.simulationBoundsAdjustment != null) {
+      region.simulationBounds.minX += (region.simulationBoundsAdjustment.minX || 0);
+      region.simulationBounds.maxX += (region.simulationBoundsAdjustment.maxX || 0);
+      region.simulationBounds.minY += (region.simulationBoundsAdjustment.minY || 0);
+      region.simulationBounds.maxY += (region.simulationBoundsAdjustment.maxY || 0);
     }
   }
 }

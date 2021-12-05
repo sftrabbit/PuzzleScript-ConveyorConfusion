@@ -8,7 +8,6 @@ During-playtest:
 - Secret end
 - Tracking for merging and explosions and stuff (do we even need it?)
 - Should I change the secrets to be in-PuzzleScript?
-- Rendering glitch when removing foreign object
 - Intro area feels kinda slow
 - Sigil wire needs to activate
 
