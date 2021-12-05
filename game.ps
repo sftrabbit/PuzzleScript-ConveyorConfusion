@@ -1698,6 +1698,22 @@ SlimeVat_Broken_Above_Top
 133.1
 1.240
 
+SlimeVat_Below
+#4e4143 #9066f2 #ac54fa #9b5cf5 #68585b #ac48fc #a75af7
+43114
+44444
+02310
+01230
+00000
+
+SlimeVat_Below_Top
+#4e4143 #9066f2 #ac54fa #9b5cf5 #68585b #ac48fc #a75af7
+.....
+.....
+44444
+41624
+46254
+
 SlimeVat_Broken_Below
 #4e4143 #68585b #9b5cf5 #8334f3 #9066f2
 01210
@@ -3001,10 +3017,10 @@ y = BeltX_Below and Sticky_Below and Explosive_above and BeltMark1_Below
 ┛ = BeltRD_Above and Platform1 and BeltMark1_Above
 ┗ = BeltDL_Above and Platform1 and BeltMark1_Above
 ┏ = BeltLU_Above and Platform1 and BeltMark1_Above
-┐ = BeltUR_Below and BeltMark1_Above
-┘ = BeltRD_Below
-└ = BeltDL_Below
-┌ = BeltLU_Below
+┐ = BeltUR_Below and BeltMark1_Below
+┘ = BeltRD_Below and BeltMark1_Below
+└ = BeltDL_Below and BeltMark1_Below
+┌ = BeltLU_Below and BeltMark1_Below
 (8426 - numpad directions)
 8 = Ladder1U
 4 = Ladder1L
@@ -3141,7 +3157,7 @@ Exploded = Exploded_above or Exploded_below
 vDangerStripe = vDangerStripeR or vDangerStripeD or vDangerStripeL or vDangerStripeRD or vDangerStripeDL
 
 Destructible_below = Belt_Below or Player_Below or Platform or Sticky_Below or DoorExtended or Button_Below or SlimeVat_Broken_Below or vDangerStripe or Platform_Front or SlimeVat_Mess_Above or Explosive_below or Sign_Below
-Destructible_above = Belt_Above or Player_Above or Sticky_Above or Button_Above or Explosive_above or Sign_Above
+Destructible_above = Belt_Above or Player_Above or Sticky_Above or Button_Above or Explosive_above or Sign_Above or SlimeVat_Broken_Above
 
 Inflated = InflatedU or InflatedR or InflatedD or InflatedL
 
@@ -3172,7 +3188,7 @@ Dynamic = Dynamic_Above or Dynamic_Below
 
 (Objects that stop movement)
 Static_Above = Wall or SlimeVat_Above or SlimeVat_Broken_Above or Wall_Above or Sign_Above
-Static_Below = Wall or Platform or DoorExtended or Inflated or SlimeVat_Broken_Below or Sign_Below
+Static_Below = Wall or Platform or DoorExtended or Inflated or SlimeVat_Above or SlimeVat_Broken_Below or Sign_Below
 Static = Static_Above or Static_Below
 
 
@@ -3266,7 +3282,7 @@ FloorDestructible = DoorBase or Wire
 Stickyable_Below = Belt_Below or Explosive_below
 
 (Objects that another object can be on top of)
-Upstairs = Platform or Belt_Below or DoorExtended or Inflated or Explosive_Below or SlimeVat_Broken_Below or FuseIntention or Sign_Below
+Upstairs = Platform or Belt_Below or DoorExtended or Inflated or Explosive_Below or SlimeVat_Below or SlimeVat_Broken_Below or FuseIntention or Sign_Below
 
 NoUndoBackup = Render_Player_Below_Cover or Render_Player_Above_Top_Cover
 
@@ -3326,7 +3342,7 @@ Wall, Platform, DoorExtended
 Mark_Above
 Platform_Front Wall_Front
 SlimeVat_Mess_Below End_Below
-Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Broken_Below, Sign_Below
+Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Below, SlimeVat_Broken_Below, Sign_Below
 Render_Below
 
 Distances
@@ -3348,7 +3364,7 @@ Wire_Above_L
 Render_WireOn_Above_D
 Spark
 
-Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Broken_Below_Top
+Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Below_Top, SlimeVat_Broken_Below_Top
 Mark_Above_Top
 Render_ExplosivePrimed_Below
 vDangerStripeL_Top
@@ -3579,9 +3595,7 @@ noagaincheck [ Moved NO Player ] -> [ ]
 [ BeltDL_Above@ NO Upstairs ] -> [ BeltDL_Below@ ] sfx1
 [ BeltLU_Above@ NO Upstairs ] -> [ BeltLU_Below@ ] sfx1
 [ Explosive_Above@ NO Upstairs] -> [Explosive_Below@] sfx1
-( when a non-broken slime vat has no platform below it anymore, we drop it and also splat the floor around it with mess)
-UP [ SlimeVat_Above NO Upstairs | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ ACTION SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top | ]
-[ ACTION SlimeVat_Broken_Below | NO Static_Below NO Dynamic_Below ] -> [ ACTION SlimeVat_Broken_Below | SlimeVat_Mess_Below ]
+UP [ SlimeVat_Above NO Upstairs | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ SlimeVat_Below | SlimeVat_Below_Top | ]
 UP [ SlimeVat_Broken_Above NO Upstairs | SlimeVat_Broken_Above_Top ] -> [ SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ]
 [ Sticky_Above NO Dynamic_Above Dynamic_Below ] -> [ Sticky_Below Dynamic_Below ]
 
@@ -3667,7 +3681,11 @@ RIGHT [Exploded_below InflatedL | Inflatable ] -> [Exploded_below | Inflatable W
 [ Exploded_above SlimeVat_Above | Stickyable_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | Stickyable_Below Sticky_Below ]
 [ Exploded_above SlimeVat_Above | NO Static_Below NO Stickyable_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | SlimeVat_Mess_Below ] sfx10
 [ Exploded_above SlimeVat_Above | Static_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | Static_Below SlimeVat_Mess_Above ] sfx10
-[ Exploded_above SlimeVat_Above | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ SlimeVat_Broken_Above | SlimeVat_Broken_Above_Top | ]
+UP [ Exploded_above SlimeVat_Above | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ SlimeVat_Broken_Above | SlimeVat_Broken_Above_Top | ]
+
+[Exploded_below SlimeVat_Below] -> [Exploded_below ACTION SlimeVat_Below]
+[ Exploded_below ACTION SlimeVat_Below | NO Static_Below NO Dynamic_Below ] -> [ Exploded_below ACTION SlimeVat_Below | SlimeVat_Mess_Below ]
+UP [ Exploded_below SlimeVat_Below | SlimeVat_Below_Top ] -> [ SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ]
 (- Destroy all remaining descructibles)
 [Exploded_below Destructible_below NO Wall NO ToExplode_Below] -> [Exploded_below]
 [Exploded_above Destructible_above NO Wall NO ToExplode_Above] -> [Exploded_above]
@@ -4194,8 +4212,8 @@ LEFT  [ LadderL | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
 UP [ Player_Below | Sign_Below SignToRead ] -> [ Player_Below | Sign_Below SignRead ] message KEEP OUT\nThese explosives are\nhighly explosive!\n(So don't press X near them)
 UP [ Player_Above | Sign_Above_1 SignToRead ] -> [ Player_Above | Sign_Above_1 SignRead ] message "    Welcome to m\n   It's supposed\n    though, so p\n\nNote to self: Mus"
 UP [ Player_Above | Sign_Above_2 SignToRead ] -> [ Player_Above | Sign_Above_2 SignRead ] message "y secret lab!      \nto be a secret     \nlease leave.       \n\nt buy bigger signs."
-UP [ Player_Above | Sign_Above_3 SignToRead ] -> [ Player_Above | Sign_Above_3 SignRead ] message "    Theory A o\nBoth such brill\ndo say so mysel\n      the path"
-UP [ Player_Above | Sign_Above_4 SignToRead ] -> [ Player_Above | Sign_Above_4 SignRead ] message "r theory B?    \niant ideas, if I\nf, but which is\nforward?       "
+UP [ Player_Above | Sign_Above_3 SignToRead ] -> [ Player_Above | Sign_Above_3 SignRead ] message Theory A
+UP [ Player_Above | Sign_Above_4 SignToRead ] -> [ Player_Above | Sign_Above_4 SignRead ] message Theory B
 
 (GRAPHICAL DETAILS)
 (Player directions)
@@ -4366,14 +4384,14 @@ LEVELS
 #####################################################.........########################################################################
 ####################################################...đ.+.ŝ...#######################################################################
 ####################################################.....p.....#######################################################################
-#############################~~..~```~``~`....ăă~~~~4..+prp+...#######################################################################
+#############################~~..~```~``~`....ăă⇒~~⇒4..+prp+...#######################################################################
 ############################.`...~~.?.6~~qpcpp.┐ŝ###.....p.....#######################################################################
 #########################`#..qppqq~~q#`~.p.+.p~.ŝ###...ŵ.+.ă...#######################################################################
 ########################`~~.đ+r..+~`q~#~.+~~~p8..####......8..########################################################################
 #########c+##########.##~~``~~pp..#.p`~#..~`tp...###┐#.......#┌#######################################################################
 ########.p.~########...#~`~....p#."#ppppt.`~~p..#####┐#.....#┌########################################################################
 ####~$~#"ppp+#####`#.đ...ŝ....ŵp+."......~~+qp..#############################################################################~~#######
-###......r..###~⇒~~4.........`~~~~`.`..~``~.q~""#############################################################################qqc%#####
+###......r..###~~~~4.........`~~~~`.`..~``~.q~""#############################################################################qqc%#####
 ###..6ŵŝŵp..###~##``##`#.....~~~`~``~6~~~zqpp#..##~đ...........ă~############################################################tt#######
 ###...pppp.~~.~~##££~~~....."~~~~~~``#~`~~~..~`###ŝ.............ŝ############################################################~~#######
 ###...p...ĕ.######££££~~~~~4"....~~..#``~~`...~###...+đ.ŝ+ž.žr...##########################################################..88....###
@@ -4397,13 +4415,13 @@ LEVELS
 ##ŵ######ccccccccc#####ŝŵ###c#ccccccccc#c####~~~~.Ł~46~~⇐~~#############ŵ###ŝ###~~###ŝ###đđđđđđđđđđŵ#######..6ž4ž...##~~~Ň~#~~~~##ŝŵ##
 ##ŵ####.#p....++++....#ŝŵ#########c#####+####~#.......####~#############ŵ###ŝ#.~~~~.#ŝ###ŵ#################.2......###.8.ž...8.~##ŝŵ##
 ##ŵ####..pr..........⇐ăăŵ########~z~####đ####~############~#############ŵ##~~~.~~~~.~~~##ŵ##################~#########~~~~~~~~~~##ŝŵ##
-##ŵ######~~~#~~~~~...6đđŵ########~⇑~đđđđ.đđđŁ~.đđđđđđđđđđŁ~.đđđđđđđđđđđđŵ##~1~..88..~7~##ŵ########~~~######.....######~M~#########ŝŵ##
-##ŵ#....~~#~~~~£~~...#############ŵ##########~############⇑################~~~......~~~##.##~~~~~#~~~~~~##...6ž#######~~~#########ŝŵ##
+##ŵ######~~~#~~~~~...6đđŵ########~⇑~đđđđ.đđđŁ~.đđđđđđđđđđŁ~.đđđđđđđđđđđđŵ##~~~..88..~~~##ŵ########~~~######.....######~M~#########ŝŵ##
+##ŵ#....~~#~~~~£~~...#############ŵ##########~############⇑################~1~......~7~##.##~~~~~#~~~~~~##...6ž#######~~~#########ŝŵ##
 ##ŵ#..ŵ##~~~~z~~~~...#############ŵ##########⇓###########~....~~##......6⇐~~~~......~~~~⇒~~⇒Ň~~~~##~~~~~~⇒~4..8###################ŝŵ##
 ##ŵ#.žž##tcc.p..~....############~~~#########~###########~#...Ķ~##..~~~..##~~~......~~~##Ī##.8ŵ8....8ŝ8.###....###################ŝŵ##
 ##ŵ#.8ă#.tpcpp..~.£..############~~~######~~~~~~~##~q~###~..~.~~##.~~Ķ~~.##.8........8.##ŵ#####~~~~~~############~4...".6~~#######ŝŵ##
 ##ŵ##..##tcc....~~~..###########đ...ă#####~Ł~#~Ĵ~##qrqŇ⇐~.~~~...##.~Ĵ~Ĵ~4##............##ŵ#####~~~~~~############.."#....Ň~#######⇓~##
-##ŵ##.....#....pt...#########~~~ŵ~~~ŵ~~~##~Ķ~#~Ķ~##~q~###~Ī~~4..##.~~Ķ~~.##.....22.....##ŵ#################~⇐~.~M~4..."...########~###
+##ŵ##.....#....pt...#########~~~ŵ~~~ŵ~~~##~Ķ~#~Ķ~##~q~###~Ī~~4..##.~~Ķ~~.##.....22.....##ŵ#################~~⇐.~M~4..."...########~###
 ##ŵ####2#2cppppp~~~..########~Ł~ŵŁĴŁŵ~Ĵ~##~Ł~#~Ĵ~###ŝ####~~Ň~.~~##..~~~..#######~~#######ŵ#############~~~~~###~#.....".#####..~~~~###
 ##ŵ####~~~c....p~....########888.888.888##~~~#~~~###ŝ####....6~~⇐~.......#######⇑~#######ŵ###~~~4.6s~~#~M~M~###⇑############...m~m~###
 ##~~đ.####c....p8...+cc######...#...#...###.....####ŝ##########ŵ################~~##...~.~###~."....a.#~~~~~###~############...a...###
@@ -4425,11 +4443,11 @@ LEVELS
 ########⇑#####~~~~~~##q.....q~~####~.~~~#~~....~~~##qrq⇐~~~ăăă##q~ŇŇŇ~⇑~~~#######ŵŝ########".J"#"M."##############........###...~~####
 ########~#############ccccccc#~####⇑###~#~~.~~######~q~######~~####~##ŵ##ŝ#######ŵŝ#########.......##########################..6~~####
 ########~~~⇑Ňz################~####~###~#~###################~Ň~###~##ŵ##ŝ###đđđđŵŝ#~~4..###..#~#..##########################...~Ň~###
-#~q~#ccccccqcccc##############~###~~~#~~~⇓##################~~~Ň###~##ŵ##ŝ###ŵŝăăăă#~Mx..######~#############################...~~~###
-#qrq#c#####~###c###~~~~~######~###~~~#~~~####~~⇒~4......####~~~~~Ň~~##ŵ##ŝ###ŵŝ#####."....#####~######.~~...####################~#####
-#~q~#c#......##+###~~Ķ~~~#####~~##~~~#~Ł~##~~~###...#...##############ŵ##ŝ###ŵŝ#######....#####⇓######.£~....~.#################⇑#####
-##Ň##c#.ž.ž..##.~#~~~~~~~####~~~~.Ĵ~Ň.~~~.Ĵ~~~###.6~Ĵ~4.##############ŵ##ŝ###ŵŝ#~~~~~~~.~J..~~~~######.~~...##..6~~.Ň~~#########~#####
-##8+cc#..ž.+p##Ň~#~.....~####~~Ī~~...~...~~~~~###.#ĶŁĪ#.6⇒~~.đđđđđđđ~~~~~~~~đŵŝ#ŝ#ŵ###....#...8#######.~....~..#######⇑#######..~.####
+#~q~#ccccccqccc###############~###~~~#~~~⇓##################~~~Ň###~##ŵ##ŝ###ŵŝăăăă#~Mx..######~#############################...~~~###
+#qrq#c#####~##c+###~~~~~######~###~~~#~~~####~~⇒~4......####~~~~~Ň~~##ŵ##ŝ###ŵŝ#####."....#####~######.~~...####################~#####
+#~q~#c#......#c.~##~~Ķ~~~#####~~##~~~#~Ł~##~~~###...#...##############ŵ##ŝ###ŵŝ#######....#####⇓######.£~....~.#################⇑#####
+##Ň##c#.ž.ž..#cŇ~#~~~~~~~####~~~~.Ĵ~Ň.~~~.Ĵ~~~###.6~Ĵ~4.##############ŵ##ŝ###ŵŝ#~~~~~~~.~J..~~~~######.~~...##..6~~.Ň~~#########~#####
+##8+cc#..ž.+p#+.~#~.....~####~~Ī~~...~...~~~~~###.#ĶŁĪ#.6⇒~~.đđđđđđđ~~~~~~~~đŵŝ#ŝ#ŵ###....#...8#######.~....~..#######⇑#######..~.####
 ##.##c#+rŇ~.r⇐~~~cqpr.rpqc####Ķ~~....ŵ....~~~####.6~Ł~4.##~#Ňăăăăăăă~~~~~~~~ăăă#ŝ#ŵ#......"....#######.~...e##########~#######.~..####
 ##6~⇐q~...+.6~#~#c~.....~c####.~...~~~~~...~.####..6~4..##~~~###~#####ŵ##ŝ######ŝ#ŵ#.d...."..."#####...~~..e#########~~~~~~~~~~~..####
 #####c#...r.###~#+......ă+⇐~~~~...~~...~~...Ī~~#####~###########⇓#####ŵ##ŝ######ŝ#ŵ####...dw#..#####....~..e###...###~~#########~~####

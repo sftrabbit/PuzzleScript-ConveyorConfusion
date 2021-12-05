@@ -5,6 +5,8 @@ During-playtest:
 - End cutscenes
 - Secret end
 - Intro area and finish areas feel kinda slow
+- Reset during againing, then undo
+- Reset levels during credits
 
 
 Level ideas:
