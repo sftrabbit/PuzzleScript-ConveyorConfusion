@@ -137,7 +137,8 @@ var regions = [
         { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      start: true
     },
     //////////////
     // BRANCH A
@@ -394,8 +395,7 @@ var regions = [
         { rect: [1, 1, 7, 5] }
       ],
       zoom: 0.7,
-      credit: "Norgg",
-      start: true
+      credit: "Norgg"
     },
     // 7:00 #5 Post-Norgg
     {
