@@ -1,4 +1,4 @@
-var regionsOffset = [1, 29];
+var regionsOffset = [1, 33];
 var regions = [
   [
     //////////////
@@ -1064,21 +1064,22 @@ var regions = [
     {
       offset: [22, -6],
       areas: [
-        { rect: [0, 0, 24, 3], camera: 'follow-player' },
-        { rect: [21, 3, 16, 3], camera: 'follow-player' },
-        { rect: [0, 3, 3, 11], camera: 'follow-player' },
-        { rect: [1, 14, 2, 1], camera: 'follow-player' }
+        { rect: [-1, -2, 26, 4], camera: 'follow-player' },
+        { rect: [21, 2, 4, 1], camera: 'follow-player' },
+        { rect: [21, 3, 16, 4], camera: 'follow-player' },
+        { rect: [-1, 2, 4, 15], camera: 'follow-player' }
       ],
       zoom: 0.7,
       allowReset: false
     },
     // (domcamus)
     {
-      offset: [1, 5],
+      offset: [0, 5],
       areas: [
         { rect: [0, 0, 2, 7], secondary: true, camera: 'follow-player' },
         { rect: [0, 7, 2, 11] },
-        { rect: [2, 0, 20, 18] }
+        { rect: [2, 0, 20, 18] },
+        { rect: [22, 6, 2, 2], secondary: true, camera: 'follow-player' },
       ],
       zoom: 0.50,
       credit: "domcamus"
@@ -1112,23 +1113,25 @@ var regions = [
         { rect: [33, 0, 1, 14], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.48,
-      credit: "jackk",
+      credit: "jackk"
+    },
+    // (jackk -> ending)
+    {
+      offset: [49, -23],
+      areas: [
+        { rect: [0, 0, 3, 8], secondary: true, camera: 'follow-player' },
+        { rect: [3, 5, 2, 3], secondary: true, camera: 'follow-player' },
+        { rect: [5, 4, 9, 4] },
+        { rect: [14, 5, 2, 3], secondary: true, camera: 'follow-player' },
+        { rect: [16, 5, 3, 8], secondary: true, camera: 'follow-player' },
+        { rect: [16, 13, 12, 3], secondary: true, camera: 'follow-player' },
+      ],
+      zoom: 0.85,
       start: true
     },
-    // (jackk -> ending)
+    // (Ending)
     {
-      offset: [49, -22],
-      areas: [
-        { rect: [0, 0, 3, 4], camera: 'follow-player' },
-        { rect: [0, 4, 20, 3], camera: 'follow-player' },
-        { rect: [17, 7, 4, 1], camera: 'follow-player' },
-        { rect: [20, 5, 1, 2], camera: 'follow-player' },
-      ],
-      zoom: 0.6
-    },
-    // (jackk -> ending)
-    {
-      offset: [70, -22],
+      offset: [52, -32],
       areas: [
         { rect: [0, 0, 13, 13] }
       ],
@@ -1149,7 +1152,8 @@ var theme2Areas = [
   [52, 21, 12, 8],
   [52, 29, 11, 3],
   [55, 32, 4, 1 ],
-  [76, 18, 6, 11 ]
+  [76, 18, 6, 11 ],
+  [52, -32, 13, 6]
 ];
 
 var regionMap = [];
