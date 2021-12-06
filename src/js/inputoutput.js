@@ -815,23 +815,25 @@ function update() {
             nextLevel();
         }
     }
-    if (againing) {
-        if (timer>againinterval&&messagetext.length==0) {
-            if (processInput(-1)) {
-                draw = true;
-                keyRepeatTimer=0;
-                autotick=0;
-            }
-        }
-    } else {
-        while (inputQueue.length > 0) {
-            var input = inputQueue.shift();
-            if (input.time >= (new Date() - 500)) {
-                processInput(input.inputdir);
-                break;
-            }
-        }
-    }
+    if (!textMode) {
+	    if (againing) {
+	        if (timer>againinterval&&messagetext.length==0) {
+	            if (processInput(-1)) {
+	                draw = true;
+	                keyRepeatTimer=0;
+	                autotick=0;
+	            }
+	        }
+	    } else {
+	        while (inputQueue.length > 0) {
+	            var input = inputQueue.shift();
+	            if (input.time >= (new Date() - 500)) {
+	                processInput(input.inputdir);
+	                break;
+	            }
+	        }
+	    }
+	}
     if (quittingMessageScreen) {
         if (timer/1000>0.15) {
             quittingMessageScreen=false;

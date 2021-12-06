@@ -1,13 +1,13 @@
 Pre-playtest:
+- inflation sound entering clementsparrow's level
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
 
 During-playtest:
 - End cutscenes
 - Secret end
 - Reset during againing, then undo
+- Can't reset when dead
 - Reset levels during credits
-- Placing decorative broken vats
-- Sign in slime storage (Results of experiment: explosive and slime make a big mess.)
 
 
 Level ideas:
