@@ -4,28 +4,183 @@ var regions = [
     //////////////
     // INTRO
     //////////////
+    // Entrance path
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [-8, 7, 7, 3], camera: 'follow-player-anchored-x' },
+        { rect: [-8, 10, 3, 3], camera: 'follow-player-anchored-x' },
+      ],
+      zoom: 0.7,
+      allowReset: false,
+      copyCameraAnchor: 1,
+      start: true
+    },
     // Intro
     {
       offset: [64, 67],
       areas: [
         { rect: [-1, 3, 16, 9], camera: 'follow-player-anchored-x' },
-        { rect: [4, -31, 6, 34], secondary: true, camera: 'follow-player-anchored-x' },
-        { rect: [-8, 7, 7, 3], secondary: true, camera: 'follow-player-anchored-x' },
-        { rect: [-8, 10, 3, 3], secondary: true, camera: 'follow-player-anchored-x' },
-        { rect: [-13, -6, 17, 4], secondary: true, camera: 'follow-player' },
-        { rect: [-13, -2, 4, 8], secondary: true, camera: 'follow-player' },
-        { rect: [-31, 6, 22, 4], secondary: true, camera: 'follow-player' },
-        { rect: [-29, 5, 3, 1], secondary: true, camera: 'follow-player' },
-        { rect: [10, -6, 23, 4], secondary: true, camera: 'follow-player' },
+      ],
+      zoom: 0.7
+    },
+    // Intro bottom intersection
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [4, -6, 6, 9], camera: 'follow-player-anchored-x' }
+      ],
+      zoom: 0.7,
+      copyCameraAnchor: -1,
+      simulateAlso: [1, 2, 6, 7, 9, 10]
+    },
+    // Intro bottom left arm #1
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [-9, -6, 13, 4], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      allowReset: false
+    },
+    // Intro bottom left arm #1-#2 node
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [-13, -7, 4, 5], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      simulateAlso: [-1, -2, 1, 2]
+    },
+    // Intro bottom left arm #2
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [-13, -2, 4, 8], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      allowReset: false
+    },
+    // Intro bottom left arm #2-#3 node
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [-13, 6, 4, 5], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      simulateAlso: [-1, -2, 1]
+    },
+    // Intro bottom left arm #3
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [-31, 6, 18, 4], camera: 'follow-player' },
+        { rect: [-29, 5, 3, 1], camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      simulateAlso: [-1]
+    },
+    // Intro bottom right arm #1
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [10, -6, 19, 4], secondary: true, camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      allowReset: false
+    },
+    // Intro bottom right arm #1-#2 node
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [29, -7, 4, 5], secondary: true, camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      simulateAlso: [-1, 1, -7]
+    },
+    // Intro bottom right arm #2
+    {
+      offset: [64, 67],
+      areas: [
         { rect: [29, -2, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [33, 3, 2, 4], secondary: true, camera: 'follow-player' },
-        { rect: [-4, -27, 8, 4], secondary: true, camera: 'follow-player' },
+      ],
+      zoom: 0.7,
+      allowReset: false
+    },
+    // Intro bottom-top #1
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [4, -13, 6, 7], camera: 'follow-player-anchored-x' }
+      ],
+      zoom: 0.7,
+      copyCameraAnchor: -10,
+      allowReset: false
+    },
+    // Intro bottom-top #1-#2 node
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [3, -17, 8, 4], camera: 'follow-player-anchored-x' }
+      ],
+      zoom: 0.7,
+      copyCameraAnchor: -11,
+      simulateAlso: [-1, -10, 1, 2]
+    },
+    // Intro bottom-top #2
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [4, -23, 6, 6], camera: 'follow-player-anchored-x' }
+      ],
+      zoom: 0.7,
+      copyCameraAnchor: -12,
+      allowReset: false
+    },
+    // Intro top intersection
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [4, -27, 6, 4], camera: 'follow-player-anchored-x' }
+      ],
+      zoom: 0.7,
+      copyCameraAnchor: -13,
+      simulateAlso: [-1, -2, 1, 2, 3]
+    },
+    // Intro top left arm
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [-4, -27, 8, 4], camera: 'follow-player' }
+      ],
+      zoom: 0.7,
+      allowReset: false,
+      simulateAlso: [-1]
+    },
+    // Intro top right arm
+    {
+      offset: [64, 67],
+      areas: [
         { rect: [10, -27, 1, 4], secondary: true, camera: 'follow-player' },
         { rect: [11, -32, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [15, -36, 4, 8], secondary: true, camera: 'follow-player' },
         { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      allowReset: false,
+      simulateAlso: [-2]
+    },
+    // Intro exit
+    {
+      offset: [64, 67],
+      areas: [
+        { rect: [4, -31, 6, 4], camera: 'follow-player-anchored-x' }
+      ],
+      zoom: 0.7,
+      copyCameraAnchor: -16,
+      allowReset: false,
+      simulateAlso: [-3]
     },
     // Intro bonus puzzle
     {
@@ -1126,8 +1281,7 @@ var regions = [
         { rect: [16, 5, 3, 8], secondary: true, camera: 'follow-player' },
         { rect: [16, 13, 12, 3], secondary: true, camera: 'follow-player' },
       ],
-      zoom: 0.85,
-      start: true
+      zoom: 0.85
     },
     // (Ending)
     {
@@ -1255,6 +1409,10 @@ function initRegions() {
       region.allowReset = true;
     }
 
+    if (region.simulationBoundsAdjustment == null) {
+      region.simulationBoundsAdjustment = {};
+    }
+
     if (region.secret) {
       for (var x = regionBounds.minX; x < regionBounds.maxX; x++) {
         for (var y = regionBounds.minY; y < regionBounds.maxY; y++) {
@@ -1278,11 +1436,15 @@ function initRegions() {
   for (var i = 0; i < levelRegions.length; i++) {
     var region = levelRegions[i];
 
+    if (region.copyCameraAnchor != null) {
+      region.cameraAnchor = levelRegions[i + region.copyCameraAnchor].cameraAnchor;
+    }
+
     region.simulationBounds = {
-      minX: region.fullBounds.minX - 4,
-      maxX: region.fullBounds.maxX + 3,
-      minY: region.fullBounds.minY - 4,
-      maxY: region.fullBounds.maxY + 3,
+      minX: region.fullBounds.minX,
+      maxX: region.fullBounds.maxX,
+      minY: region.fullBounds.minY,
+      maxY: region.fullBounds.maxY,
     };
 
     var simulateAlso = region.simulateAlso || [];
@@ -1296,10 +1458,10 @@ function initRegions() {
     }
 
     if (region.simulationBoundsAdjustment != null) {
-      region.simulationBounds.minX += (region.simulationBoundsAdjustment.minX || 0);
-      region.simulationBounds.maxX += (region.simulationBoundsAdjustment.maxX || 0);
-      region.simulationBounds.minY += (region.simulationBoundsAdjustment.minY || 0);
-      region.simulationBounds.maxY += (region.simulationBoundsAdjustment.maxY || 0);
+      region.simulationBounds.minX += -4 + (region.simulationBoundsAdjustment.minX || 0);
+      region.simulationBounds.maxX += 3 + (region.simulationBoundsAdjustment.maxX || 0);
+      region.simulationBounds.minY += -4 + (region.simulationBoundsAdjustment.minY || 0);
+      region.simulationBounds.maxY += 3 + (region.simulationBoundsAdjustment.maxY || 0);
     }
   }
 }
