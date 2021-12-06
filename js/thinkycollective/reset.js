@@ -2,42 +2,8 @@ var objectTrackers = null;
 var initialObjectTrackers = null;
 
 function restoreActiveRegion(lev) {
-  var playerPosition = getPlayerPositions()[0];
-  var playerX = (playerPosition / level.height) | 0;
-  var playerY = playerPosition % level.height;
-
-  var activeRegionIndex = getRegionIndex(playerX, playerY);
+  var activeRegionIndex = activeRegion.index;
   var regionBounds = getRegionBounds(regions[curlevel][activeRegionIndex], true);
-
-  // Gather foreign objects that need to be recreated after restore
-  // var foreignObjects = [];
-
-  // for (var x = regionBounds.minX; x < regionBounds.maxX; x++) {
-  //   for (var y = regionBounds.minY; y < regionBounds.maxY; y++) {
-  //     var cellTrackers = objectTrackers[x][y];
-
-  //     var trackerLayers = Object.keys(cellTrackers);
-  //     for (var i = 0; i < trackerLayers.length; i++) {
-  //       var trackerLayer = trackerLayers[i];
-  //       var trackerRegionIndex = cellTrackers[trackerLayer];
-
-  //       if (trackerRegionIndex !== activeRegionIndex) {
-  //         var layerMask = state.layerMasks[trackerLayer];
-
-  //         var objectMask = level.getCell(x * level.height + y);
-  //         objectMask.iand(layerMask);
-
-  //         foreignObjects.push({
-  //           x: x,
-  //           y: y,
-  //           layer: trackerLayer,
-  //           objectMask: objectMask,
-  //           sourceRegion: trackerRegionIndex
-  //         });
-  //       }
-  //     }
-  //   }
-  // }
 
   var trackersToRemove = getObjectTrackersFromOrigin(activeRegionIndex);
 
