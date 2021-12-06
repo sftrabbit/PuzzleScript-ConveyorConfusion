@@ -1057,7 +1057,7 @@ function DoRestart(force) {
 	}
 
 	restarting=true;
-	if (force!==true) {
+	if (force!==true && !againing) {
 		addUndoState(backupLevel());
 	}
 

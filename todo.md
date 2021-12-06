@@ -5,8 +5,6 @@ Pre-playtest:
 During-playtest:
 - End cutscenes
 - Secret end
-- Reset during againing, then undo
-- Can't reset when dead
 - Reset levels during credits
 
 
