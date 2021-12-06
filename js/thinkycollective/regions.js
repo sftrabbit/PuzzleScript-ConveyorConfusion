@@ -684,7 +684,8 @@ var regions = [
         { rect: [5, 1, 3, 3] }
       ],
       zoom: 0.7,
-      simulateAlso: [-5, -4, -3, -2, -1]
+      simulateAlso: [-5, -4, -3, -2, -1],
+      secret: true
     },
     // 9:00 #3 (Deusovi)
     {
