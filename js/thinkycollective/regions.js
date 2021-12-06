@@ -13,7 +13,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1
+      copyCameraAnchor: 1,
+      start: true
     },
     // Intro
     {
@@ -326,14 +327,22 @@ var regions = [
       areas: [
         { rect: [4, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [-1, 0, 5, 5] },
-        { rect: [0, 5, 3, 1], secondary: true, camera: 'follow-player' },
-        { rect: [-2, 6, 13, 3], secondary: true, camera: 'follow-player' },
-        { rect: [11, 7, 2, 2], secondary: true, camera: 'follow-player' },
-        { rect: [-2, 9, 3, 4], secondary: true, camera: 'follow-player' },
-        { rect: [-1, 13, 2, 3], secondary: true, camera: 'follow-player' }
+        { rect: [0, 5, 3, 1], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.8,
       secret: true
+    },
+    // (knexator) - secret return
+    {
+      offset: [50, 12],
+      areas: [
+        { rect: [-2, 6, 13, 3], camera: 'follow-player' },
+        { rect: [11, 7, 2, 2], camera: 'follow-player' },
+        { rect: [-2, 9, 3, 4], camera: 'follow-player' },
+        { rect: [-1, 13, 2, 3], camera: 'follow-player' }
+      ],
+      zoom: 0.8,
+      allowReset: false
     },
     // Branch A exit corridor
     {
@@ -445,7 +454,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 4, 5] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulateAlso: [-26, -27]
     },
     // 3:00 (Menderbug)
     {
@@ -538,7 +548,7 @@ var regions = [
         { rect: [0, 0, 5, 5] },
         { rect: [1, 5, 2, 1] },
         { rect: [3, 5, 2, 2], secondary: true, camera: 'follow-player' },
-        { rect: [5, 4, 11, 3], secondary: true, camera: 'follow-player' }
+        { rect: [5, 4, 12, 3], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
       secret: true
@@ -791,8 +801,7 @@ var regions = [
         { rect: [0, 1, 9, 5] },
         { rect: [0, 6, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.8,
-      start: true
+      zoom: 0.8
     },
     // (Joseph Mansfield #2)
     {
@@ -912,7 +921,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 3, 5] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulateAlso: [-79, -81]
     },
     // (Guilherme Tows (zaratustra))
     {
@@ -1037,7 +1047,8 @@ var regions = [
         { rect: [0, 0, 5, 5] },
         { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulateAlso: [-84, -85]
     },
     // (Joel)
     {
@@ -1050,7 +1061,7 @@ var regions = [
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Joel",
+      credit: "Joel"
     },
     // Corridor
     {
@@ -1123,17 +1134,20 @@ var regions = [
       offset: [111, 39],
       areas: [
         { rect: [0, 0, 8, 3], camera: 'follow-player' },
+        { rect: [4, -2, 4, 2], camera: 'follow-player' },
+        { rect: [4, -3, 3, 1], camera: 'follow-player' },
       ],
       zoom: 0.6
     },
     // (Joseph Mansfield) Vat introduction
     {
-      offset: [123, 29],
+      offset: [124, 29],
       areas: [
         { rect: [0, 0, 1, 10], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-2, 0, 2, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 7, 9] },
         { rect: [1, 9, 7, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [3, 10, 3, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [2, 10, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.6
     },
@@ -1145,16 +1159,18 @@ var regions = [
         { rect: [1, 0, 8, 8] },
         { rect: [9, 0, 3, 9] },
         { rect: [12, 0, 9, 11] },
-        { rect: [21, 1, 2, 10], secondary: true, camera: 'pull-horizontal' },
+        { rect: [21, 1, 1, 10], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.6,
       credit: "shark"
     },
     // (Shark) secret
     {
-      offset: [120, 20],
+      offset: [122, 24],
       areas: [
-        { rect: [1, 5, 3, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 3, 4], secondary: true, camera: 'pull-horizontal' },
+        { rect: [3, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [4, 0, 5, 5] }
       ],
       zoom: 0.7,
       secret: true
