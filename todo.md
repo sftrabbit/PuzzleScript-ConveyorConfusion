@@ -7,6 +7,7 @@ During-playtest:
 - Reset during againing, then undo
 - Reset levels during credits
 - Placing decorative broken vats
+- Sign in slime storage (Results of experiment: explosive and slime make a big mess.)
 
 
 Level ideas:

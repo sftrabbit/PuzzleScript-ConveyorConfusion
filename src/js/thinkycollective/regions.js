@@ -13,8 +13,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1,
-      start: true
+      copyCameraAnchor: 1
     },
     // Intro
     {
@@ -788,11 +787,12 @@ var regions = [
     {
       offset: [113, -3],
       areas: [
-        { rect: [0, 0, 9, 1], secondary: true },
+        { rect: [0, -1, 9, 2], secondary: true },
         { rect: [0, 1, 9, 5] },
         { rect: [0, 6, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      start: true
     },
     // (Joseph Mansfield #2)
     {
@@ -861,10 +861,17 @@ var regions = [
       offset: [109, 12],
       areas: [
         { rect: [0, 2, 2, 4], secondary: true, camera: 'pull-horizontal' },
-        { rect: [2, 0, 11, 6] },
-        { rect: [13, 0, 1, 4] }
+        { rect: [2, 0, 11, 6] }
       ],
       zoom: 0.7
+    },
+    // Slime storage
+    {
+      offset: [109, 12],
+      areas: [
+        { rect: [13, -3, 7, 7] }
+      ],
+      zoom: 0.8
     },
     // (winterbeak)
     {
