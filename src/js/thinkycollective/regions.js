@@ -802,8 +802,7 @@ var regions = [
       credit: "Mischka Kamener",
       simulationBoundsAdjustment: {
         minX: 2
-      },
-      start: true
+      }
     },
     // (Joseph Mansfield #1)
     {
@@ -946,10 +945,11 @@ var regions = [
         { rect: [12, 3, 1, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [13, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [-4, 4, 4, 5], secondary: true, camera: 'pull-horizontal' },
-        { rect: [4, 11, 3, 3], secondary: true, camera: 'pull-vertical' },
+        { rect: [4, 11, 5, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
-      credit: "Guilherme Tows (zaratustra)"
+      credit: "Guilherme Tows (zaratustra)",
+      start: true
     },
     // (Muftwin)
     {
@@ -981,7 +981,7 @@ var regions = [
       offset: [93, 46],
       areas: [
         { rect: [0, 0, 5, 8] },
-        { rect: [-4, 0, 4, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [-2, 0, 2, 3], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.6
     },
@@ -992,7 +992,7 @@ var regions = [
         { rect: [2, 0, 11, 5] },
         { rect: [0, 5, 13, 1] },
         { rect: [1, 6, 10, 6] },
-        { rect: [0, 6, 1, 6], secondary: true, camera: 'pull-horizontal' },
+        { rect: [0, 6, 1, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
       credit: "Toombler"
