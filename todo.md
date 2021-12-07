@@ -13,7 +13,8 @@ During-playtest:
 - Wires for bottom left arm secret doesn't stay lit when in puzzle to the west
 - Require both paths for bottom left arm secret
 - What to do about bomb abuse?
-- Remove no-reset regions
+- Exit from secret next to first room
+- Potentially move secret next to first room into the merge path
 
 
 Level ideas:
