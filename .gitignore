@@ -6,5 +6,9 @@ bin/
 */*/*/*.DS_Store
 */*/*/*/*.DS_Store
 
+node_modules
+package-lock.json
+package.json
+
 *.swp
 src - Kopie
