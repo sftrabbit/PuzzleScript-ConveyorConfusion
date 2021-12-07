@@ -1150,6 +1150,7 @@ function DoUndo(force,ignoreDuplicates) {
 				x: (playerPositions[0]/(level.height))|0,
 				y: (playerPositions[0]%level.height)|0
 			};
+			activeRegion = getActiveRegion();
 			onStateUpdate(false, false);
 			tryPlayUndoSound();
 		}

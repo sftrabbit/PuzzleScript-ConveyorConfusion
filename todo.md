@@ -11,7 +11,6 @@ During-playtest:
 - Split ladderblock level in half
 - Conveyors in arm next to Dan William's level don't render properly
 - Reset skip over shortcuts
-- Undoing over level boundary and then reset
 - Alternative slime vat intro solution
 - Wires for bottom left arm secret doesn't stay lit when in puzzle to the west
 - Require both paths for bottom left arm secret
