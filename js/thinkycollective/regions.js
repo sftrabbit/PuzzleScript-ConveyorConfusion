@@ -740,7 +740,7 @@ var regions = [
         { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58,
-      simulateAlso: [7]
+      simulateAlso: [8]
     },
     //////////////
     // BRANCH B
@@ -763,7 +763,7 @@ var regions = [
         { rect: [1, 12, 16, 4] },
       ],
       zoom: 0.56,
-      simulateAlso: [5]
+      simulateAlso: [6]
     },
     // (Pichusuperlover)
     {
@@ -782,10 +782,8 @@ var regions = [
       offset: [104, 2],
       areas: [
         { rect: [0, 7, 1, 5], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 6, 12] },
-        { rect: [7, 2, 1, 7] },
-        { rect: [8, 3, 4, 4] },
-        { rect: [8, 2, 4, 1], secondary: true, camera: 'follow-player' }
+        { rect: [1, 6, 6, 6] },
+        { rect: [7, 6, 1, 3] },
       ],
       zoom: 0.65,
       credit: "Mischka Kamener",
@@ -793,9 +791,23 @@ var regions = [
         minX: 2
       }
     },
+    // (Mischka Kamener part 2)
+    {
+      offset: [104, 1],
+      areas: [
+        { rect: [1, 0, 6, 7] },
+        { rect: [7, 2, 5, 5] }
+      ],
+      zoom: 0.65,
+      credit: "Mischka Kamener",
+      simulationBoundsAdjustment: {
+        minX: 2
+      },
+      start: true
+    },
     // (Joseph Mansfield #1)
     {
-      offset: [113, -3],
+      offset: [113, -4],
       areas: [
         { rect: [0, -1, 9, 2], secondary: true },
         { rect: [0, 1, 9, 5] },
@@ -805,7 +817,7 @@ var regions = [
     },
     // (Joseph Mansfield #2)
     {
-      offset: [116, 2],
+      offset: [116, 1],
       areas: [
         { rect: [3, 2, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 3, 12, 5] },
@@ -815,7 +827,7 @@ var regions = [
     },
     // (Second ending gate)
     {
-      offset: [122, -4],
+      offset: [122, -5],
       areas: [
         { rect: [0, 0, 10, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 10, 6] },
@@ -825,7 +837,7 @@ var regions = [
     },
     // (Second ending secret room)
     {
-      offset: [117, -14],
+      offset: [117, -15],
       areas: [
         { rect: [5, -2, 8, 3] },
         { rect: [0, 1, 14, 9] }
@@ -835,9 +847,9 @@ var regions = [
     },
     // Corridor to Justas
     {
-      offset: [128, 4],
+      offset: [128, 3],
       areas: [
-        { rect: [0, 0, 4, 10], camera: 'follow-player' },
+        { rect: [0, 0, 4, 11], camera: 'follow-player' },
       ],
       zoom: 0.7,
       secret: true,
@@ -922,7 +934,7 @@ var regions = [
         { rect: [0, 0, 3, 5] }
       ],
       zoom: 0.7,
-      simulateAlso: [-79, -81]
+      simulateAlso: [-80, -82]
     },
     // (Guilherme Tows (zaratustra))
     {
@@ -1048,7 +1060,7 @@ var regions = [
         { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      simulateAlso: [-84, -85]
+      simulateAlso: [-85, -86]
     },
     // (Joel)
     {
@@ -1074,8 +1086,7 @@ var regions = [
         { rect: [9, 4, 3, 1] },
         { rect: [0, 4, 7, 6] }
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     // Corridor secret #1
     {
