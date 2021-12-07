@@ -13,7 +13,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1
+      copyCameraAnchor: 1,
+      start: true
     },
     // Intro
     {
@@ -39,8 +40,7 @@ var regions = [
       areas: [
         { rect: [-9, -6, 13, 4], camera: 'follow-player' },
       ],
-      zoom: 0.7,
-      allowReset: false
+      zoom: 0.7
     },
     // Intro bottom left arm #1-#2 node
     {
@@ -57,8 +57,7 @@ var regions = [
       areas: [
         { rect: [-13, -2, 4, 8], camera: 'follow-player' },
       ],
-      zoom: 0.7,
-      allowReset: false
+      zoom: 0.7
     },
     // Intro bottom left arm #2-#3 node
     {
@@ -85,8 +84,7 @@ var regions = [
       areas: [
         { rect: [10, -6, 19, 4], secondary: true, camera: 'follow-player' },
       ],
-      zoom: 0.7,
-      allowReset: false
+      zoom: 0.7
     },
     // Intro bottom right arm #1-#2 node
     {
@@ -104,8 +102,7 @@ var regions = [
         { rect: [29, -2, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [33, 3, 2, 4], secondary: true, camera: 'follow-player' },
       ],
-      zoom: 0.7,
-      allowReset: false
+      zoom: 0.7
     },
     // Intro bottom-top #1
     {
@@ -114,8 +111,7 @@ var regions = [
         { rect: [4, -13, 6, 7], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -10,
-      allowReset: false
+      copyCameraAnchor: -10
     },
     // Intro bottom-top #1-#2 node
     {
@@ -134,8 +130,7 @@ var regions = [
         { rect: [4, -23, 6, 6], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -12,
-      allowReset: false
+      copyCameraAnchor: -12
     },
     // Intro top intersection
     {
@@ -154,7 +149,6 @@ var regions = [
         { rect: [-4, -27, 8, 4], camera: 'follow-player' }
       ],
       zoom: 0.7,
-      allowReset: false,
       simulateAlso: [-1]
     },
     // Intro top right arm
@@ -167,7 +161,6 @@ var regions = [
         { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
-      allowReset: false,
       simulateAlso: [-2]
     },
     // Intro exit
@@ -178,7 +171,6 @@ var regions = [
       ],
       zoom: 0.7,
       copyCameraAnchor: -16,
-      allowReset: false,
       simulateAlso: [-3]
     },
     // Intro bonus puzzle
@@ -340,8 +332,7 @@ var regions = [
         { rect: [-2, 9, 3, 4], camera: 'follow-player' },
         { rect: [-1, 13, 2, 3], camera: 'follow-player' }
       ],
-      zoom: 0.8,
-      allowReset: false
+      zoom: 0.8
     },
     // Branch A exit corridor
     {
@@ -432,8 +423,7 @@ var regions = [
       areas: [
         { rect: [3, 2, 1, 3] }
       ],
-      zoom: 0.4,
-      allowReset: false
+      zoom: 0.4
     },
     // 1:00 (CHz)
     {
@@ -611,8 +601,7 @@ var regions = [
         { rect: [1, 0, 13, 3], camera: 'follow-player' },
         { rect: [0, 10, 4, 3], camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      allowReset: false
+      zoom: 0.7
     },
     // 9:00 #1 (Joseph Mansfield)
     {
@@ -851,8 +840,7 @@ var regions = [
         { rect: [0, 0, 4, 11], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      secret: true,
-      allowReset: false
+      secret: true
     },
     // (Justas)
     {
@@ -948,8 +936,7 @@ var regions = [
         { rect: [4, 11, 5, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
-      credit: "Guilherme Tows (zaratustra)",
-      start: true
+      credit: "Guilherme Tows (zaratustra)"
     },
     // (Muftwin)
     {
@@ -1261,8 +1248,7 @@ var regions = [
         { rect: [21, 3, 16, 4], camera: 'follow-player' },
         { rect: [-1, 2, 4, 15], camera: 'follow-player' }
       ],
-      zoom: 0.7,
-      allowReset: false
+      zoom: 0.7
     },
     // (domcamus)
     {
