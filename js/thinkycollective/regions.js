@@ -13,8 +13,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1,
-      start: true
+      copyCameraAnchor: 1
     },
     // Intro
     {
@@ -1068,12 +1067,15 @@ var regions = [
     {
       offset: [115, 68],
       areas: [
-        { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 5, 10] },
-        { rect: [6, 1, 2, 9] },
-        { rect: [8, -1, 4, 6] }
+        { rect: [1, 0, 5, 1] },
+        { rect: [0, 1, 12, 3] },
+        { rect: [8, 0, 4, 1] },
+        { rect: [9, -1, 3, 1] },
+        { rect: [9, 4, 3, 1] },
+        { rect: [0, 4, 7, 6] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      start: true
     },
     // Corridor secret #1
     {
@@ -1087,7 +1089,7 @@ var regions = [
     },
     // Corridor secret #2
     {
-      offset: [123, 73],
+      offset: [122, 73],
       areas: [
         { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 5, 5] }
