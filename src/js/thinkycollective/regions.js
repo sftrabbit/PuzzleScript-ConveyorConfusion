@@ -13,8 +13,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1,
-      start: true
+      copyCameraAnchor: 1
     },
     // Intro
     {
@@ -1146,11 +1145,11 @@ var regions = [
       areas: [
         { rect: [0, 0, 1, 10], secondary: true, camera: 'pull-horizontal' },
         { rect: [-2, 0, 2, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 7, 9] },
-        { rect: [1, 9, 7, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [2, 10, 3, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [1, 0, 7, 10] },
+        { rect: [0, 10, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      start: true
     },
     // (Shark)
     {
