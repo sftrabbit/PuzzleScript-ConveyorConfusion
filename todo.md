@@ -6,9 +6,7 @@ During-playtest:
 - Secret end
 - Reset levels during credits
 - Inflation sound entering clementsparrow's level
-- Reset post-Norgg after doing Norgg
 - Can't get out from top left arm lock after pushing secret block through
-- Conveyors in arm next to Dan William's level don't render properly
 - Wires for bottom left arm secret doesn't stay lit when in puzzle to the west
 - Require both paths for bottom left arm secret
 - What to do about bomb abuse?
