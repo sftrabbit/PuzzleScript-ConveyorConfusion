@@ -20,6 +20,8 @@ function restoreActiveRegion(lev) {
     cell.iclear(state.objectMasks[above ? 'sticky_above' : 'sticky_below']);
     level.setCell(positionIndex, cell);
 
+    console.log('Removing tracked objcet from', x, y)
+
     if (!above) {
       var cellUp = level.getCell(positionIndex - 1);
       cellUp.iclear(state.objectMasks['ladderd']);
@@ -50,6 +52,7 @@ function restoreActiveRegion(lev) {
       var positionIndex = x * level.height + y;
 
       var inRegion = getRegionIndex(x, y) === activeRegionIndex;
+      var aboveOutsideRegion = getRegionIndex(x, y+2) !== activeRegionIndex;
 
       if (inRegion) {
         var cell = level.getCell(positionIndex);
@@ -61,7 +64,12 @@ function restoreActiveRegion(lev) {
         }
 
         for (var i = 0; i < STRIDE_OBJ; i++) {
-          level.objects[positionIndex * STRIDE_OBJ + i] = originalLevel.dat[positionIndex * STRIDE_OBJ + i];
+          if (aboveOutsideRegion) {
+            var mask = state.objectMasks['render_above_top2'].data[i];
+            level.objects[positionIndex * STRIDE_OBJ + i] = originalLevel.dat[positionIndex * STRIDE_OBJ + i] & (~mask);
+          } else {
+            level.objects[positionIndex * STRIDE_OBJ + i] = originalLevel.dat[positionIndex * STRIDE_OBJ + i];
+          }
         }
       }
     }

@@ -253,7 +253,8 @@ var regions = [
         { rect: [11, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Joseph Mansfield"
+      credit: "Joseph Mansfield",
+      start: true
     },
     // Infinite loop intro (Blookerstein)
     {
@@ -1148,8 +1149,7 @@ var regions = [
         { rect: [1, 0, 7, 10] },
         { rect: [0, 10, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6,
-      start: true
+      zoom: 0.6
     },
     // (Shark)
     {
