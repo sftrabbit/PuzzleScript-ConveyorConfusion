@@ -6,7 +6,6 @@ During-playtest:
 - Secret end
 - Inflation sound entering clementsparrow's level
 - Can't get out from top left arm lock after pushing secret block through
-- Wires for bottom left arm secret doesn't stay lit when in puzzle to the west
 - Require both paths for bottom left arm secret
 - What to do about bomb abuse?
 - Exit from secret next to first room
