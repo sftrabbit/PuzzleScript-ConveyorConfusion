@@ -31,7 +31,8 @@ var regions = [
       ],
       zoom: 0.7,
       copyCameraAnchor: -1,
-      simulateAlso: [1, 2, 6, 7, 9, 10]
+      simulateAlso: [1, 2, 6, 7, 9, 10],
+      start: true
     },
     // Intro bottom left arm #1
     {
@@ -296,8 +297,7 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "marcosd",
-      start: true
+      credit: "marcosd"
     },
     // (knexator)
     {
@@ -506,7 +506,10 @@ var regions = [
         { rect: [0, 9, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7,
-      credit: "Clickmazes"
+      credit: "Clickmazes",
+      simulationBoundsAdjustment: {
+        maxX: -2
+      }
     },
     // 7:00 #3 (pancelor)
     {
