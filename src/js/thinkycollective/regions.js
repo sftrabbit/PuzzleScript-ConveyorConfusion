@@ -253,8 +253,7 @@ var regions = [
         { rect: [11, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Joseph Mansfield",
-      start: true
+      credit: "Joseph Mansfield"
     },
     // Infinite loop intro (Blookerstein)
     {
@@ -297,7 +296,8 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "marcosd"
+      credit: "marcosd",
+      start: true
     },
     // (knexator)
     {

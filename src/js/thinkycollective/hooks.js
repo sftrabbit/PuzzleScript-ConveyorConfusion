@@ -135,3 +135,15 @@ function removePlayers() {
     }
   }
 }
+
+function restoreOriginalLevel () {
+  for (var x = 0; x < level.width; x++) {
+    for (var y = 0; y < level.height; y++) {
+      var positionIndex = x * level.height + y;
+
+      for (var i = 0; i < STRIDE_OBJ; i++) {
+        level.objects[positionIndex * STRIDE_OBJ + i] = originalLevel.dat[positionIndex * STRIDE_OBJ + i];
+      }
+    }
+  }
+}

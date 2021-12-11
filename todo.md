@@ -4,7 +4,6 @@ Pre-playtest:
 During-playtest:
 - End cutscenes
 - Secret end
-- Reset levels during credits
 - Inflation sound entering clementsparrow's level
 - Can't get out from top left arm lock after pushing secret block through
 - Wires for bottom left arm secret doesn't stay lit when in puzzle to the west

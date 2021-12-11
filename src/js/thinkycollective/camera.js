@@ -133,11 +133,15 @@ var creditsState = {
   listScrollProgress: null
 };
 
+var creditsTimeoutId = null;
+
 function startCredits () {
   winning = true;
 
   creditsState.stage = 'levels';
   creditsState.creditsRegionIndex = 0;
+  restoreOriginalLevel();
+  removePlayers();
 
   startMusic();
   showNextCredit();
@@ -156,7 +160,11 @@ function showNextCredit () {
 
   transitionCameraToRegion(regions[curlevel][creditsState.creditsRegionIndex], true);
 
-  setTimeout(function() {
+  if (creditsTimeoutId != null) {
+    clearTimeout(creditsTimeoutId);
+  }
+
+  creditsTimeoutId = setTimeout(function() {
     creditsState.creditsRegionIndex++;
     showNextCredit();
   }, 2700);
