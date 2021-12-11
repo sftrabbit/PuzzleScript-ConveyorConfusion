@@ -31,8 +31,7 @@ var regions = [
       ],
       zoom: 0.7,
       copyCameraAnchor: -1,
-      simulateAlso: [1, 2, 6, 7, 9, 10],
-      start: true
+      simulateAlso: [1, 2, 6, 7, 9, 10]
     },
     // Intro bottom left arm #1
     {
@@ -144,9 +143,9 @@ var regions = [
     },
     // Intro top left arm
     {
-      offset: [64, 67],
+      offset: [65, 67],
       areas: [
-        { rect: [-4, -27, 8, 4], camera: 'follow-player' }
+        { rect: [-4, -27, 7, 4], camera: 'follow-player' }
       ],
       zoom: 0.7,
       simulateAlso: [-1]
@@ -196,7 +195,7 @@ var regions = [
     },
     // Intro top left arm secret corridor
     {
-      offset: [64, 70],
+      offset: [65, 70],
       areas: [
         { rect: [-3, -26, 5, 11], camera: 'follow-player' },
       ],
@@ -204,7 +203,7 @@ var regions = [
     },
     // Intro top left arm secret
     {
-      offset: [64, 70],
+      offset: [65, 70],
       areas: [
         { rect: [-2, -15, 3, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [-3, -14, 5, 5] }
@@ -432,14 +431,16 @@ var regions = [
         { rect: [0, 0, 1, 3], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 1, 11], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 0, 7, 11] },
-        { rect: [9, 0, 1, 11], secondary: true }
+        { rect: [9, 0, 1, 11], secondary: true },
+        { rect: [10, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.7,
-      credit: "CHz"
+      credit: "CHz",
+      start: true
     },
     // 1:00 Main path lock
     {
-      offset: [56, 40],
+      offset: [57, 40],
       areas: [
         { rect: [0, 0, 4, 5] }
       ],
