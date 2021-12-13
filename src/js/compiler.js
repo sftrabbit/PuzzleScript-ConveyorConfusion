@@ -616,6 +616,7 @@ function processRuleString(rule, state, curRules) {
     var rigid = false;
     var global = false;
     var noagaincheck = false;
+    var destroy = false;
     var init = false;
     var groupNumber = lineNumber;
     var commands = [];
@@ -669,6 +670,8 @@ function processRuleString(rule, state, curRules) {
                         rigid = true;
                     } else if (token === 'global') {
                         global = true;
+                    } else if (token === 'destroy') {
+                        destroy = true;
                     } else if (token === 'noagaincheck') {
                         noagaincheck = true;
                     } else if (token === 'init') {
@@ -832,6 +835,7 @@ function processRuleString(rule, state, curRules) {
         late: late,
         rigid: rigid,
         global: global,
+        destroy: destroy,
         noagaincheck: noagaincheck,
         init: init,
         groupNumber: groupNumber,
@@ -862,6 +866,7 @@ function deepCloneRule(rule) {
         late: rule.late,
         rigid: rule.rigid,
         global: rule.global,
+        destroy: rule.destroy,
         noagaincheck: rule.noagaincheck,
         init: rule.init,
         groupNumber: rule.groupNumber,
@@ -1946,6 +1951,7 @@ function collapseRules(groups) {
             newrule.push(oldrule.global);
             newrule.push(oldrule.init);
             newrule.push(oldrule.noagaincheck);
+            newrule.push(oldrule.destroy);
             rules[i] = new Rule(newrule);
         }
     }
@@ -2275,6 +2281,9 @@ function cacheRuleStringRep(rule) {
     }
     if (rule.noagaincheck) {
         result = "NOAGAINCHECK " + result + " ";
+    }
+    if (rule.destroy) {
+        result = "DESTROY " + result + " ";
     }
     if (rule.init) {
         result = "INIT " + result + " ";

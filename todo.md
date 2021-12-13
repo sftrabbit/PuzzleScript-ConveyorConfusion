@@ -6,7 +6,7 @@ During-playtest:
 - Secret end
 - Inflation sound entering clementsparrow's level
 - Require both paths for bottom left arm secret
-- What to do about bomb abuse?
+- Can skip over lock at bottom left arm secret
 - Exit from secret next to first room
 - Potentially move secret next to first room into the merge path
 
