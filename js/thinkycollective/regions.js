@@ -435,8 +435,7 @@ var regions = [
         { rect: [10, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.7,
-      credit: "CHz",
-      start: true
+      credit: "CHz"
     },
     // 1:00 Main path lock
     {
@@ -1064,7 +1063,8 @@ var regions = [
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Joel"
+      credit: "Joel",
+      start: true
     },
     // Corridor
     {

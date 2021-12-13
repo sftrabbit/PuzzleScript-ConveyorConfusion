@@ -51,7 +51,7 @@
 
         var RULE_DIRECTION_WORDS = [
             "DIRECTION",//tag
-            "up", "down", "left", "right", "random", "horizontal", "vertical","late","rigid","global","noagaincheck","init"]
+            "up", "down", "left", "right", "random", "horizontal", "vertical","late","rigid","global","destroy","noagaincheck","init"]
 
         var LOOP_WORDS = [
             "BRACKET",//tag

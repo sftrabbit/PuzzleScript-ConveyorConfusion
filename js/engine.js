@@ -631,7 +631,8 @@ function backupLevel() {
 		width : level.width,
 		height : level.height,
 		oldflickscreendat: oldflickscreendat.concat([]),
-		objectTrackers: new Int32Array(objectTrackers)
+		objectTrackers: new Int32Array(objectTrackers),
+		explosionTrackers: new Int32Array(explosionTrackers)
 	};
 	return ret;
 }
@@ -642,7 +643,8 @@ function level4Serialization() {
 		width : level.width,
 		height : level.height,
 		oldflickscreendat: oldflickscreendat.concat([]),
-		objectTrackers: Array.from(objectTrackers)
+		objectTrackers: Array.from(objectTrackers),
+		explosionTrackers: Array.from(explosionTrackers)
 	};
 	return ret;
 }
@@ -932,6 +934,7 @@ function restoreLevel(lev) {
 	}
 
 	objectTrackers = new Int32Array(lev.objectTrackers);
+	explosionTrackers = new Int32Array(lev.explosionTrackers);
 
 	if (level.width !== lev.width || level.height !== lev.height) {
 		level.width = lev.width;
@@ -1030,7 +1033,8 @@ function consolidateDiff(before,after){
 		width : before.width,
 		height : before.height,
 		oldflickscreendat: before.oldflickscreendat,
-		objectTrackers: before.objectTrackers
+		objectTrackers: before.objectTrackers,
+		explosionTrackers: before.explosionTrackers
 	}
 }
 
@@ -1553,6 +1557,7 @@ function Rule(rule) {
 	this.global = rule[11];
 	this.init = rule[12];
 	this.noagaincheck = rule[13];
+	this.destroy = rule[14];
 	this.ruleMask = this.cellRowMasks.reduce( (acc, m) => { acc.ior(m); return acc }, new BitVec(STRIDE_OBJ) );
 
 	/*I tried out doing a ruleMask_movements as well along the lines of the above,
@@ -1892,6 +1897,32 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 				if (destroyed.anyBitsInCommon(state.objectMasks[trackedLayer[1]])) {
 					removeObjectTrackers([[trackedLayer[0], colIndex, rowIndex]]);
 				}
+			}
+
+			if (rule.destroy) {
+				if (created.anyBitsInCommon(state.objectMasks['exploded'])) {
+					if (!rule.explosiveOrigin) {
+						throw new Error('explosive origin is missing');
+					}
+
+					var regionIndex = getRegionIndex(colIndex, rowIndex);
+					if (rule.explosiveOrigin !== regionIndex) {
+						if (created.anyBitsInCommon(state.objectMasks['exploded_above'])) {
+							addExplosionTracker(colIndex, rowIndex, true, rule.explosiveOrigin);
+						}
+
+						if (created.anyBitsInCommon(state.objectMasks['exploded_below'])) {
+							addExplosionTracker(colIndex, rowIndex, false, rule.explosiveOrigin);
+						}
+					}
+				}
+				// if (!destroyed.anyBitsInCommon(state.objectMasks['explosive'])) {
+				// 	if (destroyed.anyBitsInCommon(state.objectMasks['destructible_below'])) {
+				// 		console.log('destroy below!')
+				// 	} else {
+				// 		console.log('destroy above!')
+				// 	}
+				// }
 			}
 		}
 	}
@@ -2295,7 +2326,28 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
     //APPLY THE RULE
     for (var cellRowIndex=0;cellRowIndex<rule.patterns.length;cellRowIndex++) {
         var preRow = rule.patterns[cellRowIndex];
-        
+
+        if (rule.destroy) {
+        	// Which cell has explosive in it?
+        	rule.explosiveOrigin = null;
+        	for (var cellIndex=0;cellIndex<preRow.length;cellIndex++) {
+            	var preCell = preRow[cellIndex];
+            	if (preCell.objectsPresent.anyBitsInCommon(state.objectMasks['explosive'])) {
+            		var explosiveIndex = tuple[cellRowIndex] + delta * cellIndex;
+
+					var explosiveX = (explosiveIndex/level.height)|0;
+					var explosiveY = (explosiveIndex%level.height);
+            		var explosiveAbove = preCell.objectsPresent.anyBitsInCommon(state.objectMasks['explosive_above']);
+            		var explosiveOrigin = getExplosiveTrackerOriginRegion(explosiveX, explosiveY, explosiveAbove);
+            		if (explosiveOrigin == null) {
+            			explosiveOrigin = getRegionIndex(explosiveX, explosiveY);
+            		}
+            		rule.explosiveOrigin = explosiveOrigin;
+            		break;
+            	}
+        	}
+        }
+
         var currentIndex = rule.isEllipsis[cellRowIndex] ? tuple[cellRowIndex][0] : tuple[cellRowIndex];
         for (var cellIndex=0;cellIndex<preRow.length;cellIndex++) {
             var preCell = preRow[cellIndex];

@@ -8,6 +8,7 @@ var pendingSave = false;
 function initOpenWorld() {
   initRegions();
   initObjectTrackers();
+  initExplosionTrackers();
 }
 
 function onStateUpdate(againing, action) {
