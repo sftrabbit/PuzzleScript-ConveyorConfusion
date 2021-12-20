@@ -1063,8 +1063,7 @@ var regions = [
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Joel",
-      start: true
+      credit: "Joel"
     },
     // Corridor
     {
@@ -1205,118 +1204,158 @@ var regions = [
       zoom: 0.6,
       credit: "Jack Lance"
     },
+    // Ending gate
+    {
+      offset: [65, -18],
+      areas: [
+        { rect: [0, 0, 9, 16] },
+        { rect: [0, 16, 9, 1], secondary: true },
+        { rect: [2, -1, 5, 1], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.48
+    },
+    // Merge corridor #1
+    {
+      offset: [50, -7],
+      areas: [
+        { rect: [-2, 0, 17, 4], camera: 'follow-player' },
+        { rect: [1, -1, 4, 1], camera: 'follow-player' },
+        { rect: [4, 4, 3, 2], camera: 'follow-player' }
+      ],
+      zoom: 0.6
+    },
+    // (D5R)
+    {
+      offset: [48, -18],
+      areas: [
+        { rect: [0, 0, 12, 10] }
+      ],
+      zoom: 0.7,
+      credit: "D5R",
+      start: true
+    },
+    // (D5R) Block release
+    {
+      offset: [60, -14],
+      areas: [
+        { rect: [0, 0, 4, 7] }
+      ],
+      zoom: 0.7
+    },
     // (Ethan Clark)
     {
-      offset: [59, -2],
+      offset: [54, -2],
       areas: [
-        { rect: [7, 0, 5, 1] },
-        { rect: [0, 1, 12, 1] },
-        { rect: [0, 2, 15, 2] },
-        { rect: [1, 4, 13, 3] },
-        { rect: [5, 7, 5, 1] },
-        { rect: [14, 3, 5, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [15, 1, 4, 2], secondary: true, camera: 'pull-horizontal' },
-        { rect: [0, -1, 3, 2], secondary: true, camera: 'follow-player' }
+        { rect: [0, 1, 2, 4], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 1, 1, 6], secondary: true, camera: 'pull-horizontal' },
+        { rect: [3, 1, 1, 6] },
+        { rect: [4, 0, 2, 7] },
+        { rect: [6, 0, 3, 8] },
+        { rect: [9, 1, 2, 7] },
+        { rect: [11, 1, 4, 6], secondary: true, camera: 'pull-horizontal' },
+        { rect: [15, 1, 4, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
       credit: "Ethan Clark"
     },
-    // Bonus level #1 (stevenjmiller)
+    // Merge corridor #2
     {
-      offset: [48, -15],
+      offset: [44, -18],
       areas: [
-        { rect: [0, 0, 17, 12] }
+        { rect: [0, 0, 4, 15], camera: 'follow-player' }
       ],
-      zoom: 0.6,
-      simulationBoundsAdjustment: {
-        minY: 2
-      }
-    },
-    // Bonus level #1 secret
-    {
-      offset: [65, -7],
-      areas: [
-        { rect: [0, 1, 2, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [2, 0, 5, 5] }
-      ],
-      zoom: 0.6,
-      secret: true
-    },
-    // (Ethan Clark) -> (domcamus)
-    {
-      offset: [22, -6],
-      areas: [
-        { rect: [-1, -2, 26, 4], camera: 'follow-player' },
-        { rect: [21, 2, 4, 1], camera: 'follow-player' },
-        { rect: [21, 3, 16, 4], camera: 'follow-player' },
-        { rect: [-1, 2, 4, 15], camera: 'follow-player' }
-      ],
-      zoom: 0.7
-    },
-    // (domcamus)
-    {
-      offset: [0, 5],
-      areas: [
-        { rect: [0, 0, 2, 7], secondary: true, camera: 'follow-player' },
-        { rect: [0, 7, 2, 11] },
-        { rect: [2, 0, 20, 18] },
-        { rect: [22, 6, 2, 2], secondary: true, camera: 'follow-player' },
-      ],
-      zoom: 0.50,
-      credit: "domcamus"
-    },
-    // (stevenjmiller)
-    {
-      offset: [1, -8],
-      areas: [
-        { rect: [0, 0, 21, 13] }
-      ],
-      zoom: 0.58,
-      credit: "stevenjmiller"
-    },
-    // (D5R)
-    {
-      offset: [1, -19],
-      areas: [
-        { rect: [0, 0, 11, 11] },
-        { rect: [11, 0, 2, 11], secondary: true, camera: 'pull-horizontal' }
-      ],
-      zoom: 0.7,
-      credit: "D5R"
+      zoom: 0.6
     },
     // (jackk)
     {
-      offset: [15, -23],
+      offset: [29, -32],
       areas: [
-        { rect: [-1, 5, 3, 9], secondary: true, camera: 'pull-horizontal' },
-        { rect: [2, 3, 5, 11] },
-        { rect: [7, 0, 26, 14] },
-        { rect: [33, 0, 1, 14], secondary: true, camera: 'pull-horizontal' }
+        { rect: [0, 0, 23, 14] },
+        { rect: [23, 0, 4, 12] },
+        { rect: [27, 0, 6, 10] }
       ],
       zoom: 0.48,
       credit: "jackk"
     },
-    // (jackk -> ending)
+    // (jackk) Block release
     {
-      offset: [49, -23],
+      offset: [21, -24],
       areas: [
-        { rect: [0, 0, 3, 8], secondary: true, camera: 'follow-player' },
-        { rect: [3, 5, 2, 3], secondary: true, camera: 'follow-player' },
-        { rect: [5, 4, 9, 4] },
-        { rect: [14, 5, 2, 3], secondary: true, camera: 'follow-player' },
-        { rect: [16, 5, 3, 8], secondary: true, camera: 'follow-player' },
-        { rect: [16, 13, 12, 3], secondary: true, camera: 'follow-player' },
+        { rect: [0, 0, 8, 6] }
       ],
-      zoom: 0.85
+      zoom: 0.7
     },
-    // (Ending)
+    // Merge corridor #2
     {
-      offset: [52, -32],
+      offset: [21, -18],
+      areas: [
+        { rect: [0, 0, 23, 4], camera: 'follow-player' }
+      ],
+      zoom: 0.6
+    },
+    // Merge corridor #3
+    {
+      offset: [21, -14],
+      areas: [
+        { rect: [0, 0, 4, 19], camera: 'follow-player' },
+        { rect: [-2, 1, 2, 4], camera: 'follow-player' }
+      ],
+      zoom: 0.6
+    },
+    // (domcamus)
+    {
+      offset: [-1, -13],
+      areas: [
+        { rect: [0, 0, 20, 9] },
+        { rect: [0, 9, 19, 3] },
+        { rect: [0, 12, 21, 5] },
+      ],
+      zoom: 0.50,
+      credit: "domcamus"
+    },
+    // (domcamus) Block release
+    {
+      offset: [17, -5],
+      areas: [
+        { rect: [0, 0, 4, 4] }
+      ],
+      zoom: 0.50
+    },
+    // Merge corridor #4
+    {
+      offset: [11, 5],
+      areas: [
+        { rect: [0, 0, 14, 4], camera: 'follow-player' }
+      ],
+      zoom: 0.6
+    },
+    // (stevenjmiller)
+    {
+      offset: [3, 10],
+      areas: [
+        { rect: [0, 0, 19, 13] },
+        { rect: [3, -1, 3, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [13, -1, 4, 1], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.58,
+      credit: "stevenjmiller"
+    },
+    // (stevenjmiller) Block release
+    {
+      offset: [6, 5],
+      areas: [
+        { rect: [0, 0, 5, 4] }
+      ],
+      zoom: 0.6,
+    },
+    // Ending
+    {
+      offset: [63, -32],
       areas: [
         { rect: [0, 0, 13, 13] }
       ],
       zoom: 0.6
-    },
+    }
   ]
 ];
 
@@ -1327,13 +1366,16 @@ var theme2Areas = [
   [82, 18, Infinity, Infinity],
   [79, 31, Infinity, Infinity],
   [71, 33, Infinity, Infinity],
-  [0, 5, 25, 18],
-  [1, -19, 13, 11],
+  // [0, 5, 25, 18],
+  // [1, -19, 13, 11],
+  // (Patrick)
   [52, 21, 12, 8],
   [52, 29, 11, 3],
   [55, 32, 4, 1 ],
+  // (Blookerstein)
   [76, 18, 6, 11 ],
-  [52, -32, 13, 6]
+  // Ending
+  [63, -32, 13, 6]
 ];
 
 var regionMap = [];

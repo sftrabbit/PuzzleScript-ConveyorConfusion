@@ -127,6 +127,7 @@ function removePlayers() {
 
       if (cell.anyBitsInCommon(state.objectMasks['player'])) {
         var region = getRegion({ x: x, y: y });
+        console.log(x, y)
         if (!region.start) {
           cell.iclear(state.objectMasks['player']);
           cell.iclear(state.objectMasks['moved']);
