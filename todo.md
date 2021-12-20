@@ -5,10 +5,10 @@ During-playtest:
 - End cutscenes
 - Secret end
 - Inflation sound entering clementsparrow's level
-- Require both paths for bottom left arm secret
+- Require both paths for bottom left arm secret (also, going back through clickmazes)
 - Can skip over lock at bottom left arm secret
 - Exit from secret next to first room
-- Potentially move secret next to first room into the merge path
+- Check for missing respawns
 
 
 Level ideas:
