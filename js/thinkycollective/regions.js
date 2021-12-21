@@ -1209,8 +1209,7 @@ var regions = [
       offset: [65, -18],
       areas: [
         { rect: [0, 0, 9, 16] },
-        { rect: [0, 16, 9, 1], secondary: true },
-        { rect: [2, -1, 5, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48
     },
@@ -1352,7 +1351,8 @@ var regions = [
     {
       offset: [63, -32],
       areas: [
-        { rect: [0, 0, 13, 13] }
+        { rect: [0, 0, 13, 13] },
+        { rect: [4, 13, 5, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.6
     }
@@ -1375,7 +1375,26 @@ var theme2Areas = [
   // (Blookerstein)
   [76, 18, 6, 11 ],
   // Ending
-  [63, -32, 13, 6]
+  [63, -33, Infinity, 3],
+  [62, -30, Infinity, 4],
+  [62, -26, 2, 6],
+  [61, -24, 1, 4],
+  [60, -22, 1, 2],
+  [64, -19, 1, 10],
+  // (D5R)
+  [49, -19, 5, 1],
+  [44, -18, 20, 10],
+  [43, -14, 1, 3],
+  [44, -8, 11, 5],
+  [55, -8, 2, 1],
+  [53, -20, 11, 2],
+  // (domcamus)
+  [21, -18, 23, 4],
+  [20, -16, 1, 2],
+  [-1, -14, 27, 4],
+  [-1, -10, 26, 5],
+  [-1, -5, 23, 6],
+  [-1, 1, 22, 3],
 ];
 
 var regionMap = [];
