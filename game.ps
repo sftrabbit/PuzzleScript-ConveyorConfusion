@@ -3945,7 +3945,7 @@ endloop
 (sorry for the mega-duplication... it was just the easier way)
 startloop
 UP [ Player_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_Player ] sfx2
-UP [ BeltX_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltX ] sfx2
+UP [ BeltX_Above@ ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltX@ ] sfx2
 UP [ BeltU_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltU ] sfx2
 UP [ BeltR_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltR ] sfx2
 UP [ BeltD_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltD ] sfx2
@@ -3957,7 +3957,7 @@ UP [ BeltLU_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMid
 UP [ Explosive_above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_Explosive ] sfx2
 
 RIGHT [ Player_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_Player ] sfx2
-RIGHT [ BeltX_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltX ] sfx2
+RIGHT [ BeltX_Above@ ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltX@ ] sfx2
 RIGHT [ BeltU_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltU ] sfx2
 RIGHT [ BeltR_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltR ] sfx2
 RIGHT [ BeltD_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltD ] sfx2
@@ -3969,7 +3969,7 @@ RIGHT [ BeltLU_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagM
 RIGHT [ Explosive_above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_Explosive ] sfx2
 
 DOWN [ Player_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_Player ] sfx2
-DOWN [ BeltX_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltX ] sfx2
+DOWN [ BeltX_Above@ ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltX@ ] sfx2
 DOWN [ BeltU_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltU ] sfx2
 DOWN [ BeltR_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltR ] sfx2
 DOWN [ BeltD_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltD ] sfx2
@@ -3981,7 +3981,7 @@ DOWN [ BeltLU_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMi
 DOWN [ Explosive_above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_Explosive ] sfx2
 
 LEFT [ Player_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_Player ] sfx2
-LEFT [ BeltX_Above DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltX ] sfx2
+LEFT [ BeltX_Above@ DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltX@ ] sfx2
 LEFT [ BeltU_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltU ] sfx2
 LEFT [ BeltR_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltR ] sfx2
 LEFT [ BeltD_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltD ] sfx2
@@ -4003,7 +4003,7 @@ LEFT [ Explosive_above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagM
 [ > BeltRD_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltRD_Above | Fusing FuseIntention_BeltRD_Above ]
 [ > BeltDL_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltDL_Above | Fusing FuseIntention_BeltDL_Above ]
 [ > BeltLU_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltLU_Above | Fusing FuseIntention_BeltLU_Above ]
-[ > DiagMidMove_BeltX NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltX | Fusing FuseIntention_BeltX_Above ]
+[ > DiagMidMove_BeltX@ NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltX | Fusing FuseIntention_BeltX_Above@ ]
 [ > DiagMidMove_BeltU NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltU | Fusing FuseIntention_BeltU_Above ]
 [ > DiagMidMove_BeltR NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltR | Fusing FuseIntention_BeltR_Above ]
 [ > DiagMidMove_BeltD NO FusingDone_MidMove | NO Above ] -> [ > DiagMidMove_BeltD | Fusing FuseIntention_BeltD_Above ]
@@ -4068,7 +4068,7 @@ endloop
 
 [ DiagMoveMarkers ] -> []
 
-UP [ FuseIntention_BeltX_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltX_Above | ]
+UP [ FuseIntention_BeltX_Above@ NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltX_Above@ | ]
 UP [ FuseIntention_BeltU_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltU_Above | ]
 UP [ FuseIntention_BeltR_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltR_Above | ]
 UP [ FuseIntention_BeltD_Above NO Fused NO Anim_FusionAbove | NO Anim_FusionAbove_Top ] -> [ BeltD_Above | ]
@@ -4477,26 +4477,26 @@ ccc╟c╟ccq#c##c######
 #######ž##~####c#########ŝ######################~#######c+###########~~~##############################################################
 #######rccqccccc#######đđđđđđđđđđđđđđđđđđ┘└ă⬅ăă~~######.p.~########c+┐.┌+c###################################################~~#######
 #######+##~############ŵŝăăăăăăăăăăăăăăăăăđđđđŝŵ###~$~#"ppp+#######c+┐.┌+c###################################################qqc%#####
-#######################ŵ└#####################ŝŵ##......r..########c+┐.┌+c###################################################tt#######
-#######################⬇┌#####################ŝŵ##..6ŵŝŵp..########c+┐.┌+c###################################################~~#######
-#####ccccccccc#########ŝŵ###~đ...........ă~###ŝŵ##...pppp.~~.Ň┘zc##c+┐.┌+c#################################################..88....###
-#....++++....p#6~~~⇐~##ŝŵ###ŝ.............ŝ###ŝŵ##...p...ĕ.###ŝ#c##c+┐.┌+c#############################################~q~#.&&&&&&.###
-#...........rp..####~~~~ŵ###...+đ.ŝ+ž.žr...###ŝŵ####qt~~...##"Ĉŝ+##c~~z~~c#############################################qrq#.&&&&&&.###
-#....~~~~~#~~~#########ŝŵ###...p...p...p...###ŝŵ####qz~~4..###ŝ####q~#+#~q#############################################~q~#.&&&&&&.###
-##...~~£~~~~#~~....####ŝŵ###...p.../...p...###ŝŵ######⇑#######ŝ####q~~.~~q##############################################Ň##....22..###
-##...~~~~z~~~~##ŵ..####ŝŵ###...pprpp.~~t...###ŝŵ#####~~#######ŝ####q~~"Ň~q##############################################~######~~#####
-##....~..p.cct##žž.####┘ŵ###.........8.....###ŝŵ#####~########ŝ####q~~"Ň~q#########################¬####################~~~~~~~~~#####
-##..£.~..ppcpt.#đ8.####┐ŝ###...đ.ŝ.x.đ.ŝ...###ŝŵ⬅ăăăă~đđđđđđđđđđđđđq~~"ŇŇq⇐~~~~~s#############c####c####c######################⇑~#####
-##..~~~....cct##..#cc+#ŵŝ###ŵ.............ŵ###đđđđđđđ┐┌ă~ăăăăăăăă⬅ăq#~"Ň~q##ŝ##d.~~~~~~~~~##ccc###ccc###ccc####################~~#####
-###...tp....#.....#z#đ#ŵŝ###~đ.2.........ă~#############~##########qqq╒qqq##ŝ###~~~~~~~I~~####ccc#c#c#ccc#############{#####¬ccqq#####
-##..~~~pppppc2#2###┐đĈđŵŝ#################~##~q~########~#############+#ŵ###ŝ###~~~~~~J~L~######ccz#zcc############~~...~~#####tt#####
-##....~p....c~~~###Ň#"#ŵŝ#####c###!###c###~~~qrq########~###############ŵ###ŝ###~~~~~~~K~~####ccc#IĕI#ccc##########~.....~#####tt#####
-cc+...8p....c####.ă~###ŵŝ#####ccc#c#ccc######~q~########⇓###~~~#########ŵ###ŝ###......~~~~##ccc###IĕI###ccc########~.Ĉ.x.~##!ccqq#####
-cc+....+ăžă+c......ŝ###ŵŝ##ccc##c#c#c##ccc##############~###~ł~.~~~#~Ňđđŵ###ŝ###....$~~~~~####c##ĦIŊIĲ##c##########~4....~#####~~#####
-cĕ##...#....pr....~.###ŵŝ####cccccrccccc################~~4..+...+...#######ŝ###......~~~~####c###"ĕ"###c##########~.....~###~~~~~~###
-crž....~4...#.....8.###ŵŝ###cc##c#ŵ#c##cc######.ŝĴ~~~~####...pp'ppppr#######ŝ###.ĕ....~~~~####c###"""###c##~~~#####⇑#####~###⇑####~~##
-#######################ŵŝ###c#cccđŵăccc#c######.đ....~####..#6žžž4.#.#######ŝ###22...6~~~~####+###"""######~ň~#####.#####⇓###.####⬇ŵ##
-#######################ŵŝ###c#c#đŵ#ŵă#c#c######.ŝ.6~..########...###########ŝ###⇑~############ă####~#######.........#####~##~~~###ŝŵ##
+#######################ŵ└##ŵ##################ŝŵ##......r..########c+┐.┌+c###################################################tt#######
+#######################⬇┌##ŵ##~đ...........ă~#ŝŵ##..6ŵŝŵp..########c+┐.┌+c###################################################~~#######
+#####ccccccccc#########ŝŵ##ŵ##ŝ.............ŝ#ŝŵ##...pppp.~~.Ň┘zc##c+┐.┌+c#################################################..88....###
+#....++++....p#6~~~⇐~##ŝŵ##ŵ##...rž.ž+ŝ.ă+...#ŝŵ##...p...ĕ.###ŝ#c##c+┐.┌+c#############################################~q~#.&&&&&&.###
+#...........rp..####~~~~ŵ#~q~#...p...p...p...#ŝŵ####qt~~...##"Ĉŝ+##c~~z~~c#############################################qrq#.&&&&&&.###
+#....~~~~~#~~~#########ŝŵ#qrq#...p.../...p...#ŝŵ####qz~~4..###ŝ####q~#+#~q#############################################~q~#.&&&&&&.###
+##...~~£~~~~#~~....####ŝŵ#~q~#...t~~.pprpp...#ŝŵ######⇑#######ŝ####q~~.~~q##############################################Ň##....22..###
+##...~~~~z~~~~##ŵ..####ŝŵ##Ň##.....8.........#ŝŵ#####~~#######ŝ####q~~"~~q##############################################~######~~#####
+##....~..p.cct##žž.####┘ŵ##~##...ŝ.ă.x.ŝ.ă...#ŝŵ#####~########ŝ####q~~"~~q#########################¬####################~~~~~~~~~#####
+##..£.~..ppcpt.#đ8.####┐ŝ##~##ŵ.............ŵ#ŝŵ⬅ăăăă~đđđđđđđđđđđđđq~~"~~q⇐~~~~~s#############c####c####c######################⇑~#####
+##..~~~....cct##..#cc+#ŵŝ##~⇐~~đ...........ă~#đđđđđđđ┐┌ăăăă~ăăăăă⬅ăq#~"~~q##ŝ##d.~~~~~~~~~##ccc###ccc###ccc####################~~#####
+###...tp....#.....#z#đ#ŵŝ###################⇑##############~#######qqq╒qqq##ŝ###~~~~~~~I~~####ccc#c#c#ccc#############{#####¬ccqq#####
+##..~~~pppppc2#2###┐đĈđŵŝ###################~##########.6⇐~~##########+#ŵ###ŝ###~~~~~~J~L~######ccz#zcc############~~...~~#####tt#####
+##....~p....c~~~###Ň#"#ŵŝ#####c###!###c#####~đđđđđđđŝ##.################ŵ###ŝ###~~~~~~~K~~####ccc#IĕI#ccc##########~.....~#####tt#####
+cc+...8p....c####.ă~###ŵŝ#####ccc#c#ccc#####ŵăăăăăăă~⇐~...###~~~.#######Ň###ŝ###......~~~~##ccc###IĕI###ccc########~.Ĉ.x.~##!ccqq#####
+cc+....+ăžă+c......ŝ###ŵŝ##ccc##c#c#c##ccc##############.####~ł~.~~~#~~Ň.###ŝ###....$~~~~~####c##ĦIŊIĲ##c##########~4....~#####~~#####
+cĕ##...#....pr....~.###ŵŝ####cccccrccccc################..→...+...+...##~###ŝ###......~~~~####c###"ĕ"###c##########~.....~###~~~~~~###
+crž....~4...#.....8.###ŵŝ###cc##c#ŵ#c##cc######.ŝĴ~~~~##.##...pp'ppppr##8###ŝ###.ĕ....~~~~####c###"""###c##~~~#####⇑#####~###⇑####~~##
+#######################ŵŝ###c#cccđŵăccc#c######.đ....~#####..#6žžž4.#..→.###ŝ###22...6~~~~####+###"""######~ň~#####.#####⇓###.####⬇ŵ##
+#######################ŵŝ###c#c#đŵ#ŵă#c#c######.ŝ.6~..#########...##########ŝ###⇑~############ă####~#######.........#####~##~~~###ŝŵ##
 ########cc+############ŵ⬇###c#+ŵĈ.#.Ĉŵ+#c######....~..##################đđđđŝ###~~###ŝăăăăăăăă.ăăă~⇑~######..6ž4ž...##~~~Ň~#~~~~##ŝŵ##
 ########z#đ##ŝăăđđđđđđđŵŝ###c#ccccccccc#c####~~~~.Ł~46~~⇐~~#############ŵ###ŝ###~~###ŝ###đđđđđđđđđđŵ#######.2......###.8.ž...8.~##ŝŵ##
 ########┐đĈđđđđ┐┌ăă~ăăăăă#########c#####+####~#.......####~#############ŵ###ŝ#.~~~~.#ŝ###ŵ##################⇑#########~~~~~~~~~~##ŝŵ##
