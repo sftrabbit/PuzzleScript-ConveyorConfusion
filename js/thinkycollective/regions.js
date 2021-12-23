@@ -13,7 +13,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1
+      copyCameraAnchor: 1,
+      start: true
     },
     // Intro
     {
@@ -1199,7 +1200,7 @@ var regions = [
       areas: [
         { rect: [1, 0, 12, 11] },
         { rect: [-3, -1, 7, 1], secondary: true },
-        { rect: [-3, 0, 4, 5], secondary: true, camera: 'pull-horizontal' }
+        { rect: [-3, 0, 4, 10], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
       credit: "Jack Lance"
@@ -1219,7 +1220,7 @@ var regions = [
       areas: [
         { rect: [-2, 0, 17, 4], camera: 'follow-player' },
         { rect: [1, -1, 4, 1], camera: 'follow-player' },
-        { rect: [4, 4, 3, 2], camera: 'follow-player' }
+        { rect: [7, 4, 3, 2], camera: 'follow-player' }
       ],
       zoom: 0.6
     },
@@ -1230,8 +1231,7 @@ var regions = [
         { rect: [0, 0, 12, 10] }
       ],
       zoom: 0.7,
-      credit: "D5R",
-      start: true
+      credit: "D5R"
     },
     // (D5R) Block release
     {
@@ -1241,21 +1241,64 @@ var regions = [
       ],
       zoom: 0.7
     },
+    // Ethan Clark secret corridor #1
+    {
+      offset: [53, -4],
+      areas: [
+        { rect: [0, 0, 1, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 3, 8] },
+        { rect: [4, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
+      ],
+      zoom: 0.7
+    },
+    // Ethan Clark secret corridor #2
+    {
+      offset: [42, -3],
+      areas: [
+        { rect: [0, 0, 11, 4], camera: 'follow-player' }
+      ],
+      zoom: 0.7
+    },
     // (Ethan Clark)
     {
-      offset: [54, -2],
+      offset: [55, -2],
       areas: [
-        { rect: [0, 1, 2, 4], secondary: true, camera: 'pull-horizontal' },
-        { rect: [2, 1, 1, 6], secondary: true, camera: 'pull-horizontal' },
-        { rect: [3, 1, 1, 6] },
+        { rect: [2, 2, 1, 5], secondary: true, camera: 'pull-horizontal' },
+        { rect: [3, 2, 1, 5] },
         { rect: [4, 0, 2, 7] },
-        { rect: [6, 0, 3, 8] },
-        { rect: [9, 1, 2, 7] },
-        { rect: [11, 1, 4, 6], secondary: true, camera: 'pull-horizontal' },
-        { rect: [15, 1, 4, 3], secondary: true, camera: 'pull-horizontal' }
+        { rect: [6, 0, 4, 8] },
+        { rect: [10, 1, 1, 7] },
+        { rect: [11, 1, 4, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
       credit: "Ethan Clark"
+    },
+    // (Ethan Clark) block release
+    {
+      offset: [55, -2],
+      areas: [
+        { rect: [15, 1, 3, 6] }
+      ],
+      zoom: 0.7
+    },
+    // stevenjmiller bonus puzzle
+    {
+      offset: [28, -15],
+      areas: [
+        { rect: [0, 0, 17, 12] }
+      ],
+      zoom: 0.7
+    },
+    // stevenjmiller bonus puzzle secret
+    {
+      offset: [24, -15],
+      areas: [
+        { rect: [1, 1, 3, 2] },
+        { rect: [0, 3, 5, 5] },
+        { rect: [1, 8, 3, 4] }
+      ],
+      zoom: 0.7,
+      secret: true
     },
     // Merge corridor #2
     {
@@ -1391,7 +1434,7 @@ var theme2Areas = [
   // (domcamus)
   [21, -18, 23, 4],
   [20, -16, 1, 2],
-  [-1, -14, 27, 4],
+  [-1, -14, 26, 4],
   [-1, -10, 26, 5],
   [-1, -5, 23, 6],
   [-1, 1, 22, 3],

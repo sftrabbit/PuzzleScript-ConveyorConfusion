@@ -361,7 +361,7 @@ function redraw() {
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
         if (quittingTitleScreen && timer) {
-            ctx.globalAlpha = Math.max(1 - (Math.max(0, Math.min(timer / 1000, 1)) * 1.1), 0);
+            ctx.globalAlpha = Math.max(1 - (Math.max(0, Math.min(timer / 300, 1)) * 1.1), 0);
         }
 
         for (var i = 0; i < titleWidth; i++) {

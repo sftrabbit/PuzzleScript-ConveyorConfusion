@@ -809,8 +809,8 @@ function update() {
     input_throttle_timer+=deltatime;
     if (quittingTitleScreen) {
         redraw();
-        setMusicVolume(1 - (timer/800));
-        if (timer/1000>1) {
+        setMusicVolume(1 - (timer/300));
+        if (timer/300>1) {
             quittingTitleScreen=false;
             nextLevel();
         }
