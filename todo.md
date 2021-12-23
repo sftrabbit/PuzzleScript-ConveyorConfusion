@@ -1,6 +1,3 @@
-Pre-playtest:
-- Go through, make sure regions are all good. Check resets. Check backwards traversal.
-
 During-playtest:
 - End cutscenes
 - Secret end
@@ -9,8 +6,9 @@ During-playtest:
 - Can skip over lock at bottom left arm secret
 - Exit from secret next to first room
 - Check for missing respawns
-
-
-Level ideas:
-- Infinite loop
-- Can you get knocked off a conveyor by a block behind you?
+- Tracking of diagonal-moving blocks in merge branch (let's just hack it together - keep note of when a "block release" region has been exited and then when entering the gate room just set up the tracker then)
+- Locatable secret indicators
+- Entrance to sjm secret
+- Entrance to jm secret
+- Add final sjm secret
+- Go through, make sure regions are all good. Check resets. Check backwards traversal.
