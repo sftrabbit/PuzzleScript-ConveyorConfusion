@@ -14,7 +14,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1
+      copyCameraAnchor: 'intro',
+      start: true
     },
     // Intro
     {
@@ -27,14 +28,21 @@ var regions = [
     },
     // Intro bottom intersection
     {
-      id: 'entrance bottom intersection',
+      id: 'intro bottom intersection',
       offset: [64, 67],
       areas: [
         { rect: [4, -6, 6, 9], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -1,
-      simulateAlso: [1, 2, 6, 7, 9, 10]
+      copyCameraAnchor: 'intro',
+      simulateAlso: [
+        'intro bottom left arm 1',
+        'intro bottom left arm 1-2 node',
+        'intro bottom right arm 1',
+        'intro bottom right arm 1-2 node',
+        'intro bottom top 1',
+        'intro bottom top 1-2 node'
+      ]
     },
     // Intro bottom left arm #1
     {
@@ -53,7 +61,12 @@ var regions = [
         { rect: [-13, -7, 4, 5], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAlso: [-1, -2, 1, 2]
+      simulateAlso: [
+        'intro bottom left arm 1',
+        'intro bottom intersection',
+        'intro bottom left arm 2',
+        'intro bottom left arm 2-3 node'
+      ]
     },
     // Intro bottom left arm #2
     {
@@ -72,7 +85,11 @@ var regions = [
         { rect: [-13, 6, 4, 5], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAlso: [-1, -2, 1]
+      simulateAlso: [
+        'intro bottom left arm 2',
+        'intro bottom left arm 1-2 node',
+        'intro bottom left arm 3'
+      ]
     },
     // Intro bottom left arm #3
     {
@@ -83,7 +100,7 @@ var regions = [
         { rect: [-29, 5, 3, 1], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAlso: [-1]
+      simulateAlso: ['intro bottom left arm 2-3 node']
     },
     // Intro bottom right arm #1
     {
@@ -102,7 +119,11 @@ var regions = [
         { rect: [29, -7, 4, 5], secondary: true, camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAlso: [-1, 1, -7]
+      simulateAlso: [
+        'intro bottom right arm 1',
+        'intro bottom right arm 2',
+        'intro bottom intersection'
+      ]
     },
     // Intro bottom right arm #2
     {
@@ -122,7 +143,7 @@ var regions = [
         { rect: [4, -13, 6, 7], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -10
+      copyCameraAnchor: 'intro'
     },
     // Intro bottom-top #1-#2 node
     {
@@ -132,8 +153,13 @@ var regions = [
         { rect: [3, -17, 8, 4], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -11,
-      simulateAlso: [-1, -10, 1, 2]
+      copyCameraAnchor: 'intro',
+      simulateAlso: [
+        'intro bottom top 1',
+        'intro bottom intersection',
+        'intro bottom top 2',
+        'intro top intersection'
+      ]
     },
     // Intro bottom-top #2
     {
@@ -143,7 +169,7 @@ var regions = [
         { rect: [4, -23, 6, 6], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -12
+      copyCameraAnchor: 'intro'
     },
     // Intro top intersection
     {
@@ -153,8 +179,14 @@ var regions = [
         { rect: [4, -27, 6, 4], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -13,
-      simulateAlso: [-1, -2, 1, 2, 3]
+      copyCameraAnchor: 'intro',
+      simulateAlso: [
+        'intro bottom top 2',
+        'intro bottom top 1-2 node',
+        'intro top left arm',
+        'intro top right arm',
+        'intro exit'
+      ]
     },
     // Intro top left arm
     {
@@ -164,7 +196,7 @@ var regions = [
         { rect: [-4, -27, 7, 4], camera: 'follow-player' }
       ],
       zoom: 0.7,
-      simulateAlso: [-1]
+      simulateAlso: ['intro top intersection']
     },
     // Intro top right arm
     {
@@ -177,7 +209,7 @@ var regions = [
         { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
-      simulateAlso: [-2]
+      simulateAlso: ['intro top intersection']
     },
     // Intro exit
     {
@@ -187,8 +219,8 @@ var regions = [
         { rect: [4, -31, 6, 4], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: -16,
-      simulateAlso: [-3]
+      copyCameraAnchor: 'intro',
+      simulateAlso: ['intro top intersection']
     },
     // Intro bonus puzzle
     {
@@ -486,7 +518,10 @@ var regions = [
         { rect: [0, 0, 4, 5] }
       ],
       zoom: 0.7,
-      simulateAlso: [-26, -27]
+      simulateAlso: [
+        'intro top left arm',
+        'intro top intersection'
+      ]
     },
     // 3:00 (Menderbug)
     {
@@ -682,7 +717,12 @@ var regions = [
         { rect: [0, 6, 3, 3] }
       ],
       zoom: 0.6,
-      simulateAlso: [1, 2, 3, 4]
+      simulateAlso: [
+        'clementsparrow',
+        'clementsparrow secret 1',
+        'clementsparrow secret 2 release',
+        'clementsparrow secret 2'
+      ]
     },
     // 9:00 #2 (clementsparrow)
     {
@@ -696,7 +736,13 @@ var regions = [
       ],
       zoom: 0.60,
       credit: "clementsparrow",
-      simulateAlso: [-2, -1, 1, 2, 3],
+      simulateAlso: [
+        'joseph mansfield inflate intro',
+        'clementsparrow block source',
+        'clementsparrow secret 1',
+        'clementsparrow secret 2 release',
+        'clementsparrow secret 2'
+      ],
       simulationBoundsAdjustment: {
         maxX: 2
       }
@@ -712,7 +758,13 @@ var regions = [
       ],
       zoom: 0.6,
       secret: true,
-      simulateAlso: [-3, -2, -1, 1, 2]
+      simulateAlso: [
+        'joseph mansfield inflate intro',
+        'clementsparrow block source',
+        'clementsparrow',
+        'clementsparrow secret 2 release',
+        'clementsparrow secret 2'
+      ]
     },
     // 9:00 clementsparrow secret 2 release
     {
@@ -722,7 +774,13 @@ var regions = [
         { rect: [0, 0, 8, 3] }
       ],
       zoom: 0.7,
-      simulateAlso: [-4, -3, -2, -1, 1],
+      simulateAlso: [
+        'joseph mansfield inflate intro',
+        'clementsparrow block source',
+        'clementsparrow',
+        'clementsparrow secret 1',
+        'clementsparrow secret 2'
+      ],
       simulationBoundsAdjustment: {
         maxX: -2
       }
@@ -736,7 +794,13 @@ var regions = [
         { rect: [5, 1, 3, 3] }
       ],
       zoom: 0.7,
-      simulateAlso: [-5, -4, -3, -2, -1],
+      simulateAlso: [
+        'joseph mansfield inflate intro',
+        'clementsparrow block source',
+        'clementsparrow',
+        'clementsparrow secret 1',
+        'clementsparrow secret 2 release'
+      ],
       secret: true
     },
     // 9:00 #3 (Deusovi)
@@ -798,7 +862,7 @@ var regions = [
         { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58,
-      simulateAlso: [8]
+      simulateAlso: ['second ending gate']
     },
     //////////////
     // BRANCH B
@@ -823,7 +887,7 @@ var regions = [
         { rect: [1, 12, 16, 4] },
       ],
       zoom: 0.56,
-      simulateAlso: [6]
+      simulateAlso: ['second ending gate']
     },
     // (Pichusuperlover)
     {
@@ -1008,7 +1072,7 @@ var regions = [
         { rect: [0, 0, 3, 5] }
       ],
       zoom: 0.7,
-      simulateAlso: [-80, -82]
+      simulateAlso: ['intro top right arm', 'intro top intersection']
     },
     // (Guilherme Tows (zaratustra))
     {
@@ -1145,7 +1209,7 @@ var regions = [
         { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      simulateAlso: [-85, -86]
+      simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node']
     },
     // (Joel)
     {
@@ -1478,8 +1542,7 @@ var regions = [
         { rect: [0, 12, 21, 5] },
       ],
       zoom: 0.52,
-      credit: "domcamus",
-      start: true,
+      credit: "domcamus"
     },
     // (domcamus) Block release
     {
@@ -1590,6 +1653,7 @@ var theme2Areas = [
 ];
 
 var regionMap = [];
+var regionIds = {};
 var secrets = [];
 
 function initRegions() {
@@ -1629,6 +1693,13 @@ function initRegions() {
   }
 
   var secretCount = 0;
+
+  for (var i = 0; i < levelRegions.length; i++) {
+    if (levelRegions[i].id == null) {
+      throw new Error('Region missing id');
+    }
+    regionIds[levelRegions[i].id] = i;
+  }
 
   for (var i = 0; i < levelRegions.length; i++) {
     var region = levelRegions[i];
@@ -1716,7 +1787,7 @@ function initRegions() {
     var region = levelRegions[i];
 
     if (region.copyCameraAnchor != null) {
-      region.cameraAnchor = levelRegions[i + region.copyCameraAnchor].cameraAnchor;
+      region.cameraAnchor = levelRegions[regionIds[region.copyCameraAnchor]].cameraAnchor;
     }
 
     region.simulationBounds = {
@@ -1729,7 +1800,7 @@ function initRegions() {
     var simulateAlso = region.simulateAlso || [];
 
     for (var j = 0; j < simulateAlso.length; j++) {
-      var alsoRegion = levelRegions[i + simulateAlso[j]];
+      var alsoRegion = levelRegions[regionIds[simulateAlso[j]]];
       region.simulationBounds.minX = Math.min(region.simulationBounds.minX, alsoRegion.fullBounds.minX);
       region.simulationBounds.maxX = Math.max(region.simulationBounds.maxX, alsoRegion.fullBounds.maxX);
       region.simulationBounds.minY = Math.min(region.simulationBounds.minY, alsoRegion.fullBounds.minY);
