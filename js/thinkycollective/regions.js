@@ -14,8 +14,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro',
-      start: true
+      copyCameraAnchor: 'intro'
     },
     // Intro
     {
@@ -662,7 +661,7 @@ var regions = [
     },
     // 7:00 Le Slo Secret
     {
-      id: 'le slow secret',
+      id: 'le slo secret',
       offset: [19, 61],
       areas: [
         { rect: [0, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
@@ -967,13 +966,14 @@ var regions = [
     // (Second ending secret room)
     {
       id: 'second ending secret room',
-      offset: [117, -15],
+      offset: [117, -20],
       areas: [
-        { rect: [5, -2, 8, 3] },
-        { rect: [0, 1, 14, 9] }
+        { rect: [1, 0, 13, 15] },
+        { rect: [-3, 4, 4, 11] }
       ],
-      zoom: 0.7,
-      secret: true
+      zoom: 0.50,
+      secret: true,
+      start: true
     },
     // Corridor to Justas
     {
@@ -1567,9 +1567,20 @@ var regions = [
       id: 'gamepad bonus puzzle',
       offset: [1, -32],
       areas: [
-        { rect: [0, 0, 20, 16] }
+        { rect: [0, 0, 20, 6] },
+        { rect: [0, 6, 14, 10] }
       ],
       zoom: 0.52
+    },
+    // remote gamepad bonus puzzle
+    {
+      id: 'gamepad bonus puzzle secret',
+      offset: [1, -32],
+      areas: [
+        { rect: [14, 6, 5, 5] }
+      ],
+      zoom: 0.52,
+      secret: true
     },
     // Merge corridor #5
     {
@@ -1615,7 +1626,7 @@ var regions = [
 ];
 
 var theme2Areas = [
-  [115, -21, Infinity, Infinity],
+  [113, -24, Infinity, Infinity],
   [77, -8, Infinity, 13],
   [80, 5, Infinity, 13],
   [82, 18, Infinity, Infinity],
@@ -1650,6 +1661,28 @@ var theme2Areas = [
   [-1, -10, 26, 5],
   [-1, -5, 23, 6],
   [-1, 1, 22, 3],
+];
+
+var secretRegions = [
+  'clementsparrow secret 1',
+  'clementsparrow secret 2',
+  'gamepad bonus puzzle secret',
+  'stevenjmiller bonus puzzle secret',
+  'le slo secret',
+  'zomulgustar',
+  '7:00 main path lock secret',
+  'knexator secret',
+  'jumble secret',
+  'joseph mansfield secret',
+  'intro top left arm secret',
+  'intro bonus puzzle secret',
+  'joseph mansfield bomb secret 2',
+  'second ending secret room',
+  'stevenjmiller bomb secret',
+  'shark secret',
+  'zach secret',
+  'joel corridor secret 1',
+  'joel corridor secret 2'
 ];
 
 var regionMap = [];
@@ -1769,10 +1802,18 @@ function initRegions() {
           var positionIndex = y + x * level.height;
           var cell = level.getCell(positionIndex);
           if (cell.anyBitsInCommon(state.objectMasks['button_below'])) {
+            var markerIndexIndex = secretRegions.findIndex(function (regionId) {
+              return regionId === region.id;
+            });
+
+            if (markerIndexIndex === -1) {
+              throw new Error('Region has no corresponding secret marker:' + region.id);
+            }
+
             var secret = {
               buttonIndex: positionIndex,
               region: region,
-              markerIndex: secretMarkerIndexes[secretCount]
+              markerIndex: secretMarkerIndexes[markerIndexIndex]
             };
             secrets.push(secret);
             region.secret = secret;
@@ -1781,6 +1822,10 @@ function initRegions() {
         }
       }
     }
+  }
+
+  if (secretCount !== secretRegions.length) {
+    throw new Error('Expected ' + secretRegions.length + ' secret regions but there were ' + secretCount);
   }
 
   for (var i = 0; i < levelRegions.length; i++) {
