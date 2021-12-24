@@ -13,8 +13,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 1,
-      start: true
+      copyCameraAnchor: 1
     },
     // Intro
     {
@@ -1327,7 +1326,7 @@ var regions = [
       ],
       zoom: 0.7
     },
-    // Merge corridor #2
+    // Merge corridor #3
     {
       offset: [21, -18],
       areas: [
@@ -1335,12 +1334,13 @@ var regions = [
       ],
       zoom: 0.6
     },
-    // Merge corridor #3
+    // Merge corridor #4
     {
       offset: [21, -14],
       areas: [
         { rect: [0, 0, 4, 19], camera: 'follow-player' },
-        { rect: [-2, 1, 2, 4], camera: 'follow-player' }
+        { rect: [-3, 1, 3, 4], camera: 'follow-player' },
+        { rect: [-5, 1, 2, 3], camera: 'follow-player' }
       ],
       zoom: 0.6
     },
@@ -1348,12 +1348,14 @@ var regions = [
     {
       offset: [-1, -13],
       areas: [
-        { rect: [0, 0, 20, 9] },
+        { rect: [0, 0, 17, 3] },
+        { rect: [0, 3, 20, 6] },
         { rect: [0, 9, 19, 3] },
         { rect: [0, 12, 21, 5] },
       ],
-      zoom: 0.50,
-      credit: "domcamus"
+      zoom: 0.52,
+      credit: "domcamus",
+      start: true,
     },
     // (domcamus) Block release
     {
@@ -1363,7 +1365,23 @@ var regions = [
       ],
       zoom: 0.50
     },
-    // Merge corridor #4
+    // domcamus secret corridor
+    {
+      offset: [8, -16],
+      areas: [
+        { rect: [0, 0, 8, 3] }
+      ],
+      zoom: 0.6
+    },
+    // remote gamepad bonus puzzle
+    {
+      offset: [1, -32],
+      areas: [
+        { rect: [0, 0, 20, 16] }
+      ],
+      zoom: 0.52
+    },
+    // Merge corridor #5
     {
       offset: [11, 5],
       areas: [
