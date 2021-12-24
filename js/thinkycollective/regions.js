@@ -6,6 +6,7 @@ var regions = [
     //////////////
     // Entrance path
     {
+      id: 'entrance path',
       offset: [64, 67],
       areas: [
         { rect: [-8, 7, 7, 3], camera: 'follow-player-anchored-x' },
@@ -17,6 +18,7 @@ var regions = [
     },
     // Intro
     {
+      id: 'intro',
       offset: [64, 67],
       areas: [
         { rect: [-1, 3, 16, 9], camera: 'follow-player-anchored-x' },
@@ -25,6 +27,7 @@ var regions = [
     },
     // Intro bottom intersection
     {
+      id: 'entrance bottom intersection',
       offset: [64, 67],
       areas: [
         { rect: [4, -6, 6, 9], camera: 'follow-player-anchored-x' }
@@ -35,6 +38,7 @@ var regions = [
     },
     // Intro bottom left arm #1
     {
+      id: 'intro bottom left arm 1',
       offset: [64, 67],
       areas: [
         { rect: [-9, -6, 13, 4], camera: 'follow-player' },
@@ -43,6 +47,7 @@ var regions = [
     },
     // Intro bottom left arm #1-#2 node
     {
+      id: 'intro bottom left arm 1-2 node',
       offset: [64, 67],
       areas: [
         { rect: [-13, -7, 4, 5], camera: 'follow-player' },
@@ -52,6 +57,7 @@ var regions = [
     },
     // Intro bottom left arm #2
     {
+      id: 'intro bottom left arm 2',
       offset: [64, 67],
       areas: [
         { rect: [-13, -2, 4, 8], camera: 'follow-player' },
@@ -60,6 +66,7 @@ var regions = [
     },
     // Intro bottom left arm #2-#3 node
     {
+      id: 'intro bottom left arm 2-3 node',
       offset: [64, 67],
       areas: [
         { rect: [-13, 6, 4, 5], camera: 'follow-player' },
@@ -69,6 +76,7 @@ var regions = [
     },
     // Intro bottom left arm #3
     {
+      id: 'intro bottom left arm 3',
       offset: [64, 67],
       areas: [
         { rect: [-31, 6, 18, 4], camera: 'follow-player' },
@@ -79,6 +87,7 @@ var regions = [
     },
     // Intro bottom right arm #1
     {
+      id: 'intro bottom right arm 1',
       offset: [64, 67],
       areas: [
         { rect: [10, -6, 19, 4], secondary: true, camera: 'follow-player' },
@@ -87,6 +96,7 @@ var regions = [
     },
     // Intro bottom right arm #1-#2 node
     {
+      id: 'intro bottom right arm 1-2 node',
       offset: [64, 67],
       areas: [
         { rect: [29, -7, 4, 5], secondary: true, camera: 'follow-player' },
@@ -96,6 +106,7 @@ var regions = [
     },
     // Intro bottom right arm #2
     {
+      id: 'intro bottom right arm 2',
       offset: [64, 67],
       areas: [
         { rect: [29, -2, 4, 9], secondary: true, camera: 'follow-player' },
@@ -105,6 +116,7 @@ var regions = [
     },
     // Intro bottom-top #1
     {
+      id: 'intro bottom top 1',
       offset: [64, 67],
       areas: [
         { rect: [4, -13, 6, 7], camera: 'follow-player-anchored-x' }
@@ -114,6 +126,7 @@ var regions = [
     },
     // Intro bottom-top #1-#2 node
     {
+      id: 'intro bottom top 1-2 node',
       offset: [64, 67],
       areas: [
         { rect: [3, -17, 8, 4], camera: 'follow-player-anchored-x' }
@@ -124,6 +137,7 @@ var regions = [
     },
     // Intro bottom-top #2
     {
+      id: 'intro bottom top 2',
       offset: [64, 67],
       areas: [
         { rect: [4, -23, 6, 6], camera: 'follow-player-anchored-x' }
@@ -133,6 +147,7 @@ var regions = [
     },
     // Intro top intersection
     {
+      id: 'intro top intersection',
       offset: [64, 67],
       areas: [
         { rect: [4, -27, 6, 4], camera: 'follow-player-anchored-x' }
@@ -143,6 +158,7 @@ var regions = [
     },
     // Intro top left arm
     {
+      id: 'intro top left arm',
       offset: [65, 67],
       areas: [
         { rect: [-4, -27, 7, 4], camera: 'follow-player' }
@@ -152,6 +168,7 @@ var regions = [
     },
     // Intro top right arm
     {
+      id: 'intro top right arm',
       offset: [64, 67],
       areas: [
         { rect: [10, -27, 1, 4], secondary: true, camera: 'follow-player' },
@@ -164,6 +181,7 @@ var regions = [
     },
     // Intro exit
     {
+      id: 'intro exit',
       offset: [64, 67],
       areas: [
         { rect: [4, -31, 6, 4], camera: 'follow-player-anchored-x' }
@@ -174,6 +192,7 @@ var regions = [
     },
     // Intro bonus puzzle
     {
+      id: 'intro bonus puzzle',
       offset: [79, 66],
       areas: [
         { rect: [0, 3, 1, 5], secondary: true, camera: 'pull-horizontal' },
@@ -185,6 +204,7 @@ var regions = [
     },
     // Intro bonus puzzle secret
     {
+      id: 'intro bonus puzzle secret',
       offset: [74, 65],
       areas: [
         { rect: [0, 0, 5, 5] },
@@ -195,6 +215,7 @@ var regions = [
     },
     // Intro top left arm secret corridor
     {
+      id: 'intro top left arm secret corridor',
       offset: [65, 70],
       areas: [
         { rect: [-3, -26, 5, 11], camera: 'follow-player' },
@@ -203,6 +224,7 @@ var regions = [
     },
     // Intro top left arm secret
     {
+      id: 'intro top left arm secret',
       offset: [65, 70],
       areas: [
         { rect: [-2, -15, 3, 1], secondary: true, camera: 'pull-vertical' },
@@ -213,6 +235,7 @@ var regions = [
     },
     // Block push intro (Jumble)
     {
+      id: 'jumble',
       offset: [60, 33],
       areas: [
         { rect: [-2, 0, 10, 7] },
@@ -224,6 +247,7 @@ var regions = [
     },
     // Block push intro secret
     {
+      id: 'jumble secret',
       offset: [50, 32],
       areas: [
         { rect: [0, 0, 4, 5] },
@@ -234,6 +258,7 @@ var regions = [
     },
     // Two level intro (Patrick)
     {
+      id: 'patrick',
       offset: [52, 21],
       areas: [
         { rect: [0, 0, 12, 8] },
@@ -245,6 +270,7 @@ var regions = [
     },
     // Seed level (Joseph Mansfield)
     {
+      id: 'joseph mansfield',
       offset: [64, 20],
       areas: [
         { rect: [0, 0, 3, 8], secondary: true, camera: 'pull-horizontal' },
@@ -257,6 +283,7 @@ var regions = [
     },
     // Infinite loop intro (Blookerstein)
     {
+      id: 'blookerstein',
       offset: [75, 19],
       areas: [
         { rect: [1, -1, 6, 11] }
@@ -266,6 +293,7 @@ var regions = [
     },
     // Seed level secret
     {
+      id: 'joseph mansfield secret',
       offset: [72, 29],
       areas: [
         { rect: [-4, 0, 12, 3], camera: 'follow-player-anchored-y' },
@@ -276,6 +304,7 @@ var regions = [
     },
     // Hub
     {
+      id: 'hub',
       offset: [73, 7],
       areas: [
         { rect: [0, 0, 14, 10] },
@@ -289,6 +318,7 @@ var regions = [
     //////////////
     // (marcosd)
     {
+      id: 'marcosd',
       offset: [64, 10],
       areas: [
         { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
@@ -300,6 +330,7 @@ var regions = [
     },
     // (knexator)
     {
+      id: 'knexator',
       offset: [55, 10],
       areas: [
         { rect: [0, 0, 1, 9], secondary: true, camera: 'pull-horizontal' },
@@ -313,6 +344,7 @@ var regions = [
     },
     // (knexator) - secret
     {
+      id: 'knexator secret',
       offset: [50, 12],
       areas: [
         { rect: [4, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
@@ -324,6 +356,7 @@ var regions = [
     },
     // (knexator) - secret return
     {
+      id: 'knexator secret return',
       offset: [50, 12],
       areas: [
         { rect: [-2, 6, 13, 3], camera: 'follow-player' },
@@ -335,6 +368,7 @@ var regions = [
     },
     // Branch A exit corridor
     {
+      id: 'branch a exit corridor',
       offset: [43, 8],
       areas: [
         { rect: [-1, 0, 31, 3], camera: 'follow-player' },
@@ -349,6 +383,7 @@ var regions = [
     },
     // (Corey Hardt)
     {
+      id: 'corey hardt',
       offset: [43, 1],
       areas: [
         { rect: [0, 4, 2, 3], secondary: true, camera: 'pull-horizontal' },
@@ -362,6 +397,7 @@ var regions = [
     },
     // (Auroriax)
     {
+      id: 'auroriax',
       offset: [40, 12],
       areas: [
         { rect: [3, -1, 3, 1], secondary: true, camera: 'pull-vertical' },
@@ -377,6 +413,7 @@ var regions = [
     },
     // (Kristian Hedeholm)
     {
+      id: 'kristian hedeholm',
       offset: [39, 25],
       areas: [
         { rect: [7, 0, 3, 2], secondary: true, camera: 'pull-vertical' },
@@ -389,6 +426,7 @@ var regions = [
     },
     // The clock (Zomulgustar)
     {
+      id: 'zomulgustar',
       offset: [26, 37],
       areas: [
         { rect: [1, 0, 19, 5] },
@@ -407,6 +445,7 @@ var regions = [
     },
     // Clock shortcut surround
     {
+      id: 'clock shortcut surround',
       offset: [32, 31],
       areas: [
         { rect: [0, 0, 3, 5] },
@@ -418,6 +457,7 @@ var regions = [
     },
     // Clock shortcut
     {
+      id: 'clock shortcut',
       offset: [32, 30],
       areas: [
         { rect: [3, 2, 1, 3] }
@@ -426,6 +466,7 @@ var regions = [
     },
     // 1:00 (CHz)
     {
+      id: 'chz',
       offset: [46, 37],
       areas: [
         { rect: [0, 0, 1, 3], secondary: true, camera: 'pull-horizontal' },
@@ -439,6 +480,7 @@ var regions = [
     },
     // 1:00 Main path lock
     {
+      id: '1:00 main path lock',
       offset: [57, 40],
       areas: [
         { rect: [0, 0, 4, 5] }
@@ -448,6 +490,7 @@ var regions = [
     },
     // 3:00 (Menderbug)
     {
+      id: 'menderbug',
       offset: [47, 48],
       areas: [
         { rect: [0, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
@@ -460,6 +503,7 @@ var regions = [
     },
     // 5:00 #1 (Draknek)
     {
+      id: 'draknek',
       offset: [39, 59],
       areas: [
         { rect: [0, 0, 11, 1], secondary: true, camera: 'pull-vertical' },
@@ -473,6 +517,7 @@ var regions = [
     },
     // 5:00 #2 (Aspeon)
     {
+      id: 'aspeon',
       offset: [33, 58],
       areas: [
         { rect: [0, 0, 6, 1], secondary: true, camera: 'pull-vertical' },
@@ -486,6 +531,7 @@ var regions = [
     },
     // 7:00 #1 (KirraLuan)
     {
+      id: 'kirraluan',
       offset: [16, 51],
       areas: [
         { rect: [0, 0, 9, 4] },
@@ -498,6 +544,7 @@ var regions = [
     },
     // 7:00 #2 (Clickmazes)
     {
+      id: 'clickmazes',
       offset: [25, 59],
       areas: [
         { rect: [2, -1, 3, 2], secondary: true, camera: 'pull-vertical' },
@@ -513,6 +560,7 @@ var regions = [
     },
     // 7:00 #3 (pancelor)
     {
+      id: 'pancelor',
       offset: [19, 69],
       areas: [
         { rect: [-2, 0, 14, 1], secondary: true, camera: 'pull-vertical' },
@@ -526,6 +574,7 @@ var regions = [
     },
     // 7:00 Main path lock
     {
+      id: '7:00 main path lock',
       offset: [31, 69],
       areas: [
         { rect: [0, 0, 2, 8] },
@@ -535,6 +584,7 @@ var regions = [
     },
     // 7:00 Main path lock secret
     {
+      id: '7:00 main path lock secret',
       offset: [34, 66],
       areas: [
         { rect: [0, 0, 5, 5] },
@@ -547,6 +597,7 @@ var regions = [
     },
     // 7:00 #4 (Norgg)
     {
+      id: 'norgg',
       offset: [8, 69],
       areas: [
         { rect: [0, 0, 8, 1], secondary: true, camera: 'pull-vertical' },
@@ -560,6 +611,7 @@ var regions = [
     },
     // 7:00 #5 Post-Norgg
     {
+      id: 'post-norgg',
       offset: [8, 61],
       areas: [
         { rect: [-1, 1, 10, 6] },
@@ -575,6 +627,7 @@ var regions = [
     },
     // 7:00 Le Slo Secret
     {
+      id: 'le slow secret',
       offset: [19, 61],
       areas: [
         { rect: [0, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
@@ -586,6 +639,7 @@ var regions = [
     },
     // 7:00 #6 (Le Slo)
     {
+      id: 'le slo',
       offset: [2, 53],
       areas: [
         { rect: [2, 0, 7, 1], secondary: true },
@@ -598,6 +652,7 @@ var regions = [
     },
     // 7:00 Return to clock from (Le Slo)
     {
+      id: 'return-to-clock',
       offset: [12, 48],
       areas: [
         { rect: [1, 3, 3, 7], camera: 'follow-player' },
@@ -608,6 +663,7 @@ var regions = [
     },
     // 9:00 #1 (Joseph Mansfield)
     {
+      id: 'joseph mansfield inflate intro',
       offset: [16, 37],
       areas: [
         { rect: [1, 0, 7, 11] },
@@ -619,6 +675,7 @@ var regions = [
     },
     // 9:00 Block source
     {
+      id: 'clementsparrow block source',
       offset: [13, 38],
       areas: [
         { rect: [0, 0, 4, 6] },
@@ -629,6 +686,7 @@ var regions = [
     },
     // 9:00 #2 (clementsparrow)
     {
+      id: 'clementsparrow',
       offset: [5, 38],
       areas: [
         { rect: [0, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
@@ -645,6 +703,7 @@ var regions = [
     },
     // 9:00 clementsparrow secret 1
     {
+      id: 'clementsparrow secret 1',
       offset: [-1, 36],
       areas: [
         { rect: [0, 0, 5, 5] },
@@ -657,6 +716,7 @@ var regions = [
     },
     // 9:00 clementsparrow secret 2 release
     {
+      id: 'clementsparrow secret 2 release',
       offset: [6, 35],
       areas: [
         { rect: [0, 0, 8, 3] }
@@ -669,6 +729,7 @@ var regions = [
     },
     // 9:00 clementsparrow secret 2
     {
+      id: 'clementsparrow secret 2',
       offset: [-1, 45],
       areas: [
         { rect: [0, 0, 5, 5] },
@@ -680,6 +741,7 @@ var regions = [
     },
     // 9:00 #3 (Deusovi)
     {
+      id: 'deusovi',
       offset: [6, 25],
       areas: [
         { rect: [0, -1, 13, 11] },
@@ -691,6 +753,7 @@ var regions = [
     },
     // 9:00 #4 (crychair)
     {
+      id: 'crychair',
       offset: [20, 26],
       areas: [
         { rect: [0, 0, 1, 10], secondary: true, camera: 'pull-horizontal' },
@@ -703,6 +766,7 @@ var regions = [
     },
     // Fusion intro
     {
+      id: 'fusion-intro',
       offset: [29, 22],
       areas: [
         { rect: [0, 0, 9, 1], secondary: true, camera: 'pull-vertical' },
@@ -714,6 +778,7 @@ var regions = [
     },
     // (PedroPSI)
     {
+      id: 'pedropsi',
       offset: [27, 11],
       areas: [
         { rect: [4, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
@@ -727,6 +792,7 @@ var regions = [
     },
     // Branch A finish
     {
+      id: 'branch a finish',
       offset: [25, -3],
       areas: [
         { rect: [0, 0, 17, 14] },
@@ -739,6 +805,7 @@ var regions = [
     //////////////
     // Branch B exit path
     {
+      id: 'branch b exit path',
       offset: [87, 8],
       areas: [
         { rect: [0, 0, 3, 9], camera: 'follow-player' },
@@ -748,6 +815,7 @@ var regions = [
     },
     // Branch B finish
     {
+      id: 'branch b finish',
       offset: [89, -8],
       areas: [
         { rect: [1, 0, 17, 11] },
@@ -759,6 +827,7 @@ var regions = [
     },
     // (Pichusuperlover)
     {
+      id: 'pichusuperlover',
       offset: [90, 8],
       areas: [
         { rect: [0, 0, 1, 6], secondary: true, camera: 'pull-horizontal' },
@@ -771,6 +840,7 @@ var regions = [
     },
     // (Mischka Kamener)
     {
+      id: 'mischka kamener',
       offset: [104, 2],
       areas: [
         { rect: [0, 7, 1, 5], secondary: true, camera: 'pull-horizontal' },
@@ -785,6 +855,7 @@ var regions = [
     },
     // (Mischka Kamener part 2)
     {
+      id: 'mischka kamener part 2',
       offset: [104, 1],
       areas: [
         { rect: [1, 0, 6, 7] },
@@ -798,6 +869,7 @@ var regions = [
     },
     // (Joseph Mansfield #1)
     {
+      id: 'joseph mansfield sticky intro 1',
       offset: [113, -4],
       areas: [
         { rect: [0, -1, 9, 2], secondary: true },
@@ -808,6 +880,7 @@ var regions = [
     },
     // (Joseph Mansfield #2)
     {
+      id: 'joseph mansfield sticky intro 2',
       offset: [116, 1],
       areas: [
         { rect: [3, 2, 8, 1], secondary: true, camera: 'pull-vertical' },
@@ -818,6 +891,7 @@ var regions = [
     },
     // (Second ending gate)
     {
+      id: 'second ending gate',
       offset: [122, -5],
       areas: [
         { rect: [0, 0, 10, 1], secondary: true, camera: 'pull-vertical' },
@@ -828,6 +902,7 @@ var regions = [
     },
     // (Second ending secret room)
     {
+      id: 'second ending secret room',
       offset: [117, -15],
       areas: [
         { rect: [5, -2, 8, 3] },
@@ -838,6 +913,7 @@ var regions = [
     },
     // Corridor to Justas
     {
+      id: 'justas corridor',
       offset: [128, 3],
       areas: [
         { rect: [0, 0, 4, 11], camera: 'follow-player' },
@@ -847,6 +923,7 @@ var regions = [
     },
     // (Justas)
     {
+      id: 'justas',
       offset: [122, 14],
       areas: [
         { rect: [6, 0, 4, 1], secondary: true, camera: 'pull-vertical' },
@@ -858,6 +935,7 @@ var regions = [
     },
     // (That Scar)
     {
+      id: 'that scar',
       offset: [110, 18],
       areas: [
         { rect: [11, 2, 1, 3], secondary: true, camera: 'pull-horizontal' },
@@ -869,6 +947,7 @@ var regions = [
     },
     // Wall_Above intro
     {
+      id: 'wall above intro',
       offset: [109, 12],
       areas: [
         { rect: [0, 2, 2, 4], secondary: true, camera: 'pull-horizontal' },
@@ -878,6 +957,7 @@ var regions = [
     },
     // Slime storage
     {
+      id: 'slime storage',
       offset: [109, 12],
       areas: [
         { rect: [13, -3, 7, 7] }
@@ -886,6 +966,7 @@ var regions = [
     },
     // (winterbeak)
     {
+      id: 'winterbeak',
       offset: [91, 14],
       areas: [
         { rect: [10, 0, 6, 2], secondary: true },
@@ -900,6 +981,7 @@ var regions = [
     },
     // Corridor
     {
+      id: 'winterbeak corridor',
       offset: [93, 26],
       areas: [
         { rect: [-3, 0, 10, 3] }
@@ -908,6 +990,7 @@ var regions = [
     },
     // (Dan Williams)
     {
+      id: 'dan williams',
       offset: [89, 29],
       areas: [
         { rect: [3, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
@@ -919,6 +1002,7 @@ var regions = [
     },
     // Main path lock
     {
+      id: 'top right main path lock',
       offset: [86, 30],
       areas: [
         { rect: [0, 0, 3, 5] }
@@ -928,6 +1012,7 @@ var regions = [
     },
     // (Guilherme Tows (zaratustra))
     {
+      id: 'zaratustra',
       offset: [82, 35],
       areas: [
         { rect: [0, 0, 8, 10] },
@@ -943,6 +1028,7 @@ var regions = [
     },
     // (Muftwin)
     {
+      id: 'muftwin',
       offset: [75, 46],
       areas: [
         { rect: [3, -2, 5, 3], secondary: true, camera: 'pull-vertical' },
@@ -956,6 +1042,7 @@ var regions = [
     },
     // (Colin)
     {
+      id: 'colin',
       offset: [83, 52],
       areas: [
         { rect: [0, 6, 3, 1], secondary: true },
@@ -968,6 +1055,7 @@ var regions = [
     },
     // Explosive intro
     {
+      id: 'explosive intro',
       offset: [93, 46],
       areas: [
         { rect: [0, 0, 5, 8] },
@@ -977,6 +1065,7 @@ var regions = [
     },
     // (Toombler)
     {
+      id: 'toombler',
       offset: [98, 37],
       areas: [
         { rect: [2, 0, 11, 5] },
@@ -989,6 +1078,7 @@ var regions = [
     },
     // stevenjmiller's bomb secret corridor
     {
+      id: 'stevenjmiller bomb secret corridor',
       offset: [109, 43],
       areas: [
         { rect: [0, 0, 5, 5] },
@@ -1002,6 +1092,7 @@ var regions = [
     },
     // stevenjmiller's bomb secret
     {
+      id: 'stevenjmiller bomb secret',
       offset: [114, 52],
       areas: [
         { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
@@ -1012,6 +1103,7 @@ var regions = [
     },
     // Joseph Mansfield's secret
     {
+      id: 'joseph mansfield bomb secret',
       offset: [107, 55],
       areas: [
         { rect: [0, 0, 5, 1], secondary: true, camera: 'pull-vertical' },
@@ -1022,6 +1114,7 @@ var regions = [
     },
     // Joseph Mansfield's secret #2
     {
+      id: 'joseph mansfield bomb secret 2',
       offset: [107, 61],
       areas: [
         { rect: [1, 0, 3, 1], secondary: true, camera: 'pull-vertical' },
@@ -1034,6 +1127,7 @@ var regions = [
     },
     // (Joseph Mansfield)
     {
+      id: 'joseph mansfield bomb',
       offset: [98, 51],
       areas: [
         { rect: [3, 0, 3, 3], secondary: true, camera: 'pull-vertical' },
@@ -1044,6 +1138,7 @@ var regions = [
     },
     // Main path branch
     {
+      id: 'bottom right main path branch',
       offset: [99, 69],
       areas: [
         { rect: [0, 0, 5, 5] },
@@ -1054,6 +1149,7 @@ var regions = [
     },
     // (Joel)
     {
+      id: 'joel',
       offset: [105, 68],
       areas: [
         { rect: [0, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
@@ -1067,6 +1163,7 @@ var regions = [
     },
     // Corridor
     {
+      id: 'joel corridor',
       offset: [115, 68],
       areas: [
         { rect: [1, 0, 5, 1] },
@@ -1080,6 +1177,7 @@ var regions = [
     },
     // Corridor secret #1
     {
+      id: 'joel corridor secret 1',
       offset: [124, 63],
       areas: [
         { rect: [0, 1, 3, 3], secondary: true, camera: 'pull-horizontal' },
@@ -1090,6 +1188,7 @@ var regions = [
     },
     // Corridor secret #2
     {
+      id: 'joel corridor secret 2',
       offset: [122, 73],
       areas: [
         { rect: [0, 1, 1, 3], secondary: true, camera: 'pull-horizontal' },
@@ -1100,6 +1199,7 @@ var regions = [
     },
     // (Notan)
     {
+      id: 'notan',
       offset: [115, 57],
       areas: [
         { rect: [0, 0, 11, 5] },
@@ -1112,6 +1212,7 @@ var regions = [
     },
     // (Zach)
     {
+      id: 'zach',
       offset: [113, 40],
       areas: [
         { rect: [11, 0, 6, 1], secondary: true, camera: 'pull-vertical' },
@@ -1125,6 +1226,7 @@ var regions = [
     },
     // (Zach) secret
     {
+      id: 'zach secret',
       offset: [125, 52],
       areas: [
         { rect: [1, 0, 3, 1], secondary: true, camera: 'pull-vertical' },
@@ -1135,6 +1237,7 @@ var regions = [
     },
     // Return corridor
     {
+      id: 'zach return corridor',
       offset: [111, 39],
       areas: [
         { rect: [0, 0, 8, 3], camera: 'follow-player' },
@@ -1145,6 +1248,7 @@ var regions = [
     },
     // (Joseph Mansfield) Vat introduction
     {
+      id: 'vat introduction',
       offset: [124, 29],
       areas: [
         { rect: [0, 0, 1, 10], secondary: true, camera: 'pull-horizontal' },
@@ -1156,6 +1260,7 @@ var regions = [
     },
     // (Shark)
     {
+      id: 'shark',
       offset: [100, 25],
       areas: [
         { rect: [0, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
@@ -1169,6 +1274,7 @@ var regions = [
     },
     // (Shark) secret
     {
+      id: 'shark secret',
       offset: [122, 24],
       areas: [
         { rect: [0, 1, 3, 4], secondary: true, camera: 'pull-horizontal' },
@@ -1180,6 +1286,7 @@ var regions = [
     },
     // (twak)
     {
+      id: 'twak',
       offset: [82, 17],
       areas: [
         { rect: [0, 0, 8, 1], secondary: true, camera: 'pull-vertical' },
@@ -1195,6 +1302,7 @@ var regions = [
     //////////////
     // (Jack Lance)
     {
+      id: 'jack lance',
       offset: [77, -6],
       areas: [
         { rect: [1, 0, 12, 11] },
@@ -1206,6 +1314,7 @@ var regions = [
     },
     // Ending gate
     {
+      id: 'ending gate',
       offset: [65, -18],
       areas: [
         { rect: [0, 0, 9, 16] },
@@ -1215,6 +1324,7 @@ var regions = [
     },
     // Merge corridor #1
     {
+      id: 'merge corridor 1',
       offset: [50, -7],
       areas: [
         { rect: [-2, 0, 17, 4], camera: 'follow-player' },
@@ -1225,6 +1335,7 @@ var regions = [
     },
     // (D5R)
     {
+      id: 'd5r',
       offset: [48, -18],
       areas: [
         { rect: [0, 0, 12, 10] }
@@ -1234,6 +1345,7 @@ var regions = [
     },
     // (D5R) Block release
     {
+      id: 'd5r block release',
       offset: [60, -14],
       areas: [
         { rect: [0, 0, 4, 7] }
@@ -1242,6 +1354,7 @@ var regions = [
     },
     // Ethan Clark secret corridor #1
     {
+      id: 'ethan clark secret corridor 1',
       offset: [53, -4],
       areas: [
         { rect: [0, 0, 1, 5], secondary: true, camera: 'pull-horizontal' },
@@ -1252,6 +1365,7 @@ var regions = [
     },
     // Ethan Clark secret corridor #2
     {
+      id: 'ethan clark secret corridor 2',
       offset: [42, -3],
       areas: [
         { rect: [0, 0, 11, 4], camera: 'follow-player' }
@@ -1260,6 +1374,7 @@ var regions = [
     },
     // (Ethan Clark)
     {
+      id: 'ethan clark',
       offset: [55, -2],
       areas: [
         { rect: [2, 2, 1, 5], secondary: true, camera: 'pull-horizontal' },
@@ -1274,6 +1389,7 @@ var regions = [
     },
     // (Ethan Clark) block release
     {
+      id: 'ethan clark block release',
       offset: [55, -2],
       areas: [
         { rect: [15, 1, 3, 6] }
@@ -1282,6 +1398,7 @@ var regions = [
     },
     // stevenjmiller bonus puzzle
     {
+      id: 'stevenjmiller bonus puzzle',
       offset: [28, -15],
       areas: [
         { rect: [0, 0, 17, 12] }
@@ -1290,6 +1407,7 @@ var regions = [
     },
     // stevenjmiller bonus puzzle secret
     {
+      id: 'stevenjmiller bonus puzzle secret',
       offset: [24, -15],
       areas: [
         { rect: [1, 1, 3, 2] },
@@ -1301,6 +1419,7 @@ var regions = [
     },
     // Merge corridor #2
     {
+      id: 'merge corridor 2',
       offset: [44, -18],
       areas: [
         { rect: [0, 0, 4, 15], camera: 'follow-player' }
@@ -1309,6 +1428,7 @@ var regions = [
     },
     // (jackk)
     {
+      id: 'jackk',
       offset: [29, -32],
       areas: [
         { rect: [0, 0, 23, 14] },
@@ -1320,6 +1440,7 @@ var regions = [
     },
     // (jackk) Block release
     {
+      id: 'jackk block release',
       offset: [21, -24],
       areas: [
         { rect: [0, 0, 8, 6] }
@@ -1328,6 +1449,7 @@ var regions = [
     },
     // Merge corridor #3
     {
+      id: 'merge corridor 3',
       offset: [21, -18],
       areas: [
         { rect: [0, 0, 23, 4], camera: 'follow-player' }
@@ -1336,6 +1458,7 @@ var regions = [
     },
     // Merge corridor #4
     {
+      id: 'merge corridor 4',
       offset: [21, -14],
       areas: [
         { rect: [0, 0, 4, 19], camera: 'follow-player' },
@@ -1346,6 +1469,7 @@ var regions = [
     },
     // (domcamus)
     {
+      id: 'domcamus',
       offset: [-1, -13],
       areas: [
         { rect: [0, 0, 17, 3] },
@@ -1359,6 +1483,7 @@ var regions = [
     },
     // (domcamus) Block release
     {
+      id: 'domcamus block release',
       offset: [17, -5],
       areas: [
         { rect: [0, 0, 4, 4] }
@@ -1367,6 +1492,7 @@ var regions = [
     },
     // domcamus secret corridor
     {
+      id: 'domcamus secret corridor',
       offset: [8, -16],
       areas: [
         { rect: [0, 0, 8, 3] }
@@ -1375,6 +1501,7 @@ var regions = [
     },
     // remote gamepad bonus puzzle
     {
+      id: 'gamepad bonus puzzle',
       offset: [1, -32],
       areas: [
         { rect: [0, 0, 20, 16] }
@@ -1383,6 +1510,7 @@ var regions = [
     },
     // Merge corridor #5
     {
+      id: 'merge corridor 5',
       offset: [11, 5],
       areas: [
         { rect: [0, 0, 14, 4], camera: 'follow-player' }
@@ -1391,6 +1519,7 @@ var regions = [
     },
     // (stevenjmiller)
     {
+      id: 'stevenjmiller',
       offset: [3, 10],
       areas: [
         { rect: [0, 0, 19, 13] },
@@ -1402,6 +1531,7 @@ var regions = [
     },
     // (stevenjmiller) Block release
     {
+      id: 'stevenjmiller block release',
       offset: [6, 5],
       areas: [
         { rect: [0, 0, 5, 4] }
@@ -1410,6 +1540,7 @@ var regions = [
     },
     // Ending
     {
+      id: 'ending',
       offset: [63, -32],
       areas: [
         { rect: [0, 0, 13, 13] },
