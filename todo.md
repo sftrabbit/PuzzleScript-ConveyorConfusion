@@ -9,3 +9,4 @@ During-playtest:
 - Locatable secret indicators
 - Add final sjm secret
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
+- Change region references to ID-based
