@@ -464,6 +464,7 @@ var regions = [
         { rect: [0, 5, 21, 11] },
         { rect: [1, 16, 19, 5] },
         { rect: [12, 21, 8, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [20, 19, 1, 3], secondary: true, camera: 'pull-vertical' },
         { rect: [1, -1, 13, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.38,
@@ -539,7 +540,7 @@ var regions = [
     // 5:00 #1 (Draknek)
     {
       id: 'draknek',
-      offset: [39, 59],
+      offset: [40, 59],
       areas: [
         { rect: [0, 0, 11, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 1, 10], secondary: true, camera: 'pull-horizontal' },
@@ -553,7 +554,7 @@ var regions = [
     // 5:00 #2 (Aspeon)
     {
       id: 'aspeon',
-      offset: [33, 58],
+      offset: [34, 58],
       areas: [
         { rect: [0, 0, 6, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 1, 1, 7], secondary: true },
@@ -572,7 +573,8 @@ var regions = [
         { rect: [0, 0, 9, 4] },
         { rect: [9, 0, 2, 4], secondary: true },
         { rect: [0, 4, 9, 6] },
-        { rect: [9, 4, 2, 6], secondary: true, camera: 'pull-horizontal' }
+        { rect: [9, 4, 2, 3], secondary: true, camera: 'pull-horizontal' },
+        { rect: [9, 7, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
       credit: "KirraLuan"
@@ -580,18 +582,20 @@ var regions = [
     // 7:00 #2 (Clickmazes)
     {
       id: 'clickmazes',
-      offset: [25, 59],
+      offset: [26, 58],
       areas: [
-        { rect: [2, -1, 3, 2], secondary: true, camera: 'pull-vertical' },
-        { rect: [0, 1, 8, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [0, 2, 8, 7] },
-        { rect: [0, 9, 8, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [0, 0, 1, 11], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 6, 1], secondary: true },
+        { rect: [1, 1, 6, 9] },
+        { rect: [1, 10, 6, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [7, 0, 1, 11], secondary: true }
       ],
       zoom: 0.7,
       credit: "Clickmazes",
       simulationBoundsAdjustment: {
         maxX: -2
-      }
+      },
+      start: true
     },
     // 7:00 #3 (pancelor)
     {
@@ -1362,8 +1366,7 @@ var regions = [
         { rect: [0, 0, 9, 16] },
         { rect: [0, 16, 9, 1], secondary: true }
       ],
-      zoom: 0.48,
-      start: true
+      zoom: 0.48
     },
     // Ending gate corridor
     {
