@@ -1,4 +1,4 @@
-var regionsOffset = [1, 33];
+var regionsOffset = [1, 38];
 var regions = [
   [
     //////////////
@@ -952,29 +952,6 @@ var regions = [
       ],
       zoom: 0.7
     },
-    // (Second ending gate)
-    {
-      id: 'second ending gate',
-      offset: [122, -5],
-      areas: [
-        { rect: [0, 0, 10, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [0, 1, 10, 6] },
-        { rect: [0, 7, 10, 1], secondary: true, camera: 'pull-vertical' }
-      ],
-      zoom: 0.7
-    },
-    // (Second ending secret room)
-    {
-      id: 'second ending secret room',
-      offset: [117, -20],
-      areas: [
-        { rect: [1, 0, 13, 15] },
-        { rect: [-3, 4, 4, 11] }
-      ],
-      zoom: 0.50,
-      secret: true,
-      start: true
-    },
     // Corridor to Justas
     {
       id: 'justas corridor',
@@ -1381,8 +1358,21 @@ var regions = [
       id: 'ending gate',
       offset: [65, -18],
       areas: [
+        { rect: [3, -1, 3, 1] },
         { rect: [0, 0, 9, 16] },
         { rect: [0, 16, 9, 1], secondary: true }
+      ],
+      zoom: 0.48,
+      start: true
+    },
+    // Ending gate corridor
+    {
+      id: 'ending gate corridor',
+      offset: [65, -25],
+      areas: [
+        { rect: [0, 0, 3, 7] },
+        { rect: [3, 1, 3, 5] },
+        { rect: [6, 0, 3, 7] }
       ],
       zoom: 0.48
     },
@@ -1612,16 +1602,105 @@ var regions = [
       ],
       zoom: 0.6,
     },
+    // stevenjmiller bonus puzzle 2
+    {
+      id: 'stevenjmiller bonus puzzle 2',
+      offset: [74, -18],
+      areas: [
+        { rect: [0, 7, 1, 4], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 3, 18, 9] },
+        { rect: [15, 12, 4, 1] },
+        { rect: [9, -2, 9, 4] },
+        { rect: [9, 2, 10, 1] }
+      ],
+      zoom: 0.57
+    },
+    // stevenjmiller bonus puzzle 2
+    {
+      id: 'stevenjmiller bonus puzzle 2 secret',
+      offset: [74, -18],
+      areas: [
+        { rect: [4, -3, 5, 5] },
+        { rect: [1, -2, 3, 5] }
+      ],
+      zoom: 0.57,
+      secret: true,
+      copyCameraAnchor: 'stevenjmiller bonus puzzle 2'
+    },
     // Ending
     {
       id: 'ending',
-      offset: [63, -32],
+      offset: [63, -37],
       areas: [
-        { rect: [0, 0, 13, 13] },
-        { rect: [4, 13, 5, 1], secondary: true, camera: 'pull-vertical' }
+        { rect: [0, 0, 13, 13] }
       ],
       zoom: 0.6
-    }
+    },
+    //////////////
+    // SECOND ENDING
+    //////////////
+    // (Second ending gate)
+    {
+      id: 'second ending gate',
+      offset: [122, -5],
+      areas: [
+        { rect: [0, 0, 10, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 10, 6] },
+        { rect: [0, 7, 10, 1], secondary: true, camera: 'pull-vertical' }
+      ],
+      zoom: 0.7
+    },
+    // (Second ending secret room)
+    {
+      id: 'second ending secret room',
+      offset: [112, -21],
+      areas: [
+        { rect: [9, 0, 7, 3] },
+        { rect: [2, 3, 16, 13] },
+        { rect: [0, 8, 2, 8] }
+      ],
+      zoom: 0.52,
+      secret: true
+    },
+    // (Second ending optional corridor #1)
+    {
+      id: 'second ending optional corridor 1',
+      offset: [108, -17],
+      areas: [
+        { rect: [0, 0, 6, 4] },
+        { rect: [0, 4, 4, 6] }
+      ],
+      zoom: 0.65
+    },
+    // (Second ending optional corridor #2)
+    {
+      id: 'second ending optional corridor 2',
+      offset: [94, -11],
+      areas: [
+        { rect: [0, 0, 14, 4] }
+      ],
+      zoom: 0.65
+    },
+    // (Second ending optional corridor #3)
+    {
+      id: 'second ending optional corridor 3',
+      offset: [94, -20],
+      areas: [
+        { rect: [0, 0, 4, 9] },
+        { rect: [-2, 0, 2, 3] }
+      ],
+      zoom: 0.65
+    },
+    // (stevenjmiller) optional bonus puzzle
+    {
+      id: 'stevenjmiller optional bonus puzzle',
+      offset: [79, -37],
+      areas: [
+        { rect: [0, 0, 30, 17] },
+        { rect: [5, 17, 6, 1] }
+      ],
+      zoom: 0.5
+    },
   ]
 ];
 
@@ -1641,9 +1720,9 @@ var theme2Areas = [
   // (Blookerstein)
   [76, 18, 6, 11 ],
   // Ending
-  [63, -33, Infinity, 3],
-  [62, -30, Infinity, 4],
-  [62, -26, 2, 6],
+  [63, -38, Infinity, 3],
+  [62, -35, Infinity, 4],
+  [62, -31, 2, 11],
   [61, -24, 1, 4],
   [60, -22, 1, 2],
   [64, -19, 1, 10],
@@ -1676,6 +1755,7 @@ var secretRegions = [
   'joseph mansfield secret',
   'intro top left arm secret',
   'intro bonus puzzle secret',
+  'stevenjmiller bonus puzzle 2 secret',
   'joseph mansfield bomb secret 2',
   'second ending secret room',
   'stevenjmiller bomb secret',
