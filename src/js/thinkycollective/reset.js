@@ -103,6 +103,10 @@ function restoreActiveRegion(lev) {
 
   removeObjectTrackers(trackersToRemove);
 
+  if (activeRegion.id === 'second ending secret room') {
+    updateAllSecretMarkers();
+  }
+
   // Recreate foreign objects
   // for (var i = 0; i < foreignObjects.length; i++) {
   //   var foreignObject = foreignObjects[i];

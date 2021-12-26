@@ -371,7 +371,8 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "knexator"
+      credit: "knexator",
+      start: true
     },
     // (knexator) - secret
     {
@@ -1362,8 +1363,7 @@ var regions = [
         { rect: [0, 0, 9, 16] },
         { rect: [0, 16, 9, 1], secondary: true }
       ],
-      zoom: 0.48,
-      start: true
+      zoom: 0.48
     },
     // Ending gate corridor
     {

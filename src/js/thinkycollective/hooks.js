@@ -51,6 +51,15 @@ function updateSecretMarker(secret) {
   }
 }
 
+function updateAllSecretMarkers() {
+  for (var i = 0; i < regions[0].length; i++) {
+    var region = regions[0][i];
+    if (region.secret) {
+      updateSecretMarker(region.secret);
+    }
+  }
+}
+
 function checkSecretMarkers() {
   var secretsComplete = true;
   for (var i = 0; i < secrets.length; i++) {
