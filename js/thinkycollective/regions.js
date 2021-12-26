@@ -88,14 +88,15 @@ var regions = [
         'intro bottom left arm 2',
         'intro bottom left arm 1-2 node',
         'intro bottom left arm 3'
-      ]
+      ],
+      start: true
     },
     // Intro bottom left arm #3
     {
       id: 'intro bottom left arm 3',
       offset: [64, 67],
       areas: [
-        { rect: [-31, 6, 18, 4], camera: 'follow-player' },
+        { rect: [-30, 6, 17, 4], camera: 'follow-player' },
         { rect: [-29, 5, 3, 1], camera: 'follow-player' },
       ],
       zoom: 0.7,
@@ -192,7 +193,7 @@ var regions = [
       id: 'intro top left arm',
       offset: [65, 67],
       areas: [
-        { rect: [-4, -27, 7, 4], camera: 'follow-player' }
+        { rect: [-3, -27, 6, 4], camera: 'follow-player' }
       ],
       zoom: 0.7,
       simulateAlso: ['intro top intersection']
@@ -205,7 +206,7 @@ var regions = [
         { rect: [10, -27, 1, 4], secondary: true, camera: 'follow-player' },
         { rect: [11, -32, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [15, -36, 4, 8], secondary: true, camera: 'follow-player' },
-        { rect: [19, -36, 3, 4], secondary: true, camera: 'follow-player' }
+        { rect: [19, -36, 2, 4], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
       simulateAlso: ['intro top intersection']
@@ -371,8 +372,7 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "knexator",
-      start: true
+      credit: "knexator"
     },
     // (knexator) - secret
     {
@@ -515,7 +515,8 @@ var regions = [
       id: '1:00 main path lock',
       offset: [57, 40],
       areas: [
-        { rect: [0, 0, 4, 5] }
+        { rect: [0, 0, 4, 5] },
+        { rect: [4, 0, 1, 5] }
       ],
       zoom: 0.7,
       simulateAlso: [
@@ -612,8 +613,7 @@ var regions = [
       id: '7:00 main path lock',
       offset: [31, 69],
       areas: [
-        { rect: [0, 0, 2, 8] },
-        { rect: [2, 0, 1, 4] }
+        { rect: [0, 0, 3, 8] }
       ],
       zoom: 0.7
     },
@@ -1047,7 +1047,7 @@ var regions = [
       id: 'top right main path lock',
       offset: [86, 30],
       areas: [
-        { rect: [0, 0, 3, 5] }
+        { rect: [-1, 0, 4, 5] }
       ],
       zoom: 0.7,
       simulateAlso: ['intro top right arm', 'intro top intersection']
