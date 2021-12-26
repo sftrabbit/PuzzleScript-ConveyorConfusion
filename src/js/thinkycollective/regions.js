@@ -88,8 +88,7 @@ var regions = [
         'intro bottom left arm 2',
         'intro bottom left arm 1-2 node',
         'intro bottom left arm 3'
-      ],
-      start: true
+      ]
     },
     // Intro bottom left arm #3
     {
@@ -1363,7 +1362,8 @@ var regions = [
         { rect: [0, 0, 9, 16] },
         { rect: [0, 16, 9, 1], secondary: true }
       ],
-      zoom: 0.48
+      zoom: 0.48,
+      start: true
     },
     // Ending gate corridor
     {
@@ -1382,7 +1382,6 @@ var regions = [
       offset: [50, -7],
       areas: [
         { rect: [-2, 0, 17, 4], camera: 'follow-player' },
-        { rect: [1, -1, 4, 1], camera: 'follow-player' },
         { rect: [7, 4, 3, 2], camera: 'follow-player' }
       ],
       zoom: 0.6
@@ -1390,7 +1389,7 @@ var regions = [
     // (D5R)
     {
       id: 'd5r',
-      offset: [48, -18],
+      offset: [48, -21],
       areas: [
         { rect: [0, 0, 12, 10] }
       ],
@@ -1400,9 +1399,9 @@ var regions = [
     // (D5R) Block release
     {
       id: 'd5r block release',
-      offset: [60, -14],
+      offset: [60, -17],
       areas: [
-        { rect: [0, 0, 4, 7] }
+        { rect: [0, 0, 4, 10] }
       ],
       zoom: 0.7
     },
@@ -1422,6 +1421,7 @@ var regions = [
       id: 'ethan clark secret corridor 2',
       offset: [42, -3],
       areas: [
+        { rect: [-1, 0, 1, 3], camera: 'follow-player' },
         { rect: [0, 0, 11, 4], camera: 'follow-player' }
       ],
       zoom: 0.7
@@ -1453,20 +1453,21 @@ var regions = [
     // stevenjmiller bonus puzzle
     {
       id: 'stevenjmiller bonus puzzle',
-      offset: [28, -15],
+      offset: [27, -15],
       areas: [
+        { rect: [-2, 0, 2, 12], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 0, 17, 12] }
       ],
-      zoom: 0.7
+      zoom: 0.65
     },
     // stevenjmiller bonus puzzle secret
     {
       id: 'stevenjmiller bonus puzzle secret',
-      offset: [24, -15],
+      offset: [25, -19],
       areas: [
-        { rect: [1, 1, 3, 2] },
-        { rect: [0, 3, 5, 5] },
-        { rect: [1, 8, 3, 4] }
+        { rect: [0, 1, 8, 3], camera: 'follow-player' },
+        { rect: [8, 0, 5, 5], camera: 'follow-player' },
+        { rect: [13, 1, 6, 3], camera: 'follow-player' }
       ],
       zoom: 0.7,
       secret: true
@@ -1474,16 +1475,19 @@ var regions = [
     // Merge corridor #2
     {
       id: 'merge corridor 2',
-      offset: [44, -18],
+      offset: [44, -23],
       areas: [
-        { rect: [0, 0, 4, 15], camera: 'follow-player' }
+        { rect: [0, 0, 4, 20], camera: 'follow-player' },
+        { rect: [4, 0, 1, 3], camera: 'follow-player' },
+        { rect: [4, 13, 3, 3], camera: 'follow-player' },
+        { rect: [7, 12, 4, 4], camera: 'follow-player' }
       ],
       zoom: 0.6
     },
     // (jackk)
     {
       id: 'jackk',
-      offset: [29, -32],
+      offset: [29, -37],
       areas: [
         { rect: [0, 0, 23, 14] },
         { rect: [23, 0, 4, 12] },
@@ -1495,7 +1499,7 @@ var regions = [
     // (jackk) Block release
     {
       id: 'jackk block release',
-      offset: [21, -24],
+      offset: [21, -29],
       areas: [
         { rect: [0, 0, 8, 6] }
       ],
@@ -1504,7 +1508,7 @@ var regions = [
     // Merge corridor #3
     {
       id: 'merge corridor 3',
-      offset: [21, -18],
+      offset: [21, -23],
       areas: [
         { rect: [0, 0, 23, 4], camera: 'follow-player' }
       ],
@@ -1513,11 +1517,11 @@ var regions = [
     // Merge corridor #4
     {
       id: 'merge corridor 4',
-      offset: [21, -14],
+      offset: [21, -19],
       areas: [
-        { rect: [0, 0, 4, 19], camera: 'follow-player' },
-        { rect: [-3, 1, 3, 4], camera: 'follow-player' },
-        { rect: [-5, 1, 2, 3], camera: 'follow-player' }
+        { rect: [0, 0, 4, 24], camera: 'follow-player' },
+        { rect: [-3, 6, 3, 4], camera: 'follow-player' },
+        { rect: [-5, 6, 2, 3], camera: 'follow-player' }
       ],
       zoom: 0.6
     },
@@ -1546,16 +1550,16 @@ var regions = [
     // domcamus secret corridor
     {
       id: 'domcamus secret corridor',
-      offset: [8, -16],
+      offset: [8, -18],
       areas: [
-        { rect: [0, 0, 8, 3] }
+        { rect: [0, 0, 8, 5] }
       ],
       zoom: 0.6
     },
     // remote gamepad bonus puzzle
     {
       id: 'gamepad bonus puzzle',
-      offset: [1, -32],
+      offset: [1, -34],
       areas: [
         { rect: [0, 0, 20, 6] },
         { rect: [0, 6, 14, 10] }
@@ -1565,7 +1569,7 @@ var regions = [
     // remote gamepad bonus puzzle
     {
       id: 'gamepad bonus puzzle secret',
-      offset: [1, -32],
+      offset: [1, -34],
       areas: [
         { rect: [14, 6, 5, 5] }
       ],
@@ -1746,8 +1750,8 @@ var secretRegions = [
   'clementsparrow secret 1',
   'clementsparrow secret 2',
   'gamepad bonus puzzle secret',
-  'stevenjmiller bonus puzzle secret',
   'le slo secret',
+  'stevenjmiller bonus puzzle secret',
   'zomulgustar',
   '7:00 main path lock secret',
   'knexator secret',
