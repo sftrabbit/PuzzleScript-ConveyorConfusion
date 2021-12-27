@@ -11,6 +11,8 @@ function initOpenWorld() {
   initExplosionTrackers();
 }
 
+var releasedBlockFrom = null;
+
 function onStateUpdate(againing, action) {
   if (!isOpenWorldLevel()) {
     redraw();
@@ -27,6 +29,23 @@ function onStateUpdate(againing, action) {
 
   if (changedRegion) {
     pendingSave = true;
+
+    var previousRegion = regions[curlevel][previousActiveRegionIndex];
+    if (previousRegion.blockRelease && activeRegion.mergeCorridor) {
+      var releasedBlockX = regionsOffset[0] + previousRegion.offset[0] + previousRegion.blockRelease[0];
+      var releasedBlockY = regionsOffset[1] + previousRegion.offset[1] + previousRegion.blockRelease[1];
+      var releasedBlockPositionIndex = (releasedBlockX) * level.height + (releasedBlockY);
+      var releasedBlockCell = level.getCell(releasedBlockPositionIndex);
+      if (releasedBlockCell.anyBitsInCommon(state.objectMasks['belt_above'])) {
+        releasedBlockFrom = previousActiveRegionIndex;
+      }
+    } else if (previousRegion.mergeCorridor && activeRegion.endingGate) {
+      if (releasedBlockFrom != null) {
+        removeObjectTrackers([[true, 67, 32]]);
+        startObjectTracker(true, TRACKED_BELT, 67, 32, releasedBlockFrom);
+        releasedBlockFrom = null;
+      }
+    }
   }
 
   if (!againing && pendingSave) {

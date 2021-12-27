@@ -192,6 +192,8 @@ function startObjectTracker(above, objectType, x, y, originRegion) {
   objectTrackers.set(previousTrackers);
 
   objectTrackers[objectTrackers.length - 1] = tracker;
+
+  printObjectTrackers();
 }
 
 function moveObjectTracker(fromAbove, fromX, fromY, toAbove, toX, toY) {
@@ -203,6 +205,7 @@ function moveObjectTracker(fromAbove, fromX, fromY, toAbove, toX, toY) {
       break;
     }
   }
+  printObjectTrackers();
 }
 
 function getObjectTrackersFromOrigin(originRegion) {
@@ -216,6 +219,7 @@ function getObjectTrackersFromOrigin(originRegion) {
       ]);
     }
   }
+  printObjectTrackers();
   return fromOrigin;
 }
 
@@ -227,6 +231,7 @@ function removeObjectTrackers(objectTrackersToRemove) {
         && ((objectTracker & 0x00FF0000) >> 16) === objectTrackerToRemove[2];
     });
   });
+  printObjectTrackers();
 }
 
 function getExplosiveTrackerOriginRegion(x, y, above) {
