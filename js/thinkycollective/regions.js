@@ -269,9 +269,9 @@ var regions = [
       id: 'jumble',
       offset: [60, 33],
       areas: [
-        { rect: [-2, 0, 10, 7] },
+        { rect: [-4, 0, 12, 7] },
         { rect: [8, 0, 6, 3], secondary: true, camera: 'pull-horizontal' },
-        { rect: [-5, 0, 3, 3], secondary: true, camera: 'pull-horizontal' }
+        { rect: [-5, 0, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
       credit: "JumbleTheCircle"
@@ -320,7 +320,8 @@ var regions = [
         { rect: [1, -1, 6, 11] }
       ],
       zoom: 0.7,
-      credit: "Blookerstein"
+      credit: "Blookerstein",
+      start: true
     },
     // Seed level secret
     {
@@ -594,8 +595,7 @@ var regions = [
       credit: "Clickmazes",
       simulationBoundsAdjustment: {
         maxX: -2
-      },
-      start: true
+      }
     },
     // 7:00 #3 (pancelor)
     {
