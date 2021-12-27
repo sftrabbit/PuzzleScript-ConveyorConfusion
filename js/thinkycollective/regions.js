@@ -320,8 +320,7 @@ var regions = [
         { rect: [1, -1, 6, 11] }
       ],
       zoom: 0.7,
-      credit: "Blookerstein",
-      start: true
+      credit: "Blookerstein"
     },
     // Seed level secret
     {
@@ -1366,7 +1365,8 @@ var regions = [
         { rect: [0, 0, 9, 16] },
         { rect: [0, 16, 9, 1], secondary: true }
       ],
-      zoom: 0.48
+      zoom: 0.48,
+      endingGate: true
     },
     // Ending gate corridor
     {
@@ -1387,7 +1387,8 @@ var regions = [
         { rect: [-2, 0, 17, 4], camera: 'follow-player' },
         { rect: [7, 4, 3, 2], camera: 'follow-player' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      mergeCorridor: true
     },
     // (D5R)
     {
@@ -1397,7 +1398,8 @@ var regions = [
         { rect: [0, 0, 12, 10] }
       ],
       zoom: 0.7,
-      credit: "D5R"
+      credit: "D5R",
+      start: true
     },
     // (D5R) Block release
     {
@@ -1485,7 +1487,8 @@ var regions = [
         { rect: [4, 13, 3, 3], camera: 'follow-player' },
         { rect: [7, 12, 4, 4], camera: 'follow-player' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      mergeCorridor: true
     },
     // (jackk)
     {
@@ -1506,7 +1509,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 8, 6] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      blockRelease: [3, 7]
     },
     // Merge corridor #3
     {
@@ -1515,7 +1519,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 23, 4], camera: 'follow-player' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      mergeCorridor: true
     },
     // Merge corridor #4
     {
@@ -1526,7 +1531,8 @@ var regions = [
         { rect: [-3, 6, 3, 4], camera: 'follow-player' },
         { rect: [-5, 6, 2, 3], camera: 'follow-player' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      mergeCorridor: true
     },
     // (domcamus)
     {
@@ -1548,7 +1554,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 4, 4] }
       ],
-      zoom: 0.50
+      zoom: 0.50,
+      blockRelease: [5, 2]
     },
     // domcamus secret corridor
     {
@@ -1586,7 +1593,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 14, 4], camera: 'follow-player' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      mergeCorridor: true
     },
     // (stevenjmiller)
     {
@@ -1608,6 +1616,7 @@ var regions = [
         { rect: [0, 0, 5, 4] }
       ],
       zoom: 0.6,
+      blockRelease: [4, 2]
     },
     // stevenjmiller bonus puzzle 2
     {
