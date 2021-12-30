@@ -14,7 +14,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro'
+      copyCameraAnchor: 'intro',
+      start: true
     },
     // Intro
     {
@@ -1377,8 +1378,7 @@ var regions = [
         { rect: [3, 1, 3, 5] },
         { rect: [6, 0, 3, 7] }
       ],
-      zoom: 0.48,
-      start: true
+      zoom: 0.48
     },
     // Merge corridor #1
     {
