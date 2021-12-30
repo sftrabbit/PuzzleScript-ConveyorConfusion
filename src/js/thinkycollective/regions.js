@@ -1366,8 +1366,7 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true,
-      start: true
+      endingGate: true
     },
     // Ending gate corridor
     {
@@ -1674,11 +1673,12 @@ var regions = [
       offset: [112, -21],
       areas: [
         { rect: [7, 1, 9, 2] },
-        { rect: [2, 3, 16, 13] },
-        { rect: [0, 8, 2, 8] }
+        { rect: [5, 3, 13, 1] },
+        { rect: [0, 4, 18, 12] }
       ],
       zoom: 0.52,
-      secret: true
+      secret: true,
+      start: true
     },
     // (Second ending final corridor)
     {
@@ -1701,10 +1701,9 @@ var regions = [
     // (Second ending optional corridor #1)
     {
       id: 'second ending optional corridor 1',
-      offset: [108, -17],
+      offset: [108, -16],
       areas: [
-        { rect: [0, 0, 6, 4] },
-        { rect: [0, 4, 4, 6] }
+        { rect: [0, 0, 4, 9] }
       ],
       zoom: 0.65
     },

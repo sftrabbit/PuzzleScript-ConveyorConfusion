@@ -1,6 +1,4 @@
 - Cool hat on restart
-
-- Change sign next to indicator room
 - Inflation sound entering clementsparrow's level
 
 - Check for missing respawns

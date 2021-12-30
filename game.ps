@@ -3021,6 +3021,15 @@ Sign_Above_6
 .....
 .....
 
+Sign_Above_7
+#925f3e #6e452a #5d3820
+..2..
+.....
+.....
+.....
+.....
+
+
 SignRead
 transparent
 
@@ -3291,6 +3300,7 @@ H = Sign_Above_2 and Platform1
 7 = Sign_Above_4 and Platform1
 9 = Sign_Above_5 and Platform1
 ┺ = Sign_Above_6 and Platform1
+┵ = Sign_Above_7 and Platform1
 
 ║ = Wire and Wall_above1
 ╒ = Button_Below and Wall_above1
@@ -3304,7 +3314,7 @@ Mark_Above = BeltMark1_Above or BeltMark2_Above or ExplosiveMark1_Above or Explo
 Mark_Above_Top = BeltMark1_Above_Top or BeltMark2_Above_Top or ExplosiveMark1_Above_Top or ExplosiveMark2_Above_Top
 
 Sign_Below = Sign_Below_1 or Sign_Below_2
-Sign_Above = Sign_Above_1 or Sign_Above_2 or Sign_Above_3 or Sign_Above_4 or Sign_Above_5 or Sign_Above_6
+Sign_Above = Sign_Above_1 or Sign_Above_2 or Sign_Above_3 or Sign_Above_4 or Sign_Above_5 or Sign_Above_6 or Sign_Above_7
 
 Wall = Wall1 or Wall2
 Wall_Front = Wall1_Front or Wall2_Front
@@ -3831,7 +3841,7 @@ GLOBAL UP [ STATIONARY SigilC_Off | SigilC_Off_Top ] -> [ SigilC_On | SigilC_On_
 [ Spark ] -> []
 [ Weighted_Above Button_Above ] -> [ Weighted_Above Button_Above Spark ]
 [ Weighted_Below Button_Below ] -> [ Weighted_Below Button_Below Spark ]
-GLOBAL HORIZONTAL [ Sigil_On | Wire ] -> [ Sigil_On Spark | Wire ]
+GLOBAL [ Sigil_On | Wire ] -> [ Sigil_On Spark | Wire ]
 [ Spark NO SparkStopper | Sparkable ] -> [ Spark | Sparkable Spark ]
 (Activate/deactivate doors)
 UP [ LadderU | Spark DoorBase ] -> [ LadderU | Spark ACTION DoorBase ]
@@ -4462,6 +4472,7 @@ UP [ Player_Above | Sign_Above_3 SignToRead ] -> [ Player_Above | Sign_Above_3 S
 UP [ Player_Above | Sign_Above_4 SignToRead ] -> [ Player_Above | Sign_Above_4 SignRead ] message "Theory B\n\nSlime and explosives"
 UP [ Player_Above | Sign_Above_5 SignToRead ] -> [ Player_Above | Sign_Above_5 SignRead ] message "Aha!\n\nThe missing ingredient."
 UP [ Player_Above | Sign_Above_6 SignToRead ] -> [ CoolHat_Above | Sign_Above_6 SignRead ] message "There is no reward great enough\nfor what you've just achieved.\n\nExcept this cool explorer's hat."
+UP [ Player_Above | Sign_Above_7 SignToRead ] -> [ Player_Above | Sign_Above_7 SignRead ] message "Looking for an extra challenge?\nLook no further!\n\n<----"
 
 (GRAPHICAL DETAILS)
 (Player directions)
@@ -4655,10 +4666,10 @@ LEVELS
 #######rccqccccc#######ŵŝ#####################ŝŵ#######.p.~########$#~⇑~#$######~q~###########~#####{$${{${{###.~~~~~.#####qqqc%######
 #######+##⇑############ŵ⬇#####################ŝŵ###~$~#"ppp+#########~~~#####ŝăăqrqŇ~#cccccc##~~~~##{$$${{${###..8.8..#####ttt########
 ##########8############ŵŝ##########~q~########ŝŵ##......r..########c+┐.┌+c###ŝ##~q~#~~q..+#r####┘┌##{{${$$${###############~~~########
-##########"############ŵŝ##đđđđđđđŇqrqđđđđđđđđŝŵ##..6ŵŝŵp..########c+┐.┌+c###ŝ########c+..#ž####┐└##{$${${${#########7#....888....####
-##########""""""#######ŵŝ##ŵ#######~q~########ŝŵ##...pppp.~~.Ň┘zc##c+┐.┌+c###ŝ###########.ct####┘┌##{$${{${$##.└┘└┘└~~~4.&........####
-###############"#######ŵ└##ŵ##################ŝŵ##...p...ĕ.###ŝ#c##c+┐.┌+c###ŝ###########.c6~###┐└##{$${$${{##┘┐┌┐┌┐~~~4..&..&.&..####
-###############╝#######ŝ┌##ŵ#~đ...........ă~##ŝŵ####qt~~...##"Ĉŝ+##c+┐.┌+c###ŝcccccccz~##.p~.###┘┌##{$${$${{##┐└#######...........####
+##########"############ŵŝ##đđđđđđđŇqrqđđđđđđđđŝŵ##..6ŵŝŵp..########c+┐.┌+c###ŝ########c+..#ž####┐└##{$${${${########%##....888....####
+##########""""""#######ŵŝ##ŵ#######~q~########ŝŵ##...pppp.~~.Ň┘zc##c+┐.┌+c###ŝ###########.ct####┘┌##{$${{${$######┵#c##..&........####
+###############"#######ŵ└##ŵ##################ŝŵ##...p...ĕ.###ŝ#c##c+┐.┌+c###ŝ###########.c6~###┐└##{$${$${{##.┘└~~~qt~4..&..&.&..####
+###############╝#######ŝ┌##ŵ#~đ...........ă~##ŝŵ####qt~~...##"Ĉŝ+##c+┐.┌+c###ŝcccccccz~##.p~.###┘┌##{$${$${{##┐└┐~~~qt~4..........####
 ###############~#######ŝŵ##ŵ#ŝ.............ŝ##ŝŵ####qz~~4..###ŝ####c+┐.┌+c###ŝ+~~~~~.~Ĵ~..p~.###┐└##{$$$${{$##┘┌#######....&......####
 #....++++.....#6⇐~~~~##ŝŵ##ŵ#...rž.ž+ŝ.ă+...##ŝŵ######⇑#######ŝ####c+┐.┌+c###.ž~Ī┛ĪĪ#ĴĕĴ..c~.###┘┌############┐└##~q~##.&..&&...&.####
 #....pppppppr...####~~~~ŵ##ŵ#...p...p...p...##ŝŵ######~#######ŝ####c~~z~~c###.8........pppc..###┐└############┘┌##qrq##.&.&.......####
