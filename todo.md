@@ -1,4 +1,3 @@
-- Change slime colour?
 - Don't save in ending regions
 - Cool hat on restart
 
@@ -7,3 +6,5 @@
 
 - Check for missing respawns
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
+
+38.57
