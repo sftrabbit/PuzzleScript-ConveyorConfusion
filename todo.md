@@ -1,4 +1,6 @@
-- Reward at the end of optional bonus
+- Change slime colour?
+- Don't save in ending regions
+- Cool hat on restart
 
 - Change sign next to indicator room
 - Inflation sound entering clementsparrow's level

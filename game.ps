@@ -561,6 +561,46 @@ Render_Player_Above_Top_L
 ..00.
 .....
 
+CoolHat_Below
+#d7d721 #da7f2d #adacac #1a4fe1 #d30c0c #000000 #ac743f #b87d46 #c48a53 #d1965f
+76666
+.111.
+.333.
+.444.
+.....
+
+CoolHat_Below_Top
+#d7d721 #da7f2d #adacac #1a4fe1 #d30c0c #000000 #ac743f #b87d46 #c48a53 #d1965f
+.....
+.999.
+79996
+79996
+78886
+
+CoolHat_Above
+#f7f725 #fb9234 #d8d6d6 #215cff #f50f0f #000000 #ac743f #b87d46 #c48a53 #d1965f
+.444.
+.....
+.....
+.....
+.....
+
+CoolHat_Above_Top
+#f7f725 #fb9234 #d8d6d6 #215cff #f50f0f #000000 #ac743f #b87d46 #c48a53 #d1965f
+79996
+78886
+76666
+.111.
+.333.
+
+CoolHat_Above_Top2
+#f7f725 #fb9234 #d8d6d6 #215cff #f50f0f #000000 #ac743f #b87d46 #c48a53 #d1965f
+.....
+.....
+.....
+.999.
+79996
+
 End_Below
 #1bbd1b
 .....
@@ -2300,6 +2340,9 @@ transparent
 DiagMidMove_Player
 transparent
 
+DiagMidMove_CoolHat
+transparent
+
 DiagMidMove_BeltX
 transparent
 
@@ -2970,6 +3013,14 @@ Sign_Above_5
 .....
 .....
 
+Sign_Above_6
+#925f3e #6e452a #5d3820
+..2..
+.....
+.....
+.....
+.....
+
 SignRead
 transparent
 
@@ -3152,6 +3203,7 @@ y = BeltX_Below and Sticky_Below and Explosive_above and BeltMark1_Below
 ┐ = BeltUR_Below and BeltMark1_Below
 ┘ = BeltRD_Below and BeltMark1_Below
 └ = BeltDL_Below and BeltMark1_Below
+┕ = BeltDL_Below and BeltMark1_Below and Ladder1D
 ┌ = BeltLU_Below and BeltMark1_Below
 (8426 - numpad directions)
 8 = Ladder1U
@@ -3237,6 +3289,7 @@ H = Sign_Above_2 and Platform1
 1 = Sign_Above_3 and Platform1
 7 = Sign_Above_4 and Platform1
 9 = Sign_Above_5 and Platform1
+┺ = Sign_Above_6 and Platform1
 
 ║ = Wire and Wall_above1
 ╒ = Button_Below and Wall_above1
@@ -3250,7 +3303,7 @@ Mark_Above = BeltMark1_Above or BeltMark2_Above or ExplosiveMark1_Above or Explo
 Mark_Above_Top = BeltMark1_Above_Top or BeltMark2_Above_Top or ExplosiveMark1_Above_Top or ExplosiveMark2_Above_Top
 
 Sign_Below = Sign_Below_1 or Sign_Below_2
-Sign_Above = Sign_Above_1 or Sign_Above_2 or Sign_Above_3 or Sign_Above_4 or Sign_Above_5
+Sign_Above = Sign_Above_1 or Sign_Above_2 or Sign_Above_3 or Sign_Above_4 or Sign_Above_5 or Sign_Above_6
 
 Wall = Wall1 or Wall2
 Wall_Front = Wall1_Front or Wall2_Front
@@ -3277,8 +3330,8 @@ Background = Background1 or Background2
 Platform = Platform1 or Platform2
 Platform_Front = Platform1_Front or Platform2_Front
 Platform_Top = Platform1_Top or Platform2_Top
-Player_Above = Player_Above1
-Player_Below = Player_Below1
+Player_Above = Player_Above1 or CoolHat_Above
+Player_Below = Player_Below1 or CoolHat_Below
 
 Player = Player_Above or Player_Below
 
@@ -3380,7 +3433,7 @@ DiagSendDir = DiagSendDir_UR or DiagSendDir_RD or DiagSendDir_DL or DiagSendDir_
 DiagPending = DiagOrthoPending or DiagDiagPending
 DiagReturnDir = DiagReturnDir_UR or DiagReturnDir_RD or DiagReturnDir_DL or DiagReturnDir_LU
 DiagReturnValue = DiagReturnValue_Blocked or DiagReturnValue_Unblocked
-DiagMidMove = DiagMidMove_Player or DiagMidMove_BeltX or DiagMidMove_BeltU or DiagMidMove_BeltR or DiagMidMove_BeltD or DiagMidMove_BeltL or DiagMidMove_BeltUR or DiagMidMove_BeltRD or DiagMidMove_BeltDL or DiagMidMove_BeltLU or DiagMidMove_Explosive
+DiagMidMove = DiagMidMove_Player or DiagMidMove_CoolHat or DiagMidMove_BeltX or DiagMidMove_BeltU or DiagMidMove_BeltR or DiagMidMove_BeltD or DiagMidMove_BeltL or DiagMidMove_BeltUR or DiagMidMove_BeltRD or DiagMidMove_BeltDL or DiagMidMove_BeltLU or DiagMidMove_Explosive
 
 Fuser_Above = DiagMidMove or Belt_Above
 Fuser = Fuser_Above or Belt_Below
@@ -3405,10 +3458,10 @@ Render_Inflated_Top = Render_InflatedU_Top or Render_InflatedR_Top or Render_Inf
 Render_WireOn = Render_WireOn_Above_U_Top or Render_WireOn_Above_D or Render_WireOn_Above_R_Top or Render_WireOn_Above_D_Top or Render_WireOn_Above_L_Top or Render_WireOn_Below_U or Render_WireOn_Below_R or Render_WireOn_Below_D or Render_WireOn_Below_L or Render_WireOn_AboveWall_U_Top or Render_WireOn_AboveWall_D or Render_WireOn_AboveWall_R_Top or Render_WireOn_AboveWall_D_Top or Render_WireOn_AboveWall_L_Top 
 
 Render_Above = Render_Sticky_BeltX_Above or Render_Sticky_BeltU_Above or Render_Sticky_BeltR_Above or Render_Sticky_BeltD_Above or Render_Sticky_BeltL_Above or Render_Sticky_BeltUR_Above or Render_Sticky_BeltRD_Above or Render_Sticky_BeltDL_Above or Render_Sticky_BeltLU_Above
-Render_Above_Top = Render_Player_Above1_Top or Belt_Above_Top or Render_Explosive_Above_Top or Render_Sticky_BeltX_Above_Top or Render_Sticky_BeltU_Above_Top or Render_Sticky_BeltR_Above_Top or Render_Sticky_BeltD_Above_Top or Render_Sticky_BeltL_Above_Top or Render_Sticky_BeltUR_Above_Top or Render_Sticky_BeltRD_Above_Top or Render_Sticky_BeltDL_Above_Top or Render_Sticky_BeltLU_Above_Top or Render_Sticky_Explosive_above_top or Render_Sign_Above_Top or Ending2SecretEmpty_Above_Top or Ending2SecretFull_Above_Top
-Render_Above_Top2 = Belt_Above_Top2 or Render_Sticky_BeltX_Above_Top2 or Render_Sticky_BeltU_Above_Top2 or Render_Sticky_BeltR_Above_Top2 or Render_Sticky_BeltD_Above_Top2 or Render_Sticky_BeltL_Above_Top2 or Render_Sticky_BeltUR_Above_Top2 or Render_Sticky_BeltRD_Above_Top2 or Render_Sticky_BeltDL_Above_Top2 or Render_Sticky_BeltLU_Above_Top2
+Render_Above_Top = Render_Player_Above1_Top or Belt_Above_Top or Render_Explosive_Above_Top or Render_Sticky_BeltX_Above_Top or Render_Sticky_BeltU_Above_Top or Render_Sticky_BeltR_Above_Top or Render_Sticky_BeltD_Above_Top or Render_Sticky_BeltL_Above_Top or Render_Sticky_BeltUR_Above_Top or Render_Sticky_BeltRD_Above_Top or Render_Sticky_BeltDL_Above_Top or Render_Sticky_BeltLU_Above_Top or Render_Sticky_Explosive_above_top or Render_Sign_Above_Top or Ending2SecretEmpty_Above_Top or Ending2SecretFull_Above_Top or CoolHat_Above_Top
+Render_Above_Top2 = Belt_Above_Top2 or Render_Sticky_BeltX_Above_Top2 or Render_Sticky_BeltU_Above_Top2 or Render_Sticky_BeltR_Above_Top2 or Render_Sticky_BeltD_Above_Top2 or Render_Sticky_BeltL_Above_Top2 or Render_Sticky_BeltUR_Above_Top2 or Render_Sticky_BeltRD_Above_Top2 or Render_Sticky_BeltDL_Above_Top2 or Render_Sticky_BeltLU_Above_Top2 or CoolHat_Above_Top2
 Render_Below = Render_Sticky_BeltX_Below or Render_Sticky_BeltU_Below or Render_Sticky_BeltR_Below or Render_Sticky_BeltD_Below or Render_Sticky_BeltL_Below or Render_Sticky_BeltUR_Below or Render_Sticky_BeltRD_Below or Render_Sticky_BeltDL_Below or Render_Sticky_BeltLU_Below or Render_Sticky_Explosive_below or Render_Player_Below_Cover
-Render_Below_Top = Render_Player_Below1_Top or Belt_Below_Top or Render_DoorExtended_Top or Render_Inflated_Top or Render_Explosive_Below_Top or Render_Sticky_BeltX_Below_Top or Render_Sticky_BeltU_Below_Top or Render_Sticky_BeltL_Below_Top or Render_Sticky_BeltR_Below_Top or Render_Sticky_BeltD_Below_Top or Render_Sticky_BeltUR_Below_Top or Render_Sticky_BeltLU_Below_Top or Render_Sticky_BeltRD_Below_Top or Render_Sticky_BeltDL_Below_Top or Render_Sticky_Explosive_below_top or Render_Sign_Below_Top or Ending2SecretEmpty_Below_Top or Ending2SecretFull_Below_Top or Ending1Secret_Top
+Render_Below_Top = Render_Player_Below1_Top or Belt_Below_Top or Render_DoorExtended_Top or Render_Inflated_Top or Render_Explosive_Below_Top or Render_Sticky_BeltX_Below_Top or Render_Sticky_BeltU_Below_Top or Render_Sticky_BeltL_Below_Top or Render_Sticky_BeltR_Below_Top or Render_Sticky_BeltD_Below_Top or Render_Sticky_BeltUR_Below_Top or Render_Sticky_BeltLU_Below_Top or Render_Sticky_BeltRD_Below_Top or Render_Sticky_BeltDL_Below_Top or Render_Sticky_Explosive_below_top or Render_Sign_Below_Top or Ending2SecretEmpty_Below_Top or Ending2SecretFull_Below_Top or Ending1Secret_Top or CoolHat_Below_Top
 Render = Render_Above or Render_Above_Top or Render_Above_Top2 or Render_Below or Render_Below_Top or Render_LadderTop or Render_Ladder_Overhang or Render_ladder_Overhang_Top or Render_WireOn or Render_Player_Above_Top_Cover or Render_SlimeVat_Mess_Above_Top or Render_ExplosivePrimed_Above_Top or Render_ExplosivePrimed_Below
 
 Sticky = Sticky_Above or Sticky_Below
@@ -3595,7 +3648,7 @@ DiagPending
 DiagReturnDir
 DiagReturn
 DiagReturnValue FusingDone_MidMove
-DiagMidMove_Player
+DiagMidMove_Player DiagMidMove_CoolHat
 DiagMidMove_BeltX
 DiagMidMove_BeltU
 DiagMidMove_BeltR
@@ -3753,7 +3806,8 @@ UP [ Ending2SecretChar Ending2SecretFull_Above | Ending2SecretChar_Top ] -> [ En
 (((WIRES)))
 
 (Objects drop to lower level)
-[ Player_Above NO Upstairs ] -> [ Player_Below1 ] sfx1
+[ Player_Above1 NO Upstairs ] -> [ Player_Below1 ] sfx1
+[ CoolHat_Above NO Upstairs ] -> [ CoolHat_Below ] sfx1
 [ BeltU_Above@ NO Upstairs ] -> [ BeltU_Below@ ] sfx1
 [ BeltR_Above@ NO Upstairs ] -> [ BeltR_Below@ ] sfx1
 [ BeltD_Above@ NO Upstairs ] -> [ BeltD_Below@ ] sfx1
@@ -3885,10 +3939,14 @@ UP [ NO SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ] -> [ | ] (TODO shoul
 (((MOVEMENT)))
 
 (Player climbing ladder)
-UP    [ > Player_Below LadderU NO Static_Above | Upstairs ] -> [ > Player_Above LadderU | Upstairs ] sfx0 again
-RIGHT [ > Player_Below LadderR NO Static_Above | Upstairs ] -> [ > Player_Above LadderR | Upstairs ] sfx0 again
-DOWN  [ > Player_Below LadderD NO Static_Above | Upstairs ] -> [ > Player_Above LadderD | Upstairs ] sfx0 again
-LEFT  [ > Player_Below LadderL NO Static_Above | Upstairs ] -> [ > Player_Above LadderL | Upstairs ] sfx0 again
+UP    [ > Player_Below1 LadderU NO Static_Above | Upstairs ] -> [ > Player_Above1 LadderU | Upstairs ] sfx0 again
+RIGHT [ > Player_Below1 LadderR NO Static_Above | Upstairs ] -> [ > Player_Above1 LadderR | Upstairs ] sfx0 again
+DOWN  [ > Player_Below1 LadderD NO Static_Above | Upstairs ] -> [ > Player_Above1 LadderD | Upstairs ] sfx0 again
+LEFT  [ > Player_Below1 LadderL NO Static_Above | Upstairs ] -> [ > Player_Above1 LadderL | Upstairs ] sfx0 again
+UP    [ > CoolHat_Below LadderU NO Static_Above | Upstairs ] -> [ > CoolHat_Above LadderU | Upstairs ] sfx0 again
+RIGHT [ > CoolHat_Below LadderR NO Static_Above | Upstairs ] -> [ > CoolHat_Above LadderR | Upstairs ] sfx0 again
+DOWN  [ > CoolHat_Below LadderD NO Static_Above | Upstairs ] -> [ > CoolHat_Above LadderD | Upstairs ] sfx0 again
+LEFT  [ > CoolHat_Below LadderL NO Static_Above | Upstairs ] -> [ > CoolHat_Above LadderL | Upstairs ] sfx0 again
 
 
 (Initial causes for motion)
@@ -4072,7 +4130,8 @@ endloop
 (Manual diagonal movement of objects - part 1)
 (sorry for the mega-duplication... it was just the easier way)
 startloop
-UP [ Player_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_Player ] sfx2
+UP [ Player_Above1 ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_Player ] sfx2
+UP [ CoolHat_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_CoolHat ] sfx2
 UP [ BeltX_Above@ ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltX@ ] sfx2
 UP [ BeltU_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltU ] sfx2
 UP [ BeltR_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltR ] sfx2
@@ -4084,7 +4143,8 @@ UP [ BeltDL_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMid
 UP [ BeltLU_Above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_BeltLU ] sfx2
 UP [ Explosive_above ACTION DiagMoveDiag_UR | NO DiagMidMove ] -> [ | RIGHT DiagMidMove_Explosive ] sfx2
 
-RIGHT [ Player_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_Player ] sfx2
+RIGHT [ Player_Above1 ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_Player ] sfx2
+RIGHT [ CoolHat_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_CoolHat ] sfx2
 RIGHT [ BeltX_Above@ ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltX@ ] sfx2
 RIGHT [ BeltU_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltU ] sfx2
 RIGHT [ BeltR_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltR ] sfx2
@@ -4096,7 +4156,8 @@ RIGHT [ BeltDL_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagM
 RIGHT [ BeltLU_Above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_BeltLU ] sfx2
 RIGHT [ Explosive_above ACTION DiagMoveDiag_RD | NO DiagMidMove ] -> [ | DOWN DiagMidMove_Explosive ] sfx2
 
-DOWN [ Player_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_Player ] sfx2
+DOWN [ Player_Above1 ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_Player ] sfx2
+DOWN [ CoolHat_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_CoolHat ] sfx2
 DOWN [ BeltX_Above@ ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltX@ ] sfx2
 DOWN [ BeltU_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltU ] sfx2
 DOWN [ BeltR_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltR ] sfx2
@@ -4108,7 +4169,8 @@ DOWN [ BeltDL_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMi
 DOWN [ BeltLU_Above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_BeltLU ] sfx2
 DOWN [ Explosive_above ACTION DiagMoveDiag_DL | NO DiagMidMove ] -> [ | LEFT DiagMidMove_Explosive ] sfx2
 
-LEFT [ Player_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_Player ] sfx2
+LEFT [ Player_Above1 ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_Player ] sfx2
+LEFT [ CoolHat_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_CoolHat ] sfx2
 LEFT [ BeltX_Above@ DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltX@ ] sfx2
 LEFT [ BeltU_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltU ] sfx2
 LEFT [ BeltR_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltR ] sfx2
@@ -4196,7 +4258,8 @@ startloop
 endloop
 
 (diagonal movement - part 2)
-[ > DiagMidMove_Player | NO Above ] -> [ | Player_Above ]
+[ > DiagMidMove_Player | NO Above ] -> [ | Player_Above1 ]
+[ > DiagMidMove_CoolHat | NO Above ] -> [ | CoolHat_Above ]
 [ > DiagMidMove_Explosive | NO Above ] -> [ | Explosive_above ]
 
 [ DiagMoveMarkers ] -> []
@@ -4375,7 +4438,8 @@ LEFT  [ LadderL | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
 
 (Lift objects on doors)
 [ Sticky_Below NO Weighted_Above DoorExtended ] -> [ Sticky_Above DoorExtended ]
-[ Player_Below NO Weighted_Above DoorExtended ] -> [ Player_Above DoorExtended ]
+[ Player_Below1 NO Weighted_Above DoorExtended ] -> [ Player_Above1 DoorExtended ]
+[ CoolHat_Below NO Weighted_Above DoorExtended ] -> [ CoolHat_Above DoorExtended ]
 [ BeltU_Below@ NO Weighted_Above DoorExtended ] -> [ BeltU_Above@ DoorExtended ]
 [ BeltR_Below@ NO Weighted_Above DoorExtended ] -> [ BeltR_Above@ DoorExtended ]
 [ BeltD_Below@ NO Weighted_Above DoorExtended ] -> [ BeltD_Above@ DoorExtended ]
@@ -4396,17 +4460,18 @@ UP [ Player_Above | Sign_Above_2 SignToRead ] -> [ Player_Above | Sign_Above_2 S
 UP [ Player_Above | Sign_Above_3 SignToRead ] -> [ Player_Above | Sign_Above_3 SignRead ] message "Theory A\n\nElectricity and motion"
 UP [ Player_Above | Sign_Above_4 SignToRead ] -> [ Player_Above | Sign_Above_4 SignRead ] message "Theory B\n\nSlime and explosives"
 UP [ Player_Above | Sign_Above_5 SignToRead ] -> [ Player_Above | Sign_Above_5 SignRead ] message "Aha!\n\nThe missing ingredient."
+UP [ Player_Above | Sign_Above_6 SignToRead ] -> [ CoolHat_Above | Sign_Above_6 SignRead ] message "There is no reward great enough\nfor what you've just achieved.\n\nExcept this cool explorer's hat."
 
 (GRAPHICAL DETAILS)
 (Player directions)
 NOAGAINCHECK LATE [ Moved NO Player | Player ] -> [ | Player Moved ]
 NOAGAINCHECK LATE [ Moved NO Player ] [ Player ] -> [ ] [ Player Moved ]
-NOAGAINCHECK LATE [ Player_Below1 MovedU ] -> [ Player_Below1 MovedU Render_Player_Below_U ]
-NOAGAINCHECK LATE [ Player_Below1 MovedR ] -> [ Player_Below1 MovedR Render_Player_Below_R ]
-NOAGAINCHECK LATE [ Player_Below1 MovedL ] -> [ Player_Below1 MovedL Render_Player_Below_L ]
-NOAGAINCHECK LATE UP [ Player_Above1 MovedU | ] -> [ Player_Above1 MovedU | Render_Player_Above_Top_U ]
-NOAGAINCHECK LATE UP [ Player_Above1 MovedR | ] -> [ Player_Above1 MovedR | Render_Player_Above_Top_R ]
-NOAGAINCHECK LATE UP [ Player_Above1 MovedL | ] -> [ Player_Above1 MovedL | Render_Player_Above_Top_L ]
+NOAGAINCHECK LATE [ Player_Below MovedU ] -> [ Player_Below MovedU Render_Player_Below_U ]
+NOAGAINCHECK LATE [ Player_Below MovedR ] -> [ Player_Below MovedR Render_Player_Below_R ]
+NOAGAINCHECK LATE [ Player_Below MovedL ] -> [ Player_Below MovedL Render_Player_Below_L ]
+NOAGAINCHECK LATE UP [ Player_Above MovedU | ] -> [ Player_Above MovedU | Render_Player_Above_Top_U ]
+NOAGAINCHECK LATE UP [ Player_Above MovedR | ] -> [ Player_Above MovedR | Render_Player_Above_Top_R ]
+NOAGAINCHECK LATE UP [ Player_Above MovedL | ] -> [ Player_Above MovedL | Render_Player_Above_Top_L ]
 
 (adding ambiant occlusion)
 NOAGAINCHECK late up    [ no Static_Below no vAmbiantOcclusionU no DoorBase no Theme2 | Static_Below NO Sign_Below ] -> [ vAmbiantOcclusionU | Static_Below ]
@@ -4453,6 +4518,8 @@ NOAGAINCHECK LATE UP [ Render_Ladder2L_Overhang | ] -> [ Render_Ladder2L_Overhan
 (player tops)
 NOAGAINCHECK LATE UP [ Player_Below1 | ] -> [ Player_Below1 | Render_Player_Below1_Top ]
 NOAGAINCHECK LATE UP [ Player_Above1 | ] -> [ Player_Above1 | Render_Player_Above1_Top ]
+NOAGAINCHECK LATE UP [ CoolHat_Below | ] -> [ CoolHat_Below | CoolHat_Below_Top ]
+NOAGAINCHECK LATE UP [ CoolHat_Above | | ] -> [ CoolHat_Above | CoolHat_Above_Top | CoolHat_Above_Top2 ]
 
 (belt tops)
 NOAGAINCHECK LATE UP [ BeltX_Above | | ] -> [ BeltX_Above | BeltX_Above_Top | BeltX_Above_Top2 ]
@@ -4576,22 +4643,22 @@ LEVELS
 ##c##c+Ĉ..➢..ŵđ╬đđđŝđ+##########..pq+~~......".+pŝ....ŵ...ă.#`###.ac+...+cw.#######.......~~~...~~~..cr~~....###┿....########crc#╉.╉##
 ##c#cc+đ..đž.ž+c##ŝ#############..p~~`.tpppp#".#p....~`~#...#####.dp......s.#######...rppp...........#~Ň~....###┿.┿..#########.##...##
 ##c#c##+++++++#c##ŝ############...pt`~..#~`p.#..pp~~``~~##.######.8p..+.....#######......p...........#~~~....###┿┿┿............##╉....
-##c#c##ccccccc#c##ŝ####cz└Ň~~##...p~~~+.~#~q`~+..r+ă.~~`##########.pppc....########""...#+.ă.+..ă.đ.##.8.....###┿┿┿┿...........##╉╉╉##
+##c#c##ccccccc#c##ŝ####cz└Ň~~##...p~~~+.~#~q`~+..r+ă.~~`##########.pppc....########""...#+.ă.+..ă.đ.##.8.....###┿┿┿┿.......222.##╉╉╉##
 ##c#c+###~z~###c#~Ň~###c#ŝ##~##ŵ.~╡.+.p.~`#q~~qqppq..#`############.......#######~£..........c..ă.đ.##......~##############~~~########
 ##c#cr#+cz~zc##c#qrq###+ŝĈ"#~##ŵ└.ppcpq~~4.?.~~...`.################..↑..########~Ň..........p..ă.đ.##......~############$#~~~#$######
-##c##ž#ž#~z~c##c#~q~#####ŝ##~⇐~~đđ....`~``~```~.2~~##################┐ŵ┌#########~Ň...+...rppp......##......~##############~~~########
-##ccc╟c╟ccq#c##c#########ŝ######################⇑##################$#ŵ9ŵ#$#######~Ł...p..r....#.....##......~~~~~########$#~~~#$######
-#####ž#ž##~#c##c#########ŝ######################~####################~~~#########~~4..p..p....└..$..############~##########~~~########
-#####+c╟ccqcc##c#######đđđđđđđđđđđđđ┘└ăăăăăă⬅ăă~~##################$#~~~#$############c#žc####~#.£..##########~~~~~~~####$#~~~#$######
-#######ž##~####c#######ŵŝăăăăăăăăăăăăđđđđđđđđđŝŵ########c+###########~~~##############cr"+####~###############~~~~~~~######~~~########
-#######rccqccccc#######ŵŝ#####################ŝŵ#######.p.~########$#~⇑~#$######~q~###########~#####{$${{{$$##~~~~~~~######qqqc%######
-#######+##⇑############ŵ⬇#####################ŝŵ###~$~#"ppp+#########~~~#####ŝăăqrqŇ~#cccccc##~~~~##{$${$$$$##~~~~~~~######~tt########
-##########8############ŵŝ##########~q~########ŝŵ##......r..########c+┐.┌+c###ŝ##~q~#~~q..+#r####┘┌##{$${$$${###############~~~########
-##########"############ŵŝ##đđđđđđđŇqrqđđđđđđđđŝŵ##..6ŵŝŵp..########c+┐.┌+c###ŝ########c+..#ž####┐└##{$${{$$$#########7#....888....####
-##########""""""#######ŵŝ##ŵ#######~q~########ŝŵ##...pppp.~~.Ň┘zc##c+┐.┌+c###ŝ###########.ct####┘┌##{$$${{${##.└┘└┘└~~~4.&........####
-###############"#######ŵ└##ŵ##################ŝŵ##...p...ĕ.###ŝ#c##c+┐.┌+c###ŝ###########.c6~###┐└##{$${{{{$##┘┐┌┐┌┐~~~4..&..&.&..####
-###############╝#######ŝ┌##ŵ#~đ...........ă~##ŝŵ####qt~~...##"Ĉŝ+##c+┐.┌+c###ŝcccccccz~##.p~.###┘┌##{$$${${{##┐└#######...........####
-###############~#######ŝŵ##ŵ#ŝ.............ŝ##ŝŵ####qz~~4..###ŝ####c+┐.┌+c###ŝ+~~~~~.~Ĵ~..p~.###┐└##{$$${{$$##┘┌#######....&......####
+##c##ž#ž#~z~c##c#~q~#####ŝ##~⇐~~đđ....`~``~```~.2~~##################┐ŵ┌#########~Ň...+...rppp......##......~##.......#####~~~########
+##ccc╟c╟ccq#c##c#########ŝ######################⇑##################$#ŵ9ŵ#$#######~Ł...p..r....#.....##......~~~4.~~~..###$#~~~#$######
+#####ž#ž##~#c##c#########ŝ######################~####################~~~#########~~4..p..p....┕..$..###########.~~~~~.#####~~~########
+#####+c╟ccqcc##c#######đđđđđđđđđđđđđ┘└ăăăăăă⬅ăă~~##################$#~~~#$############c#žc####~#.£..###########.~~┺~~.###$#~~~#$######
+#######ž##~####c#######ŵŝăăăăăăăăăăăăđđđđđđđđđŝŵ########c+###########~~~##############cr"+####~################.~~~~~.#####~~~########
+#######rccqccccc#######ŵŝ#####################ŝŵ#######.p.~########$#~⇑~#$######~q~###########~#####{$${{${{###.~~~~~.#####qqqc%######
+#######+##⇑############ŵ⬇#####################ŝŵ###~$~#"ppp+#########~~~#####ŝăăqrqŇ~#cccccc##~~~~##{$$${{${###..8.8..#####~tt########
+##########8############ŵŝ##########~q~########ŝŵ##......r..########c+┐.┌+c###ŝ##~q~#~~q..+#r####┘┌##{{${$$${###############~~~########
+##########"############ŵŝ##đđđđđđđŇqrqđđđđđđđđŝŵ##..6ŵŝŵp..########c+┐.┌+c###ŝ########c+..#ž####┐└##{$${${${#########7#....888....####
+##########""""""#######ŵŝ##ŵ#######~q~########ŝŵ##...pppp.~~.Ň┘zc##c+┐.┌+c###ŝ###########.ct####┘┌##{$${{${$##.└┘└┘└~~~4.&........####
+###############"#######ŵ└##ŵ##################ŝŵ##...p...ĕ.###ŝ#c##c+┐.┌+c###ŝ###########.c6~###┐└##{$${$${{##┘┐┌┐┌┐~~~4..&..&.&..####
+###############╝#######ŝ┌##ŵ#~đ...........ă~##ŝŵ####qt~~...##"Ĉŝ+##c+┐.┌+c###ŝcccccccz~##.p~.###┘┌##{$${$${{##┐└#######...........####
+###############~#######ŝŵ##ŵ#ŝ.............ŝ##ŝŵ####qz~~4..###ŝ####c+┐.┌+c###ŝ+~~~~~.~Ĵ~..p~.###┐└##{$$$${{$##┘┌#######....&......####
 #....++++.....#6⇐~~~~##ŝŵ##ŵ#...rž.ž+ŝ.ă+...##ŝŵ######⇑#######ŝ####c+┐.┌+c###.ž~Ī┛ĪĪ#ĴĕĴ..c~.###┘┌############┐└##~q~##.&..&&...&.####
 #....pppppppr...####~~~~ŵ##ŵ#...p...p...p...##ŝŵ######~#######ŝ####c~~z~~c###.8........pppc..###┐└############┘┌##qrq##.&.&.......####
 #....~~~~~#~~~#########ŝŵ##ŵ#...p.../...p...##ŝŵ#####~~#######ŝ####q~#+#~q#~~4.......#.r..~..###┘┌┘└┘└┘└┘└┘└┘└┐└##~q~##.....&..&&.####

@@ -1735,11 +1735,23 @@ var regions = [
       ],
       zoom: 0.5
     },
+    // (stevenjmiller) optional bonus reward
+    {
+      id: 'stevenjmiller optional bonus reward',
+      offset: [109, -26],
+      areas: [
+        { rect: [0, 0, 9, 9] }
+      ],
+      zoom: 0.7
+    }
   ]
 ];
 
 var theme2Areas = [
-  [113, -24, Infinity, Infinity],
+  // B branch
+  [110, -39, Infinity, 13],
+  [119, -26, Infinity, Infinity],
+  [112, -18, Infinity, Infinity],
   [77, -8, Infinity, 13],
   [80, 5, Infinity, 13],
   [82, 18, Infinity, Infinity],
