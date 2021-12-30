@@ -14,8 +14,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro',
-      start: true
+      copyCameraAnchor: 'intro'
     },
     // Intro
     {
@@ -1671,12 +1670,31 @@ var regions = [
       id: 'second ending secret room',
       offset: [112, -21],
       areas: [
-        { rect: [9, 0, 7, 3] },
+        { rect: [7, 1, 9, 2] },
         { rect: [2, 3, 16, 13] },
         { rect: [0, 8, 2, 8] }
       ],
       zoom: 0.52,
-      secret: true
+      secret: true,
+      start: true
+    },
+    // (Second ending final corridor)
+    {
+      id: 'second ending final corridor',
+      offset: [119, -26],
+      areas: [
+        { rect: [0, 0, 9, 6] }
+      ],
+      zoom: 0.7
+    },
+    // (Second ending final room)
+    {
+      id: 'second ending final room',
+      offset: [116, -37],
+      areas: [
+        { rect: [-6, 0, 23, 11] },
+      ],
+      zoom: 0.7
     },
     // (Second ending optional corridor #1)
     {
@@ -1736,8 +1754,8 @@ var theme2Areas = [
   // (Blookerstein)
   [76, 18, 6, 11 ],
   // Ending
-  [63, -38, Infinity, 3],
-  [62, -35, Infinity, 4],
+  [63, -38, 15, 3],
+  [62, -35, 16, 4],
   [62, -31, 2, 11],
   [61, -24, 1, 4],
   [60, -22, 1, 2],

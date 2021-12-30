@@ -2995,6 +2995,102 @@ Ending1Secret
 00000
 .....
 
+Ending2SecretEmpty_Below
+#72696c #786f72 #7e7679 #8f8a8d #cfcccf #9c3d00 #db7838
+3663.
+3553.
+3432.
+4222.
+2001.
+
+Ending2SecretEmpty_Below_Top
+#72696c #786f72 #7e7679 #8f8a8d #cfcccf #9c3d00 #db7838
+.....
+.....
+.....
+.....
+.66..
+
+Ending2SecretFull_Below
+#ae1e95 #ca32af #ca32af #eb5dd2 #f4a9e6 #9c3d00 #db7838
+3663.
+3553.
+3432.
+4222.
+2001.
+
+Ending2SecretFull_Below_Top
+#ae1e95 #ca32af #ca32af #eb5dd2 #f4a9e6 #9c3d00 #db7838
+.....
+.....
+.....
+.....
+.66..
+
+Ending2SecretEmpty_Above
+#72696c #786f72 #7e7679 #8f8a8d #cfcccf #9c3d00 #db7838
+4222.
+2001.
+.....
+.....
+.....
+
+Ending2SecretEmpty_Above_Top
+#72696c #786f72 #7e7679 #8f8a8d #cfcccf #9c3d00 #db7838
+.....
+.66..
+3663.
+3553.
+3432.
+
+Ending2SecretFull_Above
+#ae1e95 #ca32af #ca32af #eb5dd2 #f4a9e6 #9c3d00 #db7838
+4222.
+2001.
+.....
+.....
+.....
+
+Ending2SecretFull_Above_Top
+#ae1e95 #ca32af #ca32af #eb5dd2 #f4a9e6 #9c3d00 #db7838
+.....
+.66..
+3663.
+3553.
+3432.
+
+Ending2SecretChar
+#5918db #f283c4 #303040
+.222.
+.111.
+.000.
+.000.
+.....
+
+Ending2SecretChar_Top
+#5918db #f283c4 #303040
+.....
+.....
+.....
+.222.
+.222.
+
+Ending2SecretChar2
+#cf2abc #dc35c9 #eb42d8 #fa4de6 #a200ff
+.333.
+.333.
+32223
+24140
+.110.
+
+Ending2SecretChar2_Top
+#cf2abc #dc35c9 #eb42d8 #fa4de6 #a200ff
+.....
+.....
+.....
+.....
+..3..
+
 =======
 LEGEND
 =======
@@ -3144,6 +3240,10 @@ H = Sign_Above_2 and Platform1
 
 ║ = Wire and Wall_above1
 ╒ = Button_Below and Wall_above1
+┿ = Ending2SecretEmpty_Below
+┾ = Ending1Secret
+╊ = Ending2SecretChar
+╉ = Ending2SecretFull_Below
 
 Mark_Below = BeltMark1_Below or BeltMark2_Below or PlatformMark1_Below or PlatformMark2_Below or ExplosiveMark1_Below or ExplosiveMark2_Below
 Mark_Above = BeltMark1_Above or BeltMark2_Above or ExplosiveMark1_Above or ExplosiveMark2_Above
@@ -3242,8 +3342,8 @@ Tracked_Below = Belt_Below or Explosive_Below
 Tracked = Tracked_Above or Tracked_Below
 
 (Objects that can move)
-Dynamic_Above = Player_Above or Belt_Above or Explosive_Above
-Dynamic_Below = Player_Below or Belt_Below or Explosive_Below
+Dynamic_Above = Player_Above or Belt_Above or Explosive_Above or Ending2SecretEmpty_Above or Ending2SecretFull_Above
+Dynamic_Below = Player_Below or Belt_Below or Explosive_Below or Ending2SecretEmpty_Below or Ending2SecretFull_Below
 Dynamic = Dynamic_Above or Dynamic_Below
 
 (Objects that stop movement)
@@ -3305,10 +3405,10 @@ Render_Inflated_Top = Render_InflatedU_Top or Render_InflatedR_Top or Render_Inf
 Render_WireOn = Render_WireOn_Above_U_Top or Render_WireOn_Above_D or Render_WireOn_Above_R_Top or Render_WireOn_Above_D_Top or Render_WireOn_Above_L_Top or Render_WireOn_Below_U or Render_WireOn_Below_R or Render_WireOn_Below_D or Render_WireOn_Below_L or Render_WireOn_AboveWall_U_Top or Render_WireOn_AboveWall_D or Render_WireOn_AboveWall_R_Top or Render_WireOn_AboveWall_D_Top or Render_WireOn_AboveWall_L_Top 
 
 Render_Above = Render_Sticky_BeltX_Above or Render_Sticky_BeltU_Above or Render_Sticky_BeltR_Above or Render_Sticky_BeltD_Above or Render_Sticky_BeltL_Above or Render_Sticky_BeltUR_Above or Render_Sticky_BeltRD_Above or Render_Sticky_BeltDL_Above or Render_Sticky_BeltLU_Above
-Render_Above_Top = Render_Player_Above1_Top or Belt_Above_Top or Render_Explosive_Above_Top or Render_Sticky_BeltX_Above_Top or Render_Sticky_BeltU_Above_Top or Render_Sticky_BeltR_Above_Top or Render_Sticky_BeltD_Above_Top or Render_Sticky_BeltL_Above_Top or Render_Sticky_BeltUR_Above_Top or Render_Sticky_BeltRD_Above_Top or Render_Sticky_BeltDL_Above_Top or Render_Sticky_BeltLU_Above_Top or Render_Sticky_Explosive_above_top or Render_Sign_Above_Top
+Render_Above_Top = Render_Player_Above1_Top or Belt_Above_Top or Render_Explosive_Above_Top or Render_Sticky_BeltX_Above_Top or Render_Sticky_BeltU_Above_Top or Render_Sticky_BeltR_Above_Top or Render_Sticky_BeltD_Above_Top or Render_Sticky_BeltL_Above_Top or Render_Sticky_BeltUR_Above_Top or Render_Sticky_BeltRD_Above_Top or Render_Sticky_BeltDL_Above_Top or Render_Sticky_BeltLU_Above_Top or Render_Sticky_Explosive_above_top or Render_Sign_Above_Top or Ending2SecretEmpty_Above_Top or Ending2SecretFull_Above_Top
 Render_Above_Top2 = Belt_Above_Top2 or Render_Sticky_BeltX_Above_Top2 or Render_Sticky_BeltU_Above_Top2 or Render_Sticky_BeltR_Above_Top2 or Render_Sticky_BeltD_Above_Top2 or Render_Sticky_BeltL_Above_Top2 or Render_Sticky_BeltUR_Above_Top2 or Render_Sticky_BeltRD_Above_Top2 or Render_Sticky_BeltDL_Above_Top2 or Render_Sticky_BeltLU_Above_Top2
 Render_Below = Render_Sticky_BeltX_Below or Render_Sticky_BeltU_Below or Render_Sticky_BeltR_Below or Render_Sticky_BeltD_Below or Render_Sticky_BeltL_Below or Render_Sticky_BeltUR_Below or Render_Sticky_BeltRD_Below or Render_Sticky_BeltDL_Below or Render_Sticky_BeltLU_Below or Render_Sticky_Explosive_below or Render_Player_Below_Cover
-Render_Below_Top = Render_Player_Below1_Top or Belt_Below_Top or Render_DoorExtended_Top or Render_Inflated_Top or Render_Explosive_Below_Top or Render_Sticky_BeltX_Below_Top or Render_Sticky_BeltU_Below_Top or Render_Sticky_BeltL_Below_Top or Render_Sticky_BeltR_Below_Top or Render_Sticky_BeltD_Below_Top or Render_Sticky_BeltUR_Below_Top or Render_Sticky_BeltLU_Below_Top or Render_Sticky_BeltRD_Below_Top or Render_Sticky_BeltDL_Below_Top or Render_Sticky_Explosive_below_top or Render_Sign_Below_Top
+Render_Below_Top = Render_Player_Below1_Top or Belt_Below_Top or Render_DoorExtended_Top or Render_Inflated_Top or Render_Explosive_Below_Top or Render_Sticky_BeltX_Below_Top or Render_Sticky_BeltU_Below_Top or Render_Sticky_BeltL_Below_Top or Render_Sticky_BeltR_Below_Top or Render_Sticky_BeltD_Below_Top or Render_Sticky_BeltUR_Below_Top or Render_Sticky_BeltLU_Below_Top or Render_Sticky_BeltRD_Below_Top or Render_Sticky_BeltDL_Below_Top or Render_Sticky_Explosive_below_top or Render_Sign_Below_Top or Ending2SecretEmpty_Below_Top or Ending2SecretFull_Below_Top or Ending1Secret_Top
 Render = Render_Above or Render_Above_Top or Render_Above_Top2 or Render_Below or Render_Below_Top or Render_LadderTop or Render_Ladder_Overhang or Render_ladder_Overhang_Top or Render_WireOn or Render_Player_Above_Top_Cover or Render_SlimeVat_Mess_Above_Top or Render_ExplosivePrimed_Above_Top or Render_ExplosivePrimed_Below
 
 Sticky = Sticky_Above or Sticky_Below
@@ -3361,6 +3461,7 @@ sfx7 50942902 (explosion)
 sfx8 47821307 (sticky push)
 sfx9 11307307 (normal push)
 sfx10 91417908 (vat explosion)
+sfx11 77471309 (ending 2)
 
 endlevel 5477908 (finish)
 
@@ -3402,7 +3503,7 @@ Wall, Platform, DoorExtended
 Mark_Above
 Platform_Front Wall_Front
 SlimeVat_Mess_Below End_Below
-Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Below, SlimeVat_Broken_Below, Sign_Below, Ending1Secret
+Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Below, SlimeVat_Broken_Below, Sign_Below, Ending1Secret, Ending2SecretEmpty_Below, Ending2SecretFull_Below, Ending2SecretChar, Ending2SecretChar2
 Render_Below
 
 Distances
@@ -3424,7 +3525,7 @@ Wire_Above_L
 Render_WireOn_Above_D
 Spark
 
-Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Below_Top, SlimeVat_Broken_Below_Top, Ending1Secret_Top
+Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Below_Top, SlimeVat_Broken_Below_Top, Ending2SecretChar_Top, Ending2SecretChar2_Top
 Mark_Above_Top
 Render_ExplosivePrimed_Below
 vDangerStripeL_Top
@@ -3450,7 +3551,7 @@ Render_WireOn_Above_L_Top
 
 (Objects on upper level)
 SlimeVat_Mess_Above
-Belt_Above, Player_Above, Explosive_above, Wall_above, SlimeVat_Above, SlimeVat_Broken_Above, Anim_FusionAbove, Sign_Above
+Belt_Above, Player_Above, Explosive_above, Wall_above, SlimeVat_Above, SlimeVat_Broken_Above, Anim_FusionAbove, Sign_Above, Ending2SecretEmpty_Above, Ending2SecretFull_Above
 Render_Above
 Wire_AboveWall_D
 Render_WireOn_AboveWall_D
@@ -3632,6 +3733,7 @@ GLOBAL UP INIT [ SigilA_Off | ] -> [ SigilA_Off | SigilA_Off_Top ]
 GLOBAL UP INIT [ SigilB_Off | ] -> [ SigilB_Off | SigilB_Off_Top ]
 GLOBAL UP INIT [ SigilC_Off | ] -> [ SigilC_Off | SigilC_Off_Top ]
 
+GLOBAL UP INIT [ Ending2SecretChar | ] -> [ Ending2SecretChar | Ending2SecretChar_Top ]
 
 NOAGAINCHECK UP [ | ClearOnTurnStart ] -> [ | ]
 
@@ -3643,6 +3745,9 @@ noagaincheck [ Moved NO Player ] -> [ ]
 (Le Slo: with the doors, death is not always implicit, because Belt won't fall when on top of an activated door. Hence, forcing player's elimination)
 [ Player_Below Belt_Above ] -> [ Belt_Above ] sfx5
 
+
+(Trigger second ending)
+UP [ Ending2SecretChar Ending2SecretFull_Above | Ending2SecretChar_Top ] -> [ Ending2SecretChar2 | Ending2SecretChar2_Top ] sfx11
 
 
 (((WIRES)))
@@ -3659,8 +3764,10 @@ noagaincheck [ Moved NO Player ] -> [ ]
 [ BeltDL_Above@ NO Upstairs ] -> [ BeltDL_Below@ ] sfx1
 [ BeltLU_Above@ NO Upstairs ] -> [ BeltLU_Below@ ] sfx1
 [ Explosive_Above@ NO Upstairs] -> [Explosive_Below@] sfx1
-UP [ SlimeVat_Above NO Upstairs | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ SlimeVat_Below | SlimeVat_Below_Top | ]
-UP [ SlimeVat_Broken_Above NO Upstairs | SlimeVat_Broken_Above_Top ] -> [ SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ]
+[ Ending2SecretEmpty_Above NO Upstairs] -> [Ending2SecretEmpty_Below] sfx1
+[ Ending2SecretFull_Above NO Upstairs] -> [Ending2SecretFull_Below] sfx1
+UP [ SlimeVat_Above NO Upstairs | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ SlimeVat_Below | SlimeVat_Below_Top | ] sfx1
+UP [ SlimeVat_Broken_Above NO Upstairs | SlimeVat_Broken_Above_Top ] -> [ SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ] sfx1
 [ Sticky_Above NO Dynamic_Above Dynamic_Below ] -> [ Sticky_Below Dynamic_Below ]
 
 (Calculate sparks)
@@ -3743,7 +3850,8 @@ RIGHT [Exploded_below InflatedL | Inflatable ] -> [Exploded_below | Inflatable W
 (- Destroy slimevat)
 [Exploded_above SlimeVat_Above] -> [Exploded_above ACTION SlimeVat_Above]
 [ Exploded_above SlimeVat_Above | Stickyable_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | Stickyable_Below Sticky_Below ]
-[ Exploded_above SlimeVat_Above | NO Static_Below NO Stickyable_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | SlimeVat_Mess_Below ] sfx10
+[ Exploded_above SlimeVat_Above | Ending2SecretEmpty_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | Ending2SecretFull_Below ]
+[ Exploded_above SlimeVat_Above | NO Static_Below NO Stickyable_Below NO Ending2SecretFull_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | SlimeVat_Mess_Below ] sfx10
 [ Exploded_above SlimeVat_Above | Static_Below NO Dynamic_Above NO Static_Above ] -> [ Exploded_above SlimeVat_Above | Static_Below SlimeVat_Mess_Above ] sfx10
 UP [ Exploded_above SlimeVat_Above | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] -> [ SlimeVat_Broken_Above | SlimeVat_Broken_Above_Top | ]
 
@@ -4268,16 +4376,18 @@ LEFT  [ LadderL | no Platform no Belt_Below no FuseIntention_Below ] -> [|]
 (Lift objects on doors)
 [ Sticky_Below NO Weighted_Above DoorExtended ] -> [ Sticky_Above DoorExtended ]
 [ Player_Below NO Weighted_Above DoorExtended ] -> [ Player_Above DoorExtended ]
-[ BeltU_Below NO Weighted_Above DoorExtended ] -> [ BeltU_Above DoorExtended ]
-[ BeltR_Below NO Weighted_Above DoorExtended ] -> [ BeltR_Above DoorExtended ]
-[ BeltD_Below NO Weighted_Above DoorExtended ] -> [ BeltD_Above DoorExtended ]
-[ BeltL_Below NO Weighted_Above DoorExtended ] -> [ BeltL_Above DoorExtended ]
-[ BeltUR_Below NO Weighted_Above DoorExtended ] -> [ BeltUR_Above DoorExtended ]
-[ BeltRD_Below NO Weighted_Above DoorExtended ] -> [ BeltRD_Above DoorExtended ]
-[ BeltDL_Below NO Weighted_Above DoorExtended ] -> [ BeltDL_Above DoorExtended ]
-[ BeltLU_Below NO Weighted_Above DoorExtended ] -> [ BeltLU_Above DoorExtended ]
-[ BeltX_Below NO Weighted_Above DoorExtended ] -> [ BeltX_Above DoorExtended ]
-[ Explosive_Below NO Weighted_Above DoorExtended ] -> [ Explosive_Above DoorExtended ]
+[ BeltU_Below@ NO Weighted_Above DoorExtended ] -> [ BeltU_Above@ DoorExtended ]
+[ BeltR_Below@ NO Weighted_Above DoorExtended ] -> [ BeltR_Above@ DoorExtended ]
+[ BeltD_Below@ NO Weighted_Above DoorExtended ] -> [ BeltD_Above@ DoorExtended ]
+[ BeltL_Below@ NO Weighted_Above DoorExtended ] -> [ BeltL_Above@ DoorExtended ]
+[ BeltUR_Below@ NO Weighted_Above DoorExtended ] -> [ BeltUR_Above@ DoorExtended ]
+[ BeltRD_Below@ NO Weighted_Above DoorExtended ] -> [ BeltRD_Above@ DoorExtended ]
+[ BeltDL_Below@ NO Weighted_Above DoorExtended ] -> [ BeltDL_Above@ DoorExtended ]
+[ BeltLU_Below@ NO Weighted_Above DoorExtended ] -> [ BeltLU_Above@ DoorExtended ]
+[ BeltX_Below@ NO Weighted_Above DoorExtended ] -> [ BeltX_Above@ DoorExtended ]
+[ Explosive_Below@ NO Weighted_Above DoorExtended ] -> [ Explosive_Above@ DoorExtended ]
+[ Ending2SecretEmpty_Below NO Weighted_Above DoorExtended ] -> [ Ending2SecretEmpty_Above DoorExtended ]
+[ Ending2SecretFull_Below NO Weighted_Above DoorExtended ] -> [ Ending2SecretFull_Above DoorExtended ]
 
 UP [ Player_Below | Sign_Below_1 SignToRead ] -> [ Player_Below | Sign_Below_1 SignRead ] message KEEP OUT\nThese explosives are\nhighly explosive!\n(So don't press X near them)
 UP [ Player_Below | Sign_Below_2 SignToRead ] -> [ Player_Below | Sign_Below_2 SignRead ] message "Experimental findings:\nexplosives and slime are\na messy combination!"
@@ -4408,6 +4518,12 @@ NOAGAINCHECK LATE UP [ SlimeVat_Mess_Above | ] -> [ SlimeVat_Mess_Above | Render
 NOAGAINCHECK LATE UP [ Sign_Above | ] -> [ Sign_Above | Render_Sign_Above_Top ]
 NOAGAINCHECK LATE UP [ Sign_Below | ] -> [ Sign_Below | Render_Sign_Below_Top ]
 
+NOAGAINCHECK LATE UP [ Ending1Secret | ] -> [ Ending1Secret | Ending1Secret_Top ]
+NOAGAINCHECK LATE UP [ Ending2SecretEmpty_Below | ] -> [ Ending2SecretEmpty_Below | Ending2SecretEmpty_Below_Top ]
+NOAGAINCHECK LATE UP [ Ending2SecretFull_Below | ] -> [ Ending2SecretFull_Below | Ending2SecretFull_Below_Top ]
+NOAGAINCHECK LATE UP [ Ending2SecretEmpty_Above | ] -> [ Ending2SecretEmpty_Above | Ending2SecretEmpty_Above_Top ]
+NOAGAINCHECK LATE UP [ Ending2SecretFull_Above | ] -> [ Ending2SecretFull_Above | Ending2SecretFull_Above_Top ]
+
 (Wires on)
 NOAGAINCHECK LATE UP [ Wire_Below_U Spark ] -> [ Wire_Below_U Spark Render_WireOn_Below_U ]
 NOAGAINCHECK LATE UP [ Wire_Below_R Spark ] -> [ Wire_Below_R Spark Render_WireOn_Below_R ]
@@ -4451,25 +4567,25 @@ LEVELS
 
 
 @#####################################################################################################################################
-############################################################`#########################################################################
-##################################.~~~``..#.6~.....".~~~~~~£~£######,~~~,#############~~~~~~~##r.+###..###############################
-#################################~...`~~``#..~~...."6~~~~~££££#####ŝĴĕĕĕŁŝ############~ĶĴĴĴĶ~#cc.r.....###############################
-##cccccccccccc###################`~..~~~`~#``~~~~~~".....~~~££####~ŝ##ĕ##ŝ~###########~Ķ~~~Ķ~.p......ct###############################
-##c####+++++++##################..#ppqz~~~4~``~`~~~.....#`##``###~~rĕ#+c}r~~##########~~~~~Ķ~ppp~~~..c.###############################
-##c##c+.đḴ➢.╩┘+ccccccc##########""~q.~``~..`.`~~~~`.........6~###..p##.##p..#######.......~~~ttt~Ň~..c.#.....#########################
-##c##c+Ĉ..➢..ŵđ╬đđđŝđ+##########..pq+~~......".+pŝ....ŵ...ă.#`###.ac+...+cw.#######.......~~~...~~~..cr~~....#########################
-##c#cc+đ..đž.ž+c##ŝ#############..p~~`.tpppp#".#p....~`~#...#####.dp......s.#######...rppp...........#~Ň~....#########################
-##c#c##+++++++#c##ŝ############...pt`~..#~`p.#..pp~~``~~##.######.8p..+.....#######......p...........#~~~....#########################
-##c#c##ccccccc#c##ŝ####cz└Ň~~##...p~~~+.~#~q`~+..r+ă.~~`##########.pppc....########""...#+.ă.+..ă.đ.##.8.....#########################
-##c#c+###~z~###c#~Ň~###c#ŝ##~##ŵ.~╡.+.p.~`#q~~qqppq..#`############.......#######~£..........c..ă.đ.##......~#########################
-##c#cr#+cz~zc##c#qrq###+ŝĈ"#~##ŵ└.ppcpq~~4.?.~~...`.################..↑..########~Ň..........p..ă.đ.##......~#########################
-##c##ž#ž#~z~c##c#~q~#####ŝ##~⇐~~đđ....`~``~```~.2~~##################┐ŵ┌#########~Ň...+...rppp......##......~#########################
-##ccc╟c╟ccq#c##c#########ŝ######################⇑##################$#ŵ9ŵ#$#######~Ł...p..r....#.....##......~~~~~##########~~~########
+############################################################`#########################################################cccccccc########
+##################################.~~~``..#.6~.....".~~~~~~£~£######,~~~,#############~~~~~~~##r.+###..#########.£...#c#....#c########
+#################################~...`~~``#..~~...."6~~~~~££££#####ŝĴĕĕĕŁŝ############~ĶĴĴĴĶ~#cc.r.....#########{${{{#+#....#╒#"######
+##cccccccccccc###################`~..~~~`~#``~~~~~~".....~~~££####~ŝ##ĕ##ŝ~###########~Ķ~~~Ķ~.p......ct#########......"..6ztđžđăđđŝ###
+##c####+++++++##################..#ppqz~~~4~``~`~~~.....#`##``###~~rĕ#+c}r~~##########~~~~~Ķ~ppp~~~..c.#########.....###....#đ#đ#╉ŝ╉##
+##c##c+.đḴ➢.╩┘+ccccccc##########""~q.~``~..`.`~~~~`.........6~###..p##.##p..#######.......~~~ttt~Ň~..c.#.....###.....###....#+#+#╉╊.##
+##c##c+Ĉ..➢..ŵđ╬đđđŝđ+##########..pq+~~......".+pŝ....ŵ...ă.#`###.ac+...+cw.#######.......~~~...~~~..cr~~....###┿....########crc#╉.╉##
+##c#cc+đ..đž.ž+c##ŝ#############..p~~`.tpppp#".#p....~`~#...#####.dp......s.#######...rppp...........#~Ň~....###┿.┿..#########.##...##
+##c#c##+++++++#c##ŝ############...pt`~..#~`p.#..pp~~``~~##.######.8p..+.....#######......p...........#~~~....###┿┿┿............##╉....
+##c#c##ccccccc#c##ŝ####cz└Ň~~##...p~~~+.~#~q`~+..r+ă.~~`##########.pppc....########""...#+.ă.+..ă.đ.##.8.....###┿┿┿┿...........##╉╉╉##
+##c#c+###~z~###c#~Ň~###c#ŝ##~##ŵ.~╡.+.p.~`#q~~qqppq..#`############.......#######~£..........c..ă.đ.##......~##############~~~########
+##c#cr#+cz~zc##c#qrq###+ŝĈ"#~##ŵ└.ppcpq~~4.?.~~...`.################..↑..########~Ň..........p..ă.đ.##......~############$#~~~#$######
+##c##ž#ž#~z~c##c#~q~#####ŝ##~⇐~~đđ....`~``~```~.2~~##################┐ŵ┌#########~Ň...+...rppp......##......~##############~~~########
+##ccc╟c╟ccq#c##c#########ŝ######################⇑##################$#ŵ9ŵ#$#######~Ł...p..r....#.....##......~~~~~########$#~~~#$######
 #####ž#ž##~#c##c#########ŝ######################~####################~~~#########~~4..p..p....└..$..############~##########~~~########
-#####+c╟ccqcc##c#######đđđđđđđđđđđđđ┘└ăăăăăă⬅ăă~~##################$#~~~#$############c#žc####~#.£..##########~~~~~~~######~~~########
+#####+c╟ccqcc##c#######đđđđđđđđđđđđđ┘└ăăăăăă⬅ăă~~##################$#~~~#$############c#žc####~#.£..##########~~~~~~~####$#~~~#$######
 #######ž##~####c#######ŵŝăăăăăăăăăăăăđđđđđđđđđŝŵ########c+###########~~~##############cr"+####~###############~~~~~~~######~~~########
 #######rccqccccc#######ŵŝ#####################ŝŵ#######.p.~########$#~⇑~#$######~q~###########~#####{$${{{$$##~~~~~~~######qqqc%######
-#######+##⇑############ŵ⬇#####################ŝŵ###~$~#"ppp+#########~~~#####ŝăăqrqŇ~#cccccc##~~~~##{$${$$$$##~~~~~~~######ttt########
+#######+##⇑############ŵ⬇#####################ŝŵ###~$~#"ppp+#########~~~#####ŝăăqrqŇ~#cccccc##~~~~##{$${$$$$##~~~~~~~######~tt########
 ##########8############ŵŝ##########~q~########ŝŵ##......r..########c+┐.┌+c###ŝ##~q~#~~q..+#r####┘┌##{$${$$${###############~~~########
 ##########"############ŵŝ##đđđđđđđŇqrqđđđđđđđđŝŵ##..6ŵŝŵp..########c+┐.┌+c###ŝ########c+..#ž####┐└##{$${{$$$#########7#....888....####
 ##########""""""#######ŵŝ##ŵ#######~q~########ŝŵ##...pppp.~~.Ň┘zc##c+┐.┌+c###ŝ###########.ct####┘┌##{$$${{${##.└┘└┘└~~~4.&........####
