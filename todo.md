@@ -1,4 +1,3 @@
-- Undoing/restart during ending cutscenes
 - Reward at the end of optional bonus
 
 - Change sign next to indicator room
