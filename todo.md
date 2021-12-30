@@ -1,4 +1,3 @@
-- Don't save in ending regions
 - Cool hat on restart
 
 - Change sign next to indicator room
@@ -6,5 +5,3 @@
 
 - Check for missing respawns
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
-
-38.57

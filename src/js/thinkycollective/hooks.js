@@ -28,7 +28,9 @@ function onStateUpdate(againing, action) {
   var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
 
   if (changedRegion) {
-    pendingSave = true;
+    if (activeRegion.allowSave) {
+      pendingSave = true;
+    }
 
     // Track belts released from merge levels
     var previousRegion = regions[curlevel][previousActiveRegionIndex];

@@ -1366,7 +1366,8 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true
+      endingGate: true,
+      start: true
     },
     // Ending gate corridor
     {
@@ -1377,7 +1378,8 @@ var regions = [
         { rect: [3, 1, 3, 5] },
         { rect: [6, 0, 3, 7] }
       ],
-      zoom: 0.48
+      zoom: 0.48,
+      allowSave: false
     },
     // Merge corridor #1
     {
@@ -1649,7 +1651,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 13, 13] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      allowSave: false
     },
     //////////////
     // SECOND ENDING
@@ -1675,8 +1678,7 @@ var regions = [
         { rect: [0, 8, 2, 8] }
       ],
       zoom: 0.52,
-      secret: true,
-      start: true
+      secret: true
     },
     // (Second ending final corridor)
     {
@@ -1916,6 +1918,10 @@ function initRegions() {
 
     if (region.allowReset == null) {
       region.allowReset = true;
+    }
+
+    if (region.allowSave == null) {
+      region.allowSave = true;
     }
 
     if (region.simulationBoundsAdjustment == null) {
