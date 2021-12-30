@@ -30,6 +30,7 @@ function onStateUpdate(againing, action) {
   if (changedRegion) {
     pendingSave = true;
 
+    // Track belts released from merge levels
     var previousRegion = regions[curlevel][previousActiveRegionIndex];
     if (previousRegion.blockRelease && activeRegion.mergeCorridor) {
       var releasedBlockX = regionsOffset[0] + previousRegion.offset[0] + previousRegion.blockRelease[0];
@@ -46,6 +47,10 @@ function onStateUpdate(againing, action) {
         releasedBlockFrom = null;
       }
     }
+  }
+
+  if (state.objectMasks['ending1trigger'].bitsSetInArray(level.mapCellContents.data)) {
+    startEnding1();
   }
 
   if (!againing && pendingSave) {

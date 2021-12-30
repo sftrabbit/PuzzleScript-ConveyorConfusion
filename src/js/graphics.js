@@ -543,7 +543,49 @@ function redraw() {
         );
 
         if (creditsState.stage != null) {
-            if (creditsState.stage === 'levels') {
+            if (creditsState.stage === 'ending1') {
+                ctx.fillStyle = '#fff';
+                if (creditsState.ending1Progress < 160) {
+                    if (shake.state === ShakeState.STOPPED) {
+                        shakeScreen(16);
+                    }
+                    ctx.globalAlpha = Math.min(creditsState.ending1Progress / 100, 1);
+
+                    if (creditsState.ending1Progress === 130) {
+                        var endingPositionIndex = 70 * level.height + 7;
+                        var endingCell = level.getCell(endingPositionIndex);
+                        endingCell.iclear(state.objectMasks['anim_fusionbelow']);
+                        endingCell.iclear(state.objectMasks['fuseintention_below']);
+                        endingCell.ior(state.objectMasks['ending1secret']);
+                        level.setCell(endingPositionIndex, endingCell);
+
+                        var endingTopCell = level.getCell(endingPositionIndex - 1);
+                        endingTopCell.iclear(state.objectMasks['anim_fusionbelow_top']);
+                        endingTopCell.ior(state.objectMasks['ending1secret_top']);
+                        level.setCell(endingPositionIndex - 1, endingTopCell);
+
+                        var endingBlockLeftCell = level.getCell(endingPositionIndex - (3 * level.height) - 2);
+                        endingBlockLeftCell.iclear(state.objectMasks['dynamic_below']);
+                        level.setCell(endingPositionIndex - (3 * level.height) - 2, endingBlockLeftCell);
+
+                        var endingBlockRightCell = level.getCell(endingPositionIndex + (3 * level.height) - 2);
+                        endingBlockRightCell.iclear(state.objectMasks['dynamic_below']);
+                        level.setCell(endingPositionIndex + (3 * level.height) - 2, endingBlockRightCell);
+
+                        againing = true;
+                    }
+                } else {
+                    ctx.globalAlpha = Math.max(1 - ((creditsState.ending1Progress - 160) / 100), 0);
+
+                    if (creditsState.ending1Progress >= 360) {
+                        startCredits();
+                    }
+                }
+                ctx.fillRect(xoffset, yoffset, screenwidth * cellwidth, screenheight * cellheight);
+                ctx.globalAlpha = 1;
+
+                creditsState.ending1Progress++;
+            } else if (creditsState.stage === 'levels') {
                 var creditsRegion = regions[0][creditsState.creditsRegionIndex];
                 var creditText = creditsRegion.credit
 
@@ -606,9 +648,9 @@ function redraw() {
                     creditsState.listScrollProgress++;
                 }
             } else if (creditsState.stage === 'thanks') {
+                ctx.globalAlpha = 1;
                 ctx.fillStyle = '#000';
                 ctx.fillRect(xoffset, yoffset, screenwidth * cellwidth, screenheight * cellheight);
-                ctx.globalAlpha = 1;
 
                 var textSize = Math.max(~~(cellwidth / 18),1);
                 var textCellwidth = 6 * textSize;

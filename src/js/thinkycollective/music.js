@@ -14,3 +14,10 @@ function setMusicVolume (volume) {
   music.volume = Math.max(0.3 * volume, 0);
 }
 
+function playAudioElement(soundName) {
+  var sound = document.getElementById(soundName);
+  sound.loop = false;
+  sound.currentTime = 0;
+  sound.volume = 0.7;
+  sound.play();
+}

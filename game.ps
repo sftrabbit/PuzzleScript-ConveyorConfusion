@@ -2976,6 +2976,25 @@ transparent
 SignToRead
 transparent
 
+Ending1Trigger
+transparent
+
+Ending1Secret_Top
+#a46422 #bb742b #000
+.....
+.....
+.....
+11111
+02020
+
+Ending1Secret
+#a46422 #875018 #fff
+00000
+2.2.0
+11110
+00000
+.....
+
 =======
 LEGEND
 =======
@@ -3383,7 +3402,7 @@ Wall, Platform, DoorExtended
 Mark_Above
 Platform_Front Wall_Front
 SlimeVat_Mess_Below End_Below
-Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Below, SlimeVat_Broken_Below, Sign_Below
+Player_Below, Belt_Below, Explosive_below, Anim_FusionBelow, SlimeVat_Below, SlimeVat_Broken_Below, Sign_Below, Ending1Secret
 Render_Below
 
 Distances
@@ -3405,7 +3424,7 @@ Wire_Above_L
 Render_WireOn_Above_D
 Spark
 
-Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Below_Top, SlimeVat_Broken_Below_Top
+Render_Below_Top Platform_Top Anim_FusionBelow_Top, SlimeVat_Below_Top, SlimeVat_Broken_Below_Top, Ending1Secret_Top
 Mark_Above_Top
 Render_ExplosivePrimed_Below
 vDangerStripeL_Top
@@ -3508,7 +3527,7 @@ FuseIntention_BeltRD_Below
 FuseIntention_BeltDL_Below
 FuseIntention_BeltLU_Below
 
-Init2 Moved SignRead SignToRead
+Init2 Moved SignRead SignToRead Ending1Trigger
 Theme2
 
 ======
@@ -3993,6 +4012,11 @@ LEFT [ BeltDL_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidM
 LEFT [ BeltLU_Above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_BeltLU ] sfx2
 LEFT [ Explosive_above ACTION DiagMoveDiag_LU | NO DiagMidMove ] -> [ | UP DiagMidMove_Explosive ] sfx2
 
+(Trigger ending)
+RIGHT [ Inflatable InflatedR | Belt_Below | Player_Below | Belt_Below | Inflatable InflatedL ] -> [ Inflatable InflatedR | Belt_Below | Player_Below ACTION PlayerMovement | Belt_Below | Inflatable InflatedL ]
+DOWN [ Inflatable InflatedD | Belt_Below | Player_Below ACTION PlayerMovement | Belt_Below | Inflatable InflatedU ] -> [ Inflatable InflatedR | Belt_Below | Ending1Trigger | Belt_Below | Inflatable InflatedL ]
+RIGHT [ Inflatable InflatedR | Belt_Below | Player_Below ACTION PlayerMovement | Belt_Below | Inflatable InflatedL ] -> [ Inflatable InflatedR | Belt_Below | Player_Below | Belt_Below | Inflatable InflatedL ]
+
 (Fuse colliding blocks --Pedro PSI)
 (Above fusing)
 [ > BeltL_Above NO FusingDone_NonMidMove | no Above ] -> [ > BeltL_Above | Fusing FuseIntention_BeltL_Above ]
@@ -4197,7 +4221,7 @@ UP [ NO Anim_FusionBelow_7 | Anim_FusionBelow_7_Top ] -> [ | ] again
 (Fuse animation)
 UP [ Anim_FusionBelow_6 | Anim_FusionBelow_6_Top ] -> [ Anim_FusionBelow_7 | Anim_FusionBelow_7_Top ] again
 UP [ Anim_FusionBelow_5 | Anim_FusionBelow_5_Top ] -> [ Anim_FusionBelow_6 | Anim_FusionBelow_6_Top ] again
-UP [ Anim_FusionBelow_4 | Anim_FusionBelow_2_Top ] -> [ Anim_FusionBelow_5 | Anim_FusionBelow_5_Top ] again
+UP [ Anim_FusionBelow_4 NO Ending1Trigger | Anim_FusionBelow_2_Top ] -> [ Anim_FusionBelow_5 | Anim_FusionBelow_5_Top ] again
 UP [ Anim_FusionBelow_3 ] -> [ Anim_FusionBelow_4 ] again
 UP [ Anim_FusionBelow_2 ] -> [ Anim_FusionBelow_3 ] again
 UP [ Anim_FusionBelow_1 | Anim_FusionBelow_1_Top ] -> [ Anim_FusionBelow_2 | Anim_FusionBelow_2_Top ] again
@@ -4430,21 +4454,21 @@ LEVELS
 ############################################################`#########################################################################
 ##################################.~~~``..#.6~.....".~~~~~~£~£######,~~~,#############~~~~~~~##r.+###..###############################
 #################################~...`~~``#..~~...."6~~~~~££££#####ŝĴĕĕĕŁŝ############~ĶĴĴĴĶ~#cc.r.....###############################
-##cccccccccccc###################`~..~~~`~#``~~~~~~".....~~~££####~ŝ#~ĕ~#ŝ~###########~Ķ~~~Ķ~.p......ct###############################
-##c####+++++++##################..#ppqz~~~4~``~`~~~.....#`##``###~~rĕ~+q}r~~##########~~~~~Ķ~ppp~~~..c.###############################
-##c##c+.đḴ➢.╩┘+ccccccc##########""~q.~``~..`.`~~~~`.........6~###..p.....p..#######.......~~~ttt~Ň~..c.#.....#########################
-##c##c+Ĉ..➢..ŵđ╬đđđŝđ+##########..pq+~~......".+pŝ....ŵ...ă.#`###.ap+...+pw.#######.......~~~...~~~..cr~~....#########################
-##c#cc+đ..đž.ž+c##ŝ#############..p~~`8tpppp#".#p....~`~#...#####.dp......s.#######...rppp...........#~Ň~....#########################
+##cccccccccccc###################`~..~~~`~#``~~~~~~".....~~~££####~ŝ##ĕ##ŝ~###########~Ķ~~~Ķ~.p......ct###############################
+##c####+++++++##################..#ppqz~~~4~``~`~~~.....#`##``###~~rĕ#+c}r~~##########~~~~~Ķ~ppp~~~..c.###############################
+##c##c+.đḴ➢.╩┘+ccccccc##########""~q.~``~..`.`~~~~`.........6~###..p##.##p..#######.......~~~ttt~Ň~..c.#.....#########################
+##c##c+Ĉ..➢..ŵđ╬đđđŝđ+##########..pq+~~......".+pŝ....ŵ...ă.#`###.ac+...+cw.#######.......~~~...~~~..cr~~....#########################
+##c#cc+đ..đž.ž+c##ŝ#############..p~~`.tpppp#".#p....~`~#...#####.dp......s.#######...rppp...........#~Ň~....#########################
 ##c#c##+++++++#c##ŝ############...pt`~..#~`p.#..pp~~``~~##.######.8p..+.....#######......p...........#~~~....#########################
-##c#c##ccccccc#c##ŝ####cz└Ň~~##...p~~~+.~#~q`~+..r+ă.~~`##########.pppp....########""...#+.ă.+..ă.đ.##.8.....#########################
+##c#c##ccccccc#c##ŝ####cz└Ň~~##...p~~~+.~#~q`~+..r+ă.~~`##########.pppc....########""...#+.ă.+..ă.đ.##.8.....#########################
 ##c#c+###~z~###c#~Ň~###c#ŝ##~##ŵ.~╡.+.p.~`#q~~qqppq..#`############.......#######~£..........c..ă.đ.##......~#########################
-##c#cr#+cz~zc##c#qrq###+ŝĈ"#~##ŵ└4ppcpq~~4.?.~~...`.################..↑..########~Ň..........p..ă.đ.##......~#########################
+##c#cr#+cz~zc##c#qrq###+ŝĈ"#~##ŵ└.ppcpq~~4.?.~~...`.################..↑..########~Ň..........p..ă.đ.##......~#########################
 ##c##ž#ž#~z~c##c#~q~#####ŝ##~⇐~~đđ....`~``~```~.2~~##################┐ŵ┌#########~Ň...+...rppp......##......~#########################
-##ccc╟c╟ccq#c##c#########ŝ######################~##################$#ŵ9ŵ#$#######~Ł...p..r....#.....##......~~~~~##########~~~########
+##ccc╟c╟ccq#c##c#########ŝ######################⇑##################$#ŵ9ŵ#$#######~Ł...p..r....#.....##......~~~~~##########~~~########
 #####ž#ž##~#c##c#########ŝ######################~####################~~~#########~~4..p..p....└..$..############~##########~~~########
 #####+c╟ccqcc##c#######đđđđđđđđđđđđđ┘└ăăăăăă⬅ăă~~##################$#~~~#$############c#žc####~#.£..##########~~~~~~~######~~~########
 #######ž##~####c#######ŵŝăăăăăăăăăăăăđđđđđđđđđŝŵ########c+###########~~~##############cr"+####~###############~~~~~~~######~~~########
-#######rccqccccc#######ŵŝ#####################ŝŵ#######.p.~########$#~~~#$######~q~###########~#####{$${{{$$##~~~~~~~######qqqc%######
+#######rccqccccc#######ŵŝ#####################ŝŵ#######.p.~########$#~⇑~#$######~q~###########~#####{$${{{$$##~~~~~~~######qqqc%######
 #######+##⇑############ŵ⬇#####################ŝŵ###~$~#"ppp+#########~~~#####ŝăăqrqŇ~#cccccc##~~~~##{$${$$$$##~~~~~~~######ttt########
 ##########8############ŵŝ##########~q~########ŝŵ##......r..########c+┐.┌+c###ŝ##~q~#~~q..+#r####┘┌##{$${$$${###############~~~########
 ##########"############ŵŝ##đđđđđđđŇqrqđđđđđđđđŝŵ##..6ŵŝŵp..########c+┐.┌+c###ŝ########c+..#ž####┐└##{$${{$$$#########7#....888....####

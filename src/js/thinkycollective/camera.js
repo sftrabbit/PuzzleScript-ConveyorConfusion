@@ -129,15 +129,25 @@ function clampCameraPosition(activeRegion, position) {
 
 var creditsState = {
   stage: null,
+  ending1Progress: null,
   creditsRegionIndex: null,
   listScrollProgress: null
 };
 
 var creditsTimeoutId = null;
 
-function startCredits () {
-  winning = true;
+function startEnding1 () {
+  if (creditsState.stage != null) {
+    return;
+  }
 
+  playAudioElement('rumble');
+
+  creditsState.stage = 'ending1';
+  creditsState.ending1Progress = 0;
+}
+
+function startCredits () {
   creditsState.stage = 'levels';
   creditsState.creditsRegionIndex = 0;
   restoreOriginalLevel();

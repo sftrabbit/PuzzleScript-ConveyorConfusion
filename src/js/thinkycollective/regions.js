@@ -1377,7 +1377,8 @@ var regions = [
         { rect: [3, 1, 3, 5] },
         { rect: [6, 0, 3, 7] }
       ],
-      zoom: 0.48
+      zoom: 0.48,
+      start: true
     },
     // Merge corridor #1
     {
@@ -1398,8 +1399,7 @@ var regions = [
         { rect: [0, 0, 12, 10] }
       ],
       zoom: 0.7,
-      credit: "D5R",
-      start: true
+      credit: "D5R"
     },
     // (D5R) Block release
     {
