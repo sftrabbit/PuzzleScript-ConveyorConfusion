@@ -53,6 +53,10 @@ function onStateUpdate(againing, action) {
     startEnding1();
   }
 
+  if (state.objectMasks['ending2secretchar2'].bitsSetInArray(level.mapCellContents.data)) {
+    startEnding2();
+  }
+
   if (!againing && pendingSave) {
     saveLevelState();
     pendingSave = false;

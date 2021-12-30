@@ -147,6 +147,17 @@ function startEnding1 () {
   creditsState.ending1Progress = 0;
 }
 
+function startEnding2 () {
+  if (creditsState.stage != null) {
+    return;
+  }
+
+  creditsState.stage = 'ending2';
+  setTimeout(function() {
+    startCredits()
+  }, 2500);
+}
+
 function startCredits () {
   creditsState.stage = 'levels';
   creditsState.creditsRegionIndex = 0;
