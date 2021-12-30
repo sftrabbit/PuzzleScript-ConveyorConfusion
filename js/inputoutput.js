@@ -555,7 +555,7 @@ function prevent(e) {
 function checkKey(e,justPressed) {
 	ULBS();
 	
-    if (winning) {
+    if (winning || creditsState.stage != null) {
     	return;
 	}
 	if (e&&(e.ctrlKey || e.metaKey|| e.altKey)){
