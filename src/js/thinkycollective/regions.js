@@ -1377,8 +1377,9 @@ var regions = [
         { rect: [3, 1, 3, 5] },
         { rect: [6, 0, 3, 7] }
       ],
-      zoom: 0.48,
-      allowSave: false
+      zoom: 0.6,
+      allowSave: false,
+      start: true
     },
     // Merge corridor #1
     {
@@ -1541,8 +1542,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 17, 3] },
         { rect: [0, 3, 20, 6] },
-        { rect: [0, 9, 19, 3] },
-        { rect: [0, 12, 21, 5] },
+        { rect: [0, 9, 19, 4] },
+        { rect: [0, 13, 21, 4] },
       ],
       zoom: 0.52,
       credit: "domcamus"
@@ -1552,7 +1553,7 @@ var regions = [
       id: 'domcamus block release',
       offset: [17, -5],
       areas: [
-        { rect: [0, 0, 4, 4] }
+        { rect: [0, 0, 4, 5] }
       ],
       zoom: 0.50,
       blockRelease: [5, 2]
@@ -1602,7 +1603,6 @@ var regions = [
       offset: [3, 10],
       areas: [
         { rect: [0, 0, 19, 13] },
-        { rect: [3, -1, 3, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [13, -1, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.58,
@@ -1613,7 +1613,7 @@ var regions = [
       id: 'stevenjmiller block release',
       offset: [6, 5],
       areas: [
-        { rect: [0, 0, 5, 4] }
+        { rect: [0, 0, 5, 5] }
       ],
       zoom: 0.6,
       blockRelease: [4, 2]
@@ -1626,8 +1626,8 @@ var regions = [
         { rect: [0, 7, 1, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 3, 18, 9] },
         { rect: [15, 12, 4, 1] },
-        { rect: [9, -2, 9, 4] },
-        { rect: [9, 2, 10, 1] }
+        { rect: [10, -2, 8, 4] },
+        { rect: [10, 2, 9, 1] }
       ],
       zoom: 0.57
     },
@@ -1637,6 +1637,7 @@ var regions = [
       offset: [74, -18],
       areas: [
         { rect: [4, -3, 5, 5] },
+        { rect: [9, -2, 1, 4] },
         { rect: [1, -2, 3, 5] }
       ],
       zoom: 0.57,
@@ -1677,8 +1678,7 @@ var regions = [
         { rect: [0, 4, 18, 12] }
       ],
       zoom: 0.52,
-      secret: true,
-      start: true
+      secret: true
     },
     // (Second ending final corridor)
     {
@@ -2264,4 +2264,35 @@ function formatPoint(point) {
 function parsePoint(formattedPoint) {
   var pointParts = formattedPoint.split(',');
   return [parseInt(pointParts[0]), parseInt(pointParts[1])]
+}
+
+function checkSpawns() {
+  for (var i = 0; i < regions[curlevel].length; i++) {
+    var region = regions[curlevel][i];
+    var regionBounds = region.fullBounds;
+    var foundSpawn = false;
+    for (var x = regionBounds.minX; x < regionBounds.maxX; x++) {
+      for (var y = regionBounds.minY; y < regionBounds.maxY; y++) {
+        var inRegion = getRegionIndex(x, y) === i;
+
+        if (!inRegion) {
+          continue;
+        }
+
+        var positionIndex = y + x * level.height;
+        var cell = new BitVec(originalLevel.dat.subarray(positionIndex * STRIDE_OBJ, positionIndex * STRIDE_OBJ + STRIDE_OBJ));
+        if (cell.anyBitsInCommon(state.objectMasks['player'])) {
+          if (foundSpawn) {
+            throw new Error('Found two spawns in region ' + region.id);
+          } else {
+            foundSpawn = true;
+          }
+        }
+      }
+    }
+
+    if (!foundSpawn) {
+      console.log('Missing spawn in region ' + region.id);
+    }
+  }
 }
