@@ -14,7 +14,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro'
+      copyCameraAnchor: 'intro',
+      start: true
     },
     // Intro
     {
@@ -226,9 +227,9 @@ var regions = [
       id: 'intro bonus puzzle',
       offset: [79, 66],
       areas: [
-        { rect: [0, 3, 1, 5], secondary: true, camera: 'pull-horizontal' },
-        { rect: [1, 0, 1, 8], secondary: true, camera: 'pull-horizontal' },
-        { rect: [2, 0, 3, 8] },
+        { rect: [0, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
+        { rect: [2, 0, 3, 7] },
         { rect: [5, 0, 8, 10] }
       ],
       zoom: 0.7
@@ -1378,8 +1379,7 @@ var regions = [
         { rect: [6, 0, 3, 7] }
       ],
       zoom: 0.6,
-      allowSave: false,
-      start: true
+      allowSave: false
     },
     // Merge corridor #1
     {
