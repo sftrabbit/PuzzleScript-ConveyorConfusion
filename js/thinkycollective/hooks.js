@@ -104,7 +104,6 @@ function checkSecretMarkers() {
   if (secretsComplete) {
     againing = true;
   }
-  console.log('Secrets complete?', secretsComplete);
 }
 
 function transitionCamera(activeRegion) {
