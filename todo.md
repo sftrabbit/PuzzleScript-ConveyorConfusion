@@ -6,7 +6,6 @@ Bugs:
 - Post-Nogg player ghost
 - Stevenjmiller bonus 2 secret loses power in adjacent level
 - Block release from Ethan Clark's level has visual glitch
-- Show button in ending gate
 - Game pad secret doesn't register
 
 Maybe:
