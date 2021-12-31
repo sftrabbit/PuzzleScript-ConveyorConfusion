@@ -14,8 +14,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro',
-      start: true
+      copyCameraAnchor: 'intro'
     },
     // Intro
     {
@@ -1367,7 +1366,8 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true
+      endingGate: true,
+      start: true
     },
     // Ending gate corridor
     {
