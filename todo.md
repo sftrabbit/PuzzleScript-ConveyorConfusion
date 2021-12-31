@@ -12,7 +12,6 @@ Bugs:
 
 Maybe:
 - Leave credits?
-- Exit from shark secret without reset required?
 - Slowness in branch endings?
 - Sound when going from Deusovi to Gamepad secret
 - Sound when going from Merge Path 4 to Merge Path 3
