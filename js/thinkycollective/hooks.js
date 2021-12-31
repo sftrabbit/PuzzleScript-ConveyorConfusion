@@ -23,6 +23,8 @@ function onStateUpdate(againing, action) {
 
   if (activeRegion.secret) {
     updateSecretMarker(activeRegion.secret);
+  } else if (activeRegion.indirectSecret) {
+    updateSecretMarker(regions[curlevel][regionIds[activeRegion.indirectSecret]].secret);
   }
 
   var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;

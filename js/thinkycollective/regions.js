@@ -14,7 +14,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro'
+      copyCameraAnchor: 'intro',
+      start: true
     },
     // Intro
     {
@@ -1366,8 +1367,7 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true,
-      start: true
+      endingGate: true
     },
     // Ending gate corridor
     {
@@ -1575,7 +1575,8 @@ var regions = [
         { rect: [0, 0, 20, 6] },
         { rect: [0, 6, 14, 10] }
       ],
-      zoom: 0.52
+      zoom: 0.52,
+      indirectSecret: 'gamepad bonus puzzle secret'
     },
     // remote gamepad bonus puzzle
     {
