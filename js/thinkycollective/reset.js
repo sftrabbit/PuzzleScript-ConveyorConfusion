@@ -96,9 +96,34 @@ function restoreActiveRegion(lev) {
       trackersToRemove.push([false, x, y]);
     }
 
-    for (var j = 0; j < STRIDE_OBJ; j++) {
-      level.objects[positionIndex * STRIDE_OBJ + j] = originalLevel.dat[positionIndex * STRIDE_OBJ + j];
-    }
+    var originalCell = new BitVec(originalLevel.dat.subarray(positionIndex * STRIDE_OBJ, positionIndex * STRIDE_OBJ + STRIDE_OBJ));
+    originalCell.iclear(state.objectMasks['render']);
+    var cell = level.getCell(positionIndex);
+    cell.ior(originalCell);
+    level.setCell(positionIndex, cell);
+
+    var topPositionIndex = positionIndex - 1;
+    var originalCellTop = new BitVec(originalLevel.dat.subarray(topPositionIndex * STRIDE_OBJ, topPositionIndex * STRIDE_OBJ + STRIDE_OBJ));
+    var topMask = state.objectMasks['render_below_top'].clone();
+    topMask.ior(state.objectMasks['render_above_top']);
+    topMask.ior(state.objectMasks['platform_top']);
+    topMask.ior(state.objectMasks['button_above_top']);
+    topMask.ior(state.objectMasks['inflatable_top']);
+    topMask.ior(state.objectMasks['slimevat_above_top']);
+    originalCellTop.iand(topMask);
+    var cellTop = level.getCell(topPositionIndex);
+    cellTop.ior(originalCellTop);
+    cellTop.iclear(state.objectMasks['platform_front']);
+    level.setCell(topPositionIndex, cellTop);
+
+    var top2PositionIndex = positionIndex - 2;
+    var originalCellTop2 = new BitVec(originalLevel.dat.subarray(top2PositionIndex * STRIDE_OBJ, top2PositionIndex * STRIDE_OBJ + STRIDE_OBJ));
+    var top2Mask = state.objectMasks['render_above_top2'].clone();
+    top2Mask.ior(state.objectMasks['slimevat_above_top2']);
+    originalCellTop2.iand(top2Mask);
+    var cellTop2 = level.getCell(top2PositionIndex);
+    cellTop2.ior(originalCellTop2);
+    level.setCell(top2PositionIndex, cellTop2);
   }
 
   removeObjectTrackers(trackersToRemove);

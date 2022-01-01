@@ -1252,7 +1252,8 @@ var regions = [
         { rect: [5, -2, 5, 2], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
-      credit: "Notan"
+      credit: "Notan",
+      start: true
     },
     // (Zach)
     {
@@ -1444,8 +1445,7 @@ var regions = [
         { rect: [11, 1, 4, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Ethan Clark",
-      start: true
+      credit: "Ethan Clark"
     },
     // (Ethan Clark) block release
     {
