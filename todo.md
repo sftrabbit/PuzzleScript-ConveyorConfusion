@@ -6,5 +6,4 @@
 - Sound when going from branch A exit path to Corey Hardt
 - Sound when going from inflatable intro to clementsparrow
 - Sound when going from clock to KirraLuan
-- Theme2 covering stevenjmiller bonus 2
 - Check credits
