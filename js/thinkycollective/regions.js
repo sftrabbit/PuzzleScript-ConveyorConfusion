@@ -1444,7 +1444,8 @@ var regions = [
         { rect: [11, 1, 4, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Ethan Clark"
+      credit: "Ethan Clark",
+      start: true
     },
     // (Ethan Clark) block release
     {
@@ -1453,7 +1454,10 @@ var regions = [
       areas: [
         { rect: [15, 1, 3, 6] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minY: -1
+      }
     },
     // stevenjmiller bonus puzzle
     {
@@ -1629,8 +1633,7 @@ var regions = [
         { rect: [10, -2, 8, 4] },
         { rect: [10, 2, 9, 1] }
       ],
-      zoom: 0.57,
-      start: true
+      zoom: 0.57
     },
     // stevenjmiller bonus puzzle 2 secret
     {
