@@ -887,8 +887,7 @@ var regions = [
         { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58,
-      finish: true,
-      start: true
+      finish: true
     },
     //////////////
     // BRANCH B
@@ -1656,7 +1655,8 @@ var regions = [
         { rect: [10, -2, 8, 4] },
         { rect: [10, 2, 9, 1] }
       ],
-      zoom: 0.57
+      zoom: 0.57,
+      start: true
     },
     // stevenjmiller bonus puzzle 2 secret
     {
@@ -1785,7 +1785,9 @@ var theme2Areas = [
   [110, -39, Infinity, 13],
   [119, -26, Infinity, Infinity],
   [112, -18, Infinity, Infinity],
-  [77, -8, Infinity, 13],
+  [77, -7, 13, 12],
+  [90, -6, 2, 11],
+  [92, -7, Infinity, 12],
   [80, 5, Infinity, 13],
   [82, 18, Infinity, Infinity],
   [79, 31, Infinity, Infinity],
