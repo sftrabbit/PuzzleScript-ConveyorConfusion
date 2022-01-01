@@ -11,4 +11,3 @@
 - Sound when going from clock to KirraLuan
 - Theme2 covering stevenjmiller bonus 2
 - Move blocks in ending
-- Add exit from stevenjmiller mega puzzle
