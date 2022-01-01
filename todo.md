@@ -6,6 +6,7 @@ Bugs:
 - Post-Nogg player ghost
 - Stevenjmiller bonus 2 secret loses power
 - Block release from Ethan Clark's level has visual glitch
+- Visual bug when resetting explosion (see sjm chat)
 
 Maybe:
 - Leave credits?
