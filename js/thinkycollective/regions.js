@@ -1366,7 +1366,8 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true
+      endingGate: true,
+      start: true
     },
     // Ending gate corridor
     {
@@ -1750,8 +1751,7 @@ var regions = [
         { rect: [0, 0, 9, 9] },
         { rect: [9, 5, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     }
   ]
 ];

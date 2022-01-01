@@ -191,6 +191,13 @@ function showNextCredit () {
   }, 2700);
 }
 
+function stopCredits() {
+  creditsState.stage = null;
+  creditsState.ending1Progress = null;
+  creditsState.creditsRegionIndex = null;
+  creditsState.listScrollProgress = null;
+}
+
 var listCredits = [
   'Made collaboratively',
   'by members of the',

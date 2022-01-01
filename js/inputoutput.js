@@ -556,6 +556,13 @@ function checkKey(e,justPressed) {
 	ULBS();
 	
     if (winning || creditsState.stage != null) {
+    	if (creditsState.stage === 'thanks') {
+			stopCredits();
+			goToTitleScreen();	
+			tryPlayTitleSound();
+			canvasResize();			
+			return prevent(e)
+    	}
     	return;
 	}
 	if (e&&(e.ctrlKey || e.metaKey|| e.altKey)){
