@@ -2751,6 +2751,7 @@ var localBoundary = {
 var activeRegion = null;
 
 var runningLateRules = false;
+var overrideActiveRegion = null;
 
 /* returns a bool indicating if anything changed */
 function processInput(dir,dontDoWin,dontModify) {
@@ -2772,7 +2773,7 @@ function processInput(dir,dontDoWin,dontModify) {
 	localBoundary.ymin=playerPosition.y - 10;
 	localBoundary.ymax=playerPosition.y + 11;
 
-	activeRegion = getActiveRegion();
+	activeRegion = overrideActiveRegion || getActiveRegion();
 
     if (dir<=4) {//when is dir>4???
 

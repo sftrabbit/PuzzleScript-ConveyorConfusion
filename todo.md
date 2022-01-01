@@ -1,7 +1,6 @@
 - Helper functions?
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
 
-- Slowness in branch endings?
 - Sound when going from Deusovi to Gamepad secret
 - Sound when going from Merge Path 4 to Merge Path 3
 - Sound when going from branch A exit path to Corey Hardt

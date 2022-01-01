@@ -555,7 +555,7 @@ function prevent(e) {
 function checkKey(e,justPressed) {
 	ULBS();
 	
-    if (winning || creditsState.stage != null) {
+    if (winning || creditsState.stage != null || overrideActiveRegion) {
     	if (creditsState.stage === 'thanks') {
 			stopCredits();
 			goToTitleScreen();	
