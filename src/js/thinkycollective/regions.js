@@ -14,8 +14,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro',
-      start: true
+      copyCameraAnchor: 'intro'
     },
     // Intro
     {
@@ -602,9 +601,8 @@ var regions = [
       id: 'pancelor',
       offset: [19, 69],
       areas: [
-        { rect: [-2, 0, 14, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [1, 1, 1, 8], secondary: true, camera: 'pull-horizontal' },
-        { rect: [-2, 1, 3, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [-2, 1, 4, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 1, 9, 8] },
         { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-horizontal' }
       ],
@@ -636,8 +634,9 @@ var regions = [
     // 7:00 #4 (Norgg)
     {
       id: 'norgg',
-      offset: [8, 69],
+      offset: [8, 70],
       areas: [
+        { rect: [6, -1, 3, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 0, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [8, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 1, 1, 6], secondary: true },
@@ -645,7 +644,8 @@ var regions = [
         { rect: [1, 1, 7, 5] }
       ],
       zoom: 0.7,
-      credit: "Norgg"
+      credit: "Norgg",
+      start: true
     },
     // 7:00 #5 Post-Norgg
     {
@@ -660,7 +660,7 @@ var regions = [
       ],
       zoom: 0.7,
       simulationBoundsAdjustment: {
-        maxY: -2
+        maxY: -1
       }
     },
     // 7:00 Le Slo Secret
