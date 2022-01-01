@@ -1658,7 +1658,8 @@ var regions = [
         { rect: [0, 0, 13, 13] }
       ],
       zoom: 0.6,
-      allowSave: false
+      allowSave: false,
+      start: true
     },
     //////////////
     // SECOND ENDING
@@ -1750,8 +1751,7 @@ var regions = [
         { rect: [0, 0, 9, 9] },
         { rect: [9, 5, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     }
   ]
 ];

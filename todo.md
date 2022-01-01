@@ -10,4 +10,4 @@
 - Sound when going from inflatable intro to clementsparrow
 - Sound when going from clock to KirraLuan
 - Theme2 covering stevenjmiller bonus 2
-- Move blocks in ending
+- Check credits
