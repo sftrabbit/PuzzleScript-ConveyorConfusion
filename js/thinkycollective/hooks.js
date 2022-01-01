@@ -13,7 +13,10 @@ function initOpenWorld() {
 
 var releasedBlockFrom = null;
 
-function onStateUpdate(againing, action) {
+var setSigilA = false;
+var setSigilB = false;
+
+function onStateUpdate(isAgaining, action) {
   if (!isOpenWorldLevel()) {
     redraw();
     return;
@@ -25,6 +28,42 @@ function onStateUpdate(againing, action) {
     updateSecretMarker(activeRegion.secret);
   } else if (activeRegion.indirectSecret) {
     updateSecretMarker(regions[curlevel][regionIds[activeRegion.indirectSecret]].secret);
+  }
+
+  if (activeRegion.finish) {
+    if (!setSigilA && state.objectMasks['sigila_on'].anyBitsInCommon(level.mapCellContents)) {
+      setSigilA = true;
+
+      var sigilCell = level.getCell(sigilPositions[0]);
+      sigilCell.iclear(state.objectMasks['sigila_off']);
+      sigilCell.ior(state.objectMasks['sigila_on']);
+      level.setCell(sigilPositions[0], sigilCell);
+
+      var sigilCellTop = level.getCell(sigilPositions[0] - 1);
+      sigilCellTop.iclear(state.objectMasks['sigila_off_top']);
+      sigilCellTop.ior(state.objectMasks['sigila_on_top']);
+      level.setCell(sigilPositions[0] - 1, sigilCellTop);
+
+      overrideActiveRegion = regions[curlevel][regionIds['second ending gate']];
+      againing = true;
+    }
+
+    if (!setSigilB && state.objectMasks['sigilb_on'].anyBitsInCommon(level.mapCellContents)) {
+      setSigilB = true;
+      
+      var sigilCell = level.getCell(sigilPositions[1]);
+      sigilCell.iclear(state.objectMasks['sigilb_off']);
+      sigilCell.ior(state.objectMasks['sigilb_on']);
+      level.setCell(sigilPositions[1], sigilCell);
+
+      var sigilCellTop = level.getCell(sigilPositions[1] - 1);
+      sigilCellTop.iclear(state.objectMasks['sigilb_off_top']);
+      sigilCellTop.ior(state.objectMasks['sigilb_on_top']);
+      level.setCell(sigilPositions[1] - 1, sigilCellTop);
+
+      overrideActiveRegion = regions[curlevel][regionIds['second ending gate']];
+      againing = true;
+    }
   }
 
   var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
@@ -61,9 +100,16 @@ function onStateUpdate(againing, action) {
     startEnding2();
   }
 
-  if (!againing && pendingSave) {
-    saveLevelState();
-    pendingSave = false;
+  if (!isAgaining) {
+    if (pendingSave) {
+      saveLevelState();
+      pendingSave = false;
+    }
+
+    if (overrideActiveRegion != null) {
+      overrideActiveRegion = null;
+      againing = true;
+    }
   }
 
   transitionCamera(activeRegion);

@@ -864,7 +864,8 @@ var regions = [
         { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58,
-      simulateAlso: ['second ending gate']
+      finish: true,
+      start: true
     },
     //////////////
     // BRANCH B
@@ -889,7 +890,7 @@ var regions = [
         { rect: [1, 12, 16, 4] },
       ],
       zoom: 0.56,
-      simulateAlso: ['second ending gate']
+      finish: true
     },
     // (Pichusuperlover)
     {
@@ -1366,8 +1367,7 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true,
-      start: true
+      endingGate: true
     },
     // Ending gate corridor
     {
@@ -1673,7 +1673,8 @@ var regions = [
         { rect: [0, 1, 10, 6] },
         { rect: [0, 7, 10, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secondEndingGate: [[1, 4], [1, 1]]
     },
     // (Second ending secret room)
     {
@@ -1823,6 +1824,7 @@ var secretRegions = [
 var regionMap = [];
 var regionIds = {};
 var secrets = [];
+var sigilPositions = [];
 
 function initRegions() {
   regionMap = [];
@@ -1960,6 +1962,12 @@ function initRegions() {
           }
         }
       }
+    }
+
+    if (region.secondEndingGate) {
+      sigilPositions = [];
+      sigilPositions.push((offsetX + region.secondEndingGate[0][0]) * level.height + (offsetY + region.secondEndingGate[0][1]));
+      sigilPositions.push((offsetX + region.secondEndingGate[1][0]) * level.height + (offsetY + region.secondEndingGate[1][1]));
     }
   }
 
