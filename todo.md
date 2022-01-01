@@ -3,7 +3,6 @@
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
 
 Bugs:
-- Block release from Ethan Clark's level has visual glitch
 - Visual bug when resetting explosion (see sjm chat)
 
 Maybe:
