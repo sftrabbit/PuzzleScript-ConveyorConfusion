@@ -2,10 +2,6 @@
 - Helper functions?
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
 
-Bugs:
-- Visual bug when resetting explosion (see sjm chat)
-
-Maybe:
 - Leave credits?
 - Slowness in branch endings?
 - Sound when going from Deusovi to Gamepad secret
@@ -14,3 +10,5 @@ Maybe:
 - Sound when going from inflatable intro to clementsparrow
 - Sound when going from clock to KirraLuan
 - Theme2 covering stevenjmiller bonus 2
+- Move blocks in ending
+- Add exit from stevenjmiller mega puzzle
