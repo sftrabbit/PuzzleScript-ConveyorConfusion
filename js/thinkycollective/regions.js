@@ -644,8 +644,7 @@ var regions = [
         { rect: [1, 1, 7, 5] }
       ],
       zoom: 0.7,
-      credit: "Norgg",
-      start: true
+      credit: "Norgg"
     },
     // 7:00 #5 Post-Norgg
     {
@@ -1630,9 +1629,10 @@ var regions = [
         { rect: [10, -2, 8, 4] },
         { rect: [10, 2, 9, 1] }
       ],
-      zoom: 0.57
+      zoom: 0.57,
+      start: true
     },
-    // stevenjmiller bonus puzzle 2
+    // stevenjmiller bonus puzzle 2 secret
     {
       id: 'stevenjmiller bonus puzzle 2 secret',
       offset: [74, -18],
@@ -1643,7 +1643,10 @@ var regions = [
       ],
       zoom: 0.57,
       secret: true,
-      copyCameraAnchor: 'stevenjmiller bonus puzzle 2'
+      copyCameraAnchor: 'stevenjmiller bonus puzzle 2',
+      simulationBoundsAdjustment: {
+        maxX: -2
+      }
     },
     // Ending
     {
