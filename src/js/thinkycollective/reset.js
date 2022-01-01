@@ -10,6 +10,8 @@ function restoreActiveRegion(lev) {
 
   var foreignRegionIndexes = [];
 
+  var hasCoolHat = state.objectMasks['coolhat'].anyBitsInCommon(level.mapCellContents);
+
   for (var i = 0; i < trackersToRemove.length; i++) {
     var objectTracker = trackersToRemove[i];
     var x = objectTracker[1];
@@ -132,27 +134,16 @@ function restoreActiveRegion(lev) {
     updateAllSecretMarkers();
   }
 
-  // Recreate foreign objects
-  // for (var i = 0; i < foreignObjects.length; i++) {
-  //   var foreignObject = foreignObjects[i];
-
-  //   var positionIndex = foreignObject.x * level.height + foreignObject.y;
-  //   var cell = level.getCell(positionIndex);
-
-  //   var layerMask = state.layerMasks[foreignObject.layer];
-
-  //   // If the restored cell already has stuff in this layer, foreign object doesn't get to exist anymore
-  //   if (cell.anyBitsInCommon(layerMask)) {
-  //     continue;
-  //   }
-
-  //   cell.iclear(layerMask);
-  //   cell.ior(foreignObject.objectMask);
-
-  //   level.setCell(positionIndex, cell);
-
-  //   objectTrackers[foreignObject.x][foreignObject.y][foreignObject.layer] = foreignObject.sourceRegion;
-  // }
+  if (hasCoolHat) {
+    var playerPositions = getPlayerPositions();
+    if (playerPositions.length > 0) {
+      var playerCell = level.getCell(playerPositions[0]);
+      var isPlayerAbove = playerCell.anyBitsInCommon(state.objectMasks['player_above']);
+      playerCell.iclear(state.objectMasks['player']);
+      playerCell.ior(state.objectMasks[isPlayerAbove ? 'coolhat_above' : 'coolhat_below']);
+      level.setCell(playerPositions[0], playerCell);
+    }
+  }
 
   // Stuff copied from the normal restore function (could probably do with tidying up)
   if (level.width !== lev.width || level.height !== lev.height) {
