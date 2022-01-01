@@ -397,15 +397,38 @@ var regions = [
       ],
       zoom: 0.8
     },
-    // Branch A exit corridor
+    // Branch A exit corridor #1
     {
-      id: 'branch a exit corridor',
+      id: 'branch a exit corridor 1',
       offset: [43, 8],
       areas: [
-        { rect: [-1, 0, 31, 3], camera: 'follow-player' },
-        { rect: [13, -3, 3, 3], camera: 'follow-player' },
+        { rect: [-1, 0, 13, 3], camera: 'follow-player' }
+      ],
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        minX: 2
+      }
+    },
+    // Branch A exit corridor #2
+    {
+      id: 'branch a exit corridor 2',
+      offset: [43, 8],
+      areas: [
+        { rect: [12, 0, 15, 3], camera: 'follow-player' },
+        { rect: [13, -3, 3, 3], camera: 'follow-player' }
+      ],
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        minX: 2
+      }
+    },
+    // Branch A exit corridor #3
+    {
+      id: 'branch a exit corridor 3',
+      offset: [43, 8],
+      areas: [
         { rect: [27, -4, 7, 3], camera: 'follow-player' },
-        { rect: [27, -1, 3, 1], camera: 'follow-player' }
+        { rect: [27, -1, 3, 4], camera: 'follow-player' }
       ],
       zoom: 0.8,
       simulationBoundsAdjustment: {
