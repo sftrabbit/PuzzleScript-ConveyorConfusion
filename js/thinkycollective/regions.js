@@ -1252,8 +1252,7 @@ var regions = [
         { rect: [5, -2, 5, 2], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
-      credit: "Notan",
-      start: true
+      credit: "Notan"
     },
     // (Zach)
     {
@@ -1748,9 +1747,11 @@ var regions = [
       id: 'stevenjmiller optional bonus reward',
       offset: [109, -26],
       areas: [
-        { rect: [0, 0, 9, 9] }
+        { rect: [0, 0, 9, 9] },
+        { rect: [9, 5, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     }
   ]
 ];
