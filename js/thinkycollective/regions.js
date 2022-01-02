@@ -57,7 +57,10 @@ var regions = [
       areas: [
         { rect: [-9, -6, 13, 4], camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // Intro bottom left arm #1-#2 node
     {
@@ -234,7 +237,10 @@ var regions = [
         { rect: [19, -36, 2, 4], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
-      simulateAlso: ['intro top intersection']
+      simulateAlso: ['intro top intersection'],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Intro exit
     {
@@ -1215,7 +1221,8 @@ var regions = [
         minX: -2,
         minY: -2,
         maxY: 1
-      }
+      },
+      start: true
     },
     // Main path lock
     {
@@ -1826,8 +1833,7 @@ var regions = [
       credit: "domcamus",
       simulationBoundsAdjustment: {
         maxY: 1
-      },
-      start: true
+      }
     },
     // (domcamus) Block release
     {
