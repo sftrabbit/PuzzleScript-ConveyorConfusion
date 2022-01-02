@@ -9,7 +9,6 @@
 - Check credits
 - Reset secret room after activating all secrets, sigils stay lit, don't power
 
-- Pancelor power on but not off
 - Norgg power off when exiting
 - Clementsparrow powering off
 - Wall above intro ghost
