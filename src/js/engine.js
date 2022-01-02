@@ -522,6 +522,8 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
 		};
 	}
 
+	activeRegion = getActiveRegion();
+
 	if (!isOpenWorldLevel()) {
 		drawLevel();
 		redraw();
