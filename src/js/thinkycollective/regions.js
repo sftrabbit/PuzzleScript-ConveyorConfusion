@@ -23,7 +23,11 @@ var regions = [
       areas: [
         { rect: [-1, 3, 16, 9], camera: 'follow-player-anchored-x' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        minY: -2
+      }
     },
     // Intro bottom intersection
     {
@@ -41,7 +45,10 @@ var regions = [
         'intro bottom right arm 1-2 node',
         'intro bottom top 1',
         'intro bottom top 1-2 node'
-      ]
+      ],
+      simulationBoundsAdjustment: {
+        maxY: 4
+      }
     },
     // Intro bottom left arm #1
     {
@@ -74,7 +81,10 @@ var regions = [
       areas: [
         { rect: [-13, -2, 4, 8], camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Intro bottom left arm #2-#3 node
     {
@@ -99,7 +109,10 @@ var regions = [
         { rect: [-29, 5, 3, 1], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAlso: ['intro bottom left arm 2-3 node']
+      simulateAlso: ['intro bottom left arm 2-3 node'],
+      simulationBoundsAdjustment: {
+        minX: 2
+      }
     },
     // Intro bottom right arm #1
     {
@@ -108,7 +121,10 @@ var regions = [
       areas: [
         { rect: [10, -6, 19, 4], secondary: true, camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // Intro bottom right arm #1-#2 node
     {
@@ -142,7 +158,10 @@ var regions = [
         { rect: [4, -13, 6, 7], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: 'intro'
+      copyCameraAnchor: 'intro',
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Intro bottom-top #1-#2 node
     {
@@ -168,7 +187,10 @@ var regions = [
         { rect: [4, -23, 6, 6], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
-      copyCameraAnchor: 'intro'
+      copyCameraAnchor: 'intro',
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Intro top intersection
     {
@@ -195,7 +217,11 @@ var regions = [
         { rect: [-3, -27, 6, 4], camera: 'follow-player' }
       ],
       zoom: 0.7,
-      simulateAlso: ['intro top intersection']
+      simulateAlso: ['intro top intersection'],
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // Intro top right arm
     {
@@ -219,6 +245,9 @@ var regions = [
       ],
       zoom: 0.7,
       copyCameraAnchor: 'intro',
+      simulationBoundsAdjustment: {
+        minY: -3
+      },
       simulateAlso: ['intro top intersection']
     },
     // Intro bonus puzzle
@@ -251,7 +280,10 @@ var regions = [
       areas: [
         { rect: [-3, -26, 5, 11], camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Intro top left arm secret
     {
@@ -274,7 +306,10 @@ var regions = [
         { rect: [-5, 0, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "JumbleTheCircle"
+      credit: "JumbleTheCircle",
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // Block push intro secret
     {
@@ -297,7 +332,11 @@ var regions = [
         { rect: [3, 11, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.65,
-      credit: "Patrick"
+      credit: "Patrick",
+      simulationBoundsAdjustment: {
+        maxX: 1,
+        maxY: 1
+      }
     },
     // Seed level (Joseph Mansfield)
     {
@@ -310,7 +349,10 @@ var regions = [
         { rect: [11, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Joseph Mansfield"
+      credit: "Joseph Mansfield",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Infinite loop intro (Blookerstein)
     {
@@ -320,7 +362,11 @@ var regions = [
         { rect: [1, -1, 6, 11] }
       ],
       zoom: 0.7,
-      credit: "Blookerstein"
+      credit: "Blookerstein",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // Seed level secret
     {
@@ -342,7 +388,10 @@ var regions = [
         { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     //////////////
     // BRANCH A
@@ -357,7 +406,10 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "marcosd"
+      credit: "marcosd",
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // (knexator)
     {
@@ -371,7 +423,13 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "knexator"
+      credit: "knexator",
+      simulationBoundsAdjustment: {
+        minX: -1,
+        maxX: 2,
+        minY: -1,
+        maxY: 1
+      }
     },
     // (knexator) - secret
     {
@@ -383,7 +441,10 @@ var regions = [
         { rect: [0, 5, 3, 1], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.8,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (knexator) - secret return
     {
@@ -395,7 +456,10 @@ var regions = [
         { rect: [-2, 9, 3, 4], camera: 'follow-player' },
         { rect: [-1, 13, 2, 3], camera: 'follow-player' }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Branch A exit corridor #1
     {
@@ -406,7 +470,8 @@ var regions = [
       ],
       zoom: 0.8,
       simulationBoundsAdjustment: {
-        minX: 2
+        maxX: 2,
+        maxY: 1
       }
     },
     // Branch A exit corridor #2
@@ -419,7 +484,8 @@ var regions = [
       ],
       zoom: 0.8,
       simulationBoundsAdjustment: {
-        minX: 2
+        maxX: 2,
+        maxY: 1
       }
     },
     // Branch A exit corridor #3
@@ -430,10 +496,7 @@ var regions = [
         { rect: [27, -4, 7, 3], camera: 'follow-player' },
         { rect: [27, -1, 3, 4], camera: 'follow-player' }
       ],
-      zoom: 0.8,
-      simulationBoundsAdjustment: {
-        minX: 2
-      }
+      zoom: 0.8
     },
     // (Corey Hardt)
     {
@@ -463,7 +526,10 @@ var regions = [
         { rect: [3, 14, 3, 2], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.55,
-      credit: "Auroriax"
+      credit: "Auroriax",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Kristian Hedeholm)
     {
@@ -476,7 +542,11 @@ var regions = [
         { rect: [0, 11, 7, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.75,
-      credit: "Kristian Hedeholm"
+      credit: "Kristian Hedeholm",
+      simulationBoundsAdjustment: {
+        minY: -2,
+        maxY: 1
+      }
     },
     // The clock (Zomulgustar)
     {
@@ -494,8 +564,8 @@ var regions = [
       secret: true,
       credit: "Zomulgustar",
       simulationBoundsAdjustment: {
-        minX: 3,
-        minY: 2
+        maxX: 2,
+        maxY: 1
       }
     },
     // Clock shortcut surround
@@ -508,7 +578,10 @@ var regions = [
         { rect: [3, 4, 1, 1] },
         { rect: [4, 0, 4, 5] }
       ],
-      zoom: 0.4
+      zoom: 0.4,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Clock shortcut
     {
@@ -531,7 +604,10 @@ var regions = [
         { rect: [10, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.7,
-      credit: "CHz"
+      credit: "CHz",
+      simulationBoundsAdjustment: {
+        maxX: 2
+      }
     },
     // 1:00 Main path lock
     {
@@ -616,7 +692,7 @@ var regions = [
       zoom: 0.7,
       credit: "Clickmazes",
       simulationBoundsAdjustment: {
-        maxX: -2
+        maxY: 1
       }
     },
     // 7:00 #3 (pancelor)
@@ -630,7 +706,8 @@ var regions = [
         { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "pancelor"
+      credit: "pancelor",
+      start: true
     },
     // 7:00 Main path lock
     {
@@ -639,7 +716,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 3, 8] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 4
+      }
     },
     // 7:00 Main path lock secret
     {
@@ -652,7 +732,10 @@ var regions = [
         { rect: [5, 4, 12, 3], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // 7:00 #4 (Norgg)
     {
@@ -667,7 +750,10 @@ var regions = [
         { rect: [1, 1, 7, 5] }
       ],
       zoom: 0.7,
-      credit: "Norgg"
+      credit: "Norgg",
+      simulationBoundsAdjustment: {
+        minY: -2
+      }
     },
     // 7:00 #5 Post-Norgg
     {
@@ -682,7 +768,8 @@ var regions = [
       ],
       zoom: 0.7,
       simulationBoundsAdjustment: {
-        maxY: -1
+        maxX: 2,
+        maxY: 1
       }
     },
     // 7:00 Le Slo Secret
@@ -708,7 +795,10 @@ var regions = [
         { rect: [0, 8, 8, 1], secondary: true }
       ],
       zoom: 0.7,
-      credit: "Le Slo"
+      credit: "Le Slo",
+      simulationBoundsAdjustment: {
+        maxY: 2
+      }
     },
     // 7:00 Return to clock from (Le Slo)
     {
@@ -747,7 +837,10 @@ var regions = [
         'clementsparrow secret 1',
         'clementsparrow secret 2 release',
         'clementsparrow secret 2'
-      ]
+      ],
+      simulationBoundsAdjustment: {
+        maxX: 2
+      }
     },
     // 9:00 #2 (clementsparrow)
     {
@@ -838,7 +931,10 @@ var regions = [
         { rect: [13, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.65,
-      credit: "Deusovi"
+      credit: "Deusovi",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // 9:00 #4 (crychair)
     {
@@ -851,7 +947,10 @@ var regions = [
         { rect: [9, 7, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "crychair"
+      credit: "crychair",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Fusion intro
     {
@@ -863,7 +962,10 @@ var regions = [
         { rect: [0, 7, 9, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [3, 8, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (PedroPSI)
     {
@@ -877,7 +979,10 @@ var regions = [
         { rect: [0, 10, 13, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7,
-      credit: "PedroPSI"
+      credit: "PedroPSI",
+      simulationBoundsAdjustment: {
+        maxY: 3
+      }
     },
     // Branch A finish
     {
@@ -887,6 +992,9 @@ var regions = [
         { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
       finish: true
     },
     //////////////
@@ -900,7 +1008,12 @@ var regions = [
         { rect: [0, 0, 3, 9], camera: 'follow-player' },
         { rect: [-4, -4, 7, 4], camera: 'follow-player' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2,
+        maxY: 1
+      }
     },
     // Branch B finish
     {
@@ -912,6 +1025,9 @@ var regions = [
         { rect: [1, 12, 16, 4] },
       ],
       zoom: 0.56,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
       finish: true
     },
     // (Pichusuperlover)
@@ -925,7 +1041,11 @@ var regions = [
         { rect: [3, 6, 8, 2] }
       ],
       zoom: 0.7,
-      credit: "Pichusuperlover"
+      credit: "Pichusuperlover",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // (Mischka Kamener)
     {
@@ -937,10 +1057,7 @@ var regions = [
         { rect: [7, 6, 1, 3] },
       ],
       zoom: 0.65,
-      credit: "Mischka Kamener",
-      simulationBoundsAdjustment: {
-        minX: 2
-      }
+      credit: "Mischka Kamener"
     },
     // (Mischka Kamener part 2)
     {
@@ -953,7 +1070,7 @@ var regions = [
       zoom: 0.65,
       credit: "Mischka Kamener",
       simulationBoundsAdjustment: {
-        minX: 2
+        maxY: 1
       }
     },
     // (Joseph Mansfield #1)
@@ -965,7 +1082,10 @@ var regions = [
         { rect: [0, 1, 9, 5] },
         { rect: [0, 6, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Joseph Mansfield #2)
     {
@@ -976,7 +1096,10 @@ var regions = [
         { rect: [0, 3, 12, 5] },
         { rect: [0, 8, 5, 2] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minY: -2
+      }
     },
     // Corridor to Justas
     {
@@ -986,7 +1109,10 @@ var regions = [
         { rect: [0, 0, 4, 11], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Justas)
     {
@@ -998,7 +1124,10 @@ var regions = [
         { rect: [0, 2, 10, 7] }
       ],
       zoom: 0.7,
-      credit: "Justas"
+      credit: "Justas",
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // (That Scar)
     {
@@ -1010,7 +1139,10 @@ var regions = [
         { rect: [-1, 0, 2, 5], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "That Scar"
+      credit: "That Scar",
+      simulationBoundsAdjustment: {
+        maxX: 2
+      }
     },
     // Wall_Above intro
     {
@@ -1020,7 +1152,12 @@ var regions = [
         { rect: [0, 2, 2, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 0, 11, 6] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2,
+        maxY: 1
+      }
     },
     // Slime storage
     {
@@ -1044,7 +1181,10 @@ var regions = [
         { rect: [2, 11, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.65,
-      credit: "winterbeak"
+      credit: "winterbeak",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Corridor
     {
@@ -1053,7 +1193,10 @@ var regions = [
       areas: [
         { rect: [-3, 0, 10, 3] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Dan Williams)
     {
@@ -1065,7 +1208,12 @@ var regions = [
         { rect: [1, 8, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
-      credit: "Dan Williams"
+      credit: "Dan Williams",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        minY: -2,
+        maxY: 1
+      }
     },
     // Main path lock
     {
@@ -1075,7 +1223,10 @@ var regions = [
         { rect: [-1, 0, 4, 5] }
       ],
       zoom: 0.7,
-      simulateAlso: ['intro top right arm', 'intro top intersection']
+      simulateAlso: ['intro top right arm', 'intro top intersection'],
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // (Guilherme Tows (zaratustra))
     {
@@ -1141,7 +1292,11 @@ var regions = [
         { rect: [0, 6, 1, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Toombler"
+      credit: "Toombler",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // stevenjmiller's bomb secret corridor
     {
@@ -1155,7 +1310,11 @@ var regions = [
         { rect: [2, 12, 3, 1] },
         { rect: [-5, 8, 4, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 2
+      }
     },
     // stevenjmiller's bomb secret
     {
@@ -1177,7 +1336,11 @@ var regions = [
         { rect: [0, 1, 5, 4] },
         { rect: [0, 5, 5, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minY: -2,
+        maxY: 2
+      }
     },
     // Joseph Mansfield's secret #2
     {
@@ -1201,7 +1364,10 @@ var regions = [
         { rect: [0, 3, 9, 13] },
         { rect: [3, 16, 3, 2], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.56
+      zoom: 0.56,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Main path branch
     {
@@ -1226,7 +1392,11 @@ var regions = [
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Joel"
+      credit: "Joel",
+      simulationBoundsAdjustment: {
+        minX: -3,
+        maxX: 3
+      }
     },
     // Corridor
     {
@@ -1240,7 +1410,13 @@ var regions = [
         { rect: [9, 4, 3, 1] },
         { rect: [0, 4, 7, 6] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -3,
+        maxX: 3,
+        minY: -2,
+        maxY: 1
+      }
     },
     // Corridor secret #1
     {
@@ -1275,7 +1451,10 @@ var regions = [
         { rect: [5, -2, 5, 2], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
-      credit: "Notan"
+      credit: "Notan",
+      simulationBoundsAdjustment: {
+        maxY: 3
+      }
     },
     // (Zach)
     {
@@ -1289,7 +1468,11 @@ var regions = [
         { rect: [7, 12, 5, 3], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.6,
-      credit: "Zach"
+      credit: "Zach",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // (Zach) secret
     {
@@ -1311,7 +1494,10 @@ var regions = [
         { rect: [4, -2, 4, 2], camera: 'follow-player' },
         { rect: [4, -3, 3, 1], camera: 'follow-player' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Joseph Mansfield) Vat introduction
     {
@@ -1323,7 +1509,11 @@ var regions = [
         { rect: [1, 0, 7, 10] },
         { rect: [0, 10, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // (Shark)
     {
@@ -1337,7 +1527,11 @@ var regions = [
         { rect: [21, 1, 1, 10], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.6,
-      credit: "shark"
+      credit: "shark",
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        maxY: 1
+      }
     },
     // (Shark) secret
     {
@@ -1349,7 +1543,10 @@ var regions = [
         { rect: [4, 0, 5, 5] }
       ],
       zoom: 0.7,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (twak)
     {
@@ -1362,7 +1559,10 @@ var regions = [
         { rect: [7, 1, 1, 11], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "twak"
+      credit: "twak",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     //////////////
     // MERGE
@@ -1377,7 +1577,10 @@ var regions = [
         { rect: [-3, 0, 4, 10], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Jack Lance"
+      credit: "Jack Lance",
+      simulationBoundsAdjustment: {
+        maxY: 2
+      }
     },
     // Ending gate
     {
@@ -1389,7 +1592,11 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true
+      endingGate: true,
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        maxY: 1
+      }
     },
     // Ending gate corridor
     {
@@ -1401,7 +1608,10 @@ var regions = [
         { rect: [6, 0, 3, 7] }
       ],
       zoom: 0.6,
-      allowSave: false
+      allowSave: false,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Merge corridor #1
     {
@@ -1412,7 +1622,10 @@ var regions = [
         { rect: [7, 4, 3, 2], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        maxX: 4
+      }
     },
     // (D5R)
     {
@@ -1422,7 +1635,11 @@ var regions = [
         { rect: [0, 0, 12, 10] }
       ],
       zoom: 0.7,
-      credit: "D5R"
+      credit: "D5R",
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        maxY: 1
+      }
     },
     // (D5R) Block release
     {
@@ -1431,7 +1648,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 4, 10] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Ethan Clark secret corridor #1
     {
@@ -1452,7 +1672,10 @@ var regions = [
         { rect: [-1, 0, 1, 3], camera: 'follow-player' },
         { rect: [0, 0, 11, 4], camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 1
+      }
     },
     // (Ethan Clark)
     {
@@ -1467,7 +1690,11 @@ var regions = [
         { rect: [11, 1, 4, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Ethan Clark"
+      credit: "Ethan Clark",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // (Ethan Clark) block release
     {
@@ -1478,7 +1705,7 @@ var regions = [
       ],
       zoom: 0.7,
       simulationBoundsAdjustment: {
-        minY: -1
+        minY: -3
       }
     },
     // stevenjmiller bonus puzzle
@@ -1489,7 +1716,10 @@ var regions = [
         { rect: [-2, 0, 2, 12], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 0, 17, 12] }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // stevenjmiller bonus puzzle secret
     {
@@ -1514,7 +1744,10 @@ var regions = [
         { rect: [7, 12, 4, 4], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // (jackk)
     {
@@ -1526,7 +1759,10 @@ var regions = [
         { rect: [27, 0, 6, 10] }
       ],
       zoom: 0.48,
-      credit: "jackk"
+      credit: "jackk",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (jackk) Block release
     {
@@ -1536,7 +1772,10 @@ var regions = [
         { rect: [0, 0, 8, 6] }
       ],
       zoom: 0.7,
-      blockRelease: [3, 7]
+      blockRelease: [3, 7],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Merge corridor #3
     {
@@ -1546,7 +1785,11 @@ var regions = [
         { rect: [0, 0, 23, 4], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        maxX: 3,
+        maxY: 1
+      }
     },
     // Merge corridor #4
     {
@@ -1558,7 +1801,11 @@ var regions = [
         { rect: [-5, 6, 2, 3], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        minY: -2,
+        maxY: 1
+      }
     },
     // (domcamus)
     {
@@ -1581,7 +1828,10 @@ var regions = [
         { rect: [0, 0, 4, 5] }
       ],
       zoom: 0.50,
-      blockRelease: [5, 2]
+      blockRelease: [5, 2],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // domcamus secret corridor
     {
@@ -1590,7 +1840,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 8, 5] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // remote gamepad bonus puzzle
     {
@@ -1601,9 +1854,12 @@ var regions = [
         { rect: [0, 6, 14, 10] }
       ],
       zoom: 0.52,
-      indirectSecret: 'gamepad bonus puzzle secret'
+      indirectSecret: 'gamepad bonus puzzle secret',
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
-    // remote gamepad bonus puzzle
+    // remote gamepad bonus puzzle secret
     {
       id: 'gamepad bonus puzzle secret',
       offset: [1, -34],
@@ -1621,7 +1877,11 @@ var regions = [
         { rect: [0, 0, 14, 4], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        minY: -3,
+        maxY: 1
+      }
     },
     // (stevenjmiller)
     {
@@ -1632,7 +1892,10 @@ var regions = [
         { rect: [13, -1, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.58,
-      credit: "stevenjmiller"
+      credit: "stevenjmiller",
+      simulationBoundsAdjustment: {
+        minY: -2
+      }
     },
     // (stevenjmiller) Block release
     {
@@ -1642,7 +1905,10 @@ var regions = [
         { rect: [0, 0, 5, 5] }
       ],
       zoom: 0.6,
-      blockRelease: [4, 2]
+      blockRelease: [4, 2],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // stevenjmiller bonus puzzle 2
     {
@@ -1655,8 +1921,7 @@ var regions = [
         { rect: [10, -2, 8, 4] },
         { rect: [10, 2, 9, 1] }
       ],
-      zoom: 0.57,
-      start: true
+      zoom: 0.57
     },
     // stevenjmiller bonus puzzle 2 secret
     {
@@ -1671,7 +1936,7 @@ var regions = [
       secret: true,
       copyCameraAnchor: 'stevenjmiller bonus puzzle 2',
       simulationBoundsAdjustment: {
-        maxX: -2
+        maxY: 1
       }
     },
     // Ending
@@ -1682,7 +1947,10 @@ var regions = [
         { rect: [0, 0, 13, 13] }
       ],
       zoom: 0.6,
-      allowSave: false
+      allowSave: false,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     //////////////
     // SECOND ENDING
@@ -1697,7 +1965,10 @@ var regions = [
         { rect: [0, 7, 10, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7,
-      secondEndingGate: [[1, 4], [1, 1]]
+      secondEndingGate: [[1, 4], [1, 1]],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Second ending secret room)
     {
@@ -1709,7 +1980,10 @@ var regions = [
         { rect: [0, 4, 18, 12] }
       ],
       zoom: 0.52,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Second ending final corridor)
     {
@@ -1718,7 +1992,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 9, 6] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Second ending final room)
     {
@@ -1727,7 +2004,10 @@ var regions = [
       areas: [
         { rect: [-6, 0, 23, 11] },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Second ending optional corridor #1)
     {
@@ -1755,7 +2035,10 @@ var regions = [
         { rect: [0, 0, 4, 9] },
         { rect: [-2, 0, 2, 3] }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (stevenjmiller) optional bonus puzzle
     {
@@ -1765,7 +2048,10 @@ var regions = [
         { rect: [0, 0, 30, 17] },
         { rect: [5, 17, 6, 1] }
       ],
-      zoom: 0.5
+      zoom: 0.5,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (stevenjmiller) optional bonus reward
     {
@@ -1775,7 +2061,10 @@ var regions = [
         { rect: [0, 0, 9, 9] },
         { rect: [9, 5, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     }
   ]
 ];
@@ -2025,10 +2314,10 @@ function initRegions() {
     }
 
     if (region.simulationBoundsAdjustment != null) {
-      region.simulationBounds.minX += -4 + (region.simulationBoundsAdjustment.minX || 0);
-      region.simulationBounds.maxX += 3 + (region.simulationBoundsAdjustment.maxX || 0);
-      region.simulationBounds.minY += -4 + (region.simulationBoundsAdjustment.minY || 0);
-      region.simulationBounds.maxY += 3 + (region.simulationBoundsAdjustment.maxY || 0);
+      region.simulationBounds.minX += -1 + (region.simulationBoundsAdjustment.minX || 0);
+      region.simulationBounds.maxX += 1 + (region.simulationBoundsAdjustment.maxX || 0);
+      region.simulationBounds.minY += -2 + (region.simulationBoundsAdjustment.minY || 0);
+      region.simulationBounds.maxY += 1 + (region.simulationBoundsAdjustment.maxY || 0);
     }
   }
 }

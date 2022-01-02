@@ -7,3 +7,20 @@
 - Sound when going from inflatable intro to clementsparrow
 - Sound when going from clock to KirraLuan
 - Check credits
+- Reset secret room after activating all secrets, sigils stay lit, don't power
+
+- Pancelor power on but not off
+- Norgg power off when exiting
+- Clementsparrow powering off
+- Wall above intro ghost
+- Muftwin, blocks at very bottom messed up after solving
+- Zach can't reach remote bomb
+- Remote bomb secret is breakable by approaching in reverse
+- D5R ghost
+- Major ghosting when entering domcamus
+- Bottom row of domcaus (are the bottom 2 rows of every level messed up?)
+- Smear when extracting belt from top right arm (again, bottom 2 rows)
+- Bomb protection sign doesn't disappear
+- Traffic jam pass through
+- Top left arm ghost
+- Top left arm secret ghost
