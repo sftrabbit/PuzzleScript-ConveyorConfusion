@@ -15,6 +15,7 @@ var releasedBlockFrom = null;
 
 var setSigilA = false;
 var setSigilB = false;
+var setSigilC = false;
 
 function onStateUpdate(isAgaining, action) {
   if (!isOpenWorldLevel()) {
@@ -27,6 +28,7 @@ function onStateUpdate(isAgaining, action) {
   }
 
   var activeRegion = getActiveRegion();
+  var previousOverrideActiveRegion = overrideActiveRegion;
 
   if (activeRegion.secret) {
     updateSecretMarker(activeRegion.secret);
@@ -34,7 +36,7 @@ function onStateUpdate(isAgaining, action) {
     updateSecretMarker(regions[curlevel][regionIds[activeRegion.indirectSecret]].secret);
   }
 
-  if (activeRegion.finish) {
+  if (activeRegion.finish || activeRegion.secondEndingGate) {
     if (!setSigilA && state.objectMasks['sigila_on'].anyBitsInCommon(level.mapCellContents)) {
       setSigilA = true;
 
@@ -110,7 +112,7 @@ function onStateUpdate(isAgaining, action) {
       pendingSave = false;
     }
 
-    if (overrideActiveRegion != null) {
+    if (overrideActiveRegion != null && overrideActiveRegion === previousOverrideActiveRegion) {
       overrideActiveRegion = null;
       againing = true;
     }
@@ -153,7 +155,23 @@ function checkSecretMarkers() {
     }
   }
 
-  if (secretsComplete) {
+  if (secretsComplete && !setSigilC) {
+    setSigilC = true;
+
+    for (var i = 0; i < sigilCPositions.length; i++) {
+      var sigilCell = level.getCell(sigilCPositions[i]);
+      sigilCell.iclear(state.objectMasks['sigilc_off']);
+      sigilCell.ior(state.objectMasks['sigilc_on']);
+      level.setCell(sigilCPositions[i], sigilCell);
+
+      var sigilCellTop = level.getCell(sigilCPositions[i] - 1);
+      sigilCellTop.iclear(state.objectMasks['sigilc_off_top']);
+      sigilCellTop.ior(state.objectMasks['sigilc_on_top']);
+      level.setCell(sigilCPositions[i] - 1, sigilCellTop);
+    }
+
+    overrideActiveRegion = regions[curlevel][regionIds['second ending secret room']];
+
     againing = true;
   }
 }

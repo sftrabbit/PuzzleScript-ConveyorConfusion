@@ -1982,7 +1982,8 @@ var regions = [
       secret: true,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      sigilCPositions: [[14, 1], [3, 4]]
     },
     // (Second ending final corridor)
     {
@@ -2138,6 +2139,7 @@ var regionMap = [];
 var regionIds = {};
 var secrets = [];
 var sigilPositions = [];
+var sigilCPositions = [];
 
 function initRegions() {
   regionMap = [];
@@ -2281,6 +2283,12 @@ function initRegions() {
       sigilPositions = [];
       sigilPositions.push((offsetX + region.secondEndingGate[0][0]) * level.height + (offsetY + region.secondEndingGate[0][1]));
       sigilPositions.push((offsetX + region.secondEndingGate[1][0]) * level.height + (offsetY + region.secondEndingGate[1][1]));
+    }
+
+    if (region.sigilCPositions) {
+      sigilCPositions = [];
+      sigilCPositions.push((offsetX + region.sigilCPositions[0][0]) * level.height + (offsetY + region.sigilCPositions[0][1]));
+      sigilCPositions.push((offsetX + region.sigilCPositions[1][0]) * level.height + (offsetY + region.sigilCPositions[1][1]));
     }
   }
 
