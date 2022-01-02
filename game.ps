@@ -4629,7 +4629,8 @@ NOAGAINCHECK LATE UP [ Wall Spark | Wire_AboveWall_L_Top ] -> [ Wire_Above_L Wal
 (Calculate distances)
 NOAGAINCHECK LATE [ Distances ] -> []
 
-NOAGAINCHECK LATE [||NO Distances|Player|||] -> [Distance3|Distance2|Distance1|Player Distance0|Distance1|Distance2|Distance3]
+NOAGAINCHECK LATE [|NO Distances|Player||] -> [Distance2|Distance1|Player Distance0|Distance1|Distance2]
+NOAGAINCHECK LATE [Distance1|Distance2|NO Distance3] -> [Distance1|Distance2|Distance3]
 NOAGAINCHECK LATE VERTICAL [NO Distances|Distance2|] -> [Distance3|Distance2|Distance3]
 NOAGAINCHECK LATE VERTICAL [|NO Distances|Distance1||] -> [Distance3|Distance2|Distance1|Distance2|Distance3]
 (NOAGAINCHECK LATE [Player] -> [Player Distance0]

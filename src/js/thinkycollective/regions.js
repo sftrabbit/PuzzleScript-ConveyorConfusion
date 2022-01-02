@@ -14,7 +14,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro'
+      copyCameraAnchor: 'intro',
+      start: true
     },
     // Intro
     {
@@ -572,8 +573,7 @@ var regions = [
       zoom: 0.4,
       simulationBoundsAdjustment: {
         maxY: 1
-      },
-      start: true
+      }
     },
     // Clock shortcut
     {
@@ -1380,7 +1380,10 @@ var regions = [
         { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node']
+      simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node'],
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // (Joel)
     {
@@ -1396,7 +1399,7 @@ var regions = [
       zoom: 0.6,
       credit: "Joel",
       simulationBoundsAdjustment: {
-        minX: -3,
+        minX: -4,
         maxX: 3
       }
     },
@@ -1455,7 +1458,7 @@ var regions = [
       zoom: 0.6,
       credit: "Notan",
       simulationBoundsAdjustment: {
-        maxY: 3
+        maxY: 4
       }
     },
     // (Zach)
