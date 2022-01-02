@@ -823,8 +823,7 @@ var regions = [
         { rect: [9, 5, 1, 6], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7,
-      start: true
+      zoom: 0.7
     },
     // 9:00 Block source
     {
@@ -1160,7 +1159,8 @@ var regions = [
         minX: -2,
         maxX: 2,
         maxY: 1
-      }
+      },
+      start: true
     },
     // Slime storage
     {
