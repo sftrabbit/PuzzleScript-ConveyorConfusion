@@ -14,7 +14,8 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro'
+      copyCameraAnchor: 'intro',
+      start: true
     },
     // Intro
     {
@@ -42,11 +43,10 @@ var regions = [
         'intro bottom left arm 1',
         'intro bottom left arm 1-2 node',
         'intro bottom right arm 1',
-        'intro bottom right arm 1-2 node',
-        'intro bottom top 1',
-        'intro bottom top 1-2 node'
+        'intro bottom right arm 1-2 node'
       ],
       simulationBoundsAdjustment: {
+        minY: -2,
         maxY: 4
       }
     },
@@ -114,7 +114,7 @@ var regions = [
       zoom: 0.7,
       simulateAlso: ['intro bottom left arm 2-3 node'],
       simulationBoundsAdjustment: {
-        minX: 2
+        minX: -2
       }
     },
     // Intro bottom right arm #1
@@ -126,7 +126,8 @@ var regions = [
       ],
       zoom: 0.7,
       simulationBoundsAdjustment: {
-        minX: -2
+        minX: -2,
+        maxX: 2
       }
     },
     // Intro bottom right arm #1-#2 node
@@ -141,7 +142,10 @@ var regions = [
         'intro bottom right arm 1',
         'intro bottom right arm 2',
         'intro bottom intersection'
-      ]
+      ],
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // Intro bottom right arm #2
     {
@@ -151,48 +155,25 @@ var regions = [
         { rect: [29, -2, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [33, 3, 2, 4], secondary: true, camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // Intro bottom-top #1
     {
-      id: 'intro bottom top 1',
+      id: 'intro bottom top',
       offset: [64, 67],
       areas: [
-        { rect: [4, -13, 6, 7], camera: 'follow-player-anchored-x' }
+        { rect: [3, -23, 8, 17], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
       copyCameraAnchor: 'intro',
       simulationBoundsAdjustment: {
-        maxY: 1
-      }
-    },
-    // Intro bottom-top #1-#2 node
-    {
-      id: 'intro bottom top 1-2 node',
-      offset: [64, 67],
-      areas: [
-        { rect: [3, -17, 8, 4], camera: 'follow-player-anchored-x' }
-      ],
-      zoom: 0.7,
-      copyCameraAnchor: 'intro',
-      simulateAlso: [
-        'intro bottom top 1',
-        'intro bottom intersection',
-        'intro bottom top 2',
-        'intro top intersection'
-      ]
-    },
-    // Intro bottom-top #2
-    {
-      id: 'intro bottom top 2',
-      offset: [64, 67],
-      areas: [
-        { rect: [4, -23, 6, 6], camera: 'follow-player-anchored-x' }
-      ],
-      zoom: 0.7,
-      copyCameraAnchor: 'intro',
-      simulationBoundsAdjustment: {
-        maxY: 1
+        minX: 1,
+        maxX: -1,
+        minY: -3,
+        maxY: 3
       }
     },
     // Intro top intersection
@@ -205,15 +186,14 @@ var regions = [
       zoom: 0.7,
       copyCameraAnchor: 'intro',
       simulateAlso: [
-        'intro bottom top 2',
-        'intro bottom top 1-2 node',
         'intro top left arm',
         'intro top right arm',
         'intro exit'
       ],
       simulationBoundsAdjustment: {
         minX: -2,
-        maxX: 2
+        maxX: 2,
+        maxY: 2
       }
     },
     // Intro top left arm
@@ -2002,8 +1982,7 @@ var regions = [
       secret: true,
       simulationBoundsAdjustment: {
         maxY: 1
-      },
-      start: true
+      }
     },
     // (Second ending final corridor)
     {
