@@ -709,8 +709,7 @@ var regions = [
       credit: "pancelor",
       simulationBoundsAdjustment: {
         maxY: 1
-      },
-      start: true
+      }
     },
     // 7:00 Main path lock
     {
@@ -756,7 +755,8 @@ var regions = [
       credit: "Norgg",
       simulationBoundsAdjustment: {
         minY: -2
-      }
+      },
+      start: true
     },
     // 7:00 #5 Post-Norgg
     {
