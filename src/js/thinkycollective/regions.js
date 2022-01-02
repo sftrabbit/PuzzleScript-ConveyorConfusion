@@ -1644,8 +1644,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      },
-      start: true
+      }
     },
     // (D5R) Block release
     {
@@ -1824,7 +1823,8 @@ var regions = [
         { rect: [0, 13, 21, 4] },
       ],
       zoom: 0.52,
-      credit: "domcamus"
+      credit: "domcamus",
+      start: true
     },
     // (domcamus) Block release
     {
