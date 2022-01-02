@@ -9,6 +9,5 @@
 - Check credits
 - Reset secret room after activating all secrets, sigils stay lit, don't power
 
-- Traffic jam pass through
 - Top left arm ghost
 - Top left arm secret ghost
