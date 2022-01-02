@@ -48,8 +48,7 @@ var regions = [
       ],
       simulationBoundsAdjustment: {
         maxY: 4
-      },
-      start: true
+      }
     },
     // Intro bottom left arm #1
     {
@@ -211,7 +210,12 @@ var regions = [
         'intro top left arm',
         'intro top right arm',
         'intro exit'
-      ]
+      ],
+      start: true,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // Intro top left arm
     {
