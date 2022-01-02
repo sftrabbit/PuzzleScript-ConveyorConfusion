@@ -1793,7 +1793,7 @@ var regions = [
       offset: [21, -19],
       areas: [
         { rect: [0, 0, 4, 24], camera: 'follow-player' },
-        { rect: [-3, 6, 3, 4], camera: 'follow-player' },
+        { rect: [-3, 2, 3, 8], camera: 'follow-player' },
         { rect: [-5, 6, 2, 3], camera: 'follow-player' }
       ],
       zoom: 0.6,
@@ -1837,7 +1837,8 @@ var regions = [
       id: 'domcamus secret corridor',
       offset: [8, -18],
       areas: [
-        { rect: [0, 0, 8, 5] }
+        { rect: [0, 0, 3, 5] },
+        { rect: [3, 1, 7, 4] }
       ],
       zoom: 0.6,
       simulationBoundsAdjustment: {
