@@ -8,6 +8,3 @@
 - Sound when going from clock to KirraLuan
 - Check credits
 - Reset secret room after activating all secrets, sigils stay lit, don't power
-
-- Top left arm ghost
-- Top left arm secret ghost

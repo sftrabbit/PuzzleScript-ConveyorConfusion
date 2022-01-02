@@ -293,6 +293,8 @@ var regions = [
       ],
       zoom: 0.7,
       simulationBoundsAdjustment: {
+        minX: -2,
+        minY: -2,
         maxY: 1
       }
     },
