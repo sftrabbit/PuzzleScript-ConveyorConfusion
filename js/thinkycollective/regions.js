@@ -707,6 +707,9 @@ var regions = [
       ],
       zoom: 0.7,
       credit: "pancelor",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
       start: true
     },
     // 7:00 Main path lock
