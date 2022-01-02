@@ -75,12 +75,13 @@ function onStateUpdate(isAgaining, action) {
   var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
 
   if (changedRegion) {
-    if (activeRegion.allowSave) {
+    var previousRegion = regions[curlevel][previousActiveRegionIndex];
+
+    if (activeRegion.allowSave && previousRegion.allowSave) {
       pendingSave = true;
     }
 
     // Track belts released from merge levels
-    var previousRegion = regions[curlevel][previousActiveRegionIndex];
     if (previousRegion.blockRelease && activeRegion.mergeCorridor) {
       var releasedBlockX = regionsOffset[0] + previousRegion.offset[0] + previousRegion.blockRelease[0];
       var releasedBlockY = regionsOffset[1] + previousRegion.offset[1] + previousRegion.blockRelease[1];
