@@ -1261,8 +1261,7 @@ var regions = [
       credit: "Muftwin",
       simulationBoundsAdjustment: {
         maxY: 1
-      },
-      start: true
+      }
     },
     // (Colin)
     {
@@ -1478,7 +1477,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 1
-      }
+      },
+      start: true
     },
     // (Zach) secret
     {
