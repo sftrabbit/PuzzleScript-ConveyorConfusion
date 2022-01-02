@@ -1159,8 +1159,7 @@ var regions = [
         minX: -2,
         maxX: 2,
         maxY: 1
-      },
-      start: true
+      }
     },
     // Slime storage
     {
@@ -1259,7 +1258,11 @@ var regions = [
         { rect: [4, 12, 4, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
-      credit: "Muftwin"
+      credit: "Muftwin",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
+      start: true
     },
     // (Colin)
     {

@@ -9,7 +9,6 @@
 - Check credits
 - Reset secret room after activating all secrets, sigils stay lit, don't power
 
-- Muftwin, blocks at very bottom messed up after solving
 - Zach can't reach remote bomb
 - Remote bomb secret is breakable by approaching in reverse
 - D5R ghost
