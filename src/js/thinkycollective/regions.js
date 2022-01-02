@@ -48,7 +48,8 @@ var regions = [
       ],
       simulationBoundsAdjustment: {
         maxY: 4
-      }
+      },
+      start: true
     },
     // Intro bottom left arm #1
     {
@@ -1221,8 +1222,7 @@ var regions = [
         minX: -2,
         minY: -2,
         maxY: 1
-      },
-      start: true
+      }
     },
     // Main path lock
     {
