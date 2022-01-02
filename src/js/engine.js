@@ -2049,17 +2049,10 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
 		ymin=0;
 		ymax=level.height;
 	} else {
-		if (activeRegion.simulateAll || forceSimulateAll) {
-			xmin=activeRegion.simulationBounds.minX;
-			xmax=activeRegion.simulationBounds.maxX;
-			ymin=activeRegion.simulationBounds.minY + (!runningLateRules && noagaincheck ? 1 : 0);
-			ymax=activeRegion.simulationBounds.maxY  + (!runningLateRules && noagaincheck ? -2 : 0);
-		} else {
-			xmin=localBoundary.xmin;
-			xmax=localBoundary.xmax;
-			ymin=localBoundary.ymin + (!runningLateRules && noagaincheck ? 1 : 0);
-			ymax=localBoundary.ymax + (!runningLateRules && noagaincheck ? -2 : 0);
-		}
+		xmin=activeRegion.simulationBounds.minX;
+		xmax=activeRegion.simulationBounds.maxX;
+		ymin=activeRegion.simulationBounds.minY + (!runningLateRules && noagaincheck ? 1 : 0);
+		ymax=activeRegion.simulationBounds.maxY  + (!runningLateRules && noagaincheck ? -2 : 0);
 
 		if (foreignSimulationBounds != null) {
 			xmin=Math.min(xmin, foreignSimulationBounds.minX);
@@ -2364,6 +2357,13 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
         }
     }
 
+ //    if (result) {
+	// 	if (!performanceTracking[rule.lineNumber]) {
+	// 		performanceTracking[rule.lineNumber] = 0;
+	// 	}
+	// 	performanceTracking[rule.lineNumber]++;
+	// }
+
 	if (verbose_logging && result){
 		var ruleDirection = dirMaskName[rule.direction];
 		if (!rule.directional()){
@@ -2380,9 +2380,12 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
 };
 
 Rule.prototype.tryApply = function(level) {
-	if (!firstTurn && this.init) {
-		return false;
+	if (!firstTurn) {
+		if (this.init) {
+			return false;
+		}
 	}
+
 	const delta = level.delta_index(this.direction);
 
     //get all cellrow matches
@@ -2405,6 +2408,7 @@ Rule.prototype.tryApply = function(level) {
     if (matches.length>0) {
     	this.queueCommands();
     }
+
     return result;
 };
 
@@ -2534,10 +2538,13 @@ function applyRuleGroup(ruleGroup, againing) {
 	// 	return applyRandomRuleGroup(level,ruleGroup);
 	// }
 
+	// var startTime = performance.now();
+
 	var loopPropagated=false;
     var propagated=true;
     var loopcount=0;
 	var nothing_happened_counter = -1;
+	// var anythingModified = false;
     while(propagated) {
     	loopcount++;
     	if (loopcount>200) 
@@ -2571,6 +2578,12 @@ function applyRuleGroup(ruleGroup, againing) {
 			}
         }
     }
+
+ //    if (anythingModified) {
+	// 	if (!performanceTracking[ruleGroup[0].lineNumber]) {
+	// 		performanceTracking[ruleGroup[0].lineNumber] = performance.now() - startTime;
+	// 	}
+	// }
 
     return loopPropagated;
 }
@@ -2710,17 +2723,29 @@ function calculateRowColMasks() {
 
 	var rowsCleared = false;
 
-	for (var i=0;i<level.width;i++) {
+	var minX = Math.max(activeRegion.simulationBounds.minX, 0);
+	var maxX = Math.min(activeRegion.simulationBounds.maxX, level.width);
+	var minY = Math.max(activeRegion.simulationBounds.minY, 0);
+	var maxY = Math.min(activeRegion.simulationBounds.maxY, level.height);
+
+	if (firstTurn) {
+		minX = 0;
+		maxX = level.width;
+		minY = 0;
+		maxY = level.height;
+	}
+
+	for (var i=minX;i<maxX;i++) {
 		var ccc = level.colCellContents[i];
 		ccc.setZero();
 		var ccc_Movements = level.colCellContents_Movements[i];
 		ccc_Movements.setZero();
 
-		for (var j=0;j<level.height;j++) {
+		for (var j=minY;j<maxY;j++) {
 			if (!rowsCleared) {
-				var rcc = level.rowCellContents[i];
+				var rcc = level.rowCellContents[j];
 				rcc.setZero();
-				var rcc_Movements = level.rowCellContents_Movements[i];
+				var rcc_Movements = level.rowCellContents_Movements[j];
 				rcc_Movements.setZero();
 			}
 
@@ -2753,8 +2778,12 @@ var activeRegion = null;
 var runningLateRules = false;
 var overrideActiveRegion = null;
 
+var performanceTracking = {};
+
 /* returns a bool indicating if anything changed */
 function processInput(dir,dontDoWin,dontModify) {
+	// console.log('Turn start', dir)
+	// var startTime = performance.now();
 	againing = false;
 
 	var bak = backupLevel();
@@ -2767,11 +2796,6 @@ function processInput(dir,dontDoWin,dontModify) {
 		    y: (playerPositions[0]%level.height)|0
 		};
 	}
-
-	localBoundary.xmin=playerPosition.x - 15;
-	localBoundary.xmax=playerPosition.x + 16;
-	localBoundary.ymin=playerPosition.y - 10;
-	localBoundary.ymax=playerPosition.y + 11;
 
 	activeRegion = overrideActiveRegion || getActiveRegion();
 
@@ -2849,6 +2873,9 @@ function processInput(dir,dontDoWin,dontModify) {
 		seedsToPlay_CanMove=[];
 		seedsToPlay_CantMove=[];
 
+	// console.log('Before masks', performance.now() - startTime);
+	// startTime = performance.now();
+
 		calculateRowColMasks();
 
         // var i=0;
@@ -2858,7 +2885,9 @@ function processInput(dir,dontDoWin,dontModify) {
         // 	rigidloop=false;
         // 	i++;
         	
-
+	// console.log('Masks', performance.now() - startTime);
+	// startTime = performance.now();
+        // performanceTracking = {};
         	applyRules(state.rules, state.loopPoint, startRuleGroupIndex, bannedGroup, dontModify);
         	var shouldUndo = resolveMovements(level,bannedGroup);
 
@@ -2906,6 +2935,8 @@ function processInput(dir,dontDoWin,dontModify) {
 				// 		consolePrint('Applying late rules');
 				// 	}
 				// }
+	// console.log('Rules', performance.now() - startTime);
+	// startTime = performance.now();
 
 				if (!dontModify) {
 					runningLateRules = true;
@@ -2913,7 +2944,10 @@ function processInput(dir,dontDoWin,dontModify) {
         			runningLateRules = false;
         			startRuleGroupIndex=0;
         		}
+	// console.log('Late rules', performance.now() - startTime);
+	// startTime = performance.now();
         	// }
+        	// printPerformanceTracking();
         // } while (i < 50 && rigidloop);
 
         // if (i>=50) {
@@ -3148,8 +3182,34 @@ function processInput(dir,dontDoWin,dontModify) {
 	if (winning) {
 		againing=false;
 	}
+	// console.log('The rest', performance.now() - startTime);
 
 	return modified;
+}
+
+function printPerformanceTracking() {
+	var entries = [];
+
+	var lineNumbers = Object.keys(performanceTracking);
+	for (var i = 0; i < lineNumbers.length; i++) {
+		var lineNumber = lineNumbers[i];
+		entries.push([lineNumber, performanceTracking[lineNumber]]);
+	}
+
+	entries.sort(function(entryA, entryB) {
+		if (entryA[1] < entryB[1]) {
+			return -1;
+		}
+
+		return 1;
+	});
+	console.log('--- BEGIN PERFORMANCE ---')
+
+	for (var i = 0; i < entries.length; i++) {
+		console.log(entries[i][0], entries[i][1]);
+	}
+
+	console.log('--- END PERFORMANCE ---')
 }
 
 function saveLevelState () {
