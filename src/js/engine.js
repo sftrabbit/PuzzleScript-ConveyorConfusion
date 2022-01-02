@@ -1077,6 +1077,9 @@ function DoRestart(force) {
 	} else {
 		restoreLevel(restartTarget);
 	}
+	setSigilA = false;
+	setSigilB = false;
+	setSigilC = false;
 	tryPlayRestartSound();
 
 	if ('run_rules_on_level_start' in state.metadata) {
@@ -1148,6 +1151,9 @@ function DoUndo(force,ignoreDuplicates) {
 		var torestore = backups[backups.length-1];
 		restoreLevel(torestore);
 		backups = backups.splice(0,backups.length-1);
+		setSigilA = false;
+		setSigilB = false;
+		setSigilC = false;
 		if (!force) {
 			var playerPositions = getPlayerPositions();
 			playerPosition = {
