@@ -9,7 +9,6 @@
 - Check credits
 - Reset secret room after activating all secrets, sigils stay lit, don't power
 
-- Smear when extracting belt from top right arm (again, bottom 2 rows)
 - Bomb protection sign doesn't disappear
 - Traffic jam pass through
 - Top left arm ghost
