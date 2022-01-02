@@ -211,7 +211,6 @@ var regions = [
         'intro top right arm',
         'intro exit'
       ],
-      start: true,
       simulationBoundsAdjustment: {
         minX: -2,
         maxX: 2
@@ -703,7 +702,7 @@ var regions = [
         { rect: [7, 0, 1, 11], secondary: true }
       ],
       zoom: 0.7,
-      credit: "Clickmazes",
+      credit: "clickmazes",
       simulationBoundsAdjustment: {
         maxY: 1
       }
@@ -994,7 +993,7 @@ var regions = [
         { rect: [0, 10, 13, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7,
-      credit: "PedroPSI",
+      credit: "Pedro PSI",
       simulationBoundsAdjustment: {
         maxY: 3
       }
@@ -1124,7 +1123,6 @@ var regions = [
         { rect: [0, 0, 4, 11], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      secret: true,
       simulationBoundsAdjustment: {
         maxY: 1
       }
@@ -1257,7 +1255,7 @@ var regions = [
         { rect: [4, 11, 5, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
-      credit: "Guilherme Tows (zaratustra)"
+      credit: "zaratustra"
     },
     // (Muftwin)
     {
@@ -2004,7 +2002,8 @@ var regions = [
       secret: true,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      start: true
     },
     // (Second ending final corridor)
     {
