@@ -9,7 +9,6 @@
 - Check credits
 - Reset secret room after activating all secrets, sigils stay lit, don't power
 
-- D5R ghost
 - Major ghosting when entering domcamus
 - Bottom row of domcaus (are the bottom 2 rows of every level messed up?)
 - Smear when extracting belt from top right arm (again, bottom 2 rows)
