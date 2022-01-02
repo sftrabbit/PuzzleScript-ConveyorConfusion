@@ -755,8 +755,7 @@ var regions = [
       credit: "Norgg",
       simulationBoundsAdjustment: {
         minY: -2
-      },
-      start: true
+      }
     },
     // 7:00 #5 Post-Norgg
     {
@@ -824,7 +823,8 @@ var regions = [
         { rect: [9, 5, 1, 6], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      start: true
     },
     // 9:00 Block source
     {
