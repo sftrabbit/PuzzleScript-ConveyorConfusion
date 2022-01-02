@@ -1824,6 +1824,9 @@ var regions = [
       ],
       zoom: 0.52,
       credit: "domcamus",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
       start: true
     },
     // (domcamus) Block release
