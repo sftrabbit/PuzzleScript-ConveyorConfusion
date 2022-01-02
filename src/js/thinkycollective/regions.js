@@ -14,8 +14,7 @@ var regions = [
       ],
       zoom: 0.7,
       allowReset: false,
-      copyCameraAnchor: 'intro',
-      start: true
+      copyCameraAnchor: 'intro'
     },
     // Intro
     {
@@ -573,7 +572,8 @@ var regions = [
       zoom: 0.4,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      start: true
     },
     // Clock shortcut
     {
@@ -582,7 +582,13 @@ var regions = [
       areas: [
         { rect: [3, 2, 1, 3] }
       ],
-      zoom: 0.4
+      zoom: 0.4,
+      simulationBoundsAdjustment: {
+        minX: -1,
+        maxX: 1,
+        minY: 1,
+        maxY: 1
+      }
     },
     // 1:00 (CHz)
     {
