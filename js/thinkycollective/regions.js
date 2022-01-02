@@ -1312,7 +1312,7 @@ var regions = [
         { rect: [1, 5, 3, 1] },
         { rect: [-1, 6, 5, 2] },
         { rect: [-1, 8, 6, 4] },
-        { rect: [2, 12, 3, 1] },
+        { rect: [1, 12, 4, 1] },
         { rect: [-5, 8, 4, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
@@ -1372,7 +1372,8 @@ var regions = [
       zoom: 0.56,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      start: true
     },
     // Main path branch
     {
@@ -1477,8 +1478,7 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 1
-      },
-      start: true
+      }
     },
     // (Zach) secret
     {
