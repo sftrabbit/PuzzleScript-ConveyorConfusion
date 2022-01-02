@@ -117,7 +117,7 @@ function onStateUpdate(isAgaining, action) {
 
 function updateSecretMarker(secret) {
   var buttonCell = level.getCell(secret.buttonIndex);
-  if (buttonCell.anyBitsInCommon(state.objectMasks['dynamic_below'])) {
+  if (secret.region.id !== 'second ending secret room' || buttonCell.anyBitsInCommon(state.objectMasks['dynamic_below'])) {
     var markerCell = level.getCell(secret.markerIndex);
     if (markerCell.anyBitsInCommon(state.objectMasks['secret_off'])) {
       markerCell.iclear(state.objectMasks['secret_off']);
@@ -139,6 +139,7 @@ function updateAllSecretMarkers() {
 }
 
 function checkSecretMarkers() {
+  console.log('Checking secret markers')
   var secretsComplete = true;
   for (var i = 0; i < secrets.length; i++) {
     var secret = secrets[i];
@@ -148,6 +149,8 @@ function checkSecretMarkers() {
       break;
     }
   }
+
+  console.log('Checked', secretsComplete)
 
   if (secretsComplete) {
     againing = true;

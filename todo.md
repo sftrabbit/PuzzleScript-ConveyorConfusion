@@ -1,4 +1,3 @@
 - Helper functions?
 - Go through, make sure regions are all good. Check resets. Check backwards traversal.
-- Check credits
 - Reset secret room after activating all secrets, sigils stay lit, don't power
