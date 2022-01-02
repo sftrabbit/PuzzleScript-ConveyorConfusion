@@ -1372,8 +1372,7 @@ var regions = [
       zoom: 0.56,
       simulationBoundsAdjustment: {
         maxY: 1
-      },
-      start: true
+      }
     },
     // Main path branch
     {
@@ -1645,7 +1644,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      }
+      },
+      start: true
     },
     // (D5R) Block release
     {
