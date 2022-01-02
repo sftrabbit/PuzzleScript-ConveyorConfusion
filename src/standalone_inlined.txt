@@ -247,6 +247,13 @@ function showNextCredit () {
   }, 2700);
 }
 
+function stopCredits() {
+  creditsState.stage = null;
+  creditsState.ending1Progress = null;
+  creditsState.creditsRegionIndex = null;
+  creditsState.listScrollProgress = null;
+}
+
 var listCredits = [
   'Made collaboratively',
   'by members of the',
@@ -283,7 +290,7 @@ var listCredits = [
   'Link: https://incompetech.filmmusic.io',
   '       /song/5659-blippy-trance',
   'License: https://filmmusic.io/standard-license'
-];</script> <script>function initOpenWorld(){initRegions(),initObjectTrackers(),initExplosionTrackers()}function onStateUpdate(e,r){if(!isOpenWorldLevel())return void redraw();var t=getActiveRegion();if(t.secret?updateSecretMarker(t.secret):t.indirectSecret&&updateSecretMarker(regions[curlevel][regionIds[t.indirectSecret]].secret),null!=previousActiveRegionIndex&&t.index!==previousActiveRegionIndex){t.allowSave&&(pendingSave=!0);var a=regions[curlevel][previousActiveRegionIndex];if(a.blockRelease&&t.mergeCorridor){var n=regionsOffset[0]+a.offset[0]+a.blockRelease[0],l=regionsOffset[1]+a.offset[1]+a.blockRelease[1],o=n*level.height+l;level.getCell(o).anyBitsInCommon(state.objectMasks.belt_above)&&(releasedBlockFrom=previousActiveRegionIndex)}else a.mergeCorridor&&t.endingGate&&null!=releasedBlockFrom&&(removeObjectTrackers([[!0,67,32]]),startObjectTracker(!0,TRACKED_BELT,67,32,releasedBlockFrom),releasedBlockFrom=null)}state.objectMasks.ending1trigger.bitsSetInArray(level.mapCellContents.data)&&startEnding1(),state.objectMasks.ending2secretchar2.bitsSetInArray(level.mapCellContents.data)&&startEnding2(),!e&&pendingSave&&(saveLevelState(),pendingSave=!1),transitionCamera(t)}function updateSecretMarker(e){if(level.getCell(e.buttonIndex).anyBitsInCommon(state.objectMasks.dynamic_below)){var r=level.getCell(e.markerIndex);r.anyBitsInCommon(state.objectMasks.secret_off)&&(r.iclear(state.objectMasks.secret_off),r.ior(state.objectMasks.secret_on),level.setCell(e.markerIndex,r),checkSecretMarkers())}}function updateAllSecretMarkers(){for(var e=0;e<regions[0].length;e++){var r=regions[0][e];r.secret&&updateSecretMarker(r.secret)}}function checkSecretMarkers(){for(var e=!0,r=0;r<secrets.length;r++){var t=secrets[r];if(!level.getCell(t.markerIndex).anyBitsInCommon(state.objectMasks.secret_on)){e=!1;break}}e&&(againing=!0)}function transitionCamera(e){if(null==e)return void transitionCameraToPlayer(e);var r=getActiveArea();"region-center"===r.camera?transitionCameraToRegion(e):"pull-horizontal"===r.camera?transitionCameraPulledByPlayer(e,!0):"pull-vertical"===r.camera?transitionCameraPulledByPlayer(e,!1):"follow-player"===r.camera?transitionCameraToPlayer(e):"follow-player-anchored-x"===r.camera?transitionCameraToPlayerAnchored(e,!0):"follow-player-anchored-y"===r.camera&&transitionCameraToPlayerAnchored(e,!1),previousActiveRegionIndex=e.index}function isOpenWorldLevel(){return!textMode&&null!=regions[curlevel]}function clearOpenWorldState(){window.cancelAnimationFrame(currentAnimationFrameId),regionMap=[],camera=null,cameraTransition=null,objectTrackers=[]}function removePlayerDecorations(){for(var e=0;e<level.height;e++)for(var r=0;r<level.width;r++){var t=r*level.height+e,a=level.getCellInto(t,_o10);a.anyBitsInCommon(state.objectMasks.playerdecorations)&&(a.iclear(state.objectMasks.playerdecorations),level.setCell(t,_o10))}}function removePlayers(){for(var e=0;e<level.height;e++)for(var r=0;r<level.width;r++){var t=r*level.height+e,a=level.getCellInto(t,_o10);if(a.anyBitsInCommon(state.objectMasks.player)){var n=getRegion({x:r,y:e});n.start||(a.iclear(state.objectMasks.player),a.iclear(state.objectMasks.moved),level.setCell(t,_o10))}}}function restoreOriginalLevel(){for(var e=0;e<level.width;e++)for(var r=0;r<level.height;r++)for(var t=e*level.height+r,a=0;a<STRIDE_OBJ;a++)level.objects[t*STRIDE_OBJ+a]=originalLevel.dat[t*STRIDE_OBJ+a]}var playerPosition=null,previousActiveRegionIndex=null,levelNeedsDraw=!0,pendingSave=!1,releasedBlockFrom=null;</script> <script>var regionsOffset = [1, 38];
+];</script> <script>function initOpenWorld(){initRegions(),initObjectTrackers(),initExplosionTrackers()}function onStateUpdate(e,i){if(!isOpenWorldLevel())return void redraw();if(!firstTurn){var t=getActiveRegion(),l=overrideActiveRegion;if(t.secret?updateSecretMarker(t.secret):t.indirectSecret&&updateSecretMarker(regions[curlevel][regionIds[t.indirectSecret]].secret),t.finish||t.secondEndingGate){if(!setSigilA&&state.objectMasks.sigila_on.anyBitsInCommon(level.mapCellContents)){setSigilA=!0;var o=level.getCell(sigilPositions[0]);o.iclear(state.objectMasks.sigila_off),o.ior(state.objectMasks.sigila_on),level.setCell(sigilPositions[0],o);var r=level.getCell(sigilPositions[0]-1);r.iclear(state.objectMasks.sigila_off_top),r.ior(state.objectMasks.sigila_on_top),level.setCell(sigilPositions[0]-1,r),overrideActiveRegion=regions[curlevel][regionIds["second ending gate"]],againing=!0}if(!setSigilB&&state.objectMasks.sigilb_on.anyBitsInCommon(level.mapCellContents)){setSigilB=!0;var o=level.getCell(sigilPositions[1]);o.iclear(state.objectMasks.sigilb_off),o.ior(state.objectMasks.sigilb_on),level.setCell(sigilPositions[1],o);var r=level.getCell(sigilPositions[1]-1);r.iclear(state.objectMasks.sigilb_off_top),r.ior(state.objectMasks.sigilb_on_top),level.setCell(sigilPositions[1]-1,r),overrideActiveRegion=regions[curlevel][regionIds["second ending gate"]],againing=!0}}if(null!=previousActiveRegionIndex&&t.index!==previousActiveRegionIndex){t.allowSave&&(pendingSave=!0);var s=regions[curlevel][previousActiveRegionIndex];if(s.blockRelease&&t.mergeCorridor){var a=regionsOffset[0]+s.offset[0]+s.blockRelease[0],n=regionsOffset[1]+s.offset[1]+s.blockRelease[1],c=a*level.height+n;level.getCell(c).anyBitsInCommon(state.objectMasks.belt_above)&&(releasedBlockFrom=previousActiveRegionIndex)}else s.mergeCorridor&&t.endingGate&&null!=releasedBlockFrom&&(removeObjectTrackers([[!0,67,32]]),startObjectTracker(!0,TRACKED_BELT,67,32,releasedBlockFrom),releasedBlockFrom=null)}state.objectMasks.ending1trigger.bitsSetInArray(level.mapCellContents.data)&&startEnding1(),state.objectMasks.ending2secretchar2.bitsSetInArray(level.mapCellContents.data)&&startEnding2(),e||(pendingSave&&(saveLevelState(),pendingSave=!1),null!=overrideActiveRegion&&overrideActiveRegion===l&&(overrideActiveRegion=null,againing=!0)),transitionCamera(t)}}function updateSecretMarker(e){if(level.getCell(e.buttonIndex).anyBitsInCommon(state.objectMasks.dynamic_below)){var i=level.getCell(e.markerIndex);i.anyBitsInCommon(state.objectMasks.secret_off)&&(i.iclear(state.objectMasks.secret_off),i.ior(state.objectMasks.secret_on),level.setCell(e.markerIndex,i),checkSecretMarkers())}}function updateAllSecretMarkers(){for(var e=0;e<regions[0].length;e++){var i=regions[0][e];i.secret&&updateSecretMarker(i.secret)}}function checkSecretMarkers(){for(var e=!0,i=0;i<secrets.length;i++){var t=secrets[i];if(!level.getCell(t.markerIndex).anyBitsInCommon(state.objectMasks.secret_on)){e=!1;break}}if(e&&!setSigilC){setSigilC=!0;for(var i=0;i<sigilCPositions.length;i++){var l=level.getCell(sigilCPositions[i]);l.iclear(state.objectMasks.sigilc_off),l.ior(state.objectMasks.sigilc_on),level.setCell(sigilCPositions[i],l);var o=level.getCell(sigilCPositions[i]-1);o.iclear(state.objectMasks.sigilc_off_top),o.ior(state.objectMasks.sigilc_on_top),level.setCell(sigilCPositions[i]-1,o)}overrideActiveRegion=regions[curlevel][regionIds["second ending secret room"]],againing=!0}}function transitionCamera(e){if(null==e)return void transitionCameraToPlayer(e);var i=getActiveArea();"region-center"===i.camera?transitionCameraToRegion(e):"pull-horizontal"===i.camera?transitionCameraPulledByPlayer(e,!0):"pull-vertical"===i.camera?transitionCameraPulledByPlayer(e,!1):"follow-player"===i.camera?transitionCameraToPlayer(e):"follow-player-anchored-x"===i.camera?transitionCameraToPlayerAnchored(e,!0):"follow-player-anchored-y"===i.camera&&transitionCameraToPlayerAnchored(e,!1),previousActiveRegionIndex=e.index}function isOpenWorldLevel(){return!textMode&&null!=regions[curlevel]}function clearOpenWorldState(){window.cancelAnimationFrame(currentAnimationFrameId),regionMap=[],camera=null,cameraTransition=null,objectTrackers=[]}function removePlayerDecorations(){for(var e=0;e<level.height;e++)for(var i=0;i<level.width;i++){var t=i*level.height+e,l=level.getCellInto(t,_o10);l.anyBitsInCommon(state.objectMasks.playerdecorations)&&(l.iclear(state.objectMasks.playerdecorations),level.setCell(t,_o10))}}function removePlayers(){for(var e=0;e<level.height;e++)for(var i=0;i<level.width;i++){var t=i*level.height+e,l=level.getCellInto(t,_o10);if(l.anyBitsInCommon(state.objectMasks.player)){var o=getRegion({x:i,y:e});o.start||(l.iclear(state.objectMasks.player),l.iclear(state.objectMasks.moved),level.setCell(t,_o10))}}}function restoreOriginalLevel(){for(var e=0;e<level.width;e++)for(var i=0;i<level.height;i++)for(var t=e*level.height+i,l=0;l<STRIDE_OBJ;l++)level.objects[t*STRIDE_OBJ+l]=originalLevel.dat[t*STRIDE_OBJ+l]}var playerPosition=null,previousActiveRegionIndex=null,levelNeedsDraw=!0,pendingSave=!1,releasedBlockFrom=null,setSigilA=!1,setSigilB=!1,setSigilC=!1;</script> <script>var regionsOffset = [1, 38];
 var regions = [
   [
     //////////////
@@ -309,7 +316,11 @@ var regions = [
       areas: [
         { rect: [-1, 3, 16, 9], camera: 'follow-player-anchored-x' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        minY: -2
+      }
     },
     // Intro bottom intersection
     {
@@ -324,10 +335,12 @@ var regions = [
         'intro bottom left arm 1',
         'intro bottom left arm 1-2 node',
         'intro bottom right arm 1',
-        'intro bottom right arm 1-2 node',
-        'intro bottom top 1',
-        'intro bottom top 1-2 node'
-      ]
+        'intro bottom right arm 1-2 node'
+      ],
+      simulationBoundsAdjustment: {
+        minY: -2,
+        maxY: 4
+      }
     },
     // Intro bottom left arm #1
     {
@@ -336,7 +349,10 @@ var regions = [
       areas: [
         { rect: [-9, -6, 13, 4], camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // Intro bottom left arm #1-#2 node
     {
@@ -360,7 +376,10 @@ var regions = [
       areas: [
         { rect: [-13, -2, 4, 8], camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Intro bottom left arm #2-#3 node
     {
@@ -385,7 +404,10 @@ var regions = [
         { rect: [-29, 5, 3, 1], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      simulateAlso: ['intro bottom left arm 2-3 node']
+      simulateAlso: ['intro bottom left arm 2-3 node'],
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // Intro bottom right arm #1
     {
@@ -394,7 +416,11 @@ var regions = [
       areas: [
         { rect: [10, -6, 19, 4], secondary: true, camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // Intro bottom right arm #1-#2 node
     {
@@ -408,7 +434,10 @@ var regions = [
         'intro bottom right arm 1',
         'intro bottom right arm 2',
         'intro bottom intersection'
-      ]
+      ],
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // Intro bottom right arm #2
     {
@@ -418,43 +447,26 @@ var regions = [
         { rect: [29, -2, 4, 9], secondary: true, camera: 'follow-player' },
         { rect: [33, 3, 2, 4], secondary: true, camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // Intro bottom-top #1
     {
-      id: 'intro bottom top 1',
+      id: 'intro bottom top',
       offset: [64, 67],
       areas: [
-        { rect: [4, -13, 6, 7], camera: 'follow-player-anchored-x' }
-      ],
-      zoom: 0.7,
-      copyCameraAnchor: 'intro'
-    },
-    // Intro bottom-top #1-#2 node
-    {
-      id: 'intro bottom top 1-2 node',
-      offset: [64, 67],
-      areas: [
-        { rect: [3, -17, 8, 4], camera: 'follow-player-anchored-x' }
+        { rect: [3, -23, 8, 17], camera: 'follow-player-anchored-x' }
       ],
       zoom: 0.7,
       copyCameraAnchor: 'intro',
-      simulateAlso: [
-        'intro bottom top 1',
-        'intro bottom intersection',
-        'intro bottom top 2',
-        'intro top intersection'
-      ]
-    },
-    // Intro bottom-top #2
-    {
-      id: 'intro bottom top 2',
-      offset: [64, 67],
-      areas: [
-        { rect: [4, -23, 6, 6], camera: 'follow-player-anchored-x' }
-      ],
-      zoom: 0.7,
-      copyCameraAnchor: 'intro'
+      simulationBoundsAdjustment: {
+        minX: 1,
+        maxX: -1,
+        minY: -3,
+        maxY: 3
+      }
     },
     // Intro top intersection
     {
@@ -466,12 +478,15 @@ var regions = [
       zoom: 0.7,
       copyCameraAnchor: 'intro',
       simulateAlso: [
-        'intro bottom top 2',
-        'intro bottom top 1-2 node',
         'intro top left arm',
         'intro top right arm',
         'intro exit'
-      ]
+      ],
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2,
+        maxY: 2
+      }
     },
     // Intro top left arm
     {
@@ -481,7 +496,11 @@ var regions = [
         { rect: [-3, -27, 6, 4], camera: 'follow-player' }
       ],
       zoom: 0.7,
-      simulateAlso: ['intro top intersection']
+      simulateAlso: ['intro top intersection'],
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // Intro top right arm
     {
@@ -494,7 +513,10 @@ var regions = [
         { rect: [19, -36, 2, 4], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
-      simulateAlso: ['intro top intersection']
+      simulateAlso: ['intro top intersection'],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Intro exit
     {
@@ -505,6 +527,9 @@ var regions = [
       ],
       zoom: 0.7,
       copyCameraAnchor: 'intro',
+      simulationBoundsAdjustment: {
+        minY: -3
+      },
       simulateAlso: ['intro top intersection']
     },
     // Intro bonus puzzle
@@ -537,7 +562,12 @@ var regions = [
       areas: [
         { rect: [-3, -26, 5, 11], camera: 'follow-player' },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        minY: -2,
+        maxY: 1
+      }
     },
     // Intro top left arm secret
     {
@@ -560,7 +590,10 @@ var regions = [
         { rect: [-5, 0, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "JumbleTheCircle"
+      credit: "JumbleTheCircle",
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // Block push intro secret
     {
@@ -583,7 +616,11 @@ var regions = [
         { rect: [3, 11, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.65,
-      credit: "Patrick"
+      credit: "Patrick",
+      simulationBoundsAdjustment: {
+        maxX: 1,
+        maxY: 1
+      }
     },
     // Seed level (Joseph Mansfield)
     {
@@ -596,7 +633,10 @@ var regions = [
         { rect: [11, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Joseph Mansfield"
+      credit: "Joseph Mansfield",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Infinite loop intro (Blookerstein)
     {
@@ -606,7 +646,11 @@ var regions = [
         { rect: [1, -1, 6, 11] }
       ],
       zoom: 0.7,
-      credit: "Blookerstein"
+      credit: "Blookerstein",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // Seed level secret
     {
@@ -628,7 +672,10 @@ var regions = [
         { rect: [3, -2, 8, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [5, 10, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     //////////////
     // BRANCH A
@@ -643,7 +690,10 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "marcosd"
+      credit: "marcosd",
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // (knexator)
     {
@@ -657,7 +707,13 @@ var regions = [
         { rect: [8, 0, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "knexator"
+      credit: "knexator",
+      simulationBoundsAdjustment: {
+        minX: -1,
+        maxX: 2,
+        minY: -1,
+        maxY: 1
+      }
     },
     // (knexator) - secret
     {
@@ -669,7 +725,10 @@ var regions = [
         { rect: [0, 5, 3, 1], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.8,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (knexator) - secret return
     {
@@ -681,22 +740,47 @@ var regions = [
         { rect: [-2, 9, 3, 4], camera: 'follow-player' },
         { rect: [-1, 13, 2, 3], camera: 'follow-player' }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
-    // Branch A exit corridor
+    // Branch A exit corridor #1
     {
-      id: 'branch a exit corridor',
+      id: 'branch a exit corridor 1',
       offset: [43, 8],
       areas: [
-        { rect: [-1, 0, 31, 3], camera: 'follow-player' },
-        { rect: [13, -3, 3, 3], camera: 'follow-player' },
-        { rect: [27, -4, 7, 3], camera: 'follow-player' },
-        { rect: [27, -1, 3, 1], camera: 'follow-player' }
+        { rect: [-1, 0, 13, 3], camera: 'follow-player' }
       ],
       zoom: 0.8,
       simulationBoundsAdjustment: {
-        minX: 2
+        maxX: 2,
+        maxY: 1
       }
+    },
+    // Branch A exit corridor #2
+    {
+      id: 'branch a exit corridor 2',
+      offset: [43, 8],
+      areas: [
+        { rect: [12, 0, 15, 3], camera: 'follow-player' },
+        { rect: [13, -3, 3, 3], camera: 'follow-player' }
+      ],
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        maxY: 1
+      }
+    },
+    // Branch A exit corridor #3
+    {
+      id: 'branch a exit corridor 3',
+      offset: [43, 8],
+      areas: [
+        { rect: [27, -4, 7, 3], camera: 'follow-player' },
+        { rect: [27, -1, 3, 4], camera: 'follow-player' }
+      ],
+      zoom: 0.8
     },
     // (Corey Hardt)
     {
@@ -726,7 +810,10 @@ var regions = [
         { rect: [3, 14, 3, 2], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.55,
-      credit: "Auroriax"
+      credit: "Auroriax",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Kristian Hedeholm)
     {
@@ -739,7 +826,11 @@ var regions = [
         { rect: [0, 11, 7, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.75,
-      credit: "Kristian Hedeholm"
+      credit: "Kristian Hedeholm",
+      simulationBoundsAdjustment: {
+        minY: -2,
+        maxY: 1
+      }
     },
     // The clock (Zomulgustar)
     {
@@ -757,8 +848,8 @@ var regions = [
       secret: true,
       credit: "Zomulgustar",
       simulationBoundsAdjustment: {
-        minX: 3,
-        minY: 2
+        maxX: 2,
+        maxY: 1
       }
     },
     // Clock shortcut surround
@@ -771,7 +862,10 @@ var regions = [
         { rect: [3, 4, 1, 1] },
         { rect: [4, 0, 4, 5] }
       ],
-      zoom: 0.4
+      zoom: 0.4,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Clock shortcut
     {
@@ -794,7 +888,10 @@ var regions = [
         { rect: [10, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.7,
-      credit: "CHz"
+      credit: "CHz",
+      simulationBoundsAdjustment: {
+        maxX: 2
+      }
     },
     // 1:00 Main path lock
     {
@@ -877,9 +974,9 @@ var regions = [
         { rect: [7, 0, 1, 11], secondary: true }
       ],
       zoom: 0.7,
-      credit: "Clickmazes",
+      credit: "clickmazes",
       simulationBoundsAdjustment: {
-        maxX: -2
+        maxY: 1
       }
     },
     // 7:00 #3 (pancelor)
@@ -887,14 +984,16 @@ var regions = [
       id: 'pancelor',
       offset: [19, 69],
       areas: [
-        { rect: [-2, 0, 14, 1], secondary: true, camera: 'pull-vertical' },
-        { rect: [1, 1, 1, 8], secondary: true, camera: 'pull-horizontal' },
-        { rect: [-2, 1, 3, 8], secondary: true, camera: 'pull-horizontal' },
+        { rect: [1, 0, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [-2, 1, 4, 8], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 1, 9, 8] },
         { rect: [11, 1, 1, 8], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "pancelor"
+      credit: "pancelor",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // 7:00 Main path lock
     {
@@ -903,7 +1002,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 3, 8] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 4
+      }
     },
     // 7:00 Main path lock secret
     {
@@ -916,13 +1018,17 @@ var regions = [
         { rect: [5, 4, 12, 3], secondary: true, camera: 'follow-player' }
       ],
       zoom: 0.7,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // 7:00 #4 (Norgg)
     {
       id: 'norgg',
-      offset: [8, 69],
+      offset: [8, 70],
       areas: [
+        { rect: [6, -1, 3, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [0, 0, 8, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [8, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 1, 1, 6], secondary: true },
@@ -930,7 +1036,10 @@ var regions = [
         { rect: [1, 1, 7, 5] }
       ],
       zoom: 0.7,
-      credit: "Norgg"
+      credit: "Norgg",
+      simulationBoundsAdjustment: {
+        minY: -2
+      }
     },
     // 7:00 #5 Post-Norgg
     {
@@ -945,7 +1054,8 @@ var regions = [
       ],
       zoom: 0.7,
       simulationBoundsAdjustment: {
-        maxY: -2
+        maxX: 2,
+        maxY: 1
       }
     },
     // 7:00 Le Slo Secret
@@ -971,7 +1081,10 @@ var regions = [
         { rect: [0, 8, 8, 1], secondary: true }
       ],
       zoom: 0.7,
-      credit: "Le Slo"
+      credit: "Le Slo",
+      simulationBoundsAdjustment: {
+        maxY: 2
+      }
     },
     // 7:00 Return to clock from (Le Slo)
     {
@@ -1010,7 +1123,10 @@ var regions = [
         'clementsparrow secret 1',
         'clementsparrow secret 2 release',
         'clementsparrow secret 2'
-      ]
+      ],
+      simulationBoundsAdjustment: {
+        maxX: 2
+      }
     },
     // 9:00 #2 (clementsparrow)
     {
@@ -1101,7 +1217,10 @@ var regions = [
         { rect: [13, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.65,
-      credit: "Deusovi"
+      credit: "Deusovi",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // 9:00 #4 (crychair)
     {
@@ -1114,7 +1233,10 @@ var regions = [
         { rect: [9, 7, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "crychair"
+      credit: "crychair",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Fusion intro
     {
@@ -1126,7 +1248,10 @@ var regions = [
         { rect: [0, 7, 9, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [3, 8, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (PedroPSI)
     {
@@ -1140,7 +1265,10 @@ var regions = [
         { rect: [0, 10, 13, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.7,
-      credit: "PedroPSI"
+      credit: "Pedro PSI",
+      simulationBoundsAdjustment: {
+        maxY: 3
+      }
     },
     // Branch A finish
     {
@@ -1150,7 +1278,10 @@ var regions = [
         { rect: [0, 0, 17, 14] },
       ],
       zoom: 0.58,
-      simulateAlso: ['second ending gate']
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
+      finish: true
     },
     //////////////
     // BRANCH B
@@ -1163,7 +1294,12 @@ var regions = [
         { rect: [0, 0, 3, 9], camera: 'follow-player' },
         { rect: [-4, -4, 7, 4], camera: 'follow-player' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2,
+        maxY: 1
+      }
     },
     // Branch B finish
     {
@@ -1175,7 +1311,10 @@ var regions = [
         { rect: [1, 12, 16, 4] },
       ],
       zoom: 0.56,
-      simulateAlso: ['second ending gate']
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
+      finish: true
     },
     // (Pichusuperlover)
     {
@@ -1188,7 +1327,11 @@ var regions = [
         { rect: [3, 6, 8, 2] }
       ],
       zoom: 0.7,
-      credit: "Pichusuperlover"
+      credit: "Pichusuperlover",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // (Mischka Kamener)
     {
@@ -1200,10 +1343,7 @@ var regions = [
         { rect: [7, 6, 1, 3] },
       ],
       zoom: 0.65,
-      credit: "Mischka Kamener",
-      simulationBoundsAdjustment: {
-        minX: 2
-      }
+      credit: "Mischka Kamener"
     },
     // (Mischka Kamener part 2)
     {
@@ -1216,7 +1356,7 @@ var regions = [
       zoom: 0.65,
       credit: "Mischka Kamener",
       simulationBoundsAdjustment: {
-        minX: 2
+        maxY: 1
       }
     },
     // (Joseph Mansfield #1)
@@ -1228,7 +1368,10 @@ var regions = [
         { rect: [0, 1, 9, 5] },
         { rect: [0, 6, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Joseph Mansfield #2)
     {
@@ -1239,7 +1382,10 @@ var regions = [
         { rect: [0, 3, 12, 5] },
         { rect: [0, 8, 5, 2] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minY: -2
+      }
     },
     // Corridor to Justas
     {
@@ -1249,7 +1395,9 @@ var regions = [
         { rect: [0, 0, 4, 11], camera: 'follow-player' },
       ],
       zoom: 0.7,
-      secret: true
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Justas)
     {
@@ -1261,7 +1409,10 @@ var regions = [
         { rect: [0, 2, 10, 7] }
       ],
       zoom: 0.7,
-      credit: "Justas"
+      credit: "Justas",
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // (That Scar)
     {
@@ -1273,7 +1424,10 @@ var regions = [
         { rect: [-1, 0, 2, 5], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "That Scar"
+      credit: "That Scar",
+      simulationBoundsAdjustment: {
+        maxX: 2
+      }
     },
     // Wall_Above intro
     {
@@ -1283,7 +1437,12 @@ var regions = [
         { rect: [0, 2, 2, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 0, 11, 6] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2,
+        maxY: 1
+      }
     },
     // Slime storage
     {
@@ -1307,7 +1466,10 @@ var regions = [
         { rect: [2, 11, 3, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.65,
-      credit: "winterbeak"
+      credit: "winterbeak",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Corridor
     {
@@ -1316,7 +1478,10 @@ var regions = [
       areas: [
         { rect: [-3, 0, 10, 3] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Dan Williams)
     {
@@ -1328,7 +1493,12 @@ var regions = [
         { rect: [1, 8, 9, 1], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
-      credit: "Dan Williams"
+      credit: "Dan Williams",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        minY: -2,
+        maxY: 1
+      }
     },
     // Main path lock
     {
@@ -1338,7 +1508,10 @@ var regions = [
         { rect: [-1, 0, 4, 5] }
       ],
       zoom: 0.7,
-      simulateAlso: ['intro top right arm', 'intro top intersection']
+      simulateAlso: ['intro top right arm', 'intro top intersection'],
+      simulationBoundsAdjustment: {
+        minX: -2
+      }
     },
     // (Guilherme Tows (zaratustra))
     {
@@ -1354,7 +1527,7 @@ var regions = [
         { rect: [4, 11, 5, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
-      credit: "Guilherme Tows (zaratustra)"
+      credit: "zaratustra"
     },
     // (Muftwin)
     {
@@ -1368,7 +1541,10 @@ var regions = [
         { rect: [4, 12, 4, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
-      credit: "Muftwin"
+      credit: "Muftwin",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Colin)
     {
@@ -1404,7 +1580,11 @@ var regions = [
         { rect: [0, 6, 1, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Toombler"
+      credit: "Toombler",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // stevenjmiller's bomb secret corridor
     {
@@ -1415,10 +1595,14 @@ var regions = [
         { rect: [1, 5, 3, 1] },
         { rect: [-1, 6, 5, 2] },
         { rect: [-1, 8, 6, 4] },
-        { rect: [2, 12, 3, 1] },
+        { rect: [1, 12, 4, 1] },
         { rect: [-5, 8, 4, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 2
+      }
     },
     // stevenjmiller's bomb secret
     {
@@ -1440,7 +1624,11 @@ var regions = [
         { rect: [0, 1, 5, 4] },
         { rect: [0, 5, 5, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minY: -2,
+        maxY: 2
+      }
     },
     // Joseph Mansfield's secret #2
     {
@@ -1464,7 +1652,10 @@ var regions = [
         { rect: [0, 3, 9, 13] },
         { rect: [3, 16, 3, 2], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.56
+      zoom: 0.56,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Main path branch
     {
@@ -1489,7 +1680,11 @@ var regions = [
         { rect: [9, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Joel"
+      credit: "Joel",
+      simulationBoundsAdjustment: {
+        minX: -3,
+        maxX: 3
+      }
     },
     // Corridor
     {
@@ -1503,7 +1698,13 @@ var regions = [
         { rect: [9, 4, 3, 1] },
         { rect: [0, 4, 7, 6] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -3,
+        maxX: 3,
+        minY: -2,
+        maxY: 1
+      }
     },
     // Corridor secret #1
     {
@@ -1538,7 +1739,10 @@ var regions = [
         { rect: [5, -2, 5, 2], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
-      credit: "Notan"
+      credit: "Notan",
+      simulationBoundsAdjustment: {
+        maxY: 3
+      }
     },
     // (Zach)
     {
@@ -1552,7 +1756,11 @@ var regions = [
         { rect: [7, 12, 5, 3], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.6,
-      credit: "Zach"
+      credit: "Zach",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // (Zach) secret
     {
@@ -1574,7 +1782,10 @@ var regions = [
         { rect: [4, -2, 4, 2], camera: 'follow-player' },
         { rect: [4, -3, 3, 1], camera: 'follow-player' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Joseph Mansfield) Vat introduction
     {
@@ -1586,7 +1797,11 @@ var regions = [
         { rect: [1, 0, 7, 10] },
         { rect: [0, 10, 8, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxY: 1
+      }
     },
     // (Shark)
     {
@@ -1600,7 +1815,11 @@ var regions = [
         { rect: [21, 1, 1, 10], secondary: true, camera: 'pull-horizontal' },
       ],
       zoom: 0.6,
-      credit: "shark"
+      credit: "shark",
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        maxY: 1
+      }
     },
     // (Shark) secret
     {
@@ -1612,7 +1831,10 @@ var regions = [
         { rect: [4, 0, 5, 5] }
       ],
       zoom: 0.7,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (twak)
     {
@@ -1625,7 +1847,10 @@ var regions = [
         { rect: [7, 1, 1, 11], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "twak"
+      credit: "twak",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     //////////////
     // MERGE
@@ -1640,7 +1865,10 @@ var regions = [
         { rect: [-3, 0, 4, 10], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
-      credit: "Jack Lance"
+      credit: "Jack Lance",
+      simulationBoundsAdjustment: {
+        maxY: 2
+      }
     },
     // Ending gate
     {
@@ -1652,7 +1880,11 @@ var regions = [
         { rect: [0, 16, 9, 1], secondary: true }
       ],
       zoom: 0.48,
-      endingGate: true
+      endingGate: true,
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        maxY: 1
+      }
     },
     // Ending gate corridor
     {
@@ -1664,7 +1896,10 @@ var regions = [
         { rect: [6, 0, 3, 7] }
       ],
       zoom: 0.6,
-      allowSave: false
+      allowSave: false,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Merge corridor #1
     {
@@ -1675,7 +1910,10 @@ var regions = [
         { rect: [7, 4, 3, 2], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        maxX: 4
+      }
     },
     // (D5R)
     {
@@ -1685,7 +1923,11 @@ var regions = [
         { rect: [0, 0, 12, 10] }
       ],
       zoom: 0.7,
-      credit: "D5R"
+      credit: "D5R",
+      simulationBoundsAdjustment: {
+        maxX: 2,
+        maxY: 1
+      }
     },
     // (D5R) Block release
     {
@@ -1694,7 +1936,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 4, 10] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Ethan Clark secret corridor #1
     {
@@ -1715,7 +1960,10 @@ var regions = [
         { rect: [-1, 0, 1, 3], camera: 'follow-player' },
         { rect: [0, 0, 11, 4], camera: 'follow-player' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxX: 1
+      }
     },
     // (Ethan Clark)
     {
@@ -1730,7 +1978,11 @@ var regions = [
         { rect: [11, 1, 4, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Ethan Clark"
+      credit: "Ethan Clark",
+      simulationBoundsAdjustment: {
+        minX: -2,
+        maxX: 2
+      }
     },
     // (Ethan Clark) block release
     {
@@ -1739,7 +1991,10 @@ var regions = [
       areas: [
         { rect: [15, 1, 3, 6] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        minY: -3
+      }
     },
     // stevenjmiller bonus puzzle
     {
@@ -1749,7 +2004,10 @@ var regions = [
         { rect: [-2, 0, 2, 12], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 0, 17, 12] }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // stevenjmiller bonus puzzle secret
     {
@@ -1774,7 +2032,10 @@ var regions = [
         { rect: [7, 12, 4, 4], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        maxX: 3
+      }
     },
     // (jackk)
     {
@@ -1786,7 +2047,10 @@ var regions = [
         { rect: [27, 0, 6, 10] }
       ],
       zoom: 0.48,
-      credit: "jackk"
+      credit: "jackk",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (jackk) Block release
     {
@@ -1796,7 +2060,10 @@ var regions = [
         { rect: [0, 0, 8, 6] }
       ],
       zoom: 0.7,
-      blockRelease: [3, 7]
+      blockRelease: [3, 7],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Merge corridor #3
     {
@@ -1806,7 +2073,11 @@ var regions = [
         { rect: [0, 0, 23, 4], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        maxX: 3,
+        maxY: 1
+      }
     },
     // Merge corridor #4
     {
@@ -1814,11 +2085,15 @@ var regions = [
       offset: [21, -19],
       areas: [
         { rect: [0, 0, 4, 24], camera: 'follow-player' },
-        { rect: [-3, 6, 3, 4], camera: 'follow-player' },
+        { rect: [-3, 2, 3, 8], camera: 'follow-player' },
         { rect: [-5, 6, 2, 3], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        minY: -2,
+        maxY: 1
+      }
     },
     // (domcamus)
     {
@@ -1831,7 +2106,10 @@ var regions = [
         { rect: [0, 13, 21, 4] },
       ],
       zoom: 0.52,
-      credit: "domcamus"
+      credit: "domcamus",
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (domcamus) Block release
     {
@@ -1841,16 +2119,23 @@ var regions = [
         { rect: [0, 0, 4, 5] }
       ],
       zoom: 0.50,
-      blockRelease: [5, 2]
+      blockRelease: [5, 2],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // domcamus secret corridor
     {
       id: 'domcamus secret corridor',
       offset: [8, -18],
       areas: [
-        { rect: [0, 0, 8, 5] }
+        { rect: [0, 0, 3, 5] },
+        { rect: [3, 1, 7, 4] }
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // remote gamepad bonus puzzle
     {
@@ -1861,9 +2146,12 @@ var regions = [
         { rect: [0, 6, 14, 10] }
       ],
       zoom: 0.52,
-      indirectSecret: 'gamepad bonus puzzle secret'
+      indirectSecret: 'gamepad bonus puzzle secret',
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
-    // remote gamepad bonus puzzle
+    // remote gamepad bonus puzzle secret
     {
       id: 'gamepad bonus puzzle secret',
       offset: [1, -34],
@@ -1881,7 +2169,11 @@ var regions = [
         { rect: [0, 0, 14, 4], camera: 'follow-player' }
       ],
       zoom: 0.6,
-      mergeCorridor: true
+      mergeCorridor: true,
+      simulationBoundsAdjustment: {
+        minY: -3,
+        maxY: 1
+      }
     },
     // (stevenjmiller)
     {
@@ -1892,7 +2184,10 @@ var regions = [
         { rect: [13, -1, 4, 1], secondary: true, camera: 'pull-vertical' }
       ],
       zoom: 0.58,
-      credit: "stevenjmiller"
+      credit: "stevenjmiller",
+      simulationBoundsAdjustment: {
+        minY: -2
+      }
     },
     // (stevenjmiller) Block release
     {
@@ -1902,7 +2197,10 @@ var regions = [
         { rect: [0, 0, 5, 5] }
       ],
       zoom: 0.6,
-      blockRelease: [4, 2]
+      blockRelease: [4, 2],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // stevenjmiller bonus puzzle 2
     {
@@ -1917,7 +2215,7 @@ var regions = [
       ],
       zoom: 0.57
     },
-    // stevenjmiller bonus puzzle 2
+    // stevenjmiller bonus puzzle 2 secret
     {
       id: 'stevenjmiller bonus puzzle 2 secret',
       offset: [74, -18],
@@ -1928,7 +2226,10 @@ var regions = [
       ],
       zoom: 0.57,
       secret: true,
-      copyCameraAnchor: 'stevenjmiller bonus puzzle 2'
+      copyCameraAnchor: 'stevenjmiller bonus puzzle 2',
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // Ending
     {
@@ -1938,7 +2239,10 @@ var regions = [
         { rect: [0, 0, 13, 13] }
       ],
       zoom: 0.6,
-      allowSave: false
+      allowSave: false,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     //////////////
     // SECOND ENDING
@@ -1952,7 +2256,11 @@ var regions = [
         { rect: [0, 1, 10, 6] },
         { rect: [0, 7, 10, 1], secondary: true, camera: 'pull-vertical' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      secondEndingGate: [[1, 4], [1, 1]],
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Second ending secret room)
     {
@@ -1964,7 +2272,11 @@ var regions = [
         { rect: [0, 4, 18, 12] }
       ],
       zoom: 0.52,
-      secret: true
+      secret: true,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      },
+      sigilCPositions: [[14, 1], [3, 4]]
     },
     // (Second ending final corridor)
     {
@@ -1973,7 +2285,10 @@ var regions = [
       areas: [
         { rect: [0, 0, 9, 6] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Second ending final room)
     {
@@ -1982,7 +2297,10 @@ var regions = [
       areas: [
         { rect: [-6, 0, 23, 11] },
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (Second ending optional corridor #1)
     {
@@ -2010,7 +2328,10 @@ var regions = [
         { rect: [0, 0, 4, 9] },
         { rect: [-2, 0, 2, 3] }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (stevenjmiller) optional bonus puzzle
     {
@@ -2020,16 +2341,23 @@ var regions = [
         { rect: [0, 0, 30, 17] },
         { rect: [5, 17, 6, 1] }
       ],
-      zoom: 0.5
+      zoom: 0.5,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     },
     // (stevenjmiller) optional bonus reward
     {
       id: 'stevenjmiller optional bonus reward',
       offset: [109, -26],
       areas: [
-        { rect: [0, 0, 9, 9] }
+        { rect: [0, 0, 9, 9] },
+        { rect: [9, 5, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      simulationBoundsAdjustment: {
+        maxY: 1
+      }
     }
   ]
 ];
@@ -2039,7 +2367,9 @@ var theme2Areas = [
   [110, -39, Infinity, 13],
   [119, -26, Infinity, Infinity],
   [112, -18, Infinity, Infinity],
-  [77, -8, Infinity, 13],
+  [77, -7, 13, 12],
+  [90, -6, 2, 11],
+  [92, -7, Infinity, 12],
   [80, 5, Infinity, 13],
   [82, 18, Infinity, Infinity],
   [79, 31, Infinity, Infinity],
@@ -2101,6 +2431,8 @@ var secretRegions = [
 var regionMap = [];
 var regionIds = {};
 var secrets = [];
+var sigilPositions = [];
+var sigilCPositions = [];
 
 function initRegions() {
   regionMap = [];
@@ -2239,6 +2571,18 @@ function initRegions() {
         }
       }
     }
+
+    if (region.secondEndingGate) {
+      sigilPositions = [];
+      sigilPositions.push((offsetX + region.secondEndingGate[0][0]) * level.height + (offsetY + region.secondEndingGate[0][1]));
+      sigilPositions.push((offsetX + region.secondEndingGate[1][0]) * level.height + (offsetY + region.secondEndingGate[1][1]));
+    }
+
+    if (region.sigilCPositions) {
+      sigilCPositions = [];
+      sigilCPositions.push((offsetX + region.sigilCPositions[0][0]) * level.height + (offsetY + region.sigilCPositions[0][1]));
+      sigilCPositions.push((offsetX + region.sigilCPositions[1][0]) * level.height + (offsetY + region.sigilCPositions[1][1]));
+    }
   }
 
   if (secretCount !== secretRegions.length) {
@@ -2270,10 +2614,10 @@ function initRegions() {
     }
 
     if (region.simulationBoundsAdjustment != null) {
-      region.simulationBounds.minX += -4 + (region.simulationBoundsAdjustment.minX || 0);
-      region.simulationBounds.maxX += 3 + (region.simulationBoundsAdjustment.maxX || 0);
-      region.simulationBounds.minY += -4 + (region.simulationBoundsAdjustment.minY || 0);
-      region.simulationBounds.maxY += 3 + (region.simulationBoundsAdjustment.maxY || 0);
+      region.simulationBounds.minX += -1 + (region.simulationBoundsAdjustment.minX || 0);
+      region.simulationBounds.maxX += 1 + (region.simulationBoundsAdjustment.maxX || 0);
+      region.simulationBounds.minY += -2 + (region.simulationBoundsAdjustment.minY || 0);
+      region.simulationBounds.maxY += 1 + (region.simulationBoundsAdjustment.maxY || 0);
     }
   }
 }
@@ -2581,7 +2925,7 @@ function checkSpawns() {
       console.log('Missing spawn in region ' + region.id);
     }
   }
-}</script> <script>function restoreActiveRegion(e){for(var r=activeRegion.index,t=getRegionBounds(regions[curlevel][r],!0),o=getObjectTrackersFromOrigin(r),l=[],a=0;a<o.length;a++){var c=o[a],s=c[1],n=c[2],i=c[0],v=s*level.height+n,k=level.getCell(v);if(k.iclear(state.objectMasks[i?"dynamic_above":"dynamic_below"]),k.iclear(state.objectMasks[i?"sticky_above":"sticky_below"]),level.setCell(v,k),!i){var T=level.getCell(v-1);T.iclear(state.objectMasks.ladderd),level.setCell(v-1,T);var b=level.getCell(v+1);b.iclear(state.objectMasks.ladderu),level.setCell(v+1,b);var g=level.getCell(v-level.height);g.iclear(state.objectMasks.ladderr),level.setCell(v-level.height,g);var j=level.getCell(v+level.height);j.iclear(state.objectMasks.ladderl),level.setCell(v+level.height,j)}var u=getRegionIndex(s,n);u!==r&&l.push(u)}for(var h=[],s=t.minX;s<t.maxX;s++)for(var n=t.minY;n<t.maxY;n++){var v=s*level.height+n,d=getRegionIndex(s,n)===r,f=getRegionIndex(s,n+2)!==r;if(d){var k=level.getCell(v);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,s,n]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,s,n]),h.push([s,n]);for(var a=0;a<STRIDE_OBJ;a++)if(f){var p=state.objectMasks.render_above_top2.data[a];level.objects[v*STRIDE_OBJ+a]=originalLevel.dat[v*STRIDE_OBJ+a]&~p}else level.objects[v*STRIDE_OBJ+a]=originalLevel.dat[v*STRIDE_OBJ+a]}}removeExplosionTrackersForPositions(h);for(var x=extractExplosionTrackersForRegion(r),a=0;a<x.length;a++){var m=x[a],s=m.x,n=m.y,v=s*level.height+n,k=level.getCell(v);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,s,n]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,s,n]);for(var _=0;_<STRIDE_OBJ;_++)level.objects[v*STRIDE_OBJ+_]=originalLevel.dat[v*STRIDE_OBJ+_]}if(removeObjectTrackers(o),"second ending secret room"===activeRegion.id&&updateAllSecretMarkers(),level.width!==e.width||level.height!==e.height)level.width=e.width,level.height=e.height,level.n_tiles=e.width*e.height,RebuildLevelArrays();else{for(var a=0;a<level.n_tiles;a++)level.movements[a]=0,level.rigidMovementAppliedMask[a]=0,level.rigidGroupIndexMask[a]=0;for(var a=0;a<level.height;a++){level.rowCellContents[a].setZero()}for(var a=0;a<level.width;a++){level.colCellContents[a].setZero()}}return againing=!1,level.commandQueue=[],level.commandQueueSourceRules=[],l}function initObjectTrackers(){objectTrackers=new Int32Array(0)}function isObjectTracked(e,r,t,o){for(var l=0;l<objectTrackers.length;l++)if((128&objectTrackers[l])>0===e&&(15&objectTrackers[l])===r&&(65280&objectTrackers[l])>>8===t&&(16711680&objectTrackers[l])>>16===o)return!0;return!1}function startObjectTracker(e,r,t,o,l){var a=r|e<<7|t<<8|o<<16|l<<24,c=objectTrackers;objectTrackers=new Int32Array(c.length+1),objectTrackers.set(c),objectTrackers[objectTrackers.length-1]=a}function moveObjectTracker(e,r,t,o,l,a){for(var c=0;c<objectTrackers.length;c++)if((128&objectTrackers[c])>0===e&&(65280&objectTrackers[c])>>8===r&&(16711680&objectTrackers[c])>>16===t){objectTrackers[c]=4278190207&objectTrackers[c]|o<<7|l<<8|a<<16;break}}function getObjectTrackersFromOrigin(e){for(var r=[],t=0;t<objectTrackers.length;t++)(4278190080&objectTrackers[t])>>24===e&&r.push([(128&objectTrackers[t])>0,(65280&objectTrackers[t])>>8,(16711680&objectTrackers[t])>>16]);return r}function removeObjectTrackers(e){objectTrackers=objectTrackers.filter(function(r){return!e.find(function(e){return(128&r)>0===e[0]&&(65280&r)>>8===e[1]&&(16711680&r)>>16===e[2]})})}function getExplosiveTrackerOriginRegion(e,r,t){for(var o=0;o<objectTrackers.length;o++)if((128&objectTrackers[o])>0===t&&(65280&objectTrackers[o])>>8===e&&(16711680&objectTrackers[o])>>16===r&&(15&objectTrackers[o])===TRACKED_EXPLOSIVE)return(4278190080&objectTrackers[o])>>24;return null}function printObjectTrackers(){for(var e=0;e<objectTrackers.length;e++){var r="";r+=(15&objectTrackers[e])===TRACKED_BELT?"belt_":"explosive_",r+=(128&objectTrackers[e])>0?"above ":"below ",r+=((65280&objectTrackers[e])>>8)+","+((16711680&objectTrackers[e])>>16),console.log(r)}}function initExplosionTrackers(){explosionTrackers=new Int32Array(0)}function addExplosionTracker(e,r,t,o){var l=t<<7|e<<8|r<<16|o<<24,a=explosionTrackers;explosionTrackers=new Int32Array(a.length+1),explosionTrackers.set(a),explosionTrackers[explosionTrackers.length-1]=l}function extractExplosionTrackersForRegion(e){var r=[];return explosionTrackers=explosionTrackers.filter(function(t){var o=(4278190080&t)>>24===e;return o&&r.push({x:(65280&t)>>8,y:(16711680&t)>>16,above:(128&t)>0}),!o}),r}function removeExplosionTrackersForPositions(e){explosionTrackers=explosionTrackers.filter(function(r){return!e.find(function(e){return(65280&r)>>8===e[0]&&(16711680&r)>>16===e[1]})})}function printExplosionTrackers(){for(var e=0;e<explosionTrackers.length;e++){var r="";r+=(128&explosionTrackers[e])>0?"above ":"below ",r+=((65280&explosionTrackers[e])>>8)+","+((16711680&explosionTrackers[e])>>16),console.log(r)}}var objectTrackers=null,explosionTrackers={},initialObjectTrackers=null,TRACKED_BELT=0,TRACKED_EXPLOSIVE=1,TRACKED_LAYERS=[[!1,"tracked_below","belt_below"],[!0,"tracked_above","belt_above"]];</script> <script>function startMusic(){null==music&&(music=document.getElementById("music")),music.loop=!0,music.currentTime=0,music.volume=.7,music.play()}function setMusicVolume(u){music.volume=Math.max(.3*u,0)}function playAudioElement(u){var m=document.getElementById(u);m.loop=!1,m.currentTime=0,m.volume=.7,m.play()}var music=null;</script> <script>function stripTags(n){var e=document.createElement("div");return e.innerHTML=n,e.textContent||e.innerText||""}function consolePrint(n,e){}function consolePrintFromRule(n,e,r){}function consoleCacheDump(n){}function consoleError(n,e){var r=document.getElementById("errormessage");n=stripTags(n),r.innerHTML+=n+"<br>"}function logErrorNoLine(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function logBetaMessage(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function clearInputHistory(){}function pushInput(n){}var canSetHTMLColors=!0,canDump=!1,canOpenEditor=!1,canYoutube=!0,IDE=!1;const diffToVisualize=null;</script> <script>var font = {
+}</script> <script>function restoreActiveRegion(e){for(var r=activeRegion.index,t=getRegionBounds(regions[curlevel][r],!0),o=getObjectTrackersFromOrigin(r),a=[],l=state.objectMasks.coolhat.anyBitsInCommon(level.mapCellContents),s=0;s<o.length;s++){var c=o[s],n=c[1],i=c[2],v=c[0],b=n*level.height+i,k=level.getCell(b);if(k.iclear(state.objectMasks[v?"dynamic_above":"dynamic_below"]),k.iclear(state.objectMasks[v?"sticky_above":"sticky_below"]),level.setCell(b,k),!v){var T=level.getCell(b-1);T.iclear(state.objectMasks.ladderd),level.setCell(b-1,T);var j=level.getCell(b+1);j.iclear(state.objectMasks.ladderu),level.setCell(b+1,j);var g=level.getCell(b-level.height);g.iclear(state.objectMasks.ladderr),level.setCell(b-level.height,g);var u=level.getCell(b+level.height);u.iclear(state.objectMasks.ladderl),level.setCell(b+level.height,u)}var d=getRegionIndex(n,i);d!==r&&a.push(d)}for(var h=[],n=t.minX;n<t.maxX;n++)for(var i=t.minY;i<t.maxY;i++){var b=n*level.height+i,_=getRegionIndex(n,i)===r,p=getRegionIndex(n,i+2)!==r;if(_){var k=level.getCell(b);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,n,i]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,n,i]),h.push([n,i]);for(var s=0;s<STRIDE_OBJ;s++)if(p){var f=state.objectMasks.render_above_top2.data[s];level.objects[b*STRIDE_OBJ+s]=originalLevel.dat[b*STRIDE_OBJ+s]&~f}else level.objects[b*STRIDE_OBJ+s]=originalLevel.dat[b*STRIDE_OBJ+s]}}removeExplosionTrackersForPositions(h);for(var m=extractExplosionTrackersForRegion(r),s=0;s<m.length;s++){var C=m[s],n=C.x,i=C.y,b=n*level.height+i,k=level.getCell(b);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,n,i]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,n,i]);var x=new BitVec(originalLevel.dat.subarray(b*STRIDE_OBJ,b*STRIDE_OBJ+STRIDE_OBJ));x.iclear(state.objectMasks.render);var k=level.getCell(b);k.ior(x),level.setCell(b,k);var E=b-1,R=new BitVec(originalLevel.dat.subarray(E*STRIDE_OBJ,E*STRIDE_OBJ+STRIDE_OBJ)),I=state.objectMasks.render_below_top.clone();I.ior(state.objectMasks.render_above_top),I.ior(state.objectMasks.platform_top),I.ior(state.objectMasks.button_above_top),I.ior(state.objectMasks.inflatable_top),I.ior(state.objectMasks.slimevat_above_top),R.iand(I);var M=level.getCell(E);M.ior(R),M.iclear(state.objectMasks.platform_front),level.setCell(E,M);var O=b-2,y=new BitVec(originalLevel.dat.subarray(O*STRIDE_OBJ,O*STRIDE_OBJ+STRIDE_OBJ)),B=state.objectMasks.render_above_top2.clone();B.ior(state.objectMasks.slimevat_above_top2),y.iand(B);var w=level.getCell(O);w.ior(y),level.setCell(O,w)}if(removeObjectTrackers(o),"second ending secret room"===activeRegion.id&&updateAllSecretMarkers(),l){var D=getPlayerPositions();if(D.length>0){var S=level.getCell(D[0]),A=S.anyBitsInCommon(state.objectMasks.player_above);S.iclear(state.objectMasks.player),S.ior(state.objectMasks[A?"coolhat_above":"coolhat_below"]),level.setCell(D[0],S)}}if(level.width!==e.width||level.height!==e.height)level.width=e.width,level.height=e.height,level.n_tiles=e.width*e.height,RebuildLevelArrays();else{for(var s=0;s<level.n_tiles;s++)level.movements[s]=0,level.rigidMovementAppliedMask[s]=0,level.rigidGroupIndexMask[s]=0;for(var s=0;s<level.height;s++){level.rowCellContents[s].setZero()}for(var s=0;s<level.width;s++){level.colCellContents[s].setZero()}}return againing=!1,level.commandQueue=[],level.commandQueueSourceRules=[],a}function initObjectTrackers(){objectTrackers=new Int32Array(0)}function isObjectTracked(e,r,t,o){for(var a=0;a<objectTrackers.length;a++)if((128&objectTrackers[a])>0===e&&(15&objectTrackers[a])===r&&(65280&objectTrackers[a])>>8===t&&(16711680&objectTrackers[a])>>16===o)return!0;return!1}function startObjectTracker(e,r,t,o,a){var l=r|e<<7|t<<8|o<<16|a<<24,s=objectTrackers;objectTrackers=new Int32Array(s.length+1),objectTrackers.set(s),objectTrackers[objectTrackers.length-1]=l}function moveObjectTracker(e,r,t,o,a,l){for(var s=0;s<objectTrackers.length;s++)if((128&objectTrackers[s])>0===e&&(65280&objectTrackers[s])>>8===r&&(16711680&objectTrackers[s])>>16===t){objectTrackers[s]=4278190207&objectTrackers[s]|o<<7|a<<8|l<<16;break}}function getObjectTrackersFromOrigin(e){for(var r=[],t=0;t<objectTrackers.length;t++)(4278190080&objectTrackers[t])>>24===e&&r.push([(128&objectTrackers[t])>0,(65280&objectTrackers[t])>>8,(16711680&objectTrackers[t])>>16]);return r}function removeObjectTrackers(e){objectTrackers=objectTrackers.filter(function(r){return!e.find(function(e){return(128&r)>0===e[0]&&(65280&r)>>8===e[1]&&(16711680&r)>>16===e[2]})})}function getExplosiveTrackerOriginRegion(e,r,t){for(var o=0;o<objectTrackers.length;o++)if((128&objectTrackers[o])>0===t&&(65280&objectTrackers[o])>>8===e&&(16711680&objectTrackers[o])>>16===r&&(15&objectTrackers[o])===TRACKED_EXPLOSIVE)return(4278190080&objectTrackers[o])>>24;return null}function printObjectTrackers(){for(var e=0;e<objectTrackers.length;e++){var r="";r+=(15&objectTrackers[e])===TRACKED_BELT?"belt_":"explosive_",r+=(128&objectTrackers[e])>0?"above ":"below ",r+=((65280&objectTrackers[e])>>8)+","+((16711680&objectTrackers[e])>>16),console.log(r)}}function initExplosionTrackers(){explosionTrackers=new Int32Array(0)}function addExplosionTracker(e,r,t,o){var a=t<<7|e<<8|r<<16|o<<24,l=explosionTrackers;explosionTrackers=new Int32Array(l.length+1),explosionTrackers.set(l),explosionTrackers[explosionTrackers.length-1]=a}function extractExplosionTrackersForRegion(e){var r=[];return explosionTrackers=explosionTrackers.filter(function(t){var o=(4278190080&t)>>24===e;return o&&r.push({x:(65280&t)>>8,y:(16711680&t)>>16,above:(128&t)>0}),!o}),r}function removeExplosionTrackersForPositions(e){explosionTrackers=explosionTrackers.filter(function(r){return!e.find(function(e){return(65280&r)>>8===e[0]&&(16711680&r)>>16===e[1]})})}function printExplosionTrackers(){for(var e=0;e<explosionTrackers.length;e++){var r="";r+=(128&explosionTrackers[e])>0?"above ":"below ",r+=((65280&explosionTrackers[e])>>8)+","+((16711680&explosionTrackers[e])>>16),console.log(r)}}var objectTrackers=null,explosionTrackers={},initialObjectTrackers=null,TRACKED_BELT=0,TRACKED_EXPLOSIVE=1,TRACKED_LAYERS=[[!1,"tracked_below","belt_below"],[!0,"tracked_above","belt_above"]];</script> <script>function startMusic(){null==music&&(music=document.getElementById("music")),music.loop=!0,music.currentTime=0,music.volume=.7,music.play()}function setMusicVolume(u){music.volume=Math.max(.3*u,0)}function playAudioElement(u){var m=document.getElementById(u);m.loop=!1,m.currentTime=0,m.volume=.7,m.play()}var music=null;</script> <script>function stripTags(n){var e=document.createElement("div");return e.innerHTML=n,e.textContent||e.innerText||""}function consolePrint(n,e){}function consolePrintFromRule(n,e,r){}function consoleCacheDump(n){}function consoleError(n,e){var r=document.getElementById("errormessage");n=stripTags(n),r.innerHTML+=n+"<br>"}function logErrorNoLine(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function logBetaMessage(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function clearInputHistory(){}function pushInput(n){}var canSetHTMLColors=!0,canDump=!1,canOpenEditor=!1,canYoutube=!0,IDE=!1;const diffToVisualize=null;</script> <script>var font = {
     '0':`
 00000
 00000
@@ -8784,6 +9128,9 @@ function DoRestart(force) {
  } else {
   restoreLevel(restartTarget);
  }
+ setSigilA = false;
+ setSigilB = false;
+ setSigilC = false;
  tryPlayRestartSound();
 
  if ('run_rules_on_level_start' in state.metadata) {
@@ -8855,6 +9202,9 @@ function DoUndo(force,ignoreDuplicates) {
   var torestore = backups[backups.length-1];
   restoreLevel(torestore);
   backups = backups.splice(0,backups.length-1);
+  setSigilA = false;
+  setSigilB = false;
+  setSigilC = false;
   if (!force) {
    var playerPositions = getPlayerPositions();
    playerPosition = {
@@ -9756,17 +10106,10 @@ function matchCellRow(direction, cellRowMatch, cellRow, cellRowMask,cellRowMask_
   ymin=0;
   ymax=level.height;
  } else {
-  if (activeRegion.simulateAll || forceSimulateAll) {
-   xmin=activeRegion.simulationBounds.minX;
-   xmax=activeRegion.simulationBounds.maxX;
-   ymin=activeRegion.simulationBounds.minY + (!runningLateRules && noagaincheck ? 1 : 0);
-   ymax=activeRegion.simulationBounds.maxY  + (!runningLateRules && noagaincheck ? -2 : 0);
-  } else {
-   xmin=localBoundary.xmin;
-   xmax=localBoundary.xmax;
-   ymin=localBoundary.ymin + (!runningLateRules && noagaincheck ? 1 : 0);
-   ymax=localBoundary.ymax + (!runningLateRules && noagaincheck ? -2 : 0);
-  }
+  xmin=activeRegion.simulationBounds.minX;
+  xmax=activeRegion.simulationBounds.maxX;
+  ymin=activeRegion.simulationBounds.minY + (!runningLateRules && noagaincheck ? 1 : 0);
+  ymax=activeRegion.simulationBounds.maxY  + (!runningLateRules && noagaincheck ? -2 : 0);
 
   if (foreignSimulationBounds != null) {
    xmin=Math.min(xmin, foreignSimulationBounds.minX);
@@ -10071,6 +10414,13 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
         }
     }
 
+ //    if (result) {
+ //  if (!performanceTracking[rule.lineNumber]) {
+ //   performanceTracking[rule.lineNumber] = 0;
+ //  }
+ //  performanceTracking[rule.lineNumber]++;
+ // }
+
  if (verbose_logging && result){
   var ruleDirection = dirMaskName[rule.direction];
   if (!rule.directional()){
@@ -10087,9 +10437,12 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
 };
 
 Rule.prototype.tryApply = function(level) {
- if (!firstTurn && this.init) {
-  return false;
+ if (!firstTurn) {
+  if (this.init) {
+   return false;
+  }
  }
+
  const delta = level.delta_index(this.direction);
 
     //get all cellrow matches
@@ -10112,6 +10465,7 @@ Rule.prototype.tryApply = function(level) {
     if (matches.length>0) {
      this.queueCommands();
     }
+
     return result;
 };
 
@@ -10241,10 +10595,13 @@ function applyRuleGroup(ruleGroup, againing) {
  //  return applyRandomRuleGroup(level,ruleGroup);
  // }
 
+ // var startTime = performance.now();
+
  var loopPropagated=false;
     var propagated=true;
     var loopcount=0;
  var nothing_happened_counter = -1;
+ // var anythingModified = false;
     while(propagated) {
      loopcount++;
      if (loopcount>200) 
@@ -10278,6 +10635,12 @@ function applyRuleGroup(ruleGroup, againing) {
    }
         }
     }
+
+ //    if (anythingModified) {
+ //  if (!performanceTracking[ruleGroup[0].lineNumber]) {
+ //   performanceTracking[ruleGroup[0].lineNumber] = performance.now() - startTime;
+ //  }
+ // }
 
     return loopPropagated;
 }
@@ -10417,17 +10780,29 @@ function calculateRowColMasks() {
 
  var rowsCleared = false;
 
- for (var i=0;i<level.width;i++) {
+ var minX = Math.max(activeRegion.simulationBounds.minX, 0);
+ var maxX = Math.min(activeRegion.simulationBounds.maxX, level.width);
+ var minY = Math.max(activeRegion.simulationBounds.minY, 0);
+ var maxY = Math.min(activeRegion.simulationBounds.maxY, level.height);
+
+ if (firstTurn) {
+  minX = 0;
+  maxX = level.width;
+  minY = 0;
+  maxY = level.height;
+ }
+
+ for (var i=minX;i<maxX;i++) {
   var ccc = level.colCellContents[i];
   ccc.setZero();
   var ccc_Movements = level.colCellContents_Movements[i];
   ccc_Movements.setZero();
 
-  for (var j=0;j<level.height;j++) {
+  for (var j=minY;j<maxY;j++) {
    if (!rowsCleared) {
-    var rcc = level.rowCellContents[i];
+    var rcc = level.rowCellContents[j];
     rcc.setZero();
-    var rcc_Movements = level.rowCellContents_Movements[i];
+    var rcc_Movements = level.rowCellContents_Movements[j];
     rcc_Movements.setZero();
    }
 
@@ -10458,9 +10833,14 @@ var localBoundary = {
 var activeRegion = null;
 
 var runningLateRules = false;
+var overrideActiveRegion = null;
+
+var performanceTracking = {};
 
 /* returns a bool indicating if anything changed */
 function processInput(dir,dontDoWin,dontModify) {
+ // console.log('Turn start', dir)
+ // var startTime = performance.now();
  againing = false;
 
  var bak = backupLevel();
@@ -10474,12 +10854,7 @@ function processInput(dir,dontDoWin,dontModify) {
   };
  }
 
- localBoundary.xmin=playerPosition.x - 15;
- localBoundary.xmax=playerPosition.x + 16;
- localBoundary.ymin=playerPosition.y - 10;
- localBoundary.ymax=playerPosition.y + 11;
-
- activeRegion = getActiveRegion();
+ activeRegion = overrideActiveRegion || getActiveRegion();
 
     if (dir<=4) {//when is dir>4???
 
@@ -10555,6 +10930,9 @@ function processInput(dir,dontDoWin,dontModify) {
   seedsToPlay_CanMove=[];
   seedsToPlay_CantMove=[];
 
+ // console.log('Before masks', performance.now() - startTime);
+ // startTime = performance.now();
+
   calculateRowColMasks();
 
         // var i=0;
@@ -10564,7 +10942,9 @@ function processInput(dir,dontDoWin,dontModify) {
         //  rigidloop=false;
         //  i++;
          
-
+ // console.log('Masks', performance.now() - startTime);
+ // startTime = performance.now();
+        // performanceTracking = {};
          applyRules(state.rules, state.loopPoint, startRuleGroupIndex, bannedGroup, dontModify);
          var shouldUndo = resolveMovements(level,bannedGroup);
 
@@ -10612,6 +10992,8 @@ function processInput(dir,dontDoWin,dontModify) {
     //   consolePrint('Applying late rules');
     //  }
     // }
+ // console.log('Rules', performance.now() - startTime);
+ // startTime = performance.now();
 
     if (!dontModify) {
      runningLateRules = true;
@@ -10619,7 +11001,10 @@ function processInput(dir,dontDoWin,dontModify) {
            runningLateRules = false;
            startRuleGroupIndex=0;
           }
+ // console.log('Late rules', performance.now() - startTime);
+ // startTime = performance.now();
          // }
+         // printPerformanceTracking();
         // } while (i < 50 && rigidloop);
 
         // if (i>=50) {
@@ -10854,8 +11239,34 @@ function processInput(dir,dontDoWin,dontModify) {
  if (winning) {
   againing=false;
  }
+ // console.log('The rest', performance.now() - startTime);
 
  return modified;
+}
+
+function printPerformanceTracking() {
+ var entries = [];
+
+ var lineNumbers = Object.keys(performanceTracking);
+ for (var i = 0; i < lineNumbers.length; i++) {
+  var lineNumber = lineNumbers[i];
+  entries.push([lineNumber, performanceTracking[lineNumber]]);
+ }
+
+ entries.sort(function(entryA, entryB) {
+  if (entryA[1] < entryB[1]) {
+   return -1;
+  }
+
+  return 1;
+ });
+ console.log('--- BEGIN PERFORMANCE ---')
+
+ for (var i = 0; i < entries.length; i++) {
+  console.log(entries[i][0], entries[i][1]);
+ }
+
+ console.log('--- END PERFORMANCE ---')
 }
 
 function saveLevelState () {
@@ -15238,7 +15649,7 @@ function qualifyURL(url) {
     var a = document.createElement('a');
     a.href = url;
     return a.href;
-}</script> <script>function selectText(e,t){t=t||window.event;var o=document.getElementById(e);if(t&&(t.ctrlKey||t.metaKey)){var r=["console"].concat(o.innerHTML.split("<br>")),n=levelFromString(state,r);loadLevelFromLevelDat(state,n,null),canvasResize()}else if(document.selection){var l=document.body.createTextRange();l.moveToElementText(o),l.select()}else if(window.getSelection){var l=document.createRange();l.selectNode(o);var a=window.getSelection();a.removeAllRanges(),a.addRange(l)}}function recalcLevelBounds(){}function arrCopy(e,t,o,r,n){for(;n--;)o[r++]=e[t]++}function adjustLevel(e,t,o){backups.push(backupLevel());var r=e.clone();e.width+=t,e.height+=o,e.n_tiles=e.width*e.height,e.objects=new Int32Array(e.n_tiles*STRIDE_OBJ);var n=new BitVec(STRIDE_OBJ);n.ibitset(state.backgroundid);for(var l=0;l<e.n_tiles;++l)e.setCell(l,n);return e.movements=new Int32Array(e.objects.length),columnAdded=!0,RebuildLevelArrays(),r}function addLeftColumn(){for(var e=adjustLevel(level,1,0),t=1;t<level.width;++t)for(var o=0;o<level.height;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r-level.height))}}function addRightColumn(){for(var e=adjustLevel(level,1,0),t=0;t<level.width-1;++t)for(var o=0;o<level.height;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r))}}function addTopRow(){for(var e=adjustLevel(level,0,1),t=0;t<level.width;++t)for(var o=1;o<level.height;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r-t-1))}}function addBottomRow(){for(var e=adjustLevel(level,0,1),t=0;t<level.width;++t)for(var o=0;o<level.height-1;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r-t))}}function removeLeftColumn(){if(!(level.width<=1))for(var e=adjustLevel(level,-1,0),t=0;t<level.width;++t)for(var o=0;o<level.height;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r+level.height))}}function removeRightColumn(){if(!(level.width<=1))for(var e=adjustLevel(level,-1,0),t=0;t<level.width;++t)for(var o=0;o<level.height;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r))}}function removeTopRow(){if(!(level.height<=1))for(var e=adjustLevel(level,0,-1),t=0;t<level.width;++t)for(var o=0;o<level.height;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r+t+1))}}function removeBottomRow(){if(!(level.height<=1))for(var e=adjustLevel(level,0,-1),t=0;t<level.width;++t)for(var o=0;o<level.height;++o){var r=t*level.height+o;level.setCell(r,e.getCell(r+t))}}function matchGlyph(e,t){for(var o,r=-1,n=0;n<t.length;++n){var l=t[n][0],a=t[n][1],i=t[n][2];if(a.bitsSetInArray(e.data)){for(var s=0,d=0;d<32*STRIDE_OBJ;++d)i.get(d)&&e.get(d)&&s++,a.get(d)&&e.get(d)&&s++;s>r&&(r=s,o=l)}}return r>0?o:(logErrorNoLine("Wasn't able to approximate a glyph value for some tiles, using '.' as a placeholder.",!0),".")}function printLevel(){var e=[];for(var t in state.glyphDict)if(state.glyphDict.hasOwnProperty(t)&&1===t.length){for(var o=state.glyphDict[t],r=new BitVec(STRIDE_OBJ),n=0;n<o.length;n++){var l=o[n];l>=0&&r.ibitset(l)}var a=r.clone(),i=state.layerMasks[state.backgroundlayer];r.iclear(i),e.push([t,r,a])}selectableint++;for(var s="selectable"+selectableint,d='Printing level contents:<br><br><span id="'+s+'" onclick="selectText(\''+s+"',event)\">",u=0;u<level.height;u++){for(var n=0;n<level.width;n++){var c=u+n*level.height,v=level.getCell(c),o=matchGlyph(v,e);o in htmlEntityMap&&(o=htmlEntityMap[o]),d+=o}u<level.height-1&&(d+="<br>")}d+="</span><br><br>",consolePrint(d,!0)}function levelEditorClick(e,t){if(mouseCoordY<=-2){var o=editorRowCount-(-mouseCoordY-2)-1,r=mouseCoordX+(screenwidth-1)*o;-1===mouseCoordX?printLevel():mouseCoordX>=0&&r<glyphImages.length&&(glyphSelectedIndex=r,redraw())}else if(mouseCoordX>-1&&mouseCoordY>-1&&mouseCoordX<screenwidth-2&&mouseCoordY<screenheight-2-editorRowCount){for(var n=glyphImagesCorrespondance[glyphSelectedIndex],l=state.glyphDict[n],a=new BitVec(STRIDE_OBJ),i=0;i<l.length;i++){var s=l[i];s>=0&&a.ibitset(s)}var d=state.layerMasks[state.backgroundlayer];a.bitsClearInArray(d.data)&&a.ibitset(state.backgroundid);var u=mouseCoordY+mouseCoordX*level.height,c=level.getCell(u);if(c.equals(a))return;!1===anyEditsSinceMouseDown&&(anyEditsSinceMouseDown=!0,backups.push(backupLevel())),level.setCell(u,a),redraw()}else t&&(-1===mouseCoordX?(addLeftColumn(),canvasResize()):mouseCoordX===screenwidth-2&&(addRightColumn(),canvasResize()),-1===mouseCoordY?(addTopRow(),canvasResize()):mouseCoordY===screenheight-2-editorRowCount&&(addBottomRow(),canvasResize()))}function levelEditorRightClick(e,t){if(-2===mouseCoordY)mouseCoordX<=glyphImages.length&&(glyphSelectedIndex=mouseCoordX,redraw());else if(mouseCoordX>-1&&mouseCoordY>-1&&mouseCoordX<screenwidth-2&&mouseCoordY<screenheight-2-editorRowCount){var o=mouseCoordY+mouseCoordX*level.height,r=new BitVec(STRIDE_OBJ);r.ibitset(state.backgroundid),level.setCell(o,r),redraw()}else t&&(-1===mouseCoordX?(removeLeftColumn(),canvasResize()):mouseCoordX===screenwidth-2&&(removeRightColumn(),canvasResize()),-1===mouseCoordY?(removeTopRow(),canvasResize()):mouseCoordY===screenheight-2-editorRowCount&&(removeBottomRow(),canvasResize()))}function onMouseDown(e){if(!e.handled){ULBS();var t=0===e.button,o=2===e.button;if("touchstart"==e.type&&(t=!0),t&&(e.ctrlKey||e.metaKey)&&(t=!1,o=!0),t){if(lastDownTarget=e.target,keybuffer=[],(e.target===canvas||"tapFocusIndicator"===e.target.className)&&(setMouseCoord(e),dragging=!0,rightdragging=!1,levelEditorOpened))return anyEditsSinceMouseDown=!1,levelEditorClick(e,!0);dragging=!1,rightdragging=!1}else if(o&&(e.target===canvas||"tapFocusIndicator"===e.target.className)&&(setMouseCoord(e),dragging=!1,rightdragging=!0,levelEditorOpened))return levelEditorRightClick(e,!0);e.handled=!0}}function rightClickCanvas(e){return prevent(e)}function onMouseUp(e){e.handled||(dragging=!1,rightdragging=!1,e.handled=!0)}function onKeyDown(e){ULBS(),e=e||window.event,!IDE&&[32,37,38,39,40].indexOf(e.keyCode)>-1&&(e&&(e.ctrlKey||e.metaKey)||prevent(e)),IDE||77!==e.keyCode||toggleMute(),keybuffer.indexOf(e.keyCode)>=0||((lastDownTarget===canvas||window.Mobile&&lastDownTarget===window.Mobile.focusIndicator)&&-1===keybuffer.indexOf(e.keyCode)&&(e&&(e.ctrlKey||e.metaKey)||(keybuffer.splice(keyRepeatIndex,0,e.keyCode),keyRepeatTimer=0,checkKey(e,!e.repeat))),!0===canDump&&(74===e.keyCode&&(e.ctrlKey||e.metaKey)?(dumpTestCase(),prevent(e)):75===e.keyCode&&(e.ctrlKey||e.metaKey)?(makeGIF(),prevent(e)):83===e.keyCode&&(e.ctrlKey||e.metaKey)?(saveClick(),prevent(e)):13===e.keyCode&&(e.ctrlKey||e.metaKey)&&(canvas.focus(),editor.display.input.blur(),e.shiftKey?runClick():rebuildClick(),prevent(e))))}function relMouseCoords(e){var t=0,o=0,r=0,n=0,l=this;do{t+=l.offsetLeft-l.scrollLeft,o+=l.offsetTop-l.scrollTop}while(l=l.offsetParent);return null==e.touches?(r=e.pageX-t,n=e.pageY-o):(r=e.touches[0].pageX-t,n=e.touches[0].pageY-o),{x:r,y:n}}function onKeyUp(e){e=e||window.event;var t=keybuffer.indexOf(e.keyCode);t>=0&&(keybuffer.splice(t,1),keyRepeatIndex>=t&&keyRepeatIndex--)}function onMyFocus(e){keybuffer=[],keyRepeatIndex=0,keyRepeatTimer=0}function onMyBlur(e){keybuffer=[],keyRepeatIndex=0,keyRepeatTimer=0}function setMouseCoord(e){var t=canvas.relMouseCoords(e);mouseCoordX=t.x-xoffset,mouseCoordY=t.y-yoffset,mouseCoordX=Math.floor(mouseCoordX/cellwidth),mouseCoordY=Math.floor(mouseCoordY/cellheight)}function mouseMove(e){e.handled||(levelEditorOpened&&(setMouseCoord(e),dragging?levelEditorClick(e,!1):rightdragging&&levelEditorRightClick(e,!1),redraw()),e.handled=!0)}function mouseOut(){}function prevent(e){return e.preventDefault&&e.preventDefault(),e.stopImmediatePropagation&&e.stopImmediatePropagation(),e.stopPropagation&&e.stopPropagation(),e.returnValue=!1,!1}function checkKey(e,t){if(ULBS(),!(winning||null!=creditsState.stage||e&&(e.ctrlKey||e.metaKey||e.altKey))){var o=-1;switch(e.keyCode){case 65:case 37:o=1;break;case 38:case 87:o=0;break;case 68:case 39:o=3;break;case 83:case 40:o=2;break;case 80:printLevel();break;case 13:case 32:case 67:case 88:if(t&&ignoreNotJustPressedAction&&(ignoreNotJustPressedAction=!1),!1===t&&ignoreNotJustPressedAction)return;if(!1!==norepeat_action&&!t)return;o=4;break;case 85:case 90:if(!1===textMode)return DoUndo(!1,!0),canvasResize(),prevent(e);break;case 82:if(!1===textMode&&t)return DoRestart(),canvasResize(),prevent(e);break;case 27:if(!1===titleScreen)return goToTitleScreen(),tryPlayTitleSound(),canvasResize(),prevent(e);break;case 69:if(canOpenEditor)return t&&(titleScreen&&("EMPTY GAME"===state.title?compile(["loadFirstNonMessageLevel"]):nextLevel()),levelEditorOpened=!levelEditorOpened,!1===levelEditorOpened&&printLevel(),restartTarget=backupLevel(),canvasResize()),prevent(e);break;case 48:case 49:case 50:case 51:case 52:case 53:case 54:case 55:case 56:case 57:if(levelEditorOpened&&t){var r=9;return e.keyCode>=49&&(r=e.keyCode-49),r<glyphImages.length?glyphSelectedIndex=r:consolePrint("Trying to select tile outside of range in level editor.",!0),canvasResize(),prevent(e)}break;case 189:if(levelEditorOpened&&t&&glyphSelectedIndex>0)return glyphSelectedIndex--,canvasResize(),prevent(e);break;case 187:if(levelEditorOpened&&t&&glyphSelectedIndex+1<glyphImages.length)return glyphSelectedIndex++,canvasResize(),prevent(e)}if(throttle_movement&&o>=0&&o<=3){if(lastinput==o&&input_throttle_timer<repeatinterval)return;lastinput=o,input_throttle_timer=0}if(textMode){if(0===state.levels.length);else if(titleScreen)0===titleMode?4===o&&t&&!1===titleSelected&&(tryPlayStartGameSound(),titleSelected=!0,messageselected=!1,timer=0,quittingTitleScreen=!0,generateTitleScreen(),canvasResize()):4==o&&t?!1===titleSelected&&(tryPlayStartGameSound(),titleSelected=!0,messageselected=!1,timer=0,quittingTitleScreen=!0,generateTitleScreen(),redraw()):0!==o&&2!==o||(titleSelection=0===o?0:1,generateTitleScreen(),redraw());else if(4==o&&t){if(unitTesting)return void nextLevel();!1===messageselected&&(messageselected=!0,timer=0,quittingMessageScreen=!0,tryPlayCloseMessageSound(),titleScreen=!1,drawMessageScreen())}}else if(o>=0)return 4===o&&"noaction"in state.metadata||queueInput(o),prevent(e)}}function queueInput(e){inputQueue.push({time:new Date,inputdir:e})}function update(){if(timer+=deltatime,input_throttle_timer+=deltatime,quittingTitleScreen&&(redraw(),setMusicVolume(1-timer/300),timer/300>1&&(quittingTitleScreen=!1,nextLevel())),!textMode)if(againing)timer>againinterval&&0==messagetext.length&&processInput(-1)&&(!0,keyRepeatTimer=0,autotick=0);else for(;inputQueue.length>0;){var e=inputQueue.shift();if(e.time>=new Date-500){processInput(e.inputdir);break}}if(quittingMessageScreen&&timer/1e3>.15&&(quittingMessageScreen=!1,""===messagetext?nextLevel():(messagetext="",textMode=!1,titleScreen=!1,titleMode=curlevel>0||null!==curlevelTarget?1:0,titleSelected=!1,ignoreNotJustPressedAction=!0,titleSelection=0,canvasResize(),startRealtimeRenderer())),winning,keybuffer.length>0){keyRepeatTimer+=deltatime;var t=throttle_movement?repeatinterval:repeatinterval/Math.sqrt(keybuffer.length);if(keyRepeatTimer>t){keyRepeatTimer=0,keyRepeatIndex=(keyRepeatIndex+1)%keybuffer.length;checkKey({keyCode:keybuffer[keyRepeatIndex]},!1)}}!(autotickinterval>0)||textMode||levelEditorOpened||againing||winning||(autotick+=deltatime,autotick>autotickinterval&&(autotick=0,pushInput("tick"),processInput(-1)))}function animationFrame(){isOpenWorldLevel()&&(redraw(),currentAnimationFrameId=window.requestAnimationFrame(animationFrame))}function startRealtimeRenderer(){currentAnimationFrameId=window.requestAnimationFrame(animationFrame)}var keyRepeatTimer=0,keyRepeatIndex=0,input_throttle_timer=0,lastinput=-100,dragging=!1,rightdragging=!1,columnAdded=!1,htmlEntityMap={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","/":"&#x2F;"},selectableint=0,anyEditsSinceMouseDown=!1;HTMLCanvasElement.prototype.relMouseCoords=relMouseCoords;var mouseCoordX=0,mouseCoordY=0;document.addEventListener("touchstart",onMouseDown,!1),document.addEventListener("touchmove",mouseMove,!1),document.addEventListener("touchend",onMouseUp,!1),document.addEventListener("mousedown",onMouseDown,!1),document.addEventListener("mouseup",onMouseUp,!1),document.addEventListener("keydown",onKeyDown,!1),document.addEventListener("keyup",onKeyUp,!1),window.addEventListener("focus",onMyFocus,!1),window.addEventListener("blur",onMyBlur,!1);var inputQueue=[],looping=!1;setInterval(function(){update()},deltatime);var currentAnimationFrameId=null;</script> <script>/*
+}</script> <script>function selectText(e,t){t=t||window.event;var r=document.getElementById(e);if(t&&(t.ctrlKey||t.metaKey)){var o=["console"].concat(r.innerHTML.split("<br>")),n=levelFromString(state,o);loadLevelFromLevelDat(state,n,null),canvasResize()}else if(document.selection){var l=document.body.createTextRange();l.moveToElementText(r),l.select()}else if(window.getSelection){var l=document.createRange();l.selectNode(r);var a=window.getSelection();a.removeAllRanges(),a.addRange(l)}}function recalcLevelBounds(){}function arrCopy(e,t,r,o,n){for(;n--;)r[o++]=e[t]++}function adjustLevel(e,t,r){backups.push(backupLevel());var o=e.clone();e.width+=t,e.height+=r,e.n_tiles=e.width*e.height,e.objects=new Int32Array(e.n_tiles*STRIDE_OBJ);var n=new BitVec(STRIDE_OBJ);n.ibitset(state.backgroundid);for(var l=0;l<e.n_tiles;++l)e.setCell(l,n);return e.movements=new Int32Array(e.objects.length),columnAdded=!0,RebuildLevelArrays(),o}function addLeftColumn(){for(var e=adjustLevel(level,1,0),t=1;t<level.width;++t)for(var r=0;r<level.height;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o-level.height))}}function addRightColumn(){for(var e=adjustLevel(level,1,0),t=0;t<level.width-1;++t)for(var r=0;r<level.height;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o))}}function addTopRow(){for(var e=adjustLevel(level,0,1),t=0;t<level.width;++t)for(var r=1;r<level.height;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o-t-1))}}function addBottomRow(){for(var e=adjustLevel(level,0,1),t=0;t<level.width;++t)for(var r=0;r<level.height-1;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o-t))}}function removeLeftColumn(){if(!(level.width<=1))for(var e=adjustLevel(level,-1,0),t=0;t<level.width;++t)for(var r=0;r<level.height;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o+level.height))}}function removeRightColumn(){if(!(level.width<=1))for(var e=adjustLevel(level,-1,0),t=0;t<level.width;++t)for(var r=0;r<level.height;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o))}}function removeTopRow(){if(!(level.height<=1))for(var e=adjustLevel(level,0,-1),t=0;t<level.width;++t)for(var r=0;r<level.height;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o+t+1))}}function removeBottomRow(){if(!(level.height<=1))for(var e=adjustLevel(level,0,-1),t=0;t<level.width;++t)for(var r=0;r<level.height;++r){var o=t*level.height+r;level.setCell(o,e.getCell(o+t))}}function matchGlyph(e,t){for(var r,o=-1,n=0;n<t.length;++n){var l=t[n][0],a=t[n][1],i=t[n][2];if(a.bitsSetInArray(e.data)){for(var s=0,d=0;d<32*STRIDE_OBJ;++d)i.get(d)&&e.get(d)&&s++,a.get(d)&&e.get(d)&&s++;s>o&&(o=s,r=l)}}return o>0?r:(logErrorNoLine("Wasn't able to approximate a glyph value for some tiles, using '.' as a placeholder.",!0),".")}function printLevel(){var e=[];for(var t in state.glyphDict)if(state.glyphDict.hasOwnProperty(t)&&1===t.length){for(var r=state.glyphDict[t],o=new BitVec(STRIDE_OBJ),n=0;n<r.length;n++){var l=r[n];l>=0&&o.ibitset(l)}var a=o.clone(),i=state.layerMasks[state.backgroundlayer];o.iclear(i),e.push([t,o,a])}selectableint++;for(var s="selectable"+selectableint,d='Printing level contents:<br><br><span id="'+s+'" onclick="selectText(\''+s+"',event)\">",u=0;u<level.height;u++){for(var n=0;n<level.width;n++){var c=u+n*level.height,v=level.getCell(c),r=matchGlyph(v,e);r in htmlEntityMap&&(r=htmlEntityMap[r]),d+=r}u<level.height-1&&(d+="<br>")}d+="</span><br><br>",consolePrint(d,!0)}function levelEditorClick(e,t){if(mouseCoordY<=-2){var r=editorRowCount-(-mouseCoordY-2)-1,o=mouseCoordX+(screenwidth-1)*r;-1===mouseCoordX?printLevel():mouseCoordX>=0&&o<glyphImages.length&&(glyphSelectedIndex=o,redraw())}else if(mouseCoordX>-1&&mouseCoordY>-1&&mouseCoordX<screenwidth-2&&mouseCoordY<screenheight-2-editorRowCount){for(var n=glyphImagesCorrespondance[glyphSelectedIndex],l=state.glyphDict[n],a=new BitVec(STRIDE_OBJ),i=0;i<l.length;i++){var s=l[i];s>=0&&a.ibitset(s)}var d=state.layerMasks[state.backgroundlayer];a.bitsClearInArray(d.data)&&a.ibitset(state.backgroundid);var u=mouseCoordY+mouseCoordX*level.height,c=level.getCell(u);if(c.equals(a))return;!1===anyEditsSinceMouseDown&&(anyEditsSinceMouseDown=!0,backups.push(backupLevel())),level.setCell(u,a),redraw()}else t&&(-1===mouseCoordX?(addLeftColumn(),canvasResize()):mouseCoordX===screenwidth-2&&(addRightColumn(),canvasResize()),-1===mouseCoordY?(addTopRow(),canvasResize()):mouseCoordY===screenheight-2-editorRowCount&&(addBottomRow(),canvasResize()))}function levelEditorRightClick(e,t){if(-2===mouseCoordY)mouseCoordX<=glyphImages.length&&(glyphSelectedIndex=mouseCoordX,redraw());else if(mouseCoordX>-1&&mouseCoordY>-1&&mouseCoordX<screenwidth-2&&mouseCoordY<screenheight-2-editorRowCount){var r=mouseCoordY+mouseCoordX*level.height,o=new BitVec(STRIDE_OBJ);o.ibitset(state.backgroundid),level.setCell(r,o),redraw()}else t&&(-1===mouseCoordX?(removeLeftColumn(),canvasResize()):mouseCoordX===screenwidth-2&&(removeRightColumn(),canvasResize()),-1===mouseCoordY?(removeTopRow(),canvasResize()):mouseCoordY===screenheight-2-editorRowCount&&(removeBottomRow(),canvasResize()))}function onMouseDown(e){if(!e.handled){ULBS();var t=0===e.button,r=2===e.button;if("touchstart"==e.type&&(t=!0),t&&(e.ctrlKey||e.metaKey)&&(t=!1,r=!0),t){if(lastDownTarget=e.target,keybuffer=[],(e.target===canvas||"tapFocusIndicator"===e.target.className)&&(setMouseCoord(e),dragging=!0,rightdragging=!1,levelEditorOpened))return anyEditsSinceMouseDown=!1,levelEditorClick(e,!0);dragging=!1,rightdragging=!1}else if(r&&(e.target===canvas||"tapFocusIndicator"===e.target.className)&&(setMouseCoord(e),dragging=!1,rightdragging=!0,levelEditorOpened))return levelEditorRightClick(e,!0);e.handled=!0}}function rightClickCanvas(e){return prevent(e)}function onMouseUp(e){e.handled||(dragging=!1,rightdragging=!1,e.handled=!0)}function onKeyDown(e){ULBS(),e=e||window.event,!IDE&&[32,37,38,39,40].indexOf(e.keyCode)>-1&&(e&&(e.ctrlKey||e.metaKey)||prevent(e)),IDE||77!==e.keyCode||toggleMute(),keybuffer.indexOf(e.keyCode)>=0||((lastDownTarget===canvas||window.Mobile&&lastDownTarget===window.Mobile.focusIndicator)&&-1===keybuffer.indexOf(e.keyCode)&&(e&&(e.ctrlKey||e.metaKey)||(keybuffer.splice(keyRepeatIndex,0,e.keyCode),keyRepeatTimer=0,checkKey(e,!e.repeat))),!0===canDump&&(74===e.keyCode&&(e.ctrlKey||e.metaKey)?(dumpTestCase(),prevent(e)):75===e.keyCode&&(e.ctrlKey||e.metaKey)?(makeGIF(),prevent(e)):83===e.keyCode&&(e.ctrlKey||e.metaKey)?(saveClick(),prevent(e)):13===e.keyCode&&(e.ctrlKey||e.metaKey)&&(canvas.focus(),editor.display.input.blur(),e.shiftKey?runClick():rebuildClick(),prevent(e))))}function relMouseCoords(e){var t=0,r=0,o=0,n=0,l=this;do{t+=l.offsetLeft-l.scrollLeft,r+=l.offsetTop-l.scrollTop}while(l=l.offsetParent);return null==e.touches?(o=e.pageX-t,n=e.pageY-r):(o=e.touches[0].pageX-t,n=e.touches[0].pageY-r),{x:o,y:n}}function onKeyUp(e){e=e||window.event;var t=keybuffer.indexOf(e.keyCode);t>=0&&(keybuffer.splice(t,1),keyRepeatIndex>=t&&keyRepeatIndex--)}function onMyFocus(e){keybuffer=[],keyRepeatIndex=0,keyRepeatTimer=0}function onMyBlur(e){keybuffer=[],keyRepeatIndex=0,keyRepeatTimer=0}function setMouseCoord(e){var t=canvas.relMouseCoords(e);mouseCoordX=t.x-xoffset,mouseCoordY=t.y-yoffset,mouseCoordX=Math.floor(mouseCoordX/cellwidth),mouseCoordY=Math.floor(mouseCoordY/cellheight)}function mouseMove(e){e.handled||(levelEditorOpened&&(setMouseCoord(e),dragging?levelEditorClick(e,!1):rightdragging&&levelEditorRightClick(e,!1),redraw()),e.handled=!0)}function mouseOut(){}function prevent(e){return e.preventDefault&&e.preventDefault(),e.stopImmediatePropagation&&e.stopImmediatePropagation(),e.stopPropagation&&e.stopPropagation(),e.returnValue=!1,!1}function checkKey(e,t){if(ULBS(),winning||null!=creditsState.stage||overrideActiveRegion){if("thanks"===creditsState.stage)return stopCredits(),goToTitleScreen(),tryPlayTitleSound(),canvasResize(),prevent(e)}else if(!e||!(e.ctrlKey||e.metaKey||e.altKey)){var r=-1;switch(e.keyCode){case 65:case 37:r=1;break;case 38:case 87:r=0;break;case 68:case 39:r=3;break;case 83:case 40:r=2;break;case 80:printLevel();break;case 13:case 32:case 67:case 88:if(t&&ignoreNotJustPressedAction&&(ignoreNotJustPressedAction=!1),!1===t&&ignoreNotJustPressedAction)return;if(!1!==norepeat_action&&!t)return;r=4;break;case 85:case 90:if(!1===textMode)return DoUndo(!1,!0),canvasResize(),prevent(e);break;case 82:if(!1===textMode&&t)return DoRestart(),canvasResize(),prevent(e);break;case 27:if(!1===titleScreen)return goToTitleScreen(),tryPlayTitleSound(),canvasResize(),prevent(e);break;case 69:if(canOpenEditor)return t&&(titleScreen&&("EMPTY GAME"===state.title?compile(["loadFirstNonMessageLevel"]):nextLevel()),levelEditorOpened=!levelEditorOpened,!1===levelEditorOpened&&printLevel(),restartTarget=backupLevel(),canvasResize()),prevent(e);break;case 48:case 49:case 50:case 51:case 52:case 53:case 54:case 55:case 56:case 57:if(levelEditorOpened&&t){var o=9;return e.keyCode>=49&&(o=e.keyCode-49),o<glyphImages.length?glyphSelectedIndex=o:consolePrint("Trying to select tile outside of range in level editor.",!0),canvasResize(),prevent(e)}break;case 189:if(levelEditorOpened&&t&&glyphSelectedIndex>0)return glyphSelectedIndex--,canvasResize(),prevent(e);break;case 187:if(levelEditorOpened&&t&&glyphSelectedIndex+1<glyphImages.length)return glyphSelectedIndex++,canvasResize(),prevent(e)}if(throttle_movement&&r>=0&&r<=3){if(lastinput==r&&input_throttle_timer<repeatinterval)return;lastinput=r,input_throttle_timer=0}if(textMode){if(0===state.levels.length);else if(titleScreen)0===titleMode?4===r&&t&&!1===titleSelected&&(tryPlayStartGameSound(),titleSelected=!0,messageselected=!1,timer=0,quittingTitleScreen=!0,generateTitleScreen(),canvasResize()):4==r&&t?!1===titleSelected&&(tryPlayStartGameSound(),titleSelected=!0,messageselected=!1,timer=0,quittingTitleScreen=!0,generateTitleScreen(),redraw()):0!==r&&2!==r||(titleSelection=0===r?0:1,generateTitleScreen(),redraw());else if(4==r&&t){if(unitTesting)return void nextLevel();!1===messageselected&&(messageselected=!0,timer=0,quittingMessageScreen=!0,tryPlayCloseMessageSound(),titleScreen=!1,drawMessageScreen())}}else if(r>=0)return 4===r&&"noaction"in state.metadata||queueInput(r),prevent(e)}}function queueInput(e){inputQueue.push({time:new Date,inputdir:e})}function update(){if(timer+=deltatime,input_throttle_timer+=deltatime,quittingTitleScreen&&(redraw(),setMusicVolume(1-timer/300),timer/300>1&&(quittingTitleScreen=!1,nextLevel())),!textMode)if(againing)timer>againinterval&&0==messagetext.length&&processInput(-1)&&(!0,keyRepeatTimer=0,autotick=0);else for(;inputQueue.length>0;){var e=inputQueue.shift();if(e.time>=new Date-500){processInput(e.inputdir);break}}if(quittingMessageScreen&&timer/1e3>.15&&(quittingMessageScreen=!1,""===messagetext?nextLevel():(messagetext="",textMode=!1,titleScreen=!1,titleMode=curlevel>0||null!==curlevelTarget?1:0,titleSelected=!1,ignoreNotJustPressedAction=!0,titleSelection=0,canvasResize(),startRealtimeRenderer())),winning,keybuffer.length>0){keyRepeatTimer+=deltatime;var t=throttle_movement?repeatinterval:repeatinterval/Math.sqrt(keybuffer.length);if(keyRepeatTimer>t){keyRepeatTimer=0,keyRepeatIndex=(keyRepeatIndex+1)%keybuffer.length;checkKey({keyCode:keybuffer[keyRepeatIndex]},!1)}}!(autotickinterval>0)||textMode||levelEditorOpened||againing||winning||(autotick+=deltatime,autotick>autotickinterval&&(autotick=0,pushInput("tick"),processInput(-1)))}function animationFrame(){isOpenWorldLevel()&&(redraw(),currentAnimationFrameId=window.requestAnimationFrame(animationFrame))}function startRealtimeRenderer(){currentAnimationFrameId=window.requestAnimationFrame(animationFrame)}var keyRepeatTimer=0,keyRepeatIndex=0,input_throttle_timer=0,lastinput=-100,dragging=!1,rightdragging=!1,columnAdded=!1,htmlEntityMap={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;","/":"&#x2F;"},selectableint=0,anyEditsSinceMouseDown=!1;HTMLCanvasElement.prototype.relMouseCoords=relMouseCoords;var mouseCoordX=0,mouseCoordY=0;document.addEventListener("touchstart",onMouseDown,!1),document.addEventListener("touchmove",mouseMove,!1),document.addEventListener("touchend",onMouseUp,!1),document.addEventListener("mousedown",onMouseDown,!1),document.addEventListener("mouseup",onMouseUp,!1),document.addEventListener("keydown",onKeyDown,!1),document.addEventListener("keyup",onKeyUp,!1),window.addEventListener("focus",onMyFocus,!1),window.addEventListener("blur",onMyBlur,!1);var inputQueue=[],looping=!1;setInterval(function(){update()},deltatime);var currentAnimationFrameId=null;</script> <script>/*
  * Add gesture support for mobile devices.
  */
 
