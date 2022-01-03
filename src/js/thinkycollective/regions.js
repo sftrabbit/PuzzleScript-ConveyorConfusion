@@ -1126,7 +1126,8 @@ var regions = [
       zoom: 0.7,
       credit: "Justas",
       simulationBoundsAdjustment: {
-        minX: -2
+        minX: -2,
+        maxY: 1
       }
     },
     // (That Scar)
