@@ -3229,8 +3229,14 @@ function saveLevelState () {
 		storage_set('slidetracked_save_checkpoint',backupStr);
 		storage_set('slidetracked_save',curlevel);
 	} catch (error) {
-		userErrorMessage = 'Unable to save - see game description';
-		console.log('Unable to save - see game description')
+		console.error(error)
+		try {
+			storage_get('slidetracked_save');
+			userErrorMessage = 'Save failed: local storage full';
+		} catch (error) {
+			console.error(error)
+			userErrorMessage = 'Save failed: local storage unavailable';
+		}
 	}
 }
 
