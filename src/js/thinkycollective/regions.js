@@ -1364,7 +1364,8 @@ var regions = [
       credit: "Toombler",
       simulationBoundsAdjustment: {
         minX: -2,
-        maxX: 2
+        maxX: 2,
+        maxY: 1
       },
       label: 'Level B.15'
     },
