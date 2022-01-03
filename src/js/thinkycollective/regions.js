@@ -810,8 +810,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      },
-      label: 'Level A.15'
+      }
     },
     // 7:00 Le Slo Secret
     {
@@ -840,7 +839,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 2
       },
-      label: 'Level A.16'
+      label: 'Level A.15'
     },
     // 7:00 Return to clock from (Le Slo)
     {
@@ -864,7 +863,7 @@ var regions = [
         { rect: [0, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      label: 'Level A.17'
+      label: 'Level A.16'
     },
     // 9:00 Block source
     {
@@ -884,7 +883,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2
       },
-      label: 'Level A.18'
+      label: 'Level A.17'
     },
     // 9:00 #2 (clementsparrow)
     {
@@ -908,7 +907,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2
       },
-      label: 'Level A.18'
+      label: 'Level A.17'
     },
     // 9:00 clementsparrow secret 1
     {
@@ -947,7 +946,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: -2
       },
-      label: 'Level A.18'
+      label: 'Level A.17'
     },
     // 9:00 clementsparrow secret 2
     {
@@ -981,7 +980,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level A.19'
+      label: 'Level A.18'
     },
     // 9:00 #4 (crychair)
     {
@@ -998,7 +997,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level A.20'
+      label: 'Level A.19'
     },
     // Fusion intro
     {
@@ -1014,7 +1013,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level A.21'
+      label: 'Level A.20'
     },
     // (PedroPSI)
     {
@@ -1032,7 +1031,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 3
       },
-      label: 'Level A.22'
+      label: 'Level A.21'
     },
     // Branch A finish
     {
