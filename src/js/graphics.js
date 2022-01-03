@@ -38,6 +38,7 @@ function regenText(spritecanvas,spritectx) {
             fontstr = font[n].split('\n').map(a=>a.trim().split('').map(t=>parseInt(t)));
             fontstr.shift();
             textImages[n] = createSprite('char'+n,fontstr, undefined, 1);
+            blackTextImages[n] = createSprite('blackchar'+n,fontstr, ['#00000000', '#000000'], 1);
         }
     }
 }
@@ -48,6 +49,7 @@ var spriteimages;
 function regenSpriteImages() {
 	if (textMode) {
         textImages = [];
+        blackTextImages = [];
 		regenText();
 		return;
 	} 
@@ -346,6 +348,7 @@ function drawLevel(cameraOrigin) {
 }
 
 var previousCameraOrigin = { x: 0, y: 0 };
+var userErrorMessage = null;
 
 function redraw() {
     if (cellwidth===0||cellheight===0) {
@@ -670,6 +673,23 @@ function redraw() {
                 ctx.globalAlpha = 1;
 
                 creditsState.listScrollProgress++;
+            }
+        } else {
+            var labelText = userErrorMessage || actualActiveRegion.label;
+            if (labelText) {
+                var textSize = Math.max(~~(cellwidth / 18),1);
+                var textCellwidth = 6 * textSize;
+                var textCellheight = 13 * textSize;
+
+                var labelOffset = Math.floor(screenwidth * cellwidth - textCellwidth * (labelText.length + 0.5));
+                var shadowOffset = Math.max(Math.floor(textCellwidth / 5), 1);
+
+                for (var i = 0; i < labelText.length; i++) {
+                    ctx.imageSmoothingEnabled = false;
+                    ctx.drawImage(blackTextImages[labelText.charAt(i)], xoffset + labelOffset + textCellwidth * i + shadowOffset, yoffset + (screenheight * cellheight) - textCellheight + shadowOffset, textCellwidth, textCellheight);
+                    ctx.drawImage(textImages[labelText.charAt(i)], xoffset + labelOffset + textCellwidth * i, yoffset + (screenheight * cellheight) - textCellheight, textCellwidth, textCellheight);
+                    ctx.imageSmoothingEnabled = true;
+                }
             }
         }
 

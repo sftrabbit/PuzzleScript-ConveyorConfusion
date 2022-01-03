@@ -15,7 +15,7 @@ var regions = [
       zoom: 0.7,
       allowReset: false,
       copyCameraAnchor: 'intro',
-      start: true
+      label: 'The Lab'
     },
     // Intro
     {
@@ -28,7 +28,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         minY: -2
-      }
+      },
+      label: 'The Lab'
     },
     // Intro bottom intersection
     {
@@ -48,7 +49,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minY: -2,
         maxY: 4
-      }
+      },
+      label: 'Connections'
     },
     // Intro bottom left arm #1
     {
@@ -60,7 +62,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxX: 3
-      }
+      },
+      label: 'Connections'
     },
     // Intro bottom left arm #1-#2 node
     {
@@ -75,7 +78,8 @@ var regions = [
         'intro bottom intersection',
         'intro bottom left arm 2',
         'intro bottom left arm 2-3 node'
-      ]
+      ],
+      label: 'Connections'
     },
     // Intro bottom left arm #2
     {
@@ -87,7 +91,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Connections'
     },
     // Intro bottom left arm #2-#3 node
     {
@@ -101,7 +106,8 @@ var regions = [
         'intro bottom left arm 2',
         'intro bottom left arm 1-2 node',
         'intro bottom left arm 3'
-      ]
+      ],
+      label: 'Connections'
     },
     // Intro bottom left arm #3
     {
@@ -115,7 +121,8 @@ var regions = [
       simulateAlso: ['intro bottom left arm 2-3 node'],
       simulationBoundsAdjustment: {
         minX: -2
-      }
+      },
+      label: 'Connections'
     },
     // Intro bottom right arm #1
     {
@@ -128,7 +135,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxX: 2
-      }
+      },
+      label: 'Connections'
     },
     // Intro bottom right arm #1-#2 node
     {
@@ -145,7 +153,8 @@ var regions = [
       ],
       simulationBoundsAdjustment: {
         maxX: 3
-      }
+      },
+      label: 'Connections'
     },
     // Intro bottom right arm #2
     {
@@ -158,7 +167,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxX: 3
-      }
+      },
+      label: 'Connections'
     },
     // Intro bottom-top #1
     {
@@ -174,7 +184,8 @@ var regions = [
         maxX: -1,
         minY: -3,
         maxY: 3
-      }
+      },
+      label: 'Connections'
     },
     // Intro top intersection
     {
@@ -194,7 +205,8 @@ var regions = [
         minX: -2,
         maxX: 2,
         maxY: 2
-      }
+      },
+      label: 'Connections'
     },
     // Intro top left arm
     {
@@ -208,7 +220,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 1
-      }
+      },
+      label: 'Connections'
     },
     // Intro top right arm
     {
@@ -224,7 +237,8 @@ var regions = [
       simulateAlso: ['intro top intersection'],
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Connections'
     },
     // Intro exit
     {
@@ -238,7 +252,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minY: -3
       },
-      simulateAlso: ['intro top intersection']
+      simulateAlso: ['intro top intersection'],
+      label: 'Connections'
     },
     // Intro bonus puzzle
     {
@@ -250,7 +265,8 @@ var regions = [
         { rect: [2, 0, 3, 7] },
         { rect: [5, 0, 8, 10] }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      label: 'Level S.1'
     },
     // Intro bonus puzzle secret
     {
@@ -301,7 +317,8 @@ var regions = [
       credit: "JumbleTheCircle",
       simulationBoundsAdjustment: {
         minX: -2
-      }
+      },
+      label: 'Level 1'
     },
     // Block push intro secret
     {
@@ -328,7 +345,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 1,
         maxY: 1
-      }
+      },
+      label: 'Level 2'
     },
     // Seed level (Joseph Mansfield)
     {
@@ -344,7 +362,8 @@ var regions = [
       credit: "Joseph Mansfield",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level 3'
     },
     // Infinite loop intro (Blookerstein)
     {
@@ -358,7 +377,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 1
-      }
+      },
+      label: 'Level 4'
     },
     // Seed level secret
     {
@@ -383,7 +403,8 @@ var regions = [
       zoom: 0.6,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'The Hub'
     },
     //////////////
     // BRANCH A
@@ -401,7 +422,8 @@ var regions = [
       credit: "marcosd",
       simulationBoundsAdjustment: {
         minX: -2
-      }
+      },
+      label: 'Level A.1'
     },
     // (knexator)
     {
@@ -421,7 +443,8 @@ var regions = [
         maxX: 2,
         minY: -1,
         maxY: 1
-      }
+      },
+      label: 'Level A.2'
     },
     // (knexator) - secret
     {
@@ -502,7 +525,8 @@ var regions = [
         { rect: [11, 4, 2, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.8,
-      credit: "Corey Hardt"
+      credit: "Corey Hardt",
+      label: 'Level A.3'
     },
     // (Auroriax)
     {
@@ -521,7 +545,8 @@ var regions = [
       credit: "Auroriax",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level A.4'
     },
     // (Kristian Hedeholm)
     {
@@ -538,7 +563,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minY: -2,
         maxY: 1
-      }
+      },
+      label: 'Level A.5'
     },
     // The clock (Zomulgustar)
     {
@@ -558,7 +584,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      }
+      },
+      label: 'Level A.6'
     },
     // Clock shortcut surround
     {
@@ -573,7 +600,8 @@ var regions = [
       zoom: 0.4,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level A.6'
     },
     // Clock shortcut
     {
@@ -588,7 +616,8 @@ var regions = [
         maxX: 1,
         minY: 1,
         maxY: 1
-      }
+      },
+      label: 'Level A.6'
     },
     // 1:00 (CHz)
     {
@@ -605,7 +634,8 @@ var regions = [
       credit: "CHz",
       simulationBoundsAdjustment: {
         maxX: 2
-      }
+      },
+      label: 'Level A.7'
     },
     // 1:00 Main path lock
     {
@@ -619,7 +649,8 @@ var regions = [
       simulateAlso: [
         'intro top left arm',
         'intro top intersection'
-      ]
+      ],
+      label: 'Connections'
     },
     // 3:00 (Menderbug)
     {
@@ -632,7 +663,8 @@ var regions = [
         { rect: [9, 0, 1, 9], secondary: true }
       ],
       zoom: 0.7,
-      credit: "Menderbug"
+      credit: "Menderbug",
+      label: 'Level A.8'
     },
     // 5:00 #1 (Draknek)
     {
@@ -646,7 +678,8 @@ var regions = [
         { rect: [1, 10, 9, 1], secondary: true }
       ],
       zoom: 0.7,
-      credit: "Draknek"
+      credit: "Draknek",
+      label: 'Level A.9'
     },
     // 5:00 #2 (Aspeon)
     {
@@ -660,7 +693,8 @@ var regions = [
         { rect: [5, 1, 1, 7], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "Aspeon"
+      credit: "Aspeon",
+      label: 'Level A.10'
     },
     // 7:00 #1 (KirraLuan)
     {
@@ -674,7 +708,8 @@ var regions = [
         { rect: [9, 7, 1, 3], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.7,
-      credit: "KirraLuan"
+      credit: "KirraLuan",
+      label: 'Level A.11'
     },
     // 7:00 #2 (Clickmazes)
     {
@@ -691,7 +726,8 @@ var regions = [
       credit: "clickmazes",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level A.12'
     },
     // 7:00 #3 (pancelor)
     {
@@ -707,7 +743,8 @@ var regions = [
       credit: "pancelor",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level A.13'
     },
     // 7:00 Main path lock
     {
@@ -719,7 +756,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxX: 4
-      }
+      },
+      label: 'Connections'
     },
     // 7:00 Main path lock secret
     {
@@ -753,7 +791,8 @@ var regions = [
       credit: "Norgg",
       simulationBoundsAdjustment: {
         minY: -2
-      }
+      },
+      label: 'Level A.14'
     },
     // 7:00 #5 Post-Norgg
     {
@@ -770,7 +809,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      }
+      },
+      label: 'Level A.15'
     },
     // 7:00 Le Slo Secret
     {
@@ -798,7 +838,8 @@ var regions = [
       credit: "Le Slo",
       simulationBoundsAdjustment: {
         maxY: 2
-      }
+      },
+      label: 'Level A.16'
     },
     // 7:00 Return to clock from (Le Slo)
     {
@@ -821,7 +862,8 @@ var regions = [
         { rect: [9, 5, 1, 6], secondary: true, camera: 'pull-horizontal' },
         { rect: [0, 2, 1, 9], secondary: true, camera: 'pull-horizontal' }
       ],
-      zoom: 0.7
+      zoom: 0.7,
+      label: 'Level A.17'
     },
     // 9:00 Block source
     {
@@ -840,7 +882,8 @@ var regions = [
       ],
       simulationBoundsAdjustment: {
         maxX: 2
-      }
+      },
+      label: 'Level A.18'
     },
     // 9:00 #2 (clementsparrow)
     {
@@ -863,7 +906,8 @@ var regions = [
       ],
       simulationBoundsAdjustment: {
         maxX: 2
-      }
+      },
+      label: 'Level A.18'
     },
     // 9:00 clementsparrow secret 1
     {
@@ -901,7 +945,8 @@ var regions = [
       ],
       simulationBoundsAdjustment: {
         maxX: -2
-      }
+      },
+      label: 'Level A.18'
     },
     // 9:00 clementsparrow secret 2
     {
@@ -934,7 +979,8 @@ var regions = [
       credit: "Deusovi",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level A.19'
     },
     // 9:00 #4 (crychair)
     {
@@ -950,7 +996,8 @@ var regions = [
       credit: "crychair",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level A.20'
     },
     // Fusion intro
     {
@@ -965,7 +1012,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level A.21'
     },
     // (PedroPSI)
     {
@@ -982,7 +1030,8 @@ var regions = [
       credit: "Pedro PSI",
       simulationBoundsAdjustment: {
         maxY: 3
-      }
+      },
+      label: 'Level A.22'
     },
     // Branch A finish
     {
@@ -1046,7 +1095,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxX: 2
-      }
+      },
+      label: 'Level B.1'
     },
     // (Mischka Kamener)
     {
@@ -1058,7 +1108,8 @@ var regions = [
         { rect: [7, 6, 1, 3] },
       ],
       zoom: 0.65,
-      credit: "Mischka Kamener"
+      credit: "Mischka Kamener",
+      label: 'Level B.2'
     },
     // (Mischka Kamener part 2)
     {
@@ -1072,7 +1123,8 @@ var regions = [
       credit: "Mischka Kamener",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level B.3'
     },
     // (Joseph Mansfield #1)
     {
@@ -1086,7 +1138,8 @@ var regions = [
       zoom: 0.8,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level B.4'
     },
     // (Joseph Mansfield #2)
     {
@@ -1100,7 +1153,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         minY: -2
-      }
+      },
+      label: 'Level B.5'
     },
     // Corridor to Justas
     {
@@ -1128,7 +1182,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 1
-      }
+      },
+      label: 'Level B.6'
     },
     // (That Scar)
     {
@@ -1143,7 +1198,8 @@ var regions = [
       credit: "That Scar",
       simulationBoundsAdjustment: {
         maxX: 2
-      }
+      },
+      label: 'Level B.7'
     },
     // Wall_Above intro
     {
@@ -1158,7 +1214,8 @@ var regions = [
         minX: -2,
         maxX: 2,
         maxY: 1
-      }
+      },
+      label: 'Level B.8'
     },
     // Slime storage
     {
@@ -1167,7 +1224,8 @@ var regions = [
       areas: [
         { rect: [13, -3, 7, 7] }
       ],
-      zoom: 0.8
+      zoom: 0.8,
+      label: 'Slime Storage'
     },
     // (winterbeak)
     {
@@ -1185,7 +1243,8 @@ var regions = [
       credit: "winterbeak",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level B.9'
     },
     // Corridor
     {
@@ -1214,7 +1273,8 @@ var regions = [
         minX: -2,
         minY: -2,
         maxY: 1
-      }
+      },
+      label: 'Level B.10'
     },
     // Main path lock
     {
@@ -1227,7 +1287,8 @@ var regions = [
       simulateAlso: ['intro top right arm', 'intro top intersection'],
       simulationBoundsAdjustment: {
         minX: -2
-      }
+      },
+      label: 'Connections'
     },
     // (Guilherme Tows (zaratustra))
     {
@@ -1243,7 +1304,8 @@ var regions = [
         { rect: [4, 11, 5, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.7,
-      credit: "zaratustra"
+      credit: "zaratustra",
+      label: 'Level B.11'
     },
     // (Muftwin)
     {
@@ -1260,7 +1322,8 @@ var regions = [
       credit: "Muftwin",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level B.12'
     },
     // (Colin)
     {
@@ -1273,7 +1336,8 @@ var regions = [
         { rect: [3, -2, 7, 2], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.6,
-      credit: "Colin"
+      credit: "Colin",
+      label: 'Level B.13'
     },
     // Explosive intro
     {
@@ -1283,7 +1347,8 @@ var regions = [
         { rect: [0, 0, 5, 8] },
         { rect: [-2, 0, 2, 3], secondary: true, camera: 'pull-horizontal' },
       ],
-      zoom: 0.6
+      zoom: 0.6,
+      label: 'Level B.14'
     },
     // (Toombler)
     {
@@ -1300,7 +1365,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxX: 2
-      }
+      },
+      label: 'Level B.15'
     },
     // stevenjmiller's bomb secret corridor
     {
@@ -1371,7 +1437,8 @@ var regions = [
       zoom: 0.56,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level B.16'
     },
     // Main path branch
     {
@@ -1385,7 +1452,8 @@ var regions = [
       simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node'],
       simulationBoundsAdjustment: {
         maxX: 3
-      }
+      },
+      label: 'Connections'
     },
     // (Joel)
     {
@@ -1403,7 +1471,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -4,
         maxX: 3
-      }
+      },
+      label: 'Level B.17'
     },
     // Corridor
     {
@@ -1461,7 +1530,8 @@ var regions = [
       credit: "Notan",
       simulationBoundsAdjustment: {
         maxY: 4
-      }
+      },
+      label: 'Level B.18'
     },
     // (Zach)
     {
@@ -1479,7 +1549,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 1
-      }
+      },
+      label: 'Level B.19'
     },
     // (Zach) secret
     {
@@ -1520,7 +1591,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 1
-      }
+      },
+      label: 'Level B.20'
     },
     // (Shark)
     {
@@ -1538,7 +1610,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      }
+      },
+      label: 'Level B.21'
     },
     // (Shark) secret
     {
@@ -1569,7 +1642,8 @@ var regions = [
       credit: "twak",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level B.22'
     },
     //////////////
     // MERGE
@@ -1587,7 +1661,8 @@ var regions = [
       credit: "Jack Lance",
       simulationBoundsAdjustment: {
         maxY: 2
-      }
+      },
+      label: 'Level AB.1'
     },
     // Ending gate
     {
@@ -1603,7 +1678,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      }
+      },
+      label: 'Security Clearance'
     },
     // Ending gate corridor
     {
@@ -1618,7 +1694,8 @@ var regions = [
       allowSave: false,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Security Clearance'
     },
     // Merge corridor #1
     {
@@ -1632,7 +1709,8 @@ var regions = [
       mergeCorridor: true,
       simulationBoundsAdjustment: {
         maxX: 4
-      }
+      },
+      label: 'Security Clearance'
     },
     // (D5R)
     {
@@ -1646,7 +1724,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2,
         maxY: 1
-      }
+      },
+      label: 'Level AB.3'
     },
     // (D5R) Block release
     {
@@ -1658,7 +1737,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level AB.3'
     },
     // Ethan Clark secret corridor #1
     {
@@ -1701,7 +1781,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxX: 2
-      }
+      },
+      label: 'Level AB.2'
     },
     // (Ethan Clark) block release
     {
@@ -1713,7 +1794,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         minY: -3
-      }
+      },
+      label: 'Level AB.2'
     },
     // stevenjmiller bonus puzzle
     {
@@ -1726,7 +1808,8 @@ var regions = [
       zoom: 0.65,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level S.2'
     },
     // stevenjmiller bonus puzzle secret
     {
@@ -1754,7 +1837,8 @@ var regions = [
       mergeCorridor: true,
       simulationBoundsAdjustment: {
         maxX: 3
-      }
+      },
+      label: 'Security Clearance'
     },
     // (jackk)
     {
@@ -1769,7 +1853,8 @@ var regions = [
       credit: "jackk",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level AB.4'
     },
     // (jackk) Block release
     {
@@ -1782,7 +1867,8 @@ var regions = [
       blockRelease: [3, 7],
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level AB.4'
     },
     // Merge corridor #3
     {
@@ -1796,7 +1882,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 3,
         maxY: 1
-      }
+      },
+      label: 'Security Clearance'
     },
     // Merge corridor #4
     {
@@ -1812,7 +1899,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minY: -2,
         maxY: 1
-      }
+      },
+      label: 'Security Clearance'
     },
     // (domcamus)
     {
@@ -1828,7 +1916,9 @@ var regions = [
       credit: "domcamus",
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: '',
+      label: 'Level AB.5'
     },
     // (domcamus) Block release
     {
@@ -1841,7 +1931,8 @@ var regions = [
       blockRelease: [5, 2],
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level AB.5'
     },
     // domcamus secret corridor
     {
@@ -1868,7 +1959,8 @@ var regions = [
       indirectSecret: 'gamepad bonus puzzle secret',
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level S.3'
     },
     // remote gamepad bonus puzzle secret
     {
@@ -1892,7 +1984,8 @@ var regions = [
       simulationBoundsAdjustment: {
         minY: -3,
         maxY: 1
-      }
+      },
+      label: 'Security Clearance'
     },
     // (stevenjmiller)
     {
@@ -1906,7 +1999,8 @@ var regions = [
       credit: "stevenjmiller",
       simulationBoundsAdjustment: {
         minY: -2
-      }
+      },
+      label: 'Level AB.6'
     },
     // (stevenjmiller) Block release
     {
@@ -1919,7 +2013,8 @@ var regions = [
       blockRelease: [4, 2],
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level AB.6'
     },
     // stevenjmiller bonus puzzle 2
     {
@@ -1932,7 +2027,8 @@ var regions = [
         { rect: [10, -2, 8, 4] },
         { rect: [10, 2, 9, 1] }
       ],
-      zoom: 0.57
+      zoom: 0.57,
+      label: 'Level S.4'
     },
     // stevenjmiller bonus puzzle 2 secret
     {
@@ -1961,7 +2057,9 @@ var regions = [
       allowSave: false,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Final Experiment',
+      start: true
     },
     //////////////
     // SECOND ENDING
@@ -1979,7 +2077,8 @@ var regions = [
       secondEndingGate: [[1, 4], [1, 1]],
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: '????'
     },
     // (Second ending secret room)
     {
@@ -1995,7 +2094,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      sigilCPositions: [[14, 1], [3, 4]]
+      sigilCPositions: [[14, 1], [3, 4]],
+      label: '????'
     },
     // (Second ending final corridor)
     {
@@ -2007,7 +2107,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: '????'
     },
     // (Second ending final room)
     {
@@ -2019,7 +2120,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Simple Researcher'
     },
     // (Second ending optional corridor #1)
     {
@@ -2028,7 +2130,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 4, 9] }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      label: '????'
     },
     // (Second ending optional corridor #2)
     {
@@ -2037,7 +2140,8 @@ var regions = [
       areas: [
         { rect: [0, 0, 14, 4] }
       ],
-      zoom: 0.65
+      zoom: 0.65,
+      label: '????'
     },
     // (Second ending optional corridor #3)
     {
@@ -2050,7 +2154,8 @@ var regions = [
       zoom: 0.65,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: '????'
     },
     // (stevenjmiller) optional bonus puzzle
     {
@@ -2063,7 +2168,8 @@ var regions = [
       zoom: 0.5,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level S.5'
     },
     // (stevenjmiller) optional bonus reward
     {
@@ -2076,7 +2182,8 @@ var regions = [
       zoom: 0.7,
       simulationBoundsAdjustment: {
         maxY: 1
-      }
+      },
+      label: 'Level S.5'
     }
   ]
 ];
@@ -2197,6 +2304,8 @@ function initRegions() {
     }
     regionIds[levelRegions[i].id] = i;
   }
+
+  var currentLabelNumber = 1;
 
   for (var i = 0; i < levelRegions.length; i++) {
     var region = levelRegions[i];

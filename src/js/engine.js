@@ -2782,6 +2782,7 @@ var localBoundary = {
 };
 
 var activeRegion = null;
+var actualActiveRegion = null;
 
 var runningLateRules = false;
 var overrideActiveRegion = null;
@@ -2805,7 +2806,8 @@ function processInput(dir,dontDoWin,dontModify) {
 		};
 	}
 
-	activeRegion = overrideActiveRegion || getActiveRegion();
+	actualActiveRegion = getActiveRegion();
+	activeRegion = overrideActiveRegion || actualActiveRegion;
 
     if (dir<=4) {//when is dir>4???
 
@@ -3223,8 +3225,13 @@ function printPerformanceTracking() {
 function saveLevelState () {
 	restartTarget=level4Serialization();
 	var backupStr = JSON.stringify(restartTarget);
-	storage_set('slidetracked_save_checkpoint',backupStr);
-	storage_set('slidetracked_save',curlevel);
+	try {
+		storage_set('slidetracked_save_checkpoint',backupStr);
+		storage_set('slidetracked_save',curlevel);
+	} catch (error) {
+		userErrorMessage = 'Unable to save - see game description';
+		console.log('Unable to save - see game description')
+	}
 }
 
 function checkWin(dontDoWin) {
