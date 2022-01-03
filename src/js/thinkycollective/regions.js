@@ -1314,12 +1314,12 @@ var regions = [
       offset: [75, 46],
       areas: [
         { rect: [3, -2, 5, 3], secondary: true, camera: 'pull-vertical' },
-        { rect: [0, 1, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 1, 11, 1], secondary: true },
         { rect: [0, 2, 11, 9] },
-        { rect: [0, 11, 11, 1], secondary: true, camera: 'pull-vertical' },
+        { rect: [0, 11, 11, 1] },
         { rect: [4, 12, 4, 3], secondary: true, camera: 'pull-vertical' },
       ],
-      zoom: 0.6,
+      zoom: 0.53,
       credit: "Muftwin",
       simulationBoundsAdjustment: {
         maxY: 1
