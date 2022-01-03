@@ -15,8 +15,7 @@ var regions = [
       zoom: 0.7,
       allowReset: false,
       copyCameraAnchor: 'intro',
-      label: 'The Lab',
-      start: true
+      label: 'The Lab'
     },
     // Intro
     {
@@ -1680,7 +1679,8 @@ var regions = [
         maxX: 2,
         maxY: 1
       },
-      label: 'Security Clearance'
+      label: 'Security Clearance',
+      start: true
     },
     // Ending gate corridor
     {
@@ -1918,7 +1918,6 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: '',
       label: 'Level AB.5'
     },
     // (domcamus) Block release
