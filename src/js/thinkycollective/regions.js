@@ -993,6 +993,7 @@ var regions = [
       ],
       zoom: 0.58,
       simulationBoundsAdjustment: {
+        maxX: 1,
         maxY: 1
       },
       finish: true
