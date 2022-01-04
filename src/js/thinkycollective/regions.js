@@ -599,7 +599,7 @@ var regions = [
         { rect: [3, 4, 1, 1] },
         { rect: [4, 0, 4, 5] }
       ],
-      zoom: 0.4,
+      zoom: 0.45,
       simulationBoundsAdjustment: {
         maxY: 1
       },
@@ -612,14 +612,15 @@ var regions = [
       areas: [
         { rect: [3, 2, 1, 3] }
       ],
-      zoom: 0.4,
+      zoom: 0.45,
       simulationBoundsAdjustment: {
         minX: -1,
         maxX: 1,
         minY: 1,
         maxY: 1
       },
-      label: 'Level A.6'
+      label: 'Level A.6',
+      copyCameraAnchor: 'clock shortcut surround'
     },
     // 1:00 (CHz)
     {
