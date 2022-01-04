@@ -2,3 +2,4 @@
 - Remove cheese from S.5 (see sjm)
 - Camera bugs in A.6 (see Draknek)
 - Rendering bugs in B.9 (see Draknek)
+- Fix label when undoing between regions
