@@ -1,7 +1,6 @@
 - Detect changes to levels
 - Ladder visual bug (see shark)
 - Hair visual bug (see shark)
-- Remove cheese from S.1 (sjm has potential fix)
 - Remove cheese from A.7 big loop
 - Remove cheese from S.5 (see sjm)
 - Remove cheese from remote bomb secret

@@ -15,7 +15,8 @@ var regions = [
       zoom: 0.7,
       allowReset: false,
       copyCameraAnchor: 'intro',
-      label: 'The Lab'
+      label: 'The Lab',
+      start: true
     },
     // Intro
     {
@@ -263,6 +264,7 @@ var regions = [
         { rect: [0, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 0, 3, 7] },
+        { rect: [3, 7, 2, 1] },
         { rect: [5, 0, 8, 10] }
       ],
       zoom: 0.7,
@@ -2057,8 +2059,7 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Final Experiment',
-      start: true
+      label: 'Final Experiment'
     },
     //////////////
     // SECOND ENDING
