@@ -2,7 +2,6 @@
 - Ladder visual bug (see shark)
 - Hair visual bug (see shark)
 - Remove cheese from S.5 (see sjm)
-- Remove cheese from remote bomb secret
 - Remove cheese of stealing blocks from A.6 through A.7
 - Camera bugs in A.6 (see Draknek)
 - Rendering bugs in B.9 (see Draknek)
