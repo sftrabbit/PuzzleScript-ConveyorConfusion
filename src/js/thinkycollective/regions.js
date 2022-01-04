@@ -1679,8 +1679,7 @@ var regions = [
         maxX: 2,
         maxY: 1
       },
-      label: 'Security Clearance',
-      start: true
+      label: 'Security Clearance'
     },
     // Ending gate corridor
     {
@@ -2058,7 +2057,8 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Final Experiment'
+      label: 'Final Experiment',
+      start: true
     },
     //////////////
     // SECOND ENDING
