@@ -1,5 +1,4 @@
 - Detect changes to levels
-- Ladder visual bug (see shark)
 - Hair visual bug (see shark)
 - Remove cheese from S.5 (see sjm)
 - Camera bugs in A.6 (see Draknek)

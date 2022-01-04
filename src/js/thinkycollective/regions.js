@@ -1453,7 +1453,8 @@ var regions = [
       zoom: 0.6,
       simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node'],
       simulationBoundsAdjustment: {
-        maxX: 3
+        maxX: 3,
+        maxY: 1
       },
       label: 'Connections'
     },
