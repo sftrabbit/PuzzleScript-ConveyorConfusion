@@ -1158,10 +1158,12 @@ function DoUndo(force,ignoreDuplicates) {
 		setSigilC = false;
 		if (!force) {
 			var playerPositions = getPlayerPositions();
-			playerPosition = {
-				x: (playerPositions[0]/(level.height))|0,
-				y: (playerPositions[0]%level.height)|0
-			};
+			if (playerPositions.length > 0) {
+				playerPosition = {
+					x: (playerPositions[0]/(level.height))|0,
+					y: (playerPositions[0]%level.height)|0
+				};
+			}
 			activeRegion = getActiveRegion();
 			onStateUpdate(false, false);
 			tryPlayUndoSound();
