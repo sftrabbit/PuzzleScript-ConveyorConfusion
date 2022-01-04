@@ -523,6 +523,7 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
 	}
 
 	activeRegion = getActiveRegion();
+	actualActiveRegion = activeRegion;
 
 	if (!isOpenWorldLevel()) {
 		drawLevel();
@@ -1058,6 +1059,7 @@ function DoRestart(force) {
 		return;
 	}
 	var activeRegion = getActiveRegion();
+	actualActiveRegion = activeRegion;
 	if (!activeRegion.allowReset) {
 		return;
 	}
@@ -1165,6 +1167,7 @@ function DoUndo(force,ignoreDuplicates) {
 				};
 			}
 			activeRegion = getActiveRegion();
+			actualActiveRegion = activeRegion;
 			onStateUpdate(false, false);
 			tryPlayUndoSound();
 		}
