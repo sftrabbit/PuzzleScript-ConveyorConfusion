@@ -290,7 +290,7 @@ var listCredits = [
   'Link: https://incompetech.filmmusic.io',
   '       /song/5659-blippy-trance',
   'License: https://filmmusic.io/standard-license'
-];</script> <script>function initOpenWorld(){initRegions(),initObjectTrackers(),initExplosionTrackers()}function onStateUpdate(e,i){if(!isOpenWorldLevel())return void redraw();if(!firstTurn){var t=getActiveRegion(),l=overrideActiveRegion;if(t.secret?updateSecretMarker(t.secret):t.indirectSecret&&updateSecretMarker(regions[curlevel][regionIds[t.indirectSecret]].secret),t.finish||t.secondEndingGate){if(!setSigilA&&state.objectMasks.sigila_on.anyBitsInCommon(level.mapCellContents)){setSigilA=!0;var o=level.getCell(sigilPositions[0]);o.iclear(state.objectMasks.sigila_off),o.ior(state.objectMasks.sigila_on),level.setCell(sigilPositions[0],o);var r=level.getCell(sigilPositions[0]-1);r.iclear(state.objectMasks.sigila_off_top),r.ior(state.objectMasks.sigila_on_top),level.setCell(sigilPositions[0]-1,r),overrideActiveRegion=regions[curlevel][regionIds["second ending gate"]],againing=!0}if(!setSigilB&&state.objectMasks.sigilb_on.anyBitsInCommon(level.mapCellContents)){setSigilB=!0;var o=level.getCell(sigilPositions[1]);o.iclear(state.objectMasks.sigilb_off),o.ior(state.objectMasks.sigilb_on),level.setCell(sigilPositions[1],o);var r=level.getCell(sigilPositions[1]-1);r.iclear(state.objectMasks.sigilb_off_top),r.ior(state.objectMasks.sigilb_on_top),level.setCell(sigilPositions[1]-1,r),overrideActiveRegion=regions[curlevel][regionIds["second ending gate"]],againing=!0}}if(null!=previousActiveRegionIndex&&t.index!==previousActiveRegionIndex){var a=regions[curlevel][previousActiveRegionIndex];if(t.allowSave&&a.allowSave&&(pendingSave=!0),a.blockRelease&&t.mergeCorridor){var s=regionsOffset[0]+a.offset[0]+a.blockRelease[0],n=regionsOffset[1]+a.offset[1]+a.blockRelease[1],c=s*level.height+n;level.getCell(c).anyBitsInCommon(state.objectMasks.belt_above)&&(releasedBlockFrom=previousActiveRegionIndex)}else a.mergeCorridor&&t.endingGate&&null!=releasedBlockFrom&&(removeObjectTrackers([[!0,67,32]]),startObjectTracker(!0,TRACKED_BELT,67,32,releasedBlockFrom),releasedBlockFrom=null)}state.objectMasks.ending1trigger.bitsSetInArray(level.mapCellContents.data)&&startEnding1(),state.objectMasks.ending2secretchar2.bitsSetInArray(level.mapCellContents.data)&&startEnding2(),e||(pendingSave&&(saveLevelState(),pendingSave=!1),null!=overrideActiveRegion&&overrideActiveRegion===l&&(overrideActiveRegion=null,againing=!0)),transitionCamera(t)}}function updateSecretMarker(e){if(level.getCell(e.buttonIndex).anyBitsInCommon(state.objectMasks.dynamic_below)){var i=level.getCell(e.markerIndex);i.anyBitsInCommon(state.objectMasks.secret_off)&&(i.iclear(state.objectMasks.secret_off),i.ior(state.objectMasks.secret_on),level.setCell(e.markerIndex,i),checkSecretMarkers())}}function updateAllSecretMarkers(){for(var e=0;e<regions[0].length;e++){var i=regions[0][e];i.secret&&updateSecretMarker(i.secret)}}function checkSecretMarkers(){for(var e=!0,i=0;i<secrets.length;i++){var t=secrets[i];if(!level.getCell(t.markerIndex).anyBitsInCommon(state.objectMasks.secret_on)){e=!1;break}}if(e&&!setSigilC){setSigilC=!0;for(var i=0;i<sigilCPositions.length;i++){var l=level.getCell(sigilCPositions[i]);l.iclear(state.objectMasks.sigilc_off),l.ior(state.objectMasks.sigilc_on),level.setCell(sigilCPositions[i],l);var o=level.getCell(sigilCPositions[i]-1);o.iclear(state.objectMasks.sigilc_off_top),o.ior(state.objectMasks.sigilc_on_top),level.setCell(sigilCPositions[i]-1,o)}overrideActiveRegion=regions[curlevel][regionIds["second ending secret room"]],againing=!0}}function transitionCamera(e){if(null==e)return void transitionCameraToPlayer(e);var i=getActiveArea();"region-center"===i.camera?transitionCameraToRegion(e):"pull-horizontal"===i.camera?transitionCameraPulledByPlayer(e,!0):"pull-vertical"===i.camera?transitionCameraPulledByPlayer(e,!1):"follow-player"===i.camera?transitionCameraToPlayer(e):"follow-player-anchored-x"===i.camera?transitionCameraToPlayerAnchored(e,!0):"follow-player-anchored-y"===i.camera&&transitionCameraToPlayerAnchored(e,!1),previousActiveRegionIndex=e.index}function isOpenWorldLevel(){return!textMode&&null!=regions[curlevel]}function clearOpenWorldState(){window.cancelAnimationFrame(currentAnimationFrameId),regionMap=[],camera=null,cameraTransition=null,objectTrackers=[]}function removePlayerDecorations(){for(var e=0;e<level.height;e++)for(var i=0;i<level.width;i++){var t=i*level.height+e,l=level.getCellInto(t,_o10);l.anyBitsInCommon(state.objectMasks.playerdecorations)&&(l.iclear(state.objectMasks.playerdecorations),level.setCell(t,_o10))}}function removePlayers(){for(var e=0;e<level.height;e++)for(var i=0;i<level.width;i++){var t=i*level.height+e,l=level.getCellInto(t,_o10);if(l.anyBitsInCommon(state.objectMasks.player)){var o=getRegion({x:i,y:e});o.start||(l.iclear(state.objectMasks.player),l.iclear(state.objectMasks.moved),level.setCell(t,_o10))}}}function restoreOriginalLevel(){for(var e=0;e<level.width;e++)for(var i=0;i<level.height;i++)for(var t=e*level.height+i,l=0;l<STRIDE_OBJ;l++)level.objects[t*STRIDE_OBJ+l]=originalLevel.dat[t*STRIDE_OBJ+l]}var playerPosition=null,previousActiveRegionIndex=null,levelNeedsDraw=!0,pendingSave=!1,releasedBlockFrom=null,setSigilA=!1,setSigilB=!1,setSigilC=!1;</script> <script>var regionsOffset = [1, 38];
+];</script> <script>function initOpenWorld(){initRegions(),initObjectTrackers(),initExplosionTrackers()}function onStateUpdate(e,i){if(!isOpenWorldLevel())return void redraw();if(!firstTurn){var t=getActiveRegion(),l=overrideActiveRegion;if(t.secret?updateSecretMarker(t.secret):t.indirectSecret&&updateSecretMarker(regions[curlevel][regionIds[t.indirectSecret]].secret),t.finish||t.secondEndingGate){if(!setSigilA&&state.objectMasks.sigila_on.anyBitsInCommon(level.mapCellContents)){setSigilA=!0;var o=level.getCell(sigilPositions[0]);o.iclear(state.objectMasks.sigila_off),o.ior(state.objectMasks.sigila_on),level.setCell(sigilPositions[0],o);var r=level.getCell(sigilPositions[0]-1);r.iclear(state.objectMasks.sigila_off_top),r.ior(state.objectMasks.sigila_on_top),level.setCell(sigilPositions[0]-1,r),overrideActiveRegion=regions[curlevel][regionIds["second ending gate"]],againing=!0}if(!setSigilB&&state.objectMasks.sigilb_on.anyBitsInCommon(level.mapCellContents)){setSigilB=!0;var o=level.getCell(sigilPositions[1]);o.iclear(state.objectMasks.sigilb_off),o.ior(state.objectMasks.sigilb_on),level.setCell(sigilPositions[1],o);var r=level.getCell(sigilPositions[1]-1);r.iclear(state.objectMasks.sigilb_off_top),r.ior(state.objectMasks.sigilb_on_top),level.setCell(sigilPositions[1]-1,r),overrideActiveRegion=regions[curlevel][regionIds["second ending gate"]],againing=!0}}if(t.index!==previousActiveRegionIndex){if(null!=previousActiveRegionIndex){var s=regions[curlevel][previousActiveRegionIndex];if(t.allowSave&&s.allowSave&&(pendingSave=!0),s.blockRelease&&t.mergeCorridor){var a=regionsOffset[0]+s.offset[0]+s.blockRelease[0],n=regionsOffset[1]+s.offset[1]+s.blockRelease[1],c=a*level.height+n;level.getCell(c).anyBitsInCommon(state.objectMasks.belt_above)&&(releasedBlockFrom=previousActiveRegionIndex)}else s.mergeCorridor&&t.endingGate&&null!=releasedBlockFrom&&(removeObjectTrackers([[!0,67,32]]),startObjectTracker(!0,TRACKED_BELT,67,32,releasedBlockFrom),releasedBlockFrom=null)}isLevelLatestVersion=determineLatest(t)}state.objectMasks.ending1trigger.bitsSetInArray(level.mapCellContents.data)&&startEnding1(),state.objectMasks.ending2secretchar2.bitsSetInArray(level.mapCellContents.data)&&startEnding2(),e||(pendingSave&&(saveLevelState(),pendingSave=!1),null!=overrideActiveRegion&&overrideActiveRegion===l&&(overrideActiveRegion=null,againing=!0)),transitionCamera(t)}}function updateSecretMarker(e){if(level.getCell(e.buttonIndex).anyBitsInCommon(state.objectMasks.dynamic_below)){var i=level.getCell(e.markerIndex);i.anyBitsInCommon(state.objectMasks.secret_off)&&(i.iclear(state.objectMasks.secret_off),i.ior(state.objectMasks.secret_on),level.setCell(e.markerIndex,i),checkSecretMarkers())}}function updateAllSecretMarkers(){for(var e=0;e<regions[0].length;e++){var i=regions[0][e];i.secret&&updateSecretMarker(i.secret)}}function checkSecretMarkers(){for(var e=!0,i=0;i<secrets.length;i++){var t=secrets[i];if(!level.getCell(t.markerIndex).anyBitsInCommon(state.objectMasks.secret_on)){e=!1;break}}if(e&&!setSigilC){setSigilC=!0;for(var i=0;i<sigilCPositions.length;i++){var l=level.getCell(sigilCPositions[i]);l.iclear(state.objectMasks.sigilc_off),l.ior(state.objectMasks.sigilc_on),level.setCell(sigilCPositions[i],l);var o=level.getCell(sigilCPositions[i]-1);o.iclear(state.objectMasks.sigilc_off_top),o.ior(state.objectMasks.sigilc_on_top),level.setCell(sigilCPositions[i]-1,o)}overrideActiveRegion=regions[curlevel][regionIds["second ending secret room"]],againing=!0}}function transitionCamera(e){if(null==e)return void transitionCameraToPlayer(e);var i=getActiveArea();"region-center"===i.camera?transitionCameraToRegion(e):"pull-horizontal"===i.camera?transitionCameraPulledByPlayer(e,!0):"pull-vertical"===i.camera?transitionCameraPulledByPlayer(e,!1):"follow-player"===i.camera?transitionCameraToPlayer(e):"follow-player-anchored-x"===i.camera?transitionCameraToPlayerAnchored(e,!0):"follow-player-anchored-y"===i.camera&&transitionCameraToPlayerAnchored(e,!1),previousActiveRegionIndex=e.index}function isOpenWorldLevel(){return!textMode&&null!=regions[curlevel]}function clearOpenWorldState(){window.cancelAnimationFrame(currentAnimationFrameId),regionMap=[],camera=null,cameraTransition=null,objectTrackers=[]}function removePlayerDecorations(){for(var e=0;e<level.height;e++)for(var i=0;i<level.width;i++){var t=i*level.height+e,l=level.getCellInto(t,_o10);l.anyBitsInCommon(state.objectMasks.playerdecorations)&&(l.iclear(state.objectMasks.playerdecorations),level.setCell(t,_o10))}}function removePlayers(){for(var e=0;e<level.height;e++)for(var i=0;i<level.width;i++){var t=i*level.height+e,l=level.getCellInto(t,_o10);if(l.anyBitsInCommon(state.objectMasks.player)){var o=getRegion({x:i,y:e});o.start||(l.iclear(state.objectMasks.player),l.iclear(state.objectMasks.moved),level.setCell(t,_o10))}}}function restoreOriginalLevel(){for(var e=0;e<level.width;e++)for(var i=0;i<level.height;i++)for(var t=e*level.height+i,l=0;l<STRIDE_OBJ;l++)level.objects[t*STRIDE_OBJ+l]=originalLevel.dat[t*STRIDE_OBJ+l]}var playerPosition=null,previousActiveRegionIndex=null,levelNeedsDraw=!0,pendingSave=!1,releasedBlockFrom=null,setSigilA=!1,setSigilB=!1,setSigilC=!1,isLevelLatestVersion=!0;</script> <script>var regionsOffset = [1, 38];
 var regions = [
   [
     //////////////
@@ -556,10 +556,14 @@ var regions = [
         { rect: [0, 3, 1, 4], secondary: true, camera: 'pull-horizontal' },
         { rect: [1, 0, 1, 7], secondary: true, camera: 'pull-horizontal' },
         { rect: [2, 0, 3, 7] },
+        { rect: [3, 7, 2, 1] },
         { rect: [5, 0, 8, 10] }
       ],
       zoom: 0.7,
-      label: 'Level S.1'
+      label: 'Level S.1',
+      latest: [
+        { object: 'inflatable', position: [4, 6] }
+      ]
     },
     // Intro bonus puzzle secret
     {
@@ -890,7 +894,7 @@ var regions = [
         { rect: [3, 4, 1, 1] },
         { rect: [4, 0, 4, 5] }
       ],
-      zoom: 0.4,
+      zoom: 0.45,
       simulationBoundsAdjustment: {
         maxY: 1
       },
@@ -903,14 +907,15 @@ var regions = [
       areas: [
         { rect: [3, 2, 1, 3] }
       ],
-      zoom: 0.4,
+      zoom: 0.45,
       simulationBoundsAdjustment: {
         minX: -1,
         maxX: 1,
         minY: 1,
         maxY: 1
       },
-      label: 'Level A.6'
+      label: 'Level A.6',
+      copyCameraAnchor: 'clock shortcut surround'
     },
     // 1:00 (CHz)
     {
@@ -928,7 +933,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2
       },
-      label: 'Level A.7'
+      label: 'Level A.7',
+      latest: [
+        { object: 'belt_below', position: [2, 8] }
+      ]
     },
     // 1:00 Main path lock
     {
@@ -1677,7 +1685,10 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 2
-      }
+      },
+      latest: [
+        { object: 'platformmark2_below', position: [1, 1] }
+      ]
     },
     // stevenjmiller's bomb secret
     {
@@ -1744,7 +1755,8 @@ var regions = [
       zoom: 0.6,
       simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node'],
       simulationBoundsAdjustment: {
-        maxX: 3
+        maxX: 3,
+        maxY: 1
       },
       label: 'Connections'
     },
@@ -2210,7 +2222,6 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: '',
       label: 'Level AB.5'
     },
     // (domcamus) Block release
@@ -2413,7 +2424,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Simple Researcher'
+      label: 'Simple Researcher',
+      latest: [
+        { object: 'inflatable', position: [0, 2] }
+      ]
     },
     // (Second ending optional corridor #1)
     {
@@ -2461,7 +2475,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level S.5'
+      label: 'Level S.5',
+      latest: [
+        { object: 'wall', position: [2, 14] }
+      ]
     },
     // (stevenjmiller) optional bonus reward
     {
@@ -2612,6 +2629,8 @@ function initRegions() {
 
     var offsetX = regionsOffset[0] + region.offset[0];
     var offsetY = regionsOffset[1] + region.offset[1];
+
+    region.absoluteOffset = [offsetX, offsetY];
 
     var minX = Infinity;
     var maxX = 0;
@@ -3014,6 +3033,27 @@ function formatPoint(point) {
 function parsePoint(formattedPoint) {
   var pointParts = formattedPoint.split(',');
   return [parseInt(pointParts[0]), parseInt(pointParts[1])]
+}
+
+function determineLatest (region) {
+  if (region.latest == null) {
+    return true;
+  }
+
+  for (var i = 0; i < region.latest.length; i++) {
+    var requirement = region.latest[i];
+    var x = region.absoluteOffset[0] + requirement.position[0];
+    var y = region.absoluteOffset[1] + requirement.position[1];
+    var positionIndex = x * level.height + y;
+
+    var cell = level.getCell(positionIndex);
+    var hasObject = cell.anyBitsInCommon(state.objectMasks[requirement.object]);
+    if (requirement.missing ? hasObject : !hasObject) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 function checkSpawns() {
@@ -7981,6 +8021,24 @@ function redraw() {
                     ctx.imageSmoothingEnabled = true;
                 }
             }
+
+            if (!isLevelLatestVersion) {
+                var versionText = 'Press R to update level';
+
+                var textSize = Math.max(~~(cellwidth / 18),1);
+                var textCellwidth = 6 * textSize;
+                var textCellheight = 13 * textSize;
+
+                var versionOffset = Math.floor(screenwidth * cellwidth - textCellwidth * (versionText.length + 0.5));
+                var shadowOffset = Math.max(Math.floor(textCellwidth / 5), 1);
+
+                for (var i = 0; i < versionText.length; i++) {
+                    ctx.imageSmoothingEnabled = false;
+                    ctx.drawImage(blackTextImages[versionText.charAt(i)], xoffset + versionOffset + textCellwidth * i + shadowOffset, yoffset + (screenheight * cellheight) - textCellheight * 2 + shadowOffset, textCellwidth, textCellheight);
+                    ctx.drawImage(textImages[versionText.charAt(i)], xoffset + versionOffset + textCellwidth * i, yoffset + (screenheight * cellheight) - textCellheight * 2, textCellwidth, textCellheight);
+                    ctx.imageSmoothingEnabled = true;
+                }
+            }
         }
 
         ctx.restore()
@@ -8714,6 +8772,8 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
  }
 
  activeRegion = getActiveRegion();
+ isLevelLatestVersion = determineLatest(activeRegion);
+ actualActiveRegion = activeRegion;
 
  if (!isOpenWorldLevel()) {
   drawLevel();
@@ -9249,6 +9309,7 @@ function DoRestart(force) {
   return;
  }
  var activeRegion = getActiveRegion();
+ actualActiveRegion = activeRegion;
  if (!activeRegion.allowReset) {
   return;
  }
@@ -9306,6 +9367,7 @@ function DoRestart(force) {
  level.commandQueue=[];
  level.commandQueueSourceRules=[];
  restarting=false;
+ isLevelLatestVersion = determineLatest(activeRegion);
 }
 
 function backupDiffers(){
@@ -9349,12 +9411,16 @@ function DoUndo(force,ignoreDuplicates) {
   setSigilC = false;
   if (!force) {
    var playerPositions = getPlayerPositions();
-   playerPosition = {
-    x: (playerPositions[0]/(level.height))|0,
-    y: (playerPositions[0]%level.height)|0
-   };
+   if (playerPositions.length > 0) {
+    playerPosition = {
+     x: (playerPositions[0]/(level.height))|0,
+     y: (playerPositions[0]%level.height)|0
+    };
+   }
    activeRegion = getActiveRegion();
+   actualActiveRegion = activeRegion;
    onStateUpdate(false, false);
+   isLevelLatestVersion = determineLatest(activeRegion);
    tryPlayUndoSound();
   }
  }
