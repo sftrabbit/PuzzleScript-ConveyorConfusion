@@ -3813,6 +3813,10 @@ NOAGAINCHECK UP [ | ClearOnTurnStart ] -> [ | ]
 
 noagaincheck [ Moved NO Player ] -> [ ]
 
+
+(Had to duplicate this here because an updated level wasn't getting its inflatable_top after reset)
+UP [ Inflatable | NO Inflatable_Top ] -> [ Inflatable | Inflatable_Top ]
+
 (Player death sound effect. Actual death will happen implicitly due to falling belt.
  Note: this would have to get expanded if we add other sources of player death, like being
  crushed into a wall.)
