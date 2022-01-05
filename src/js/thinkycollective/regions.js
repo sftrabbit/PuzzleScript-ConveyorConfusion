@@ -1324,22 +1324,25 @@ var regions = [
         { rect: [0, 1, 11, 1], secondary: true },
         { rect: [0, 2, 11, 9] },
         { rect: [0, 11, 11, 1] },
-        { rect: [4, 12, 4, 3], secondary: true, camera: 'pull-vertical' },
+        { rect: [4, 12, 5, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.53,
       credit: "Muftwin",
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level B.12'
+      label: 'Level B.12',
+      latest: [
+        { object: 'belt_below', position: [7, 11] }
+      ]
     },
     // (Colin)
     {
       id: 'colin',
       offset: [83, 52],
       areas: [
-        { rect: [0, 6, 3, 1], secondary: true },
-        { rect: [0, 7, 8, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [1, 6, 2, 1], secondary: true },
+        { rect: [1, 7, 7, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [3, 0, 7, 7] },
         { rect: [3, -2, 7, 2], secondary: true, camera: 'pull-vertical' },
       ],
