@@ -1195,7 +1195,7 @@ var regions = [
       label: 'Level B.6',
       latest: [
         { object: 'platformmark2_below', position: [8, 3] }
-      ] 
+      ]
     },
     // (That Scar)
     {

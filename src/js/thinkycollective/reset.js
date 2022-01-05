@@ -23,6 +23,16 @@ function restoreActiveRegion(lev) {
     cell.iclear(state.objectMasks[above ? 'sticky_above' : 'sticky_below']);
     level.setCell(positionIndex, cell);
 
+    var cellUp = level.getCell(positionIndex - 1);
+    cellUp.iclear(state.objectMasks[above ? 'render_above_top' : 'render_below_top']);
+    level.setCell(positionIndex - 1, cellUp);
+
+    if (above) {
+      var cellUp2 = level.getCell(positionIndex - 2);
+      cellUp2.iclear(state.objectMasks['render_above_top2']);
+      level.setCell(positionIndex - 2, cellUp2);
+    }
+
     if (!above) {
       var cellUp = level.getCell(positionIndex - 1);
       cellUp.iclear(state.objectMasks['ladderd']);
