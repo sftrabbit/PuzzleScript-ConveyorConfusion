@@ -100,6 +100,7 @@ function restoreActiveRegion(lev) {
 
     var originalCell = new BitVec(originalLevel.dat.subarray(positionIndex * STRIDE_OBJ, positionIndex * STRIDE_OBJ + STRIDE_OBJ));
     originalCell.iclear(state.objectMasks['render']);
+    originalCell.iclear(state.objectMasks['player']);
     var cell = level.getCell(positionIndex);
     cell.ior(originalCell);
     level.setCell(positionIndex, cell);
