@@ -1457,8 +1457,10 @@ var regions = [
       id: 'bottom right main path branch',
       offset: [99, 69],
       areas: [
-        { rect: [0, 0, 5, 5] },
-        { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
+        { rect: [-1, 0, 1, 2] },
+        { rect: [-1, 4, 1, 2] },
+        { rect: [0, 0, 5, 6] },
+        { rect: [5, 0, 1, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
       simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node'],
@@ -1466,7 +1468,10 @@ var regions = [
         maxX: 3,
         maxY: 1
       },
-      label: 'Connections'
+      label: 'Connections',
+      latest: [
+        { object: 'wall', position: [4, 2] }
+      ]
     },
     // (Joel)
     {
@@ -1505,7 +1510,10 @@ var regions = [
         maxX: 3,
         minY: -2,
         maxY: 1
-      }
+      },
+      latest: [
+        { object: 'wall', position: [4, 1] }
+      ]
     },
     // Corridor secret #1
     {
