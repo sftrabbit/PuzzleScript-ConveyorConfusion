@@ -1,4 +1,3 @@
-- Detect changes to levels
 - Remove cheese from S.5 (see sjm)
 - Rendering bugs in B.9 (see Draknek)
 - Rendering bugs in B.17 (see Draknek)

@@ -523,6 +523,7 @@ function loadLevelFromStateTarget(state,levelindex,target,randomseed) {
 	}
 
 	activeRegion = getActiveRegion();
+	isLevelLatestVersion = determineLatest(activeRegion);
 	actualActiveRegion = activeRegion;
 
 	if (!isOpenWorldLevel()) {
@@ -1117,6 +1118,7 @@ function DoRestart(force) {
 	level.commandQueue=[];
 	level.commandQueueSourceRules=[];
 	restarting=false;
+	isLevelLatestVersion = determineLatest(activeRegion);
 }
 
 function backupDiffers(){
@@ -1169,6 +1171,7 @@ function DoUndo(force,ignoreDuplicates) {
 			activeRegion = getActiveRegion();
 			actualActiveRegion = activeRegion;
 			onStateUpdate(false, false);
+			isLevelLatestVersion = determineLatest(activeRegion);
 			tryPlayUndoSound();
 		}
 	}

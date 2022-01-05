@@ -691,6 +691,24 @@ function redraw() {
                     ctx.imageSmoothingEnabled = true;
                 }
             }
+
+            if (!isLevelLatestVersion) {
+                var versionText = 'Press R to update level';
+
+                var textSize = Math.max(~~(cellwidth / 18),1);
+                var textCellwidth = 6 * textSize;
+                var textCellheight = 13 * textSize;
+
+                var versionOffset = Math.floor(screenwidth * cellwidth - textCellwidth * (versionText.length + 0.5));
+                var shadowOffset = Math.max(Math.floor(textCellwidth / 5), 1);
+
+                for (var i = 0; i < versionText.length; i++) {
+                    ctx.imageSmoothingEnabled = false;
+                    ctx.drawImage(blackTextImages[versionText.charAt(i)], xoffset + versionOffset + textCellwidth * i + shadowOffset, yoffset + (screenheight * cellheight) - textCellheight * 2 + shadowOffset, textCellwidth, textCellheight);
+                    ctx.drawImage(textImages[versionText.charAt(i)], xoffset + versionOffset + textCellwidth * i, yoffset + (screenheight * cellheight) - textCellheight * 2, textCellwidth, textCellheight);
+                    ctx.imageSmoothingEnabled = true;
+                }
+            }
         }
 
         ctx.restore()

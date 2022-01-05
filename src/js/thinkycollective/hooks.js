@@ -17,6 +17,8 @@ var setSigilA = false;
 var setSigilB = false;
 var setSigilC = false;
 
+var isLevelLatestVersion = true;
+
 function onStateUpdate(isAgaining, action) {
   if (!isOpenWorldLevel()) {
     redraw();
@@ -72,31 +74,35 @@ function onStateUpdate(isAgaining, action) {
     }
   }
 
-  var changedRegion = previousActiveRegionIndex != null && activeRegion.index !== previousActiveRegionIndex;
+  var changedRegion = activeRegion.index !== previousActiveRegionIndex;
 
   if (changedRegion) {
-    var previousRegion = regions[curlevel][previousActiveRegionIndex];
+    if (previousActiveRegionIndex != null) {
+      var previousRegion = regions[curlevel][previousActiveRegionIndex];
 
-    if (activeRegion.allowSave && previousRegion.allowSave) {
-      pendingSave = true;
+      if (activeRegion.allowSave && previousRegion.allowSave) {
+        pendingSave = true;
+      }
+
+      // Track belts released from merge levels
+      if (previousRegion.blockRelease && activeRegion.mergeCorridor) {
+        var releasedBlockX = regionsOffset[0] + previousRegion.offset[0] + previousRegion.blockRelease[0];
+        var releasedBlockY = regionsOffset[1] + previousRegion.offset[1] + previousRegion.blockRelease[1];
+        var releasedBlockPositionIndex = (releasedBlockX) * level.height + (releasedBlockY);
+        var releasedBlockCell = level.getCell(releasedBlockPositionIndex);
+        if (releasedBlockCell.anyBitsInCommon(state.objectMasks['belt_above'])) {
+          releasedBlockFrom = previousActiveRegionIndex;
+        }
+      } else if (previousRegion.mergeCorridor && activeRegion.endingGate) {
+        if (releasedBlockFrom != null) {
+          removeObjectTrackers([[true, 67, 32]]);
+          startObjectTracker(true, TRACKED_BELT, 67, 32, releasedBlockFrom);
+          releasedBlockFrom = null;
+        }
+      }
     }
 
-    // Track belts released from merge levels
-    if (previousRegion.blockRelease && activeRegion.mergeCorridor) {
-      var releasedBlockX = regionsOffset[0] + previousRegion.offset[0] + previousRegion.blockRelease[0];
-      var releasedBlockY = regionsOffset[1] + previousRegion.offset[1] + previousRegion.blockRelease[1];
-      var releasedBlockPositionIndex = (releasedBlockX) * level.height + (releasedBlockY);
-      var releasedBlockCell = level.getCell(releasedBlockPositionIndex);
-      if (releasedBlockCell.anyBitsInCommon(state.objectMasks['belt_above'])) {
-        releasedBlockFrom = previousActiveRegionIndex;
-      }
-    } else if (previousRegion.mergeCorridor && activeRegion.endingGate) {
-      if (releasedBlockFrom != null) {
-        removeObjectTrackers([[true, 67, 32]]);
-        startObjectTracker(true, TRACKED_BELT, 67, 32, releasedBlockFrom);
-        releasedBlockFrom = null;
-      }
-    }
+    isLevelLatestVersion = determineLatest(activeRegion);
   }
 
   if (state.objectMasks['ending1trigger'].bitsSetInArray(level.mapCellContents.data)) {

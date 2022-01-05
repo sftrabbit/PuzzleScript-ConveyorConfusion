@@ -268,7 +268,10 @@ var regions = [
         { rect: [5, 0, 8, 10] }
       ],
       zoom: 0.7,
-      label: 'Level S.1'
+      label: 'Level S.1',
+      latest: [
+        { object: 'inflatable', position: [4, 6] }
+      ]
     },
     // Intro bonus puzzle secret
     {
@@ -638,7 +641,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxX: 2
       },
-      label: 'Level A.7'
+      label: 'Level A.7',
+      latest: [
+        { object: 'belt_below', position: [2, 8] }
+      ]
     },
     // 1:00 Main path lock
     {
@@ -1387,7 +1393,10 @@ var regions = [
       simulationBoundsAdjustment: {
         minX: -2,
         maxY: 2
-      }
+      },
+      latest: [
+        { object: 'platformmark2_below', position: [1, 1] }
+      ]
     },
     // stevenjmiller's bomb secret
     {
@@ -2123,7 +2132,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Simple Researcher'
+      label: 'Simple Researcher',
+      latest: [
+        { object: 'inflatable', position: [0, 2] }
+      ]
     },
     // (Second ending optional corridor #1)
     {
@@ -2171,7 +2183,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level S.5'
+      label: 'Level S.5',
+      latest: [
+        { object: 'wall', position: [2, 14] }
+      ]
     },
     // (stevenjmiller) optional bonus reward
     {
@@ -2322,6 +2337,8 @@ function initRegions() {
 
     var offsetX = regionsOffset[0] + region.offset[0];
     var offsetY = regionsOffset[1] + region.offset[1];
+
+    region.absoluteOffset = [offsetX, offsetY];
 
     var minX = Infinity;
     var maxX = 0;
@@ -2724,6 +2741,27 @@ function formatPoint(point) {
 function parsePoint(formattedPoint) {
   var pointParts = formattedPoint.split(',');
   return [parseInt(pointParts[0]), parseInt(pointParts[1])]
+}
+
+function determineLatest (region) {
+  if (region.latest == null) {
+    return true;
+  }
+
+  for (var i = 0; i < region.latest.length; i++) {
+    var requirement = region.latest[i];
+    var x = region.absoluteOffset[0] + requirement.position[0];
+    var y = region.absoluteOffset[1] + requirement.position[1];
+    var positionIndex = x * level.height + y;
+
+    var cell = level.getCell(positionIndex);
+    var hasObject = cell.anyBitsInCommon(state.objectMasks[requirement.object]);
+    if (requirement.missing ? hasObject : !hasObject) {
+      return false;
+    }
+  }
+
+  return true;
 }
 
 function checkSpawns() {
