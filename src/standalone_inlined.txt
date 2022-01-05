@@ -1475,7 +1475,8 @@ var regions = [
       areas: [
         { rect: [6, 0, 4, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [1, 1, 9, 1] },
-        { rect: [0, 2, 10, 7] }
+        { rect: [0, 2, 11, 9] },
+        { rect: [-1, 8, 1, 3] }
       ],
       zoom: 0.7,
       credit: "Justas",
@@ -1483,7 +1484,10 @@ var regions = [
         minX: -2,
         maxY: 1
       },
-      label: 'Level B.6'
+      label: 'Level B.6',
+      latest: [
+        { object: 'platformmark2_below', position: [8, 3] }
+      ]
     },
     // (That Scar)
     {
@@ -1616,22 +1620,25 @@ var regions = [
         { rect: [0, 1, 11, 1], secondary: true },
         { rect: [0, 2, 11, 9] },
         { rect: [0, 11, 11, 1] },
-        { rect: [4, 12, 4, 3], secondary: true, camera: 'pull-vertical' },
+        { rect: [4, 12, 5, 3], secondary: true, camera: 'pull-vertical' },
       ],
       zoom: 0.53,
       credit: "Muftwin",
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level B.12'
+      label: 'Level B.12',
+      latest: [
+        { object: 'belt_below', position: [7, 11] }
+      ]
     },
     // (Colin)
     {
       id: 'colin',
       offset: [83, 52],
       areas: [
-        { rect: [0, 6, 3, 1], secondary: true },
-        { rect: [0, 7, 8, 2], secondary: true, camera: 'pull-vertical' },
+        { rect: [1, 6, 2, 1], secondary: true },
+        { rect: [1, 7, 7, 2], secondary: true, camera: 'pull-vertical' },
         { rect: [3, 0, 7, 7] },
         { rect: [3, -2, 7, 2], secondary: true, camera: 'pull-vertical' },
       ],
@@ -1749,8 +1756,10 @@ var regions = [
       id: 'bottom right main path branch',
       offset: [99, 69],
       areas: [
-        { rect: [0, 0, 5, 5] },
-        { rect: [5, 0, 1, 5], secondary: true, camera: 'pull-horizontal' }
+        { rect: [-1, 0, 1, 2] },
+        { rect: [-1, 4, 1, 2] },
+        { rect: [0, 0, 5, 6] },
+        { rect: [5, 0, 1, 6], secondary: true, camera: 'pull-horizontal' }
       ],
       zoom: 0.6,
       simulateAlso: ['intro bottom right arm 2', 'intro bottom right arm 1-2 node'],
@@ -1758,7 +1767,10 @@ var regions = [
         maxX: 3,
         maxY: 1
       },
-      label: 'Connections'
+      label: 'Connections',
+      latest: [
+        { object: 'wall', position: [4, 2] }
+      ]
     },
     // (Joel)
     {
@@ -1797,7 +1809,10 @@ var regions = [
         maxX: 3,
         minY: -2,
         maxY: 1
-      }
+      },
+      latest: [
+        { object: 'wall', position: [4, 1] }
+      ]
     },
     // Corridor secret #1
     {
@@ -2477,7 +2492,8 @@ var regions = [
       },
       label: 'Level S.5',
       latest: [
-        { object: 'wall', position: [2, 14] }
+        { object: 'wall', position: [2, 14] },
+        { object: 'inflatable_top', position: [20, -1] }
       ]
     },
     // (stevenjmiller) optional bonus reward
@@ -2528,8 +2544,8 @@ var theme2Areas = [
   [49, -19, 5, 1],
   [44, -18, 20, 10],
   [43, -14, 1, 3],
-  [44, -8, 11, 5],
-  [55, -8, 2, 1],
+  [44, -8, 10, 5],
+  [54, -8, 3, 1],
   [53, -20, 11, 2],
   // (domcamus)
   [21, -18, 23, 4],
@@ -3085,7 +3101,7 @@ function checkSpawns() {
       console.log('Missing spawn in region ' + region.id);
     }
   }
-}</script> <script>function restoreActiveRegion(e){for(var r=activeRegion.index,t=getRegionBounds(regions[curlevel][r],!0),o=getObjectTrackersFromOrigin(r),a=[],l=state.objectMasks.coolhat.anyBitsInCommon(level.mapCellContents),s=0;s<o.length;s++){var c=o[s],n=c[1],i=c[2],v=c[0],b=n*level.height+i,k=level.getCell(b);if(k.iclear(state.objectMasks[v?"dynamic_above":"dynamic_below"]),k.iclear(state.objectMasks[v?"sticky_above":"sticky_below"]),level.setCell(b,k),!v){var T=level.getCell(b-1);T.iclear(state.objectMasks.ladderd),level.setCell(b-1,T);var j=level.getCell(b+1);j.iclear(state.objectMasks.ladderu),level.setCell(b+1,j);var g=level.getCell(b-level.height);g.iclear(state.objectMasks.ladderr),level.setCell(b-level.height,g);var u=level.getCell(b+level.height);u.iclear(state.objectMasks.ladderl),level.setCell(b+level.height,u)}var d=getRegionIndex(n,i);d!==r&&a.push(d)}for(var h=[],n=t.minX;n<t.maxX;n++)for(var i=t.minY;i<t.maxY;i++){var b=n*level.height+i,_=getRegionIndex(n,i)===r,p=getRegionIndex(n,i+2)!==r;if(_){var k=level.getCell(b);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,n,i]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,n,i]),h.push([n,i]);for(var s=0;s<STRIDE_OBJ;s++)if(p){var f=state.objectMasks.render_above_top2.data[s];level.objects[b*STRIDE_OBJ+s]=originalLevel.dat[b*STRIDE_OBJ+s]&~f}else level.objects[b*STRIDE_OBJ+s]=originalLevel.dat[b*STRIDE_OBJ+s]}}removeExplosionTrackersForPositions(h);for(var m=extractExplosionTrackersForRegion(r),s=0;s<m.length;s++){var C=m[s],n=C.x,i=C.y,b=n*level.height+i,k=level.getCell(b);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,n,i]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,n,i]);var x=new BitVec(originalLevel.dat.subarray(b*STRIDE_OBJ,b*STRIDE_OBJ+STRIDE_OBJ));x.iclear(state.objectMasks.render);var k=level.getCell(b);k.ior(x),level.setCell(b,k);var E=b-1,R=new BitVec(originalLevel.dat.subarray(E*STRIDE_OBJ,E*STRIDE_OBJ+STRIDE_OBJ)),I=state.objectMasks.render_below_top.clone();I.ior(state.objectMasks.render_above_top),I.ior(state.objectMasks.platform_top),I.ior(state.objectMasks.button_above_top),I.ior(state.objectMasks.inflatable_top),I.ior(state.objectMasks.slimevat_above_top),R.iand(I);var M=level.getCell(E);M.ior(R),M.iclear(state.objectMasks.platform_front),level.setCell(E,M);var O=b-2,y=new BitVec(originalLevel.dat.subarray(O*STRIDE_OBJ,O*STRIDE_OBJ+STRIDE_OBJ)),B=state.objectMasks.render_above_top2.clone();B.ior(state.objectMasks.slimevat_above_top2),y.iand(B);var w=level.getCell(O);w.ior(y),level.setCell(O,w)}if(removeObjectTrackers(o),"second ending secret room"===activeRegion.id&&updateAllSecretMarkers(),l){var D=getPlayerPositions();if(D.length>0){var S=level.getCell(D[0]),A=S.anyBitsInCommon(state.objectMasks.player_above);S.iclear(state.objectMasks.player),S.ior(state.objectMasks[A?"coolhat_above":"coolhat_below"]),level.setCell(D[0],S)}}if(level.width!==e.width||level.height!==e.height)level.width=e.width,level.height=e.height,level.n_tiles=e.width*e.height,RebuildLevelArrays();else{for(var s=0;s<level.n_tiles;s++)level.movements[s]=0,level.rigidMovementAppliedMask[s]=0,level.rigidGroupIndexMask[s]=0;for(var s=0;s<level.height;s++){level.rowCellContents[s].setZero()}for(var s=0;s<level.width;s++){level.colCellContents[s].setZero()}}return againing=!1,level.commandQueue=[],level.commandQueueSourceRules=[],a}function initObjectTrackers(){objectTrackers=new Int32Array(0)}function isObjectTracked(e,r,t,o){for(var a=0;a<objectTrackers.length;a++)if((128&objectTrackers[a])>0===e&&(15&objectTrackers[a])===r&&(65280&objectTrackers[a])>>8===t&&(16711680&objectTrackers[a])>>16===o)return!0;return!1}function startObjectTracker(e,r,t,o,a){var l=r|e<<7|t<<8|o<<16|a<<24,s=objectTrackers;objectTrackers=new Int32Array(s.length+1),objectTrackers.set(s),objectTrackers[objectTrackers.length-1]=l}function moveObjectTracker(e,r,t,o,a,l){for(var s=0;s<objectTrackers.length;s++)if((128&objectTrackers[s])>0===e&&(65280&objectTrackers[s])>>8===r&&(16711680&objectTrackers[s])>>16===t){objectTrackers[s]=4278190207&objectTrackers[s]|o<<7|a<<8|l<<16;break}}function getObjectTrackersFromOrigin(e){for(var r=[],t=0;t<objectTrackers.length;t++)(4278190080&objectTrackers[t])>>24===e&&r.push([(128&objectTrackers[t])>0,(65280&objectTrackers[t])>>8,(16711680&objectTrackers[t])>>16]);return r}function removeObjectTrackers(e){objectTrackers=objectTrackers.filter(function(r){return!e.find(function(e){return(128&r)>0===e[0]&&(65280&r)>>8===e[1]&&(16711680&r)>>16===e[2]})})}function getExplosiveTrackerOriginRegion(e,r,t){for(var o=0;o<objectTrackers.length;o++)if((128&objectTrackers[o])>0===t&&(65280&objectTrackers[o])>>8===e&&(16711680&objectTrackers[o])>>16===r&&(15&objectTrackers[o])===TRACKED_EXPLOSIVE)return(4278190080&objectTrackers[o])>>24;return null}function printObjectTrackers(){for(var e=0;e<objectTrackers.length;e++){var r="";r+=(15&objectTrackers[e])===TRACKED_BELT?"belt_":"explosive_",r+=(128&objectTrackers[e])>0?"above ":"below ",r+=((65280&objectTrackers[e])>>8)+","+((16711680&objectTrackers[e])>>16),console.log(r)}}function initExplosionTrackers(){explosionTrackers=new Int32Array(0)}function addExplosionTracker(e,r,t,o){var a=t<<7|e<<8|r<<16|o<<24,l=explosionTrackers;explosionTrackers=new Int32Array(l.length+1),explosionTrackers.set(l),explosionTrackers[explosionTrackers.length-1]=a}function extractExplosionTrackersForRegion(e){var r=[];return explosionTrackers=explosionTrackers.filter(function(t){var o=(4278190080&t)>>24===e;return o&&r.push({x:(65280&t)>>8,y:(16711680&t)>>16,above:(128&t)>0}),!o}),r}function removeExplosionTrackersForPositions(e){explosionTrackers=explosionTrackers.filter(function(r){return!e.find(function(e){return(65280&r)>>8===e[0]&&(16711680&r)>>16===e[1]})})}function printExplosionTrackers(){for(var e=0;e<explosionTrackers.length;e++){var r="";r+=(128&explosionTrackers[e])>0?"above ":"below ",r+=((65280&explosionTrackers[e])>>8)+","+((16711680&explosionTrackers[e])>>16),console.log(r)}}var objectTrackers=null,explosionTrackers={},initialObjectTrackers=null,TRACKED_BELT=0,TRACKED_EXPLOSIVE=1,TRACKED_LAYERS=[[!1,"tracked_below","belt_below"],[!0,"tracked_above","belt_above"]];</script> <script>function startMusic(){null==music&&(music=document.getElementById("music")),music.loop=!0,music.currentTime=0,music.volume=.7,music.play()}function setMusicVolume(u){music.volume=Math.max(.3*u,0)}function playAudioElement(u){var m=document.getElementById(u);m.loop=!1,m.currentTime=0,m.volume=.7,m.play()}var music=null;</script> <script>function stripTags(n){var e=document.createElement("div");return e.innerHTML=n,e.textContent||e.innerText||""}function consolePrint(n,e){}function consolePrintFromRule(n,e,r){}function consoleCacheDump(n){}function consoleError(n,e){var r=document.getElementById("errormessage");n=stripTags(n),r.innerHTML+=n+"<br>"}function logErrorNoLine(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function logBetaMessage(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function clearInputHistory(){}function pushInput(n){}var canSetHTMLColors=!0,canDump=!1,canOpenEditor=!1,canYoutube=!0,IDE=!1;const diffToVisualize=null;</script> <script>var font = {
+}</script> <script>function restoreActiveRegion(e){for(var r=activeRegion.index,t=getRegionBounds(regions[curlevel][r],!0),o=getObjectTrackersFromOrigin(r),a=[],l=state.objectMasks.coolhat.anyBitsInCommon(level.mapCellContents),s=0;s<o.length;s++){var c=o[s],n=c[1],i=c[2],v=c[0],b=n*level.height+i,k=level.getCell(b);k.iclear(state.objectMasks[v?"dynamic_above":"dynamic_below"]),k.iclear(state.objectMasks[v?"sticky_above":"sticky_below"]),level.setCell(b,k);var T=level.getCell(b-1);if(T.iclear(state.objectMasks[v?"render_above_top":"render_below_top"]),level.setCell(b-1,T),v){var j=level.getCell(b-2);j.iclear(state.objectMasks.render_above_top2),level.setCell(b-2,j)}if(!v){var T=level.getCell(b-1);T.iclear(state.objectMasks.ladderd),level.setCell(b-1,T);var g=level.getCell(b+1);g.iclear(state.objectMasks.ladderu),level.setCell(b+1,g);var _=level.getCell(b-level.height);_.iclear(state.objectMasks.ladderr),level.setCell(b-level.height,_);var d=level.getCell(b+level.height);d.iclear(state.objectMasks.ladderl),level.setCell(b+level.height,d)}var u=getRegionIndex(n,i);u!==r&&a.push(u)}for(var h=[],n=t.minX;n<t.maxX;n++)for(var i=t.minY;i<t.maxY;i++){var b=n*level.height+i,p=getRegionIndex(n,i)===r,f=getRegionIndex(n,i+2)!==r;if(p){var k=level.getCell(b);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,n,i]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,n,i]),h.push([n,i]);for(var s=0;s<STRIDE_OBJ;s++)if(f){var m=state.objectMasks.render_above_top2.data[s];level.objects[b*STRIDE_OBJ+s]=originalLevel.dat[b*STRIDE_OBJ+s]&~m}else level.objects[b*STRIDE_OBJ+s]=originalLevel.dat[b*STRIDE_OBJ+s]}}removeExplosionTrackersForPositions(h);for(var C=extractExplosionTrackersForRegion(r),s=0;s<C.length;s++){var x=C[s],n=x.x,i=x.y,b=n*level.height+i,k=level.getCell(b);k.anyBitsInCommon(state.objectMasks.dynamic_above)&&o.push([!0,n,i]),k.anyBitsInCommon(state.objectMasks.dynamic_below)&&o.push([!1,n,i]);var E=new BitVec(originalLevel.dat.subarray(b*STRIDE_OBJ,b*STRIDE_OBJ+STRIDE_OBJ));E.iclear(state.objectMasks.render),E.iclear(state.objectMasks.player);var k=level.getCell(b);k.ior(E),level.setCell(b,k);var M=b-1,R=new BitVec(originalLevel.dat.subarray(M*STRIDE_OBJ,M*STRIDE_OBJ+STRIDE_OBJ)),I=state.objectMasks.render_below_top.clone();I.ior(state.objectMasks.render_above_top),I.ior(state.objectMasks.platform_top),I.ior(state.objectMasks.button_above_top),I.ior(state.objectMasks.inflatable_top),I.ior(state.objectMasks.slimevat_above_top),R.iand(I);var O=level.getCell(M);O.ior(R),O.iclear(state.objectMasks.platform_front),level.setCell(M,O);var y=b-2,B=new BitVec(originalLevel.dat.subarray(y*STRIDE_OBJ,y*STRIDE_OBJ+STRIDE_OBJ)),w=state.objectMasks.render_above_top2.clone();w.ior(state.objectMasks.slimevat_above_top2),B.iand(w);var D=level.getCell(y);D.ior(B),level.setCell(y,D)}if(removeObjectTrackers(o),"second ending secret room"===activeRegion.id&&updateAllSecretMarkers(),l){var S=getPlayerPositions();if(S.length>0){var A=level.getCell(S[0]),J=A.anyBitsInCommon(state.objectMasks.player_above);A.iclear(state.objectMasks.player),A.ior(state.objectMasks[J?"coolhat_above":"coolhat_below"]),level.setCell(S[0],A)}}if(level.width!==e.width||level.height!==e.height)level.width=e.width,level.height=e.height,level.n_tiles=e.width*e.height,RebuildLevelArrays();else{for(var s=0;s<level.n_tiles;s++)level.movements[s]=0,level.rigidMovementAppliedMask[s]=0,level.rigidGroupIndexMask[s]=0;for(var s=0;s<level.height;s++){level.rowCellContents[s].setZero()}for(var s=0;s<level.width;s++){level.colCellContents[s].setZero()}}return againing=!1,level.commandQueue=[],level.commandQueueSourceRules=[],a}function initObjectTrackers(){objectTrackers=new Int32Array(0)}function isObjectTracked(e,r,t,o){for(var a=0;a<objectTrackers.length;a++)if((128&objectTrackers[a])>0===e&&(15&objectTrackers[a])===r&&(65280&objectTrackers[a])>>8===t&&(16711680&objectTrackers[a])>>16===o)return!0;return!1}function startObjectTracker(e,r,t,o,a){var l=r|e<<7|t<<8|o<<16|a<<24,s=objectTrackers;objectTrackers=new Int32Array(s.length+1),objectTrackers.set(s),objectTrackers[objectTrackers.length-1]=l}function moveObjectTracker(e,r,t,o,a,l){for(var s=0;s<objectTrackers.length;s++)if((128&objectTrackers[s])>0===e&&(65280&objectTrackers[s])>>8===r&&(16711680&objectTrackers[s])>>16===t){objectTrackers[s]=4278190207&objectTrackers[s]|o<<7|a<<8|l<<16;break}}function getObjectTrackersFromOrigin(e){for(var r=[],t=0;t<objectTrackers.length;t++)(4278190080&objectTrackers[t])>>24===e&&r.push([(128&objectTrackers[t])>0,(65280&objectTrackers[t])>>8,(16711680&objectTrackers[t])>>16]);return r}function removeObjectTrackers(e){objectTrackers=objectTrackers.filter(function(r){return!e.find(function(e){return(128&r)>0===e[0]&&(65280&r)>>8===e[1]&&(16711680&r)>>16===e[2]})})}function getExplosiveTrackerOriginRegion(e,r,t){for(var o=0;o<objectTrackers.length;o++)if((128&objectTrackers[o])>0===t&&(65280&objectTrackers[o])>>8===e&&(16711680&objectTrackers[o])>>16===r&&(15&objectTrackers[o])===TRACKED_EXPLOSIVE)return(4278190080&objectTrackers[o])>>24;return null}function printObjectTrackers(){for(var e=0;e<objectTrackers.length;e++){var r="";r+=(15&objectTrackers[e])===TRACKED_BELT?"belt_":"explosive_",r+=(128&objectTrackers[e])>0?"above ":"below ",r+=((65280&objectTrackers[e])>>8)+","+((16711680&objectTrackers[e])>>16),console.log(r)}}function initExplosionTrackers(){explosionTrackers=new Int32Array(0)}function addExplosionTracker(e,r,t,o){var a=t<<7|e<<8|r<<16|o<<24,l=explosionTrackers;explosionTrackers=new Int32Array(l.length+1),explosionTrackers.set(l),explosionTrackers[explosionTrackers.length-1]=a}function extractExplosionTrackersForRegion(e){var r=[];return explosionTrackers=explosionTrackers.filter(function(t){var o=(4278190080&t)>>24===e;return o&&r.push({x:(65280&t)>>8,y:(16711680&t)>>16,above:(128&t)>0}),!o}),r}function removeExplosionTrackersForPositions(e){explosionTrackers=explosionTrackers.filter(function(r){return!e.find(function(e){return(65280&r)>>8===e[0]&&(16711680&r)>>16===e[1]})})}function printExplosionTrackers(){for(var e=0;e<explosionTrackers.length;e++){var r="";r+=(128&explosionTrackers[e])>0?"above ":"below ",r+=((65280&explosionTrackers[e])>>8)+","+((16711680&explosionTrackers[e])>>16),console.log(r)}}var objectTrackers=null,explosionTrackers={},initialObjectTrackers=null,TRACKED_BELT=0,TRACKED_EXPLOSIVE=1,TRACKED_LAYERS=[[!1,"tracked_below","belt_below"],[!0,"tracked_above","belt_above"]];</script> <script>function startMusic(){null==music&&(music=document.getElementById("music")),music.loop=!0,music.currentTime=0,music.volume=.7,music.play()}function setMusicVolume(u){music.volume=Math.max(.3*u,0)}function playAudioElement(u){var m=document.getElementById(u);m.loop=!1,m.currentTime=0,m.volume=.7,m.play()}var music=null;</script> <script>function stripTags(n){var e=document.createElement("div");return e.innerHTML=n,e.textContent||e.innerText||""}function consolePrint(n,e){}function consolePrintFromRule(n,e,r){}function consoleCacheDump(n){}function consoleError(n,e){var r=document.getElementById("errormessage");n=stripTags(n),r.innerHTML+=n+"<br>"}function logErrorNoLine(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function logBetaMessage(n){var e=document.getElementById("errormessage");n=stripTags(n),e.innerHTML+=n+"<br>"}function clearInputHistory(){}function pushInput(n){}var canSetHTMLColors=!0,canDump=!1,canOpenEditor=!1,canYoutube=!0,IDE=!1;const diffToVisualize=null;</script> <script>var font = {
     '0':`
 00000
 00000
