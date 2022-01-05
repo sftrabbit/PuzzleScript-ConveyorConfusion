@@ -1183,7 +1183,8 @@ var regions = [
       areas: [
         { rect: [6, 0, 4, 1], secondary: true, camera: 'pull-vertical' },
         { rect: [1, 1, 9, 1] },
-        { rect: [0, 2, 10, 7] }
+        { rect: [0, 2, 11, 9] },
+        { rect: [-1, 8, 1, 3] }
       ],
       zoom: 0.7,
       credit: "Justas",
@@ -1191,7 +1192,10 @@ var regions = [
         minX: -2,
         maxY: 1
       },
-      label: 'Level B.6'
+      label: 'Level B.6',
+      latest: [
+        { object: 'platformmark2_below', position: [8, 3] }
+      ] 
     },
     // (That Scar)
     {
