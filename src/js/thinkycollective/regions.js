@@ -1745,7 +1745,7 @@ var regions = [
       id: 'd5r',
       offset: [48, -21],
       areas: [
-        { rect: [0, 0, 12, 10] }
+        { rect: [0, -1, 12, 11] }
       ],
       zoom: 0.7,
       credit: "D5R",
@@ -1753,7 +1753,10 @@ var regions = [
         maxX: 2,
         maxY: 1
       },
-      label: 'Level AB.3'
+      label: 'Level AB.3',
+      latest: [
+        { object: 'wall', position: [9, 8] }
+      ]
     },
     // (D5R) Block release
     {
@@ -2249,12 +2252,12 @@ var theme2Areas = [
   [60, -22, 1, 2],
   [64, -19, 1, 10],
   // (D5R)
-  [49, -19, 5, 1],
+  [48, -20, 5, 2],
   [44, -18, 20, 10],
   [43, -14, 1, 3],
   [44, -8, 10, 5],
   [54, -8, 3, 1],
-  [53, -20, 11, 2],
+  [53, -21, 11, 3],
   // (domcamus)
   [21, -18, 23, 4],
   [20, -16, 1, 2],
