@@ -156,6 +156,22 @@ function restoreActiveRegion(lev) {
     }
   }
 
+  if (activeRegion.ensureObjects) {
+    for (var i = 0; i < activeRegion.ensureObjects.length; i++) {
+      var ensureObject = activeRegion.ensureObjects[i];
+      var x = activeRegion.absoluteOffset[0] + ensureObject.position[0];
+      var y = activeRegion.absoluteOffset[1] + ensureObject.position[1];
+      var positionIndex = x * level.height + y;
+      var cell = level.getCell(positionIndex);
+      if (ensureObject.remove) {
+        cell.iclear(state.objectMasks[ensureObject.object]);
+      } else {
+        cell.ior(state.objectMasks[ensureObject.object]);
+      }
+      level.setCell(positionIndex, cell);
+    }
+  }
+
   // Stuff copied from the normal restore function (could probably do with tidying up)
   if (level.width !== lev.width || level.height !== lev.height) {
     level.width = lev.width;

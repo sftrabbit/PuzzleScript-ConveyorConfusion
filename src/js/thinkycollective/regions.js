@@ -1941,23 +1941,36 @@ var regions = [
         { rect: [0, 0, 17, 3] },
         { rect: [0, 3, 20, 6] },
         { rect: [0, 9, 19, 4] },
-        { rect: [0, 13, 21, 4] },
+        { rect: [0, 13, 21, 5] },
       ],
-      zoom: 0.52,
+      zoom: 0.47,
       credit: "domcamus",
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level AB.5'
+      label: 'Level AB.5',
+      latest: [
+        { object: 'wall', position: [5, 3] }
+      ],
+      ensureObjects: [
+        { object: 'vwallborderl_top', position: [18, 9] },
+        { object: 'vwallborderl', position: [18, 10] },
+        { object: 'vwallborderd', position: [18, 11], remove: true },
+        { object: 'wall2_top', position: [18, 11] },
+        { object: 'platform2_top', position: [19, 12] },
+        { object: 'platform2_front', position: [19, 12], remove: true }
+      ]
     },
     // (domcamus) Block release
     {
       id: 'domcamus block release',
       offset: [17, -5],
       areas: [
-        { rect: [0, 0, 4, 5] }
+        { rect: [1, 0, 3, 1] },
+        { rect: [0, 1, 4, 3] },
+        { rect: [1, 4, 3, 1] }
       ],
-      zoom: 0.50,
+      zoom: 0.47,
       blockRelease: [5, 2],
       simulationBoundsAdjustment: {
         maxY: 1
@@ -2264,7 +2277,7 @@ var theme2Areas = [
   [-1, -14, 26, 4],
   [-1, -10, 26, 5],
   [-1, -5, 23, 6],
-  [-1, 1, 22, 3],
+  [-1, 1, 22, 4],
 ];
 
 var secretRegions = [
