@@ -2511,8 +2511,10 @@ var regions = [
       },
       label: 'Level S.5',
       latest: [
-        { object: 'wall', position: [2, 14] },
-        { object: 'inflatable_top', position: [20, -1] }
+        { object: 'wall_above', position: [18, 2] }
+      ],
+      ensureObjects: [
+        { object: 'inflatable_top', position: [20, -1], remove: true }
       ]
     },
     // (stevenjmiller) optional bonus reward
