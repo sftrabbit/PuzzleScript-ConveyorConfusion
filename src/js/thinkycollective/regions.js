@@ -1953,7 +1953,8 @@ var regions = [
       },
       label: 'Level AB.5',
       latest: [
-        { object: 'wall', position: [1, 4] }
+        { object: 'wall', position: [1, 4] },
+        { object: 'wall', position: [5, 3] }
       ],
       ensureObjects: [
         { object: 'vwallborderl_top', position: [18, 9] },
