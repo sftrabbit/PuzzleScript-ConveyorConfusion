@@ -1139,7 +1139,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 2
       },
-      label: 'Level A.15'
+      label: 'Level A.15',
+      latest: [
+        { object: 'platformmark1_below', position: [7, 7] }
+      ]
     },
     // 7:00 Return to clock from (Le Slo)
     {
@@ -2242,7 +2245,7 @@ var regions = [
       },
       label: 'Level AB.5',
       latest: [
-        { object: 'wall', position: [5, 3] }
+        { object: 'wall', position: [1, 4] }
       ],
       ensureObjects: [
         { object: 'vwallborderl_top', position: [18, 9] },
