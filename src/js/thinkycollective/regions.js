@@ -1562,7 +1562,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 4
       },
-      label: 'Level B.18'
+      label: 'Level B.18',
+      latest: [
+        { object: 'wall', position: [4, 1] }
+      ]
     },
     // (Zach)
     {
