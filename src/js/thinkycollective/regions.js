@@ -1564,7 +1564,8 @@ var regions = [
       },
       label: 'Level B.18',
       latest: [
-        { object: 'wall', position: [4, 1] }
+        { object: 'wall', position: [4, 1] },
+        { object: 'platformmark2_below', position: [3, 1] }
       ]
     },
     // (Zach)
