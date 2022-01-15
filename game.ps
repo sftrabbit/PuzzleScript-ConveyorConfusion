@@ -3937,7 +3937,8 @@ UP [ Exploded_above SlimeVat_Above | SlimeVat_Above_Top | SlimeVat_Above_Top2 ] 
 [ Exploded_below ACTION SlimeVat_Below | NO Static_Below NO Dynamic_Below ] -> [ Exploded_below ACTION SlimeVat_Below | SlimeVat_Mess_Below ]
 UP [ Exploded_below SlimeVat_Below | SlimeVat_Below_Top ] -> [ SlimeVat_Broken_Below | SlimeVat_Broken_Below_Top ]
 (- Destroy all remaining descructibles)
-[Exploded_below Platform Wire NO ToExplode_Below] -> [Exploded_below] 
+[Exploded_below Platform Wire NO ToExplode_Below] -> [Exploded_below]
+UP [Exploded_below Platform Button NO ToExplode_Below | ] -> [Exploded_below | NO Button_Above_Top]
 [Exploded_below Destructible_below NO Wall NO ToExplode_Below] -> [Exploded_below]
 [Exploded_above Destructible_above NO Wall NO ToExplode_Above] -> [Exploded_above]
 
