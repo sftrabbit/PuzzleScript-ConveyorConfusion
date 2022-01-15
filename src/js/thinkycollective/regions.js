@@ -1847,7 +1847,10 @@ var regions = [
       simulationBoundsAdjustment: {
         maxY: 1
       },
-      label: 'Level S.2'
+      label: 'Level S.2',
+      latest: [
+        { object: 'platformmark1_below', position: [0, 10] }
+      ]
     },
     // stevenjmiller bonus puzzle secret
     {
