@@ -1924,11 +1924,19 @@ CellPattern.prototype.replace = function(rule, currentIndex, tuple, delta) {
 					var regionIndex = getRegionIndex(colIndex, rowIndex);
 					if (rule.explosiveOrigin !== regionIndex) {
 						if (created.anyBitsInCommon(state.objectMasks['exploded_above'])) {
-							addExplosionTracker(colIndex, rowIndex, true, rule.explosiveOrigin);
+							if (!rule.explosiveAbove || colIndex !== rule.explosivePosition[0] || rowIndex !== rule.explosivePosition[1]) {
+								if (curCellMask.anyBitsInCommon(state.objectMasks['destructible_above'])) {
+									addExplosionTracker(colIndex, rowIndex, true, rule.explosiveOrigin);
+								}
+							}
 						}
 
 						if (created.anyBitsInCommon(state.objectMasks['exploded_below'])) {
-							addExplosionTracker(colIndex, rowIndex, false, rule.explosiveOrigin);
+							if (rule.explosiveAbove || colIndex !== rule.explosivePosition[0] || rowIndex !== rule.explosivePosition[1]) {
+								if (curCellMask.anyBitsInCommon(state.objectMasks['destructible_below'])) {
+									addExplosionTracker(colIndex, rowIndex, false, rule.explosiveOrigin);
+								}
+							}
 						}
 					}
 				}
@@ -2339,6 +2347,8 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
         if (rule.destroy) {
         	// Which cell has explosive in it?
         	rule.explosiveOrigin = null;
+        	rule.explosivePosition = null;
+        	rule.explosiveAbove = null;
         	for (var cellIndex=0;cellIndex<preRow.length;cellIndex++) {
             	var preCell = preRow[cellIndex];
             	if (preCell.objectsPresent.anyBitsInCommon(state.objectMasks['explosive'])) {
@@ -2352,6 +2362,8 @@ Rule.prototype.applyAt = function(level,tuple,check,delta) {
             			explosiveOrigin = getRegionIndex(explosiveX, explosiveY);
             		}
             		rule.explosiveOrigin = explosiveOrigin;
+            		rule.explosivePosition = [explosiveX, explosiveY];
+            		rule.explosiveAbove = explosiveAbove;
             		break;
             	}
         	}
