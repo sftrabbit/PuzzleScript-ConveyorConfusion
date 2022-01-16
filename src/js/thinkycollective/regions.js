@@ -2226,7 +2226,9 @@ var regions = [
       },
       label: 'Level S.5',
       latest: [
-        { object: 'wall_above', position: [18, 2] }
+        { object: 'wall_above', position: [18, 2] },
+        { object: 'wall', position: [12, 7] },
+        { object: 'wall', position: [10, 14] }
       ],
       ensureObjects: [
         { object: 'inflatable_top', position: [20, -1], remove: true }
