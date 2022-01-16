@@ -4488,6 +4488,8 @@ UP [ Player_Above | Sign_Above_5 SignToRead ] -> [ Player_Above | Sign_Above_5 S
 UP [ Player_Above | Sign_Above_6 SignToRead ] -> [ CoolHat_Above | Sign_Above_6 SignRead ] message "There is no reward great enough\nfor what you've just achieved.\n\nExcept this cool explorer's hat."
 UP [ Player_Above | Sign_Above_7 SignToRead ] -> [ Player_Above | Sign_Above_7 SignRead ] message "Looking for an extra challenge?\nLook no further!\n\n<----"
 
+GLOBAL [ CoolHat_Above_Top2 ] -> []
+
 (GRAPHICAL DETAILS)
 (Player directions)
 NOAGAINCHECK LATE [ Moved NO Player | Player ] -> [ | Player Moved ]
@@ -4545,7 +4547,7 @@ NOAGAINCHECK LATE UP [ Render_Ladder2L_Overhang | ] -> [ Render_Ladder2L_Overhan
 NOAGAINCHECK LATE UP [ Player_Below1 | ] -> [ Player_Below1 | Render_Player_Below1_Top ]
 NOAGAINCHECK LATE UP [ Player_Above1 | ] -> [ Player_Above1 | Render_Player_Above1_Top ]
 NOAGAINCHECK LATE UP [ CoolHat_Below | ] -> [ CoolHat_Below | CoolHat_Below_Top ]
-NOAGAINCHECK LATE UP [ CoolHat_Above | | ] -> [ CoolHat_Above | CoolHat_Above_Top | CoolHat_Above_Top2 ]
+NOAGAINCHECK GLOBAL LATE UP [ CoolHat_Above | | ] -> [ CoolHat_Above | CoolHat_Above_Top | CoolHat_Above_Top2 ]
 
 (belt tops)
 NOAGAINCHECK LATE UP [ BeltX_Above | | ] -> [ BeltX_Above | BeltX_Above_Top | BeltX_Above_Top2 ]
