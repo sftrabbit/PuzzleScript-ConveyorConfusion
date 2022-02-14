@@ -2666,7 +2666,7 @@ function getMinRegionSize() {
 
 function calculateOutlinePolygon(region) {
   var rects = region.areas.map(function (area) { return area.rect; });
-    
+
   // Implementation of algorithm described here: https://stackoverflow.com/a/13851341/150634
   var points = [];
 

@@ -12,6 +12,10 @@ function createSprite(name,spritegrid, colors, padding) {
 }
 
 function renderSprite(spritectx, spritegrid, colors, padding, x, y) {
+    if (colors === undefined) {
+        colors = ['#00000000', state.fgcolor];
+    }
+
     var offsetX = x * cellwidth;
     var offsetY = y * cellheight;
 
@@ -39,13 +43,31 @@ function renderSprite(spritectx, spritegrid, colors, padding, x, y) {
     }
 }
 
+var textsheetCanvas = null;
+
 function regenText(spritecanvas,spritectx) {
-    for (var n in font) {
-        if (font.hasOwnProperty(n) && !textImages.hasOwnProperty(n)) {
-            fontstr = font[n].split('\n').map(a=>a.trim().split('').map(t=>parseInt(t)));
+    if (textsheetCanvas == null) {
+        textsheetCanvas = document.createElement('canvas');
+    }
+
+    var textsheetSize = Math.ceil(Math.sqrt(fontKeys.length));
+
+    textsheetCanvas.width = textsheetSize * cellwidth;
+    textsheetCanvas.height = textsheetSize * cellheight * 2;
+
+    var textsheetContext = textsheetCanvas.getContext('2d');
+
+    for (var n = 0; n < fontKeys.length; n++) {
+        var key = fontKeys[n];
+        if (font.hasOwnProperty(key)) {
+            fontstr = font[key].split('\n').map(a=>a.trim().split('').map(t=>parseInt(t)));
             fontstr.shift();
-            textImages[n] = createSprite('char'+n,fontstr, undefined, 1);
-            blackTextImages[n] = createSprite('blackchar'+n,fontstr, ['#00000000', '#000000'], 1);
+
+            var textX = (n % textsheetSize)|0;
+            var textY = (n / textsheetSize)|0;
+
+            renderSprite(textsheetContext, fontstr, undefined, 1, textX, textY);
+            renderSprite(textsheetContext, fontstr, ['#00000000', '#000000'], 1, textX, textY + textsheetSize);
         }
     }
 }
@@ -55,16 +77,9 @@ var editor_s_grille=[[0,1,1,1,0],[1,0,0,0,0],[0,1,1,1,0],[0,0,0,0,1],[0,1,1,1,0]
 var spritesheetCanvas = null;
 function regenSpriteImages() {
 	if (textMode) {
-        textImages = [];
-        blackTextImages = [];
 		regenText();
 		return;
 	}
-
-    if (IDE===true) {
-        // console.log('foo')
-        // textImages['editor_s'] = createSprite('chars',editor_s_grille,undefined);
-    }
 
     if (state.levels.length===0) {
         return;
@@ -384,6 +399,8 @@ function redraw() {
         regenSpriteImages();
     }
 
+    var textsheetSize = Math.ceil(Math.sqrt(fontKeys.length));
+
     if (textMode) {
         ctx.fillStyle = state.bgcolor;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -395,23 +412,58 @@ function redraw() {
         for (var i = 0; i < titleWidth; i++) {
             for (var j = 0; j < titleHeight; j++) {
                 var ch = titleImage[j].charAt(i);
-                if (ch in textImages) {
-                    var sprite = textImages[ch];
+                if (ch in font) {
+                    var index = fontIndex[ch];
+                    var textX = (index % textsheetSize)|0;
+                    var textY = (index / textsheetSize)|0;
+
                     if (state.levels.length !== 0 && titleMode <= 1 && titleScreen) {
                         if (j === 1) {
                             ctx.imageSmoothingEnabled = false;
-                            ctx.drawImage(sprite, xoffset + (i - 2.5) * cellwidth * 2, yoffset + (j - 0.7) * cellheight * 2, cellwidth * 2, cellheight * 2);
+                            ctx.drawImage(
+                                textsheetCanvas,
+                                textX * textcellwidth,
+                                textY * textcellheight,
+                                textcellwidth, textcellheight,
+                                xoffset + (i - 2.5) * cellwidth * 2,
+                                yoffset + (j - 0.7) * cellheight * 2,
+                                cellwidth * 2, cellheight * 2
+                            );
                             ctx.imageSmoothingEnabled = true;
                         } else if (j === 2) {
                             ctx.imageSmoothingEnabled = false;
-                            ctx.drawImage(sprite, xoffset + (i - 1.5) * cellwidth * 2, yoffset + (j - 0.9) * cellheight * 2, cellwidth * 2, cellheight * 2);
+                            ctx.drawImage(
+                                textsheetCanvas,
+                                textX * textcellwidth,
+                                textY * textcellheight,
+                                textcellwidth, textcellheight,
+                                xoffset + (i - 1.5) * cellwidth * 2,
+                                yoffset + (j - 0.9) * cellheight * 2,
+                                cellwidth * 2, cellheight * 2
+                            );
                             ctx.imageSmoothingEnabled = true;
                         } else if (j === 0 || j === 3 || j === 4) {
                         } else {
-                        ctx.drawImage(sprite, xoffset + i * cellwidth, yoffset + j * cellheight);
+                            ctx.drawImage(
+                                textsheetCanvas,
+                                textX * textcellwidth,
+                                textY * textcellheight,
+                                textcellwidth, textcellheight,
+                                xoffset + i * cellwidth,
+                                yoffset + j * cellheight,
+                                cellwidth, cellheight
+                            );
                         }
                     } else {
-                        ctx.drawImage(sprite, xoffset + i * cellwidth, yoffset + j * cellheight);
+                        ctx.drawImage(
+                            textsheetCanvas,
+                            textX * textcellwidth,
+                            textY * textcellheight,
+                            textcellwidth, textcellheight,
+                            xoffset + i * cellwidth,
+                            yoffset + j * cellheight,
+                            cellwidth, cellheight
+                        );
                     }
                 }
             }
@@ -626,8 +678,20 @@ function redraw() {
                 ctx.fillStyle = '#000';
                 ctx.fillRect(xoffset, yoffset + (screenheight * cellheight) - textCellheight, screenwidth * cellwidth, textCellheight);
                 for (var i = 0; i < creditText.length; i++) {
+                    var char = creditText.charAt(i);
+                    var index = fontIndex[char];
+                    var textX = (index % textsheetSize)|0;
+                    var textY = (index / textsheetSize)|0;
                     ctx.imageSmoothingEnabled = false;
-                    ctx.drawImage(textImages[creditText.charAt(i)], xoffset + creditOffset + textCellwidth * i, yoffset + (screenheight * cellheight) - textCellheight, textCellwidth, textCellheight);
+                    ctx.drawImage(
+                        textsheetCanvas,
+                        textX * textcellwidth,
+                        textY * textcellheight,
+                        textcellwidth, textcellheight,
+                        xoffset + creditOffset + textCellwidth * i,
+                        yoffset + (screenheight * cellheight) - textCellheight,
+                        textCellwidth, textCellheight
+                    );
                     ctx.imageSmoothingEnabled = true;
                 }
             } else if (creditsState.stage === 'list') {
@@ -651,15 +715,51 @@ function redraw() {
                         var lineOffsetA = Math.floor(((screenwidth * cellwidth) * (3/10)) - ((textCellwidth * creditLine[0].length) / 2));
                         var lineOffsetB = Math.floor(((screenwidth * cellwidth) * (7/10)) - ((textCellwidth * creditLine[1].length) / 2));
                         for (var j = 0; j < creditLine[0].length; j++) {
-                            ctx.drawImage(textImages[creditLine[0].charAt(j)], xoffset + lineOffsetA + textCellwidth * j, yoffset + listCreditsOffset + i * textCellheight, textCellwidth, textCellheight);
+                            var char = creditLine[0].charAt(j);
+                            var index = fontIndex[char];
+                            var textX = (index % textsheetSize)|0;
+                            var textY = (index / textsheetSize)|0;
+                            ctx.drawImage(
+                                textsheetCanvas,
+                                textX * textcellwidth,
+                                textY * textcellheight,
+                                textcellwidth, textcellheight,
+                                xoffset + lineOffsetA + textCellwidth * j,
+                                yoffset + listCreditsOffset + i * textCellheight,
+                                textCellwidth, textCellheight
+                            );
                         }
                         for (var j = 0; j < creditLine[1].length; j++) {
-                            ctx.drawImage(textImages[creditLine[1].charAt(j)], xoffset + lineOffsetB + textCellwidth * j, yoffset + listCreditsOffset + i * textCellheight, textCellwidth, textCellheight);
+                            var char = creditLine[1].charAt(j);
+                            var index = fontIndex[char];
+                            var textX = (index % textsheetSize)|0;
+                            var textY = (index / textsheetSize)|0;
+                            ctx.drawImage(
+                                textsheetCanvas,
+                                textX * textcellwidth,
+                                textY * textcellheight,
+                                textcellwidth, textcellheight,
+                                xoffset + lineOffsetB + textCellwidth * j,
+                                yoffset + listCreditsOffset + i * textCellheight,
+                                textCellwidth, textCellheight
+                            );
                         }
                     } else {
                         var lineOffset = Math.floor(((screenwidth * cellwidth) / 2) - ((textCellwidth * creditLine.length) / 2));
                         for (var j = 0; j < creditLine.length; j++) {
-                            ctx.drawImage(textImages[creditLine.charAt(j)], xoffset + lineOffset + textCellwidth * j, yoffset + listCreditsOffset + i * textCellheight, textCellwidth, textCellheight);
+                            var char = creditLine.charAt(j);
+                            var index = fontIndex[char];
+                            var textX = (index % textsheetSize)|0;
+                            var textY = (index / textsheetSize)|0;
+                            ctx.drawImage(
+                                textsheetCanvas,
+                                textX * textcellwidth,
+                                textY * textcellheight,
+                                textcellwidth, textcellheight,
+                                xoffset + lineOffset + textCellwidth * j,
+                                yoffset + listCreditsOffset + i * textCellheight,
+                                textCellwidth, textCellheight
+                            );
                         }
 
                         if (i === (listCredits.length - 1) && (yoffset + listCreditsOffset + i * textCellheight) < -textCellheight) {
@@ -691,7 +791,19 @@ function redraw() {
                 var lineOffsetX = Math.floor(((screenwidth * cellwidth) / 2) - ((textCellwidth * thanksText.length) / 2));
                 var lineOffsetY = Math.floor(((screenheight * cellheight) / 2) - (textCellheight / 2));
                 for (var j = 0; j < thanksText.length; j++) {
-                    ctx.drawImage(textImages[thanksText.charAt(j)], xoffset + lineOffsetX + textCellwidth * j, yoffset + lineOffsetY, textCellwidth, textCellheight);
+                    var char = thanksText.charAt(j);
+                    var index = fontIndex[char];
+                    var textX = (index % textsheetSize)|0;
+                    var textY = (index / textsheetSize)|0;
+                    ctx.drawImage(
+                        textsheetCanvas,
+                        textX * textcellwidth,
+                        textY * textcellheight,
+                        textcellwidth, textcellheight,
+                        xoffset + lineOffsetX + textCellwidth * j,
+                        yoffset + lineOffsetY,
+                        textCellwidth, textCellheight
+                    );
                 }
                 ctx.imageSmoothingEnabled = true;
 
@@ -710,9 +822,29 @@ function redraw() {
                 var shadowOffset = Math.max(Math.floor(textCellwidth / 5), 1);
 
                 for (var i = 0; i < labelText.length; i++) {
+                    var char = labelText.charAt(i);
+                    var index = fontIndex[char];
+                    var textX = (index % textsheetSize)|0;
+                    var textY = (index / textsheetSize)|0;
                     ctx.imageSmoothingEnabled = false;
-                    ctx.drawImage(blackTextImages[labelText.charAt(i)], xoffset + labelOffset + textCellwidth * i + shadowOffset, yoffset + (screenheight * cellheight) - textCellheight + shadowOffset, textCellwidth, textCellheight);
-                    ctx.drawImage(textImages[labelText.charAt(i)], xoffset + labelOffset + textCellwidth * i, yoffset + (screenheight * cellheight) - textCellheight, textCellwidth, textCellheight);
+                    ctx.drawImage(
+                        textsheetCanvas,
+                        textX * textcellwidth,
+                        (textY + textsheetSize) * textcellheight,
+                        textcellwidth, textcellheight,
+                        xoffset + labelOffset + textCellwidth * i + shadowOffset,
+                        yoffset + (screenheight * cellheight) - textCellheight + shadowOffset,
+                        textCellwidth, textCellheight
+                    );
+                    ctx.drawImage(
+                        textsheetCanvas,
+                        textX * textcellwidth,
+                        textY * textcellheight,
+                        textcellwidth, textcellheight,
+                        xoffset + labelOffset + textCellwidth * i,
+                        yoffset + (screenheight * cellheight) - textCellheight,
+                        textCellwidth, textCellheight
+                    );
                     ctx.imageSmoothingEnabled = true;
                 }
             }
@@ -728,9 +860,29 @@ function redraw() {
                 var shadowOffset = Math.max(Math.floor(textCellwidth / 5), 1);
 
                 for (var i = 0; i < versionText.length; i++) {
+                    var char = labelText.charAt(i);
+                    var index = fontIndex[char];
+                    var textX = (index % textsheetSize)|0;
+                    var textY = (index / textsheetSize)|0;
                     ctx.imageSmoothingEnabled = false;
-                    ctx.drawImage(blackTextImages[versionText.charAt(i)], xoffset + versionOffset + textCellwidth * i + shadowOffset, yoffset + (screenheight * cellheight) - textCellheight * 2 + shadowOffset, textCellwidth, textCellheight);
-                    ctx.drawImage(textImages[versionText.charAt(i)], xoffset + versionOffset + textCellwidth * i, yoffset + (screenheight * cellheight) - textCellheight * 2, textCellwidth, textCellheight);
+                    ctx.drawImage(
+                        textsheetCanvas,
+                        textX * textcellwidth,
+                        (textY + textsheetSize) * textcellheight,
+                        textcellwidth, textcellheight,
+                        xoffset + versionOffset + textCellwidth * i + shadowOffset,
+                        yoffset + (screenheight * cellheight) - textCellheight * 2 + shadowOffset,
+                        textCellwidth, textCellheight
+                    );
+                    ctx.drawImage(
+                        textsheetCanvas,
+                        textX * textcellwidth,
+                        textY * textcellheight,
+                        textcellwidth, textcellheight,
+                        xoffset + versionOffset + textCellwidth * i,
+                        yoffset + (screenheight * cellheight) - textCellheight * 2,
+                        textCellwidth, textCellheight
+                    );
                     ctx.imageSmoothingEnabled = true;
                 }
             }
@@ -838,6 +990,9 @@ var forceRegenImages=false;
 
 var levelCanvasSize = null;
 
+var textcellwidth = 0;
+var textcellheight = 0;
+
 function canvasResize() {
     canvas.width = canvas.parentNode.clientWidth;
     canvas.height = canvas.parentNode.clientHeight;
@@ -888,12 +1043,10 @@ function canvasResize() {
     var w = 5;//sprites[1].dat.length;
     var h = 5;//sprites[1].dat[0].length;
 
-
     if (textMode) {
         w=5 + 1;
         h=font['X'].length/(w) + 1;
     }
-
 
     cellwidth =w * Math.max( ~~(cellwidth / w),1);
     cellheight = h * Math.max(~~(cellheight / h),1);
@@ -921,6 +1074,11 @@ function canvasResize() {
     cellheight = cellheight|0;
     xoffset = xoffset|0;
     yoffset = yoffset|0;
+
+    if (textMode) {
+        textcellwidth = cellwidth;
+        textcellheight = cellheight;
+    }
 
     if (oldcellwidth!=cellwidth||oldcellheight!=cellheight||oldtextmode!=textMode||textMode||oldfgcolor!=state.fgcolor||forceRegenImages){
     	forceRegenImages=false;
